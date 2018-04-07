@@ -1,0 +1,49 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mx.com.proyect.puntoventa.dao.AccountDAO">
+
+	<resultMap id="accountResultMap" type="accountDTO">
+		<result property="userId" column="id_usuario" />
+		<result property="name" column="nombre" />
+		<result property="firstName" column="ap_paterno" />
+		<result property="secondName" column="ap_materno" />
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+	</resultMap>
+
+	<select id="findById" resultMap="accountResultMap" parameterType="long">
+		select * from c_usuario where id_usuario = #{id}
+	</select>
+	
+	<select id="validateUser" resultMap="accountResultMap" parameterType="loginForm">
+		SELECT * FROM c_usuario WHERE email = #{email} AND password = #{password}
+	</select>
+
+	<select id="getAll" resultType="accountDTO">
+		select * from c_usuario
+	</select>
+
+	<insert id="insert" parameterType="accountDTO">
+		<selectKey order="BEFORE" keyProperty="userId" resultType="long">
+			SELECT nextVal('c_usuario_sequence')
+		</selectKey>
+		insert into c_usuario
+		(nombre,ap_paterno,ap_materno,email,password)
+		values
+		(#{name},#{firstName},#{secondName},#{email},#{password})
+	</insert>
+	<update id="update" parameterType="accountDTO">
+		update c_usuario set
+		nombre =
+		#{name},
+		ap_paterno = #{firstName},
+		ap_materno = #{secondName},
+		email =
+		#{email},
+		password = #{password}
+		where id_usuario = #{userId}
+	</update>
+	<delete id="remove" parameterType="accountDTO">
+		delete from c_usuario where
+		id_usuario = #{userId}
+	</delete>
+</mapper>
