@@ -8,6 +8,8 @@
 		<result property="secondName" column="ap_materno" />
 		<result property="email" column="email" />
 		<result property="password" column="password" />
+		<result property="feAlta" column="fe_alta" />
+		<result property="fg_admin" column="fgAdmin" />
 	</resultMap>
 
 	<select id="findById" resultMap="accountResultMap" parameterType="long">

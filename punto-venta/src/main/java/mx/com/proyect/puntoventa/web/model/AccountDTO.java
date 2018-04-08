@@ -1,5 +1,7 @@
 package mx.com.proyect.puntoventa.web.model;
 
+import java.sql.Timestamp;
+
 public class AccountDTO {
 	
 	
@@ -9,8 +11,24 @@ public class AccountDTO {
 	private String firstName;
 	private String secondName;
 	private String password;
+	// fecha en que se registro
+	private Timestamp feAlta;
+	// bandera para saber si es admin
+	private String fgAdmin;
 	
+	public Timestamp getFeAlta() {
+		return feAlta;
+	}
+	public void setFeAlta(Timestamp feAlta) {
+		this.feAlta = feAlta;
+	}
 	
+	public String getFgAdmin() {
+		return fgAdmin;
+	}
+	public void setFgAdmin(String fgAdmin) {
+		this.fgAdmin = fgAdmin;
+	}
 	public String getUserId() {
 		return userId;
 	}
