@@ -29,4 +29,10 @@ public class AccountServiceImpl implements AccountService {
 		return accountDao.validateUser(loginForm);
 	}
 
+	@Override
+	public boolean addUser(AccountDTO account) {
+		accountDao.insert(account);
+		return false;
+	}
+
 }

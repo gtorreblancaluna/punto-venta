@@ -11,5 +11,6 @@ public interface AccountService {
 	
 	public AccountDTO findById(Long id);
 	AccountDTO validateUser(LoginForm loginForm) throws DataAccessException;
+	boolean addUser(AccountDTO account);
 
 }
