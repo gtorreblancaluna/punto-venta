@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
 
-
 @Controller
-@SessionAttributes("userSession")
 public class LogoutController {	
 	
 	@RequestMapping(value = "/logout.do")

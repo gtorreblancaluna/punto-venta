@@ -1,6 +1,15 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+
+
+ <script type="text/javascript">
+ $( document ).ready(function() {
+	 alert('hola mundo!'+ '${sessionScope.userSession}');
+});
+               
+            
+  </script>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -9,10 +18,8 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="javascript:void(0);">Home</a></li>
      
-      <c:if test="${not empty userSession}">
-       <li class="active"><a href="logout.do">Salir</a></li>
-       <!-- 	      	--------------------------------------------------------------------------------------------v -->
-       
+<%--       <c:if test="${not empty sessionScope.userSession}"> --%>
+       <li class="active"><a href="logout.do">Salir</a></li>       
 	      <li class="dropdown"><!-- menu completo  -->
 	       <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">Sistema<span class="caret"></span></a>
 	       <ul class="dropdown-menu"><!-- baja menu a partir de aqui  -->
@@ -23,11 +30,11 @@
 					    <li><a href="javascript:void(0);">Reporte</a></li>
 <!-- 	          <li><a href="javascript:void(0);">Reportes</a></li> -->
 	      	 </ul>
-	      	</li>
-<!-- 	      	--------------------------------------------------------------------------------------------v -->
+	      </li>
+
 	      <li><a href="javascript:void(0);">Page 2</a></li>
 	      <li><a href="javascript:void(0);">Page 3</a></li>
-      </c:if>
+<%--       </c:if> --%>
     </ul>
   </div>
 </nav>

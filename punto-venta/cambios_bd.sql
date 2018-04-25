@@ -7,10 +7,8 @@ CREATE TABLE c_usuario (
   password VARCHAR(45),
   fe_alta TIMESTAMP NULL,
   fg_admin ENUM('1','0') NOT NULL DEFAULT '0',
-  PRIMARY KEY(cl_usuario),
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-)
+  PRIMARY KEY(cl_usuario)
+ )
 ENGINE = InnoDB;
 
 -- tabla de proveedores

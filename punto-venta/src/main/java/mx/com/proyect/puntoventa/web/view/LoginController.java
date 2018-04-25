@@ -1,6 +1,8 @@
 package mx.com.proyect.puntoventa.web.view;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +17,6 @@ import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.service.AccountService;
 
 @Controller
-@SessionAttributes("userSession")
 public class LoginController {
 	
 	@Autowired
@@ -28,10 +29,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/loginProcess.do", method = RequestMethod.POST)
-	public String loginProcess(HttpServletRequest request, @ModelAttribute LoginForm loginForm, Model model){
-		AccountDTO a = accountService.validateUser(loginForm);		
+	public String loginProcess(HttpServletRequest request, HttpServletResponse response, @ModelAttribute LoginForm loginForm, Model model){
+		AccountDTO a = accountService.validateUser(loginForm);				
 		if(a != null) {			
-			model.addAttribute("userSession",a);
+			request.getSession().setAttribute("userSession", a);		
 			return "bienvenida";
 		}else{
 			model.addAttribute("message","Usuario o contrase\u00F1a no coinciden");
