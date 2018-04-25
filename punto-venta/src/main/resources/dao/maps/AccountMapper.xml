@@ -20,18 +20,15 @@
 		SELECT * FROM c_usuario WHERE email = #{email} AND password = #{password}
 	</select>
 
-	<select id="getAll" resultType="accountDTO">
-		select * from c_usuario
+	<select id="getAll" resultMap="accountResultMap">
+		select * from c_usuario; 
 	</select>
 
 	<insert id="insert" parameterType="accountDTO">
-		<selectKey order="BEFORE" keyProperty="userId" resultType="long">
-			SELECT nextVal('c_usuario_sequence')
-		</selectKey>
 		insert into c_usuario
-		(nombre,ap_paterno,ap_materno,email,password)
+		(nombre,ap_paterno,ap_materno,email,fe_alta,password,fg_admin)
 		values
-		(#{name},#{firstName},#{secondName},#{email},#{password})
+		(#{name},#{firstName},#{secondName},#{email},#{addDate},#{password},#{admin})
 	</insert>
 	<update id="update" parameterType="accountDTO">
 		update c_usuario set

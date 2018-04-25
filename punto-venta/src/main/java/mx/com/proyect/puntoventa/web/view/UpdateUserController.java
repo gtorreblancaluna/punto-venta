@@ -15,25 +15,29 @@ import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.service.AccountService;
 @Controller
-public class HandleUserController {
+public class UpdateUserController {
 
 	//inyectar dependencias de spring
 	@Autowired
-	AccountService accountService;
-	
+	AccountService accountService;	
 	//mostrar la vista principal
-	@RequestMapping(value = "/showUser.do", method = RequestMethod.GET)
-	public String showHandleUser( HttpServletRequest request, Model model) {		
-		model.addAttribute("account", new AccountDTO());
-		return "handleUser";
-	}
-	// agregar usuario
-	@RequestMapping(value = "/addUser.do", method = RequestMethod.POST)
-	public String addUser( HttpServletRequest request,@ModelAttribute AccountDTO account, Model model) {	
-		System.out.println("se a recibido account: "+account);
-		accountService.addUser(account);
+		@RequestMapping(value = "/showUserUpdate.do", method = RequestMethod.GET)
+		public String showHandleUser( HttpServletRequest request, Model model) {		
+			model.addAttribute("account", new AccountDTO());
+			List<AccountDTO> listUser = accountService.getAllUser();
+			model.addAttribute("listUser",listUser);
+			return "updateUser";
+		}
+	
+	
+	// actualizar usuario
+	@RequestMapping(value = "/updateUser.do", method = RequestMethod.POST)
+	public String updateUser( HttpServletRequest request,@ModelAttribute AccountDTO account, Model model) {	
+		
+		
 		model.addAttribute("account",account);
 		return "handleUserSucess";
-	}	
+		
 	
+	}	
 }

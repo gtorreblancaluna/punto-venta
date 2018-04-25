@@ -14,7 +14,7 @@ public class SqlMapAccountDao extends SqlSessionDaoSupport implements AccountDAO
 	@Override
 	public List<AccountDTO> getAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return getSqlSession().selectList("getAll");
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package mx.com.proyect.puntoventa.web.service.impl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,12 @@ public class AccountServiceImpl implements AccountService {
 	public boolean addUser(AccountDTO account) {
 		accountDao.insert(account);
 		return false;
+	}
+
+	@Override
+	public List<AccountDTO> getAllUser() {
+		// TODO Auto-generated method stub
+		return accountDao.getAll();
 	}
 
 }

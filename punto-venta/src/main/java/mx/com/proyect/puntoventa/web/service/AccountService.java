@@ -1,5 +1,7 @@
 package mx.com.proyect.puntoventa.web.service;
 
+import java.util.List;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -12,5 +14,6 @@ public interface AccountService {
 	public AccountDTO findById(Long id);
 	AccountDTO validateUser(LoginForm loginForm) throws DataAccessException;
 	boolean addUser(AccountDTO account);
+	public List<AccountDTO> getAllUser();
 
 }
