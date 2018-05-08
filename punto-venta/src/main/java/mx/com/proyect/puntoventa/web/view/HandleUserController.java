@@ -27,6 +27,8 @@ public class HandleUserController {
 		model.addAttribute("account", new AccountDTO());
 		return "handleUser";
 	}
+	
+	
 	// agregar usuario
 	@RequestMapping(value = "/addUser.do", method = RequestMethod.POST)
 	public String addUser( HttpServletRequest request,@ModelAttribute AccountDTO account, Model model) {	
