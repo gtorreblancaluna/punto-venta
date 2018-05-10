@@ -33,21 +33,23 @@ cl_proveedor INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
 ENGINE = InnoDB;
 -------tabla clientes 
 
-CREATE TABLE c_clientes{
-  cl_proveedor INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE c_clientes(
+  cl_cliente INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(45) NOT NULL DEFAULT '',
   ap_paterno VARCHAR(45),
   ap_materno VARCHAR(45),
   email VARCHAR(45),
-  password VARCHAR(45),
   fe_alta TIMESTAMP NULL,
-  T_Fijo INTEGER(12),
-  T_Celular INTEGER(12),
-  Calle VARCHAR(30),
-  Colonia VARCHAR(30),
+  tel1 INTEGER(12),
+  tel2 INTEGER(12),
+  calle VARCHAR(30),
+  delegacion varchar(45),
+  colonia VARCHAR(30),
   cp INTEGER (5),
   municipio VARCHAR(30),
-  estado VARCHAR(30)
+  estado VARCHAR(30),
+  ciudad varchar(45),
+   PRIMARY KEY(cl_cliente)  
 )
 ENGINE = InnoDB;
 

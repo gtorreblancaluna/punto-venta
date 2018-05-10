@@ -12,19 +12,25 @@
 <body >
 	
 <div class="container" >
-	<form:form commandName="accoutn" action="addProveedores.do" method="post" name="addProveedores">
+	<form:form commandName="clientDTO" action="addClient.do" method="post" name="addClient">
 		
 		<div>
-			<label >Nombre</label>
-			<input type="text" id="empresa" name="empresa" placeholder="Empresa" class="form-control">
-		</div>	
-		<div>
-			<label>ID Cliente</label>
-			
 		
+			<p>Nombre</p>				<input type="text" name="name" id="name">
+			<p>Apellido Paterno</p>		<input type="text" name="firstName" id="apPaterno">
+			<p>Apellido Materno</p>		<input type="text" name="secondName" id="apMaterno">
+			<p>Calle</p>				<input type="text" name="street"	id="calle">
+			<p>Colonia</p>				<input type="text" name="colony" id="colonia">
+			<p>Delegacion</p>			<input type="text" name="delegation"  id="delegacion">
+			<p>Estado</p>				<input type="text" name="state"	id="">
+			<p>Ciudad</p>				<input type="text" name="city">
+			<p>C.P.</p>					<input type="text" name="cp">
+			<p>Telefono</p>				<input type="number" name="tel1">
+			<p>Telefono 2do</p>			<input type="number" name="tel2">
 		
+		<button>Enviar</button>	
 		</div>
-	
+		
 	</form:form>
 		
 </div>

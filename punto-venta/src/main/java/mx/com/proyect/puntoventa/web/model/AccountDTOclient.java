@@ -2,26 +2,33 @@ package mx.com.proyect.puntoventa.web.model;
 
 public class AccountDTOclient {
 
-	private String UserID;
+	private String userId;
 	private String name;
-	private String ap_ma;
-	private String ap_pa;
-	private String LocalPh;
-	private String Celphone;
-	private String Street;
-	private String Colonia;
-	private String CP;
+	private String firstName;
+	private String secondName;
+	private String tel1;
+	private String tel2;
+	private String street;
+	private String delegation;
+	private String colony;
+	private String cp;
 	private String state;
-	private String Municipio;
-	private String Views;
+	private String municipality;
+	private String city;
+	private String email;
 	
 	
-	
-	public String getUserID() {
-		return UserID;
+	public String getEmail() {
+		return email;
 	}
-	public void setUserID(String userID) {
-		UserID = userID;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getName() {
 		return name;
@@ -29,47 +36,53 @@ public class AccountDTOclient {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAp_ma() {
-		return ap_ma;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setAp_ma(String ap_ma) {
-		this.ap_ma = ap_ma;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getAp_pa() {
-		return ap_pa;
+	public String getSecondName() {
+		return secondName;
 	}
-	public void setAp_pa(String ap_pa) {
-		this.ap_pa = ap_pa;
+	public void setSecondName(String secondName) {
+		this.secondName = secondName;
 	}
-	public String getLocalPh() {
-		return LocalPh;
+	public String getTel1() {
+		return tel1;
 	}
-	public void setLocalPh(String localPh) {
-		LocalPh = localPh;
+	public void setTel1(String tel1) {
+		this.tel1 = tel1;
 	}
-	public String getCelphone() {
-		return Celphone;
+	public String getTel2() {
+		return tel2;
 	}
-	public void setCelphone(String celphone) {
-		Celphone = celphone;
+	public void setTel2(String tel2) {
+		this.tel2 = tel2;
 	}
 	public String getStreet() {
-		return Street;
+		return street;
 	}
 	public void setStreet(String street) {
-		Street = street;
+		this.street = street;
 	}
-	public String getColonia() {
-		return Colonia;
+	public String getDelegation() {
+		return delegation;
 	}
-	public void setColonia(String colonia) {
-		Colonia = colonia;
+	public void setDelegation(String delegation) {
+		this.delegation = delegation;
 	}
-	public String getCP() {
-		return CP;
+	public String getColony() {
+		return colony;
 	}
-	public void setCP(String cP) {
-		CP = cP;
+	public void setColony(String colony) {
+		this.colony = colony;
+	}
+	public String getCp() {
+		return cp;
+	}
+	public void setCp(String cp) {
+		this.cp = cp;
 	}
 	public String getState() {
 		return state;
@@ -77,24 +90,29 @@ public class AccountDTOclient {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getMunicipio() {
-		return Municipio;
+	public String getMunicipality() {
+		return municipality;
 	}
-	public void setMunicipio(String municipio) {
-		Municipio = municipio;
+	public void setMunicipality(String municipality) {
+		this.municipality = municipality;
 	}
-	public String getViews() {
-		return Views;
+	public String getCity() {
+		return city;
 	}
-	public void setViews(String views) {
-		Views = views;
+	public void setCity(String city) {
+		this.city = city;
 	}
 	@Override
 	public String toString() {
-		return "AccountDTOclient [UserID=" + UserID + ", name=" + name + ", ap_ma=" + ap_ma + ", ap_pa=" + ap_pa
-				+ ", LocalPh=" + LocalPh + ", Celphone=" + Celphone + ", Street=" + Street + ", Colonia=" + Colonia
-				+ ", CP=" + CP + ", state=" + state + ", Municipio=" + Municipio + ", Views=" + Views + "]";
+		return "AccountDTOclient [userId=" + userId + ", name=" + name + ", firstName=" + firstName + ", secondName="
+				+ secondName + ", tel1=" + tel1 + ", tel2=" + tel2 + ", street=" + street + ", delegation=" + delegation
+				+ ", colony=" + colony + ", cp=" + cp + ", state=" + state + ", municipality=" + municipality
+				+ ", city=" + city + "]";
 	}
+	
+	
+	
+	
 	
 	
 

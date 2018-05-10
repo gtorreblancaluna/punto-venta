@@ -43,6 +43,8 @@
 				
 				<p>Fecha <input class="form-control" type="date" value="2011-08-19" id="example-date-input"> </p>	
 				<p> v</p> 
+				<p>cliente</p>
+				<input >
 
 		</div><!-- terminacion de colmna primera  -->
 		</div>
