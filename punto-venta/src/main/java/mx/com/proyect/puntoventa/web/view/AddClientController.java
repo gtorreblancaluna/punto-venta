@@ -11,16 +11,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
-import mx.com.proyect.puntoventa.web.service.AccountService;
+
+import mx.com.proyect.puntoventa.web.service.ClientService;
 
 @Controller
-
-public class AddClient {
+public class AddClientController {
 	
 	@Autowired
-	AccountService accountService;
+	ClientService clientService;
 	
 	@RequestMapping(value = "/showAddClnt.do", method = RequestMethod.GET)
 	public String showAddClient( HttpServletRequest request, Model model) {		
@@ -30,10 +29,11 @@ public class AddClient {
 	
 	@RequestMapping(value = "/addClient.do", method = RequestMethod.POST)
 	public String addClient( HttpServletRequest request,@ModelAttribute AccountDTOclient clientDTO, Model model) {		
-		System.out.println(clientDTO);
-		
+		if(clientService.insertClient(clientDTO))
+			model.addAttribute("messageView","Se agrego con exito el Cliente: "+clientDTO.getName()+" "+clientDTO.getFirstName());
 		return "addClients";
 	}
+	
 	
 	
 

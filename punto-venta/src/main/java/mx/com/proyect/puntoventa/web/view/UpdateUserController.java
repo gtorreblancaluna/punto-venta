@@ -20,6 +20,7 @@ public class UpdateUserController {
 	//inyectar dependencias de spring
 	@Autowired
 	AccountService accountService;	
+	
 	//mostrar la vista principal
 		@RequestMapping(value = "/showUserUpdate.do", method = RequestMethod.GET)
 		public String showHandleUser( HttpServletRequest request, Model model) {		
