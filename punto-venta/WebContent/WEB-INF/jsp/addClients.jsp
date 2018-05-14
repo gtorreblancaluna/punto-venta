@@ -32,6 +32,10 @@ width:200px;
 		font-size: 16px;
 		font-style: normal;
 	}
+	
+	.badge badge-secondary{
+		align-it
+	}
 	</style>
 </head>
 <body >
@@ -44,13 +48,51 @@ width:200px;
 	<form:form commandName="clientDTO" action="addClient.do" method="post" name="addClient">
 
 				<div class="page-header">
-					<h1>Principal</h1>
+					<div	class="row">
+						<div class="col-3">
+								<h1><span class="badge badge-secondary">CLIENTES</span></h1>
+						</div>
+						<div class="col-5">
+						</div>
+						<div class="col-2">
+							<span class="badge badge-secondary">Actualizar</span>
+							<span class="badge badge-secondary">Buscar</span>
+							<button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#exampleModal">
+ 							 Launch demo modal
+							</button>
+							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  								<div class="modal-dialog" role="document">
+   									 <div class="modal-content">
+  									    <div class="modal-header">
+  										      <h5 class="modal-title" id="exampleModalLabel">Busqueda Clientes</h5>
+       											 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+       											   <span aria-hidden="true">&times;</span>
+        										 </button>
+     									 </div>
+   									   <div class="modal-body">
+												<form>
+													<span class="input-goup-text" >
+														Nombre : <input type="text" name="name" class="form-control">
+													</span>
+												</form>
+														
+									      </div>
+     							 <div class="modal-footer">
+  						      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  						      <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+						</div>
+					</div>
 				</div>
 
            <div class="row">	
 			
 					<div class="col-3.5" >
 					
+						
 					
 						<span class="input-group-text">Nombre : 
 						<input type="text" name="name" id="name" class="form-control" >
@@ -138,7 +180,7 @@ width:200px;
 						<br>
 					
 						<span class="input-group-text"> C.P.  :
-								<input type="text" name="cp">
+								<input type="text" name="cp" id="cp" class="form-control">
 						</span>
 						<br>
 					
