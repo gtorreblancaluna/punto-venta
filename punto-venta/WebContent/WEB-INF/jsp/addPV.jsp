@@ -8,6 +8,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Punto Venta:: Notas</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 		<script language="JavaScript" type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
 		<script language="JavaScript" type="text/javascript" src="../js/popper.min.js"></script>
@@ -37,18 +38,35 @@
 <body>
 
 <div class="container">
-	<div class="row">
-		<div class="col">
-				<span class="d-block p2 bg-primary text-white " > <span class="badge badge-light">Nota Venta</span></span>
-				
-				<p>Fecha <input class="form-control" type="date" value="2011-08-19" id="example-date-input"> </p>	
-				<p> v</p> 
-				<p>cliente</p>
-				<input >
-
-		</div><!-- terminacion de colmna primera  -->
+	<div class="page-header">
+		<div class="row">
+			<div class="col">
+				<h1>Venta-dia</h1>
+			</div>
+			
 		</div>
+	</div>
 	
+	<!-- inicio de Body despues de header de venta-dia -->
+	<div class="row">
+		<div class="col-3">
+		 	<span class="input-group-text">Fecha :<input type="date" class="form-control"> </span>
+			<br>
+			
+			
+		</div>
+		<div class="col-6">
+
+		</div>
+		<div class="col-2">
+			<span class="input-group-text" >Folio <input type="number" class="form-control" disabled="disabled"></span>
+		</div>
+		
+	</div>
+	
+	
+	
+
 
 </div>
 

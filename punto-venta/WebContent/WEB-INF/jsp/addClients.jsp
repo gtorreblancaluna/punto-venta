@@ -36,6 +36,20 @@ width:200px;
 	.badge badge-secondary{
 		align-it
 	}
+	
+	.popup__overlay {
+    position: fixed;
+    left:  0;
+    top:  0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    text-align: center
+    }
+.popup {
+    display: inline-block;
+    vertical-align: middle
+    } 
 	</style>
 </head>
 <body >
@@ -56,10 +70,10 @@ width:200px;
 						</div>
 						<div class="col-2">
 							<span class="badge badge-secondary">Actualizar</span>
-							<span class="badge badge-secondary">Buscar</span>
 							<button type="button" class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#exampleModal">
- 							 Launch demo modal
+ 							 Busqueda
 							</button>
+							
 							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   								<div class="modal-dialog" role="document">
    									 <div class="modal-content">
@@ -75,11 +89,19 @@ width:200px;
 														Nombre : <input type="text" name="name" class="form-control">
 													</span>
 												</form>
-														
+		
+ 		<c:forEach items="${listUser}" var="user">		
+ 		<tr>
+ 			<td>${user.name}</td>
+ 			<td>${user.email }</td>
+ 			<td><c:out default="None" escapeXml="true" value="${user.fgAdmin eq '1' ? 'Admin' : '-' }" /></td>
+ 		</tr>
+ 		</c:forEach>
+ 	
 									      </div>
      							 <div class="modal-footer">
   						      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  						      <button type="button" class="btn btn-primary">Save changes</button>
+  						      <button type="button" class="btn btn-primary">Seleccinar</button>
       </div>
     </div>
   </div>
