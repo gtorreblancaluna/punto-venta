@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -40,8 +39,7 @@
 </head>
 <body>
 
-<div class="container " style=" box-shadow: 0 0 30px black;
-">
+<div class="container " style=" box-shadow: 0 0 30px black;">
 	<div class="page-header">
 		<div class="row">
 			<div class="col">
@@ -57,7 +55,8 @@
 		 	<span class="input-group-text">Fecha :<input type="date" class="form-control"> </span>
 			<br>
 		<span class="input-group-text">Cliente :<input type="text" class="form-control"><button>?</button></span>	
-			
+			<br>
+		<span class="input-group-text">Vendedor :<input type="text" class="form-control"></span>
 		</div>
 		<div class="col-6">
 			

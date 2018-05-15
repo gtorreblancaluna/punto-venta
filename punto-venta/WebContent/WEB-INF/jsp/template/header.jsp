@@ -13,10 +13,10 @@
        <li class="active"><a href="logout.do">Salir</a></li>
        
 	      <li class="dropdown">
-	       <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">Sistema<span class="caret"></span></a>
-	       <ul class="dropdown-menu">
-	       				<li ><a href="showUser.do">Usuarios</a></li>
-	       				<li ><a href="showUserUpdate.do">Actualizar</a></li> 
+	       <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">Sistema</a>
+	       	<ul class="dropdown-menu">
+	       				<li><a href="showUser.do">Usuarios</a></li>
+	       				<li><a href="showUserUpdate.do">Actualizar</a></li> 
 	       				<li><a href="showAddClnt.do">Clientes</a></li>
 					    <li><a href="showAddProved.do">Proveedores</a></li>
 					    <li><a href="showAddInvent.do">Inventarios</a></li>
@@ -24,7 +24,7 @@
 	      	 </ul>
 	      	</li>
 	      	       
-	      <li><a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">Punto Venta<span class="caret"></span></a>
+	      <li><a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">Punto Venta</a>
 	   				<ul class="dropdown-menu">
 	   							<li><a> Pedidos</a></li>
 	   							<li><a href="showPV.do"> Notas Venta</a></li>
@@ -32,7 +32,7 @@
 	   							<li><a> Reportes</a></li>
 	   				</ul></li>
 	      
-	      <li><a class="dropdown-toggle" data-toggle="dropdown">Provedores<span class="caret"></span></a>
+	      <li><a class="dropdown-toggle" data-toggle="dropdown">Provedores</a>
 	      <ul class="dropdown-menu">
 	      
 	      	<li><a>LLegadas</a></li>

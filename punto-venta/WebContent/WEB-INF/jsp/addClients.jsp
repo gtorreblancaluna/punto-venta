@@ -54,7 +54,7 @@ width:200px;
 </head>
 <body >
 	
-<div class="container" >
+<div class="container" style=" box-shadow: 0 0 30px black;" >
 	<c:if test="${not empty messageView }">
 		<c:out value="${messageView}"></c:out>
 	</c:if>
