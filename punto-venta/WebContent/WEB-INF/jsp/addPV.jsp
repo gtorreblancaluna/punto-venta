@@ -10,13 +10,16 @@
 	<title>Punto Venta:: Notas</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 		<script language="JavaScript" type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
 		<script language="JavaScript" type="text/javascript" src="../js/popper.min.js"></script>
 		<script language="JavaScript" type="text/javascript" src="../js/bootstrap.min.js"></script>
 		  <style>    
         .row > div {
         background:#f2f2f2;
-        margin: 14px 0;
+       
       
     }
     .panel-info{
@@ -37,7 +40,8 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container " style=" box-shadow: 0 0 30px black;
+">
 	<div class="page-header">
 		<div class="row">
 			<div class="col">
@@ -49,26 +53,114 @@
 	
 	<!-- inicio de Body despues de header de venta-dia -->
 	<div class="row">
-		<div class="col-3">
+		<div class="col-4">
 		 	<span class="input-group-text">Fecha :<input type="date" class="form-control"> </span>
 			<br>
-			
+		<span class="input-group-text">Cliente :<input type="text" class="form-control"><button>?</button></span>	
 			
 		</div>
 		<div class="col-6">
-
+			
 		</div>
 		<div class="col-2">
 			<span class="input-group-text" >Folio <input type="number" class="form-control" disabled="disabled"></span>
 		</div>
 		
 	</div>
+	<div class="row">
+		 <div class="table-responsive">          
+  			<table class="table">
+			    <thead>
+			      <tr>
+			      	<th>#</th>
+			        <th>Articulo</th>
+			        <th>Descripcion</th>
+			        <th>Cantidad</th>
+			        <th>Precio</th>
+			        <th>Total</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			     <tr>
+			     	<td style="width:2%"><span class="input-group-text" >1</span></td>
+			        <td><input type="number" class="form-control" name="articulo"></td>
+			        <td><input type="text" class="form-control" name="Descripcion"></td>
+			        <td><input type="number" class="form-control" name="Cantidad"></td>
+			        <td><input type="number" class="form-control" name="Precio"></td>
+			        <td><input type="number" class="form-control" name="Total"></td>
+			      </tr>
+			       <tr>
+			       <td style="width:2%"><span class="input-group-text" >2</span></td>
+			        <td><input type="number" class="form-control" name="articulo"></td>
+			        <td><input type="text" class="form-control" name="Descripcion"></td>
+			        <td><input type="number" class="form-control" name="Cantidad"></td>
+			        <td><input type="number" class="form-control" name="Precio"></td>
+			        <td><input type="number" class="form-control" name="Total"></td>
+			      </tr>
+			       <tr>
+			       <td style="width:2%"><span class="input-group-text" >3</span></td>
+			        <td><input type="number" class="form-control" name="articulo"></td>
+			        <td><input type="text" class="form-control" name="Descripcion"></td>
+			        <td><input type="number" class="form-control" name="Cantidad"></td>
+			        <td><input type="number" class="form-control" name="Precio"></td>
+			        <td><input type="number" class="form-control" name="Total"></td>
+			      </tr>
+			       <tr>
+			       <td style="width:2%"><span class="input-group-text" >4</span></td>
+			        <td><input type="number" class="form-control" name="articulo"></td>
+			        <td><input type="text" class="form-control" name="Descripcion"></td>
+			        <td><input type="number" class="form-control" name="Cantidad"></td>
+			        <td><input type="number" class="form-control" name="Precio"></td>
+			        <td><input type="number" class="form-control" name="Total"></td>
+			      </tr>
+			       <tr>
+			       <td style="width:2%"><span class="input-group-text" >5</span></td>
+			        <td><input type="number" class="form-control" name="articulo"></td>
+			        <td><input type="text"   class="form-control" name="Descripcion"></td>
+			        <td><input type="number" class="form-control" name="Cantidad"></td>
+			        <td><input type="number" class="form-control" name="Precio"></td>
+			        <td><input type="number" class="form-control" name="Total"></td>
+			      </tr>
+			       <tr>
+			       <td style="width:2%"><span class="input-group-text" >6</span></td>
+			        <td><input type="number" class="form-control" name="articulo"></td>
+			        <td><input type="text"   class="form-control" name="Descripcion"></td>
+			        <td><input type="number" class="form-control" name="Cantidad"></td>
+			        <td><input type="number" class="form-control" name="Precio"></td>
+			        <td><input type="number" class="form-control" name="Total"></td>
+			      </tr>
+			       <tr>
+			       <td style="width:2%"><span class="input-group-text" >7</span></td>
+			        <td><input type="number" class="form-control" name="articulo"></td>
+			        <td><input type="text" class="form-control" name="Descripcion"></td>
+			        <td><input type="number" class="form-control" name="Cantidad"></td>
+			        <td><input type="number" class="form-control" name="Precio"></td>
+			        <td><input type="number" class="form-control" name="Total"></td>
+			      </tr>
+			       <tr>
+			       <td style="width:2%"><span class="input-group-text" >8</span></td>
+			        <td><input type="number" class="form-control" name="articulo"></td>
+			        <td><input type="text" class="form-control" name="Descripcion"></td>
+			        <td><input type="number" class="form-control" name="Cantidad"></td>
+			        <td><input type="number" class="form-control" name="Precio"></td>
+			        <td><input type="number" class="form-control" name="Total"></td>
+			      </tr>
+			      
+			    </tbody>
+			  </table>
+			  
+			  
+			  
+			  </div>
+			
+		</div>
+	</div>
+
 	
 	
 	
 
 
-</div>
 
 
 </body>
