@@ -16,7 +16,6 @@
 	       <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">Sistema</a>
 	       	<ul class="dropdown-menu">
 	       				<li><a href="showUser.do">Usuarios</a></li>
-	       				<li><a href="showUserUpdate.do">Actualizar</a></li> 
 	       				<li><a href="showAddClnt.do">Clientes</a></li>
 					    <li><a href="showAddProved.do">Proveedores</a></li>
 					    <li><a href="showAddInvent.do">Inventarios</a></li>					    
