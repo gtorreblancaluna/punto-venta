@@ -17,6 +17,7 @@
     	background:rgba(125,125,125);
     	border: 4px;
     	
+    	   	
     }
     <!--la linea para agregar los estilos y manipularlos  -->
     
@@ -29,6 +30,9 @@
     </style>
 		
 </head>
+<body>
+<br>
+<br>
 <body>
 
 <div class="container " style=" box-shadow: 0 0 30px black;">
@@ -154,6 +158,7 @@
 
 
 
+</body>
 </body>
 </html>
 
