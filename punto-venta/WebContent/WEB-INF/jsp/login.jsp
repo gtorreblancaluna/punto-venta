@@ -8,10 +8,8 @@
 
 <head>
 <title>punto venta ::: login</title>
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-		<script language="JavaScript" type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
-				<script language="JavaScript" type="text/javascript" src="../js/popper.min.js"></script>
-				<script language="JavaScript" type="text/javascript" src="../js/bootstrap.min.js"></script>
+
+		
 		
 <style>
 

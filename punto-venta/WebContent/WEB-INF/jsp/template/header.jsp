@@ -9,7 +9,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="homeStart">Home</a></li>
      
-      <c:if test="${not empty userSession}">
+      <c:if test="${not empty accountSession}">
        <li class="active"><a href="logout.do">Salir</a></li>
        
 	      <li class="dropdown">
@@ -19,8 +19,7 @@
 	       				<li><a href="showUserUpdate.do">Actualizar</a></li> 
 	       				<li><a href="showAddClnt.do">Clientes</a></li>
 					    <li><a href="showAddProved.do">Proveedores</a></li>
-					    <li><a href="showAddInvent.do">Inventarios</a></li>
-					    
+					    <li><a href="showAddInvent.do">Inventarios</a></li>					    
 	      	 </ul>
 	      	</li>
 	      	       

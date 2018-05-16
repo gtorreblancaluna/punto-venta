@@ -9,9 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>punto venta :: bienvenido</title>
 <link rel="stylesheet" href="../css/bootstrap.min.css">
-		<script language="JavaScript" type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
-		<script language="JavaScript" type="text/javascript" src="../js/popper.min.js"></script>
-		<script language="JavaScript" type="text/javascript" src="../js/bootstrap.min.js"></script>
+		
 		  <style>    
         .row > div {
         background:#f2f2f2;
@@ -34,7 +32,7 @@
     </style>
 </head>
 <body>
-<div>Bienvenido <c:out value="${userSession.email}"></c:out></div>
+<div>Bienvenido <c:out value="${accountSession.email}"></c:out></div>
 
 
 </body>

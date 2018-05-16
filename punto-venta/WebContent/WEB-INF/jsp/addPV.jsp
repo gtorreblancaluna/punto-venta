@@ -5,15 +5,9 @@
 <html>
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Punto Venta:: Notas</title>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="../css/bootstrap.min.css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	<title>Punto Venta:: Notas</title>
 	
-		<script language="JavaScript" type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
-		<script language="JavaScript" type="text/javascript" src="../js/popper.min.js"></script>
-		<script language="JavaScript" type="text/javascript" src="../js/bootstrap.min.js"></script>
-		  <style>    
+		 <style>    
         .row > div {
         background:#f2f2f2;
        
