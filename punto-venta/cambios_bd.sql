@@ -14,7 +14,7 @@ ENGINE = InnoDB;
 
 -- tabla de proveedores
 
-CREATE TABLE c_proveedores {
+CREATE TABLE c_proveedore {
 cl_proveedor INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(45) NOT NULL DEFAULT '',
   ap_paterno VARCHAR(45),
@@ -33,7 +33,7 @@ cl_proveedor INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
 ENGINE = InnoDB;
 -------tabla clientes 
 
-CREATE TABLE c_clientes(
+CREATE TABLE c_cliente(
   cl_cliente INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(45) NOT NULL DEFAULT '',
   ap_paterno VARCHAR(45),
