@@ -1,5 +1,7 @@
 package mx.com.proyect.puntoventa.web.service.impl;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ public class ClientServiceImp implements ClientService{
 	
 	@Override
 	public boolean insertClient(AccountDTOclient a) {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		a.setAddDate(timestamp);
+		a.setState(a.getState().trim());
 		return clientDAO.insertClient(a);
 	}
 
