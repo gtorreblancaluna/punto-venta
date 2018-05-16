@@ -12,7 +12,7 @@ public class LogoutController {
 	
 	@RequestMapping(value = "/logout.do")
 	public String showLogin( HttpServletRequest request, Model model) {	
-		request.getSession().setAttribute( "userSession", null );
+		request.getSession().setAttribute( "accountSession", null );
 	    request.getSession().invalidate();
 		model.addAttribute("loginForm", new LoginForm());		
 		return "login";		
