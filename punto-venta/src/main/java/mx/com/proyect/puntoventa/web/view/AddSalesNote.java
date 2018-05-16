@@ -14,7 +14,7 @@ import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.service.AccountService;
 @Controller
 
-public class notaVenta {
+public class AddSalesNote {
 
 @Autowired
 AccountService accountService;
