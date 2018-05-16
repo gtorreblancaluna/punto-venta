@@ -1,5 +1,7 @@
 package mx.com.proyect.puntoventa.web.model;
 
+import java.sql.Timestamp;
+
 public class AccountDTOclient {
 
 	private String userId;
@@ -16,8 +18,14 @@ public class AccountDTOclient {
 	private String municipality;
 	private String city;
 	private String email;
+	private Timestamp addDate;	
 	
-	
+	public Timestamp getAddDate() {
+		return addDate;
+	}
+	public void setAddDate(Timestamp addDate) {
+		this.addDate = addDate;
+	}
 	public String getEmail() {
 		return email;
 	}
