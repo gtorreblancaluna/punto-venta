@@ -26,6 +26,10 @@ public class ClientServiceImp implements ClientService{
 	@Override
 	public boolean updateClient(AccountDTOclient a) {
 		// TODO Auto-generated method stub
+		Timestamp timestamp =new Timestamp(System.currentTimeMillis());
+		a.setAddDate(timestamp);
+		a.setState(a.getState().trim());
+		
 		return false;
 	}
 

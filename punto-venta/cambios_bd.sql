@@ -49,7 +49,9 @@ CREATE TABLE c_cliente(
   municipio VARCHAR(30),
   estado VARCHAR(30),
   ciudad varchar(45),
+  status ENUM('1','0'),
    PRIMARY KEY(cl_cliente)  
+   
 )
 ENGINE = InnoDB;
 
