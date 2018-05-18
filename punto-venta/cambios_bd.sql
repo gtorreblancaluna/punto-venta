@@ -8,9 +8,14 @@ CREATE TABLE c_usuario (
   password VARCHAR(45),
   fe_alta TIMESTAMP NULL,
   fg_admin ENUM('1','0') NOT NULL DEFAULT '0',
+  fg_activo ENUM('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY(cl_usuario)
  )
 ENGINE = InnoDB;
+
+-- 2018.05.17 solo si existe la tabla c_usuario agregar lo siguiente
+ALTER TABLE c_usuario
+ADD fg_activo ENUM('1','0') NOT NULL DEFAULT '1';
 
 -- tabla de proveedores
 

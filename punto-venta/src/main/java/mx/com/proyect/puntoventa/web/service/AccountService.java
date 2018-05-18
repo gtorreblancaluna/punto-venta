@@ -15,6 +15,7 @@ public interface AccountService {
 	AccountDTO validateUser(LoginForm loginForm) throws DataAccessException;
 	boolean addUser(AccountDTO account);
 	boolean updateUser(AccountDTO account);
+	boolean deleteUser(AccountDTO account);
 	public List<AccountDTO> getAllUser();
 
 }

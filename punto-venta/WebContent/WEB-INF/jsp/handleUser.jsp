@@ -8,6 +8,12 @@
 <title>punto de venta :: admin usuarios</title>
 <script type="text/javascript">
 $( document ).ready(function() {
+	//confirmar eliminar	
+	$('form[name="deleteUserForm"]').submit(function() {
+	   return confirm("confirma para continuar");	   
+	});
+	
+	
 	$( '.btnUpdateUser' ).click(function() {
 		var $updateForm = $("#updateUserForm");
 		 var $row = jQuery(this).closest('tr');
@@ -19,8 +25,10 @@ $( document ).ready(function() {
 		    jQuery.each($columns, function(i, item) {
 		        values = values + 'td' + (i + 1) + ':' + item.innerHTML + '<br/>';
 		        if(i===0)
-		        	$updateForm.find('#name').val(item.innerHTML);
+		        	$updateForm.find('#userId').val(item.innerHTML);
 		        if(i===1)
+		        	$updateForm.find('#name').val(item.innerHTML);
+		        if(i===2)
 		        	$updateForm.find('#email').val(item.innerHTML);
 		        
 // 		        alert(values);
@@ -37,25 +45,38 @@ $( document ).ready(function() {
 		<div class="alert alert-success">
   			<strong>Success!</strong> ${message}
 		</div>
-<%-- 			<div class="message"><c:out value="${message}"></c:out></div> --%>
+
+		</c:if>
+		<c:if test="${messageError != null}">
+		<div class="alert alert-danger">
+  			<strong>Error! </strong> ${messageError}
+		</div>
+
 		</c:if>
 		<!-- Mostramos los usuarios -->
 		<c:if test="${not empty listUser}">
 		<table class="table">
 		<thead>
 			<tr>
+				<td>id</td>
 				<td>Nombre</td>
 				<td>Email</td>
-				<td>Admin</td>
-				<td>Editar</td>
+				<td>Admin</td>				
 			</tr>
 		</thead>
 			<c:forEach items="${listUser}" var="user">		
 		 		<tr>
+		 			<td>${user.userId}</td>
 		 			<td>${user.name}</td>
 		 			<td>${user.email }</td>
 		 			<td><c:out default="None" escapeXml="true" value="${user.fgAdmin eq '1' ? 'Admin' : '-' }" /></td>
 		 			<td><button type="button" class="btn btn-info btn-lg btnUpdateUser" id="btnUpdateUser" data-toggle="modal" data-target="#modalUpdateUser">Editar</button></td>
+		 			<td>		 			
+		 			<form:form action="handleUser.do" method="post" name="deleteUserForm" id="deleteUserForm">
+						<input type="hidden" name="userId" id="deleteUserId" value="${user.userId}">			 	
+		 			 	<input type="submit" class="btn btn-info btn-lg" name="deleteUser" value="Eliminar" />	
+		 			 </form:form>
+		 			</td>
 		 		</tr>	 	
 	 		</c:forEach>
 	 		</table>
@@ -114,7 +135,7 @@ $( document ).ready(function() {
     
     
     
-    <div id="modalUpdateUser" class="modal fade" role="dialog" >
+ <div id="modalUpdateUser" class="modal fade" role="dialog" >
  <div class="modal-content" style="width: 700px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -122,6 +143,7 @@ $( document ).ready(function() {
       </div>
       <div class="modal-body">     
 		<form:form commandName="account" action="handleUser.do" method="post" name="updateUserForm" id="updateUserForm">
+		<input type="hidden" name="userId" id="userId">
 				<div class="form-group">
 					<label>Nombre: </label>
 					<input type="text" id="name" name="name" placeholder="Nombre" class="form-control">
@@ -160,6 +182,8 @@ $( document ).ready(function() {
     </div>
     
     </div>
+    
+    
 
 
 </body>

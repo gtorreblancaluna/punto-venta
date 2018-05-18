@@ -16,5 +16,7 @@ public interface AccountDAO {
 	void remove(AccountDTO account);
  
 	void insert(AccountDTO account);
+	
+	boolean deleteUser(AccountDTO account);
 
 }

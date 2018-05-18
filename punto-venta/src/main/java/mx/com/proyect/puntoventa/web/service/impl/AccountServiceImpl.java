@@ -50,4 +50,10 @@ public class AccountServiceImpl implements AccountService {
 		return true;
 	}
 
+	@Override
+	public boolean deleteUser(AccountDTO account) {
+		accountDao.deleteUser(account);
+		return true;
+	}
+
 }

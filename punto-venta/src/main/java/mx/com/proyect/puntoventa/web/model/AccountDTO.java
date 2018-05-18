@@ -23,8 +23,15 @@ public class AccountDTO {
 	private Timestamp feAlta;
 	// bandera para saber si es admin
 	private String fgAdmin;
-
+	// bandera para saber si esta activo
+	private String fgActivo;
 	
+	public String getFgActivo() {
+		return fgActivo;
+	}
+	public void setFgActivo(String fgActivo) {
+		this.fgActivo = fgActivo;
+	}
 	public Timestamp getFeAlta() {
 		return feAlta;
 	}

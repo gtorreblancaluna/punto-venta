@@ -48,4 +48,10 @@ public class SqlMapAccountDao extends SqlSessionDaoSupport implements AccountDAO
 		return ((AccountDTO) getSqlSession().selectOne("validateUser", loginForm));
 	}
 
+	@Override
+	public boolean deleteUser(AccountDTO account) {
+		getSqlSession().update("deleteUser", account);
+		return true;
+	}
+
 }
