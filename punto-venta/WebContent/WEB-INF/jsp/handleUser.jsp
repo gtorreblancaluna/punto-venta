@@ -76,7 +76,7 @@ $( document ).ready(function() {
 		<form:form commandName="account" action="handleUser.do" method="post" name="addUserForm">
 				<div class="form-group">
 					<label>Nombre: </label>
-					<input type="text" id="name" name="name" placeholder="Email" class="form-control">
+					<input type="text" id="name" name="name" placeholder="Nombre" class="form-control">
 				</div>
 				<div class="form-group">
 					<label>Apellido Paterno: </label>
@@ -124,7 +124,7 @@ $( document ).ready(function() {
 		<form:form commandName="account" action="handleUser.do" method="post" name="updateUserForm" id="updateUserForm">
 				<div class="form-group">
 					<label>Nombre: </label>
-					<input type="text" id="name" name="name" placeholder="Email" class="form-control">
+					<input type="text" id="name" name="name" placeholder="Nombre" class="form-control">
 				</div>
 				<div class="form-group">
 					<label>Apellido Paterno: </label>
