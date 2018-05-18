@@ -1,6 +1,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+<script type="text/javascript">
+// alert('${accountSession}')
+</script>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -9,13 +13,13 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="homeStart">Home</a></li>
      
-      <c:if test="${not empty accountSession}">
+      <c:if test="${not empty sessionScope.accountSession}">
        <li class="active"><a href="logout.do">Salir</a></li>
        
 	      <li class="dropdown">
 	       <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">Sistema</a>
 	       	<ul class="dropdown-menu">
-	       				<li><a href="showUser.do">Usuarios</a></li>
+	       				<li><a href="handleUser.do">Usuarios</a></li>
 	       				<li><a href="showAddClnt.do">Clientes</a></li>
 					    <li><a href="showAddProved.do">Proveedores</a></li>
 					    <li><a href="showAddInvent.do">Inventarios</a></li>					    

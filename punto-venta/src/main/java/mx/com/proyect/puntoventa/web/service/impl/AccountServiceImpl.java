@@ -43,4 +43,11 @@ public class AccountServiceImpl implements AccountService {
 		return accountDao.getAll();
 	}
 
+	@Override
+	public boolean updateUser(AccountDTO account) {
+		// TODO Auto-generated method stub
+		accountDao.update(account);
+		return true;
+	}
+
 }

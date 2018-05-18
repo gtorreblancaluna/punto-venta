@@ -12,7 +12,7 @@
 		<result property="fg_admin" column="fgAdmin" />
 	</resultMap>
 
-	<select id="findById" resultMap="accountResultMap" parameterType="long">
+	<select id="findByIdUser" resultMap="accountResultMap" parameterType="long">
 		select * from c_usuario where id_usuario = #{id}
 	</select>
 	
@@ -20,24 +20,22 @@
 		SELECT * FROM c_usuario WHERE email = #{email} AND password = #{password}
 	</select>
 
-	<select id="getAll" resultMap="accountResultMap">
+	<select id="getAllUsers" resultMap="accountResultMap">
 		select * from c_usuario; 
 	</select>
 
-	<insert id="insert" parameterType="accountDTO">
+	<insert id="insertUser" parameterType="accountDTO">
 		insert into c_usuario
 		(nombre,ap_paterno,ap_materno,email,fe_alta,password,fg_admin)
 		values
 		(#{name},#{firstName},#{secondName},#{email},#{addDate},#{password},#{admin})
 	</insert>
-	<update id="update" parameterType="accountDTO">
+	<update id="updateUser" parameterType="accountDTO">
 		update c_usuario set
-		nombre =
-		#{name},
+		nombre = #{name},
 		ap_paterno = #{firstName},
 		ap_materno = #{secondName},
-		email =
-		#{email},
+		email =	#{email},
 		password = #{password}
 		where id_usuario = #{userId}
 	</update>

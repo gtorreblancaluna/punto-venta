@@ -14,17 +14,17 @@ public class SqlMapAccountDao extends SqlSessionDaoSupport implements AccountDAO
 	@Override
 	public List<AccountDTO> getAll() {
 		// TODO Auto-generated method stub
-		return getSqlSession().selectList("getAll");
+		return getSqlSession().selectList("getAllUsers");
 	}
 
 	@Override
 	public AccountDTO findById(Long id) {
-		return ((AccountDTO) getSqlSession().selectOne("findById", id));
+		return ((AccountDTO) getSqlSession().selectOne("findByIdUser", id));
 	}
 
 	@Override
 	public void update(AccountDTO account) {
-		// TODO Auto-generated method stub
+		getSqlSession().update("updateUser",account);
 		
 	}
 
@@ -39,7 +39,7 @@ public class SqlMapAccountDao extends SqlSessionDaoSupport implements AccountDAO
 		Timestamp l = new Timestamp(System.currentTimeMillis());
 		account.setAddDate(l);
 		account.setAdmin(account.getFgAdmin()==null ? "0":"1");
-		getSqlSession().insert("insert", account);
+		getSqlSession().insert("insertUser", account);
 		
 	}
 
