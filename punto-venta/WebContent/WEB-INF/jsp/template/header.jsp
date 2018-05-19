@@ -22,7 +22,7 @@
 	       				<li><a href="handleUser.do">Usuarios</a></li>
 	       				<li><a href="showAddClnt.do">Clientes</a></li>
 					    <li><a href="showAddProved.do">Proveedores</a></li>
-					    <li><a href="showAddInvent.do">Inventarios</a></li>					    
+					    <li><a href="handleInventory.do">Inventario</a></li>					    
 	      	 </ul>
 	      	</li>
 	      	       

@@ -18,6 +18,8 @@
 		<typeAlias alias="accountDTO" type="mx.com.proyect.puntoventa.web.model.AccountDTO" />
 		<typeAlias alias="loginForm" type="mx.com.proyect.puntoventa.web.forms.LoginForm" />
 		<typeAlias alias="clientDTO" type="mx.com.proyect.puntoventa.web.model.AccountDTOclient" />
+		<typeAlias alias="itemDTO"   type="mx.com.proyect.puntoventa.web.model.ItemDTO" />
+		<typeAlias alias="warehouseDTO"   type="mx.com.proyect.puntoventa.web.model.WarehouseDTO" />
 	
 		
 		
