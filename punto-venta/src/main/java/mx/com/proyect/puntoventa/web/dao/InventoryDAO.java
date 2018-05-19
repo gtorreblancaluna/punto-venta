@@ -1,4 +1,4 @@
-package mx.com.proyect.puntoventa.web.service;
+package mx.com.proyect.puntoventa.web.dao;
 
 import java.util.List;
 
@@ -8,12 +8,14 @@ import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.WarehouseDTO;
 
-public interface InventoryService {
+public interface InventoryDAO {
+	
 	public ItemDTO findById(Long id);
 	ItemDTO validate(LoginForm loginForm) throws DataAccessException;
-	boolean add(ItemDTO account);
-	boolean update(ItemDTO account);
-	boolean delete(ItemDTO account);
+	boolean add(ItemDTO item);
+	boolean update(ItemDTO item);
+	boolean delete(ItemDTO item);
 	public List<ItemDTO> getAll();
 	public List<WarehouseDTO> getAllWarehouse();
+
 }
