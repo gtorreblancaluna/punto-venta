@@ -107,22 +107,24 @@ ENGINE = InnoDB;
 
 
 --Tabla Inventarios
-create table c_Inventarios(
-cl_Inventario integer unsigned not null autoincrement,
-status varchar (15) not null,
-fecha date,
-almacen varchar(40),
-Articulo varchar(80) not null,
-unidad varchar(20),
-entrada double (7,2)not null,
-salida double(7,2),
-Costo double(9,2),
+create table c_inventario(
+cl_inventario integer unsigned NOT NULL AUTO_INCREMENT,
+fecha_alta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+cl_almacen INTEGER NOT NULL,
+descripcion VARCHAR(80) NOT NULL,
+unidad_medida VARCHAR(20),
+cantidad_entrada DECIMAL(9,2) NOT NULL,
+cantidad_salida DECIMAL(9,2),
+precio_venta DECIMAL(9,2),
+cantidad_existente DECIMAL(9,2),
+fg_estatus ENUM('1','0') NOT NULL DEFAULT '1',
+PRIMARY KEY(cl_inventario)
 )
 ENGINE = InnoDB;
 
---Table productos 
+--Table productos, 2018.05.17 ESTA PENDIENTE ESTA TABLA, NO SE CREA POR EL MOMENTO 
 create table c_productos(
-c_producto integer unsigned not null autoincrement,
+c_producto integer unsigned not null AUTO_INCREMENT,
 status varchar(15)not null,
 f_alta date,
 cl_almacen INTEGER NOT NULL,--aqui se podria poner un id de almacen porque seran 7 sucursales 
@@ -134,9 +136,10 @@ p_venta double(7,2),
 ENGINE = InnoDB;
 
 CREATE TABLE c_almacen(
-cl_almacnen integer unsigned not null autoincrement,
+cl_almacen integer unsigned not null AUTO_INCREMENT,
 ds_descripcion VARCHAR(65) NOT NULL,
-status varchar(15)not null
+fg_estatus ENUM('1','0') NOT NULL DEFAULT '1',
+PRIMARY KEY(cl_almacen)
 )
 ENGINE = InnoDB;
 		
