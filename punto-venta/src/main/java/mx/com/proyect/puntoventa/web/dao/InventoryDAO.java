@@ -6,7 +6,7 @@ import org.springframework.dao.DataAccessException;
 
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
-import mx.com.proyect.puntoventa.web.model.WarehouseDTO;
+import mx.com.proyect.puntoventa.web.model.StoreDTO;
 
 public interface InventoryDAO {
 	
@@ -16,6 +16,6 @@ public interface InventoryDAO {
 	boolean update(ItemDTO item);
 	boolean delete(ItemDTO item);
 	public List<ItemDTO> getAll();
-	public List<WarehouseDTO> getAllWarehouse();
+	public List<StoreDTO> getAllStore();
 
 }
