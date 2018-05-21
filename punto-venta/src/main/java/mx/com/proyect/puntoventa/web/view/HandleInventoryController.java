@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
-import mx.com.proyect.puntoventa.web.model.WarehouseDTO;
+import mx.com.proyect.puntoventa.web.model.StoreDTO;
 import mx.com.proyect.puntoventa.web.service.InventoryService;
 
 @Controller
@@ -29,8 +29,8 @@ public class HandleInventoryController {
 			model.addAttribute("listItems", listItems);	
 			
 			// traer la lista de almacenes
-			List<WarehouseDTO> listWarehouse = inventoryService.getAllWarehouse();
-			model.addAttribute("listWarehouse", listWarehouse);	
+			List<StoreDTO> listStore = inventoryService.getAllStore();
+			model.addAttribute("listStore", listStore);	
 			
 			model.addAttribute("item", new ItemDTO());
 			return "handleInventory";
@@ -54,8 +54,8 @@ public class HandleInventoryController {
 			List<ItemDTO> listItem = inventoryService.getAll();
 			model.addAttribute("listItem", listItem);
 			// traer la lista de almacenes
-			List<WarehouseDTO> listWarehouse = inventoryService.getAllWarehouse();
-			model.addAttribute("listWarehouse", listWarehouse);	
+			List<StoreDTO> listStore = inventoryService.getAllStore();
+			model.addAttribute("listStore", listStore);	
 			model.addAttribute("message", "Exito al actualizar el producto: " + item.getDescription());
 			return "handleInventory";
 		}
@@ -89,8 +89,8 @@ public class HandleInventoryController {
 			List<ItemDTO> listItem = inventoryService.getAll();
 			model.addAttribute("listItem", listItem);
 			// traer la lista de almacenes
-			List<WarehouseDTO> listWarehouse = inventoryService.getAllWarehouse();
-			model.addAttribute("listWarehouse", listWarehouse);	
+			List<StoreDTO> listStore = inventoryService.getAllStore();
+			model.addAttribute("listStore", listStore);	
 						
 			return "handleInventory";
 		}
