@@ -27,7 +27,7 @@ $( document ).ready(function() {
 		        if(i===0)
 		        	$updateForm.find('#itemId').val(item.innerHTML);
 		        if(i===2)
-		        	$updateForm.find('#warehouseDescription').val(item.innerHTML);
+		        	$updateForm.find('#storeDescription').val(item.innerHTML);
 		        if(i===3)
 		        	$updateForm.find('#unitMeasurement').val(item.innerHTML);
 		        
@@ -84,7 +84,7 @@ $( document ).ready(function() {
 		 		<tr>
 		 			<td>${item.itemId}</td>
 		 			<td>${item.date}</td>
-		 			<td>${item.warehouseDTO.description}</td>	
+		 			<td>${item.storeDTO.description}</td>	
 		 			<td>${item.description}</td>		 			
 		 			<td>${item.unitMeasurement}</td>
 		 			<td>${item.amountEntry}</td>
@@ -119,11 +119,11 @@ $( document ).ready(function() {
 				
 				<div class="form-group">
 					<label>Almacen: </label>
-<!-- 					<input type="text" id="warehouseDescription" name="warehouseDTO.description" placeholder="" class="form-control"> -->
-				<select name="warehouseDTO.warehouseId">
+<!-- 					<input type="text" id="storeDescription" name="storeDTO.description" placeholder="" class="form-control"> -->
+				<select name="storeDTO.storeId">
 				<option value="0">- Seleccione -</option>
-					<c:forEach items="${listWarehouse}" var="warehouse">
-						<option value="${warehouse.warehouseId}">${warehouse.description}</option>
+					<c:forEach items="${listStore}" var="store">
+						<option value="${store.storeId}">${store.description}</option>
 					</c:forEach>	
 				</select>
 				</div>
@@ -178,7 +178,7 @@ $( document ).ready(function() {
 				
 				<div class="form-group">
 					<label>Almacen: </label>
-					<input type="text" id="warehouseDescription" name="warehouseDTO.description" placeholder="" class="form-control">
+					<input type="text" id="storeDescription" name="storeDTO.description" placeholder="" class="form-control">
 				</div>
 				<div class="form-group">
 					<label>Descripci&oacute;n: </label>
