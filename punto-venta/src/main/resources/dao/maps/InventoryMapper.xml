@@ -11,13 +11,12 @@
 		<result property="salePrice" column="precio_venta" />
 		<result property="stock" column="cantidad_existente" />
 		<result property="fgStatus" column="fg_estatus" />		
-		<result property="warehouseDTO.warehouseId" column="cl_almacen" />
-		<result property="warehouseDTO.description" column="ds_descripcion" />
-		
+		<result property="storeDTO.storeId" column="cl_almacen" />
+		<result property="storeDTO.description" column="ds_descripcion" />		
 	</resultMap>
 	
-	<resultMap id="warehouseResultMap" type="warehouseDTO">
-		<result property="warehouseId" column="cl_almacen" />
+	<resultMap id="storeResultMap" type="storeDTO">
+		<result property="storeId" column="cl_almacen" />
 		<result property="description" column="ds_descripcion" />		
 		<result property="fgStatus" column="fg_estatus" />		
 	</resultMap>
@@ -43,11 +42,11 @@
 		INSERT INTO c_inventario
 		(cl_almacen,descripcion,unidad_medida,cantidad_entrada,cantidad_salida,precio_venta,cantidad_existente)
 		values
-		(#{warehouseDTO.warehouseId},#{description},#{unitMeasurement},#{amountEntry},#{amountOutput},#{salePrice},#{stock})
+		(#{storeDTO.storeId},#{description},#{unitMeasurement},#{amountEntry},#{amountOutput},#{salePrice},#{stock})
 	</insert>
 	<update id="updateItem" parameterType="accountDTO">
 		UPDATE c_inventario SET
-		cl_almacen = #{warehouseDTO.warehouseId},
+		cl_almacen = #{storeDTO.storeId},
 		descripcion = #{description},
 		unidad_medida = #{unitMeasurement},
 		cantidad_entrada =	#{amountEntry},
@@ -60,7 +59,7 @@
 		UPDATE c_inventario SET fg_estatus = '0' WHERE cl_inventario = #{itemId}
 	</delete>
 	
-	<select id="getAllWarehouse" resultMap="warehouseResultMap">
+	<select id="getAllStore" resultMap="storeResultMap">
 		SELECT * FROM c_almacen WHERE fg_estatus = '1'
 	</select>
 </mapper>
