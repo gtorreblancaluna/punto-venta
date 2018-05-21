@@ -8,7 +8,7 @@ public class ItemDTO {
 	// fecha de alta
 	private Timestamp date;
 	// pojo almacen
-	private WarehouseDTO warehouseDTO;
+	private StoreDTO storeDTO;
 	// descripcion
 	private String description;
 	//unidad de medida
@@ -25,18 +25,20 @@ public class ItemDTO {
 	private String fgStatus;
 	
 	
+	
+	public StoreDTO getStoreDTO() {
+		return storeDTO;
+	}
+	public void setStoreDTO(StoreDTO storeDTO) {
+		this.storeDTO = storeDTO;
+	}
 	public Float getStock() {
 		return stock;
 	}
 	public void setStock(Float stock) {
 		this.stock = stock;
 	}
-	public WarehouseDTO getWarehouseDTO() {
-		return warehouseDTO;
-	}
-	public void setWarehouseDTO(WarehouseDTO warehouseDTO) {
-		this.warehouseDTO = warehouseDTO;
-	}
+	
 	public String getItemId() {
 		return itemId;
 	}

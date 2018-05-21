@@ -1,19 +1,20 @@
 package mx.com.proyect.puntoventa.web.model;
 // 2018.05.18 GTL, POJO ALMACEN
 
-public class WarehouseDTO {
+public class StoreDTO {
 	// id almacen
-	private Integer warehouseId;
+	private Integer storeId;
 	// descripcion
 	private String description;
 	// estatus
 	private String fgStatus;
 	
-	public Integer getWarehouseId() {
-		return warehouseId;
+	
+	public Integer getStoreId() {
+		return storeId;
 	}
-	public void setWarehouseId(Integer warehouseId) {
-		this.warehouseId = warehouseId;
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
 	}
 	public String getDescription() {
 		return description;

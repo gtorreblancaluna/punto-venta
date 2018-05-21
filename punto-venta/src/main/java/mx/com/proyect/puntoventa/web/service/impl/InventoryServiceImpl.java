@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import mx.com.proyect.puntoventa.web.dao.InventoryDAO;
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
-import mx.com.proyect.puntoventa.web.model.WarehouseDTO;
+import mx.com.proyect.puntoventa.web.model.StoreDTO;
 import mx.com.proyect.puntoventa.web.service.InventoryService;
 
 @Service
@@ -55,9 +55,9 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
-	public List<WarehouseDTO> getAllWarehouse() {
+	public List<StoreDTO> getAllStore() {
 		// TODO Auto-generated method stub
-		return inventoryDao.getAllWarehouse();
+		return inventoryDao.getAllStore();
 	}
 
 }

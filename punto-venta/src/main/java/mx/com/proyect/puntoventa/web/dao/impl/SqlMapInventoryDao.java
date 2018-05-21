@@ -8,7 +8,7 @@ import org.springframework.dao.DataAccessException;
 import mx.com.proyect.puntoventa.web.dao.InventoryDAO;
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
-import mx.com.proyect.puntoventa.web.model.WarehouseDTO;
+import mx.com.proyect.puntoventa.web.model.StoreDTO;
 
 public class SqlMapInventoryDao extends SqlSessionDaoSupport implements InventoryDAO {
 
@@ -46,9 +46,9 @@ public class SqlMapInventoryDao extends SqlSessionDaoSupport implements Inventor
 	}
 
 	@Override
-	public List<WarehouseDTO> getAllWarehouse() {
+	public List<StoreDTO> getAllStore() {
 		
-		return getSqlSession().selectList("getAllWarehouse");
+		return getSqlSession().selectList("getAllStore");
 	}
 
 }
