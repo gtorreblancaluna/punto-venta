@@ -29,7 +29,7 @@
 	      <li><a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">Punto Venta</a>
 	   				<ul class="dropdown-menu">
 	   							<li><a> Pedidos</a></li>
-	   							<li><a href="showPV.do"> Notas Venta</a></li>
+	   							<li><a href="handleSaleNote.do"> Notas Venta</a></li>
 	   							<li><a> Administracion</a></li>
 	   							<li><a> Reportes</a></li>
 	   				</ul></li>
