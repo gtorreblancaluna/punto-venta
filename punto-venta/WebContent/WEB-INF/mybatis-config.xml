@@ -20,6 +20,7 @@
 		<typeAlias alias="clientDTO" type="mx.com.proyect.puntoventa.web.model.AccountDTOclient" />
 		<typeAlias alias="itemDTO"   type="mx.com.proyect.puntoventa.web.model.ItemDTO" />
 		<typeAlias alias="storeDTO"   type="mx.com.proyect.puntoventa.web.model.StoreDTO" />
+		<typeAlias alias="officeDTO"   type="mx.com.proyect.puntoventa.web.model.OfficeDTO" />
 	
 		
 		
