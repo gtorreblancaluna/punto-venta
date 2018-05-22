@@ -9,7 +9,17 @@ import mx.com.proyect.puntoventa.web.model.ItemDTO;
  * */ 
 public class SaleNoteForm {
 	
+	private String userId;
 	private List<ItemDTO> items;
+
+	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
 	public List<ItemDTO> getItems() {
 		return items;

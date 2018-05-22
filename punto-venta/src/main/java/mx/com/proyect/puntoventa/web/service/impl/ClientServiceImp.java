@@ -1,6 +1,7 @@
 package mx.com.proyect.puntoventa.web.service.impl;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,12 @@ public class ClientServiceImp implements ClientService{
 	public AccountDTOclient getClientById(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<AccountDTOclient> getAll() {
+		// TODO Auto-generated method stub
+		return clientDAO.getAll();
 	}
 	
 }

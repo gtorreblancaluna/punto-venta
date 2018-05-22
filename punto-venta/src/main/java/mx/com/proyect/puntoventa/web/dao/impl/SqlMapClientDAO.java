@@ -1,5 +1,7 @@
 package mx.com.proyect.puntoventa.web.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import mx.com.proyect.puntoventa.web.dao.ClientDAO;
@@ -29,6 +31,11 @@ public class SqlMapClientDAO extends SqlSessionDaoSupport implements ClientDAO {
 	public AccountDTOclient getClientById(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<AccountDTOclient> getAll() {
+		return getSqlSession().selectList("getAllClient");
 	}
 
 }
