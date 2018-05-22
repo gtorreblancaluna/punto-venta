@@ -6,48 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>punto de venta :: Inventario</title>
-<script type="text/javascript">
-$( document ).ready(function() {
-	//confirmar eliminar	
-	$('form[name="deleteForm"]').submit(function() {
-	   return confirm("confirma para continuar");	   
-	});
-	
-	
-	$( '.btnUpdate' ).click(function() {
-		var $updateForm = $("#updateForm");
-		 var $row = jQuery(this).closest('tr');
-		    var $columns = $row.find('td');
 
-		    $columns.addClass('row-highlight');
-		    var values = "";
-
-		    jQuery.each($columns, function(i, item) {
-		        values = values + 'td' + (i + 1) + ':' + item.innerHTML + '<br/>';
-		        if(i===0)
-		        	$updateForm.find('#itemId').val(item.innerHTML);
-		        if(i===2)
-		        	$updateForm.find('#storeDescription').val(item.innerHTML);
-		        if(i===3)
-		        	$updateForm.find('#unitMeasurement').val(item.innerHTML);
-		        
-		        if(i===4)
-		        	$updateForm.find('#amountEntry').val(item.innerHTML);
-		        if(i===5)
-		        	$updateForm.find('#amountOutput').val(item.innerHTML);
-		        if(i===6)
-		        	$updateForm.find('#salePrice').val(item.innerHTML);
-		        
-		        if(i===7)
-		        	$updateForm.find('#stock').val(item.innerHTML);
-		       
-		        
-// 		        alert(values);
-		    });
-		    console.log(values);
-	});
-});
-</script>
 </head>
 <body>
  <div class="container">
@@ -220,7 +179,48 @@ $( document ).ready(function() {
     
     </div>
     
-    
+<script type="text/javascript">
+$( document ).ready(function() {
+	//confirmar eliminar	
+	$('form[name="deleteForm"]').submit(function() {
+	   return confirm("confirma para continuar");	   
+	});
+	
+	
+	$( '.btnUpdate' ).click(function() {
+		var $updateForm = $("#updateForm");
+		 var $row = jQuery(this).closest('tr');
+		    var $columns = $row.find('td');
+
+		    $columns.addClass('row-highlight');
+		    var values = "";
+
+		    jQuery.each($columns, function(i, item) {
+		        values = values + 'td' + (i + 1) + ':' + item.innerHTML + '<br/>';
+		        if(i===0)
+		        	$updateForm.find('#itemId').val(item.innerHTML);
+		        if(i===2)
+		        	$updateForm.find('#storeDescription').val(item.innerHTML);
+		        if(i===3)
+		        	$updateForm.find('#unitMeasurement').val(item.innerHTML);
+		        
+		        if(i===4)
+		        	$updateForm.find('#amountEntry').val(item.innerHTML);
+		        if(i===5)
+		        	$updateForm.find('#amountOutput').val(item.innerHTML);
+		        if(i===6)
+		        	$updateForm.find('#salePrice').val(item.innerHTML);
+		        
+		        if(i===7)
+		        	$updateForm.find('#stock').val(item.innerHTML);
+		       
+		        
+// 		        alert(values);
+		    });
+		    console.log(values);
+	});
+});
+</script>    
 
 
 </body>
