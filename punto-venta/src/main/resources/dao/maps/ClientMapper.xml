@@ -52,4 +52,7 @@
 		delete from c_usuario where
 		id_usuario = #{userId}
 	</delete>
+	<select id="getAllClient" resultMap="clientResultMap" >
+		SELECT * FROM c_cliente WHERE status = '1' ORDER BY nombre
+	</select>
 </mapper>
