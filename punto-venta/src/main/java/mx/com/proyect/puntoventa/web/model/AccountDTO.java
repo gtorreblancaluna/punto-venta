@@ -16,7 +16,8 @@ public class AccountDTO implements Serializable {
 	private String firstName;
 	private String secondName;
 	private String password;
-
+	// para saber el puesto
+	private JobDTO job;	
 	//fecha de alta
 	private Timestamp addDate;
 	private String admin;
@@ -28,6 +29,14 @@ public class AccountDTO implements Serializable {
 	// bandera para saber si esta activo
 	private String fgActivo;
 	
+	
+	
+	public JobDTO getJob() {
+		return job;
+	}
+	public void setJob(JobDTO job) {
+		this.job = job;
+	}
 	public String getFgActivo() {
 		return fgActivo;
 	}

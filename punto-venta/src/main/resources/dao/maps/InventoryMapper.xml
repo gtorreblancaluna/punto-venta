@@ -12,11 +12,10 @@
 		<result property="stock" column="cantidad_existente" />
 		<result property="fgStatus" column="fg_estatus" />		
 		<result property="storeDTO.storeId" column="cl_almacen" />
-		<result property="storeDTO.description" column="ds_descripcion" />	
-		
-		<result property="colorDTO.colorId" column="ds_descripcion" />
-		<result property="colorDTO.description" column="ds_descripcion" />
-		<result property="colorDTO.status" column="ds_descripcion" />			
+		<result property="storeDTO.description" column="ds_descripcion" />			
+		<result property="color.colorId" column="color_id" />
+		<result property="color.description" column="color_descripcion" />
+		<result property="color.status" column="color_estatus" />			
 	</resultMap>
 	
 	<resultMap id="storeResultMap" type="storeDTO">
@@ -26,7 +25,7 @@
 	</resultMap>
 
 	<select id="findByIdItem" resultMap="itemResultMap" parameterType="long">
-		SELECT i.*, a.cl_almacen, a.ds_descripcion
+		SELECT i.*, a.cl_almacen, a.ds_descripcion, c.cl_color AS color_id, c.ds_descripcion AS color_descripcion, c.fg_estatus AS color_estatus
 		FROM c_articulo i 
 		INNER JOIN c_almacen a ON (i.cl_almacen = a.cl_almacen)
 		INNER JOIN c_color c ON (i.cl_color = c.cl_color)
@@ -35,7 +34,7 @@
 	
 	
 	<select id="getAllItems" resultMap="itemResultMap">
-		SELECT i.*, a.cl_almacen, a.ds_descripcion
+		SELECT i.*, a.cl_almacen, a.ds_descripcion, c.cl_color AS color_id, c.ds_descripcion AS color_descripcion, c.fg_estatus AS color_estatus
 		FROM c_articulo i 
 		INNER JOIN c_almacen a ON (i.cl_almacen = a.cl_almacen)
 		INNER JOIN c_color c ON (i.cl_color = c.cl_color)

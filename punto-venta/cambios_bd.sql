@@ -1,6 +1,7 @@
 --tabla usuario 
 CREATE TABLE c_usuario (
   cl_usuario INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  cl_puesto INTEGER UNSIGNED NOT NULL,
   nombre VARCHAR(45) NOT NULL DEFAULT '',
   ap_paterno VARCHAR(45),
   ap_materno VARCHAR(45),
@@ -9,11 +10,16 @@ CREATE TABLE c_usuario (
   fe_alta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   fg_admin ENUM('1','0') NOT NULL DEFAULT '0',
   fg_activo ENUM('1','0') NOT NULL DEFAULT '1',
-  PRIMARY KEY(cl_usuario)
+  PRIMARY KEY(cl_usuario),  
+  CONSTRAINT fk_cl_puesto FOREIGN KEY fk_cl_puesto (cl_puesto) 
+	REFERENCES c_puesto(cl_puesto)
+	ON DELETE CASCADE
+    ON UPDATE CASCADE 
  )
 ENGINE = InnoDB;
 
-INSERT INTO c_usuario (nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('Gerardo','Torreblanca','Luna','gtorre@email.com','123456','1','1');
+INSERT INTO c_usuario (cl_puesto,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('1','Gerardo','Torreblanca','Luna','gtorre@email.com','123456','1','1');
+INSERT INTO c_usuario (cl_puesto,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('2','Armando','Gonzales','Borja','armando@email.com','123456','1','1');
 
 -- 2018.05.17 solo si existe la tabla c_usuario agregar lo siguiente
 ALTER TABLE c_usuario
@@ -185,13 +191,13 @@ CONSTRAINT fk1_cl_color FOREIGN KEY fk1_cl_color (cl_color)
 )
 ENGINE = InnoDB;
 
-INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_2','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_3','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_4','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_5','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_6','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_7','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_8','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_2','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','2','sala_3','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_4','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_5','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_6','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_7','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_8','pieza',600,22000,500,'1');
 
 --Table productos, 2018.05.17 ESTA PENDIENTE ESTA TABLA, NO SE CREA POR EL MOMENTO 
 create table c_productos(
@@ -214,6 +220,11 @@ PRIMARY KEY(cl_almacen)
 )
 ENGINE = InnoDB;
 
+INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_1');
+INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_2');
+INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_3');
+INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_4');
+
 
 --2018-05-25 GTL - TABLA COLORES
 CREATE TABLE c_color(
@@ -231,6 +242,19 @@ INSERT INTO c_color (ds_descripcion) VALUES ('rosa');
 INSERT INTO c_color (ds_descripcion) VALUES ('negro');
 INSERT INTO c_color (ds_descripcion) VALUES ('rojo');
 		
+
+--2018-05-26 GTL - TABLA PUESTOS DEL TRABAJADOR
+CREATE TABLE c_puesto(
+cl_puesto integer unsigned not null AUTO_INCREMENT,
+ds_descripcion VARCHAR(65) NOT NULL,
+fg_estatus ENUM('1','0') NOT NULL DEFAULT '1',
+PRIMARY KEY(cl_puesto)
+)
+ENGINE = InnoDB;
+
+INSERT INTO c_puesto (ds_descripcion) VALUES ('administrador');
+INSERT INTO c_puesto (ds_descripcion) VALUES ('vendedor');
+INSERT INTO c_puesto (ds_descripcion) VALUES ('chofer');
 
 
 

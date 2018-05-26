@@ -6,8 +6,9 @@ import java.sql.Timestamp;
 public class ItemDTO implements Serializable {	
 	
 	private static final long serialVersionUID = 413296597983426254L;
+	private int itemId;
 	// id producto
-	private String itemId;
+	private String itemIdForm;
 	// fecha de alta
 	private Timestamp date;
 	// pojo almacen
@@ -29,8 +30,12 @@ public class ItemDTO implements Serializable {
 	// objeto color
 	private ColorDTO color;
 	
-	
-	
+	public String getItemIdForm() {
+		return itemIdForm;
+	}
+	public void setItemIdForm(String itemIdForm) {
+		this.itemIdForm = itemIdForm;
+	}
 	public ColorDTO getColor() {
 		return color;
 	}
@@ -50,10 +55,10 @@ public class ItemDTO implements Serializable {
 		this.stock = stock;
 	}
 	
-	public String getItemId() {
+	public int getItemId() {
 		return itemId;
 	}
-	public void setItemId(String itemId) {
+	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
 	public Timestamp getDate() {

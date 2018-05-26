@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
+import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
@@ -24,6 +25,7 @@ import mx.com.proyect.puntoventa.web.service.ClientService;
 import mx.com.proyect.puntoventa.web.service.ColorService;
 import mx.com.proyect.puntoventa.web.service.InventoryService;
 import mx.com.proyect.puntoventa.web.service.OfficeService;
+import mx.com.proyect.puntoventa.web.service.SaleNoteService;
 
 @Controller
 
@@ -39,6 +41,8 @@ public class HandleSaleNoteController {
 	OfficeService officeService;
 	@Autowired
 	ColorService colorService;
+	@Autowired
+	SaleNoteService saleNoteService;
 
 	// vista principal
 	@RequestMapping(value = "handleSaleNote.do", method = RequestMethod.GET)
@@ -48,7 +52,8 @@ public class HandleSaleNoteController {
 		List<AccountDTOclient> listClients = clientService.getAll();
 		List<OfficeDTO> listOffices = officeService.getAll();
 		List<ColorDTO> listColors = colorService.getAll();
-		
+		List<AccountDTO> listUsers = accountService.getAllUser();
+		model.addAttribute("listUsers", listUsers);
 
 		model.addAttribute("listColors", listColors);
 		model.addAttribute("listClients", listClients);
@@ -62,6 +67,10 @@ public class HandleSaleNoteController {
 	@RequestMapping(value = "handleSaleNote.do", params = "add")
 	public String addSaleNote(HttpServletRequest request, 
 			@ModelAttribute ("saleNoteForm") SaleNoteForm saleNoteForm, Model model) {
+		
+		// agregando pedido a la bd
+		saleNoteService.add(saleNoteForm);
+		
 		List<AccountDTOclient> listClients = clientService.getAll();
 		List<OfficeDTO> listOffices = officeService.getAll();
 		
@@ -69,7 +78,9 @@ public class HandleSaleNoteController {
 		List<ItemDTO> listItems = inventoryService.getAll();
 		List<ColorDTO> listColors = colorService.getAll();
 		
-
+		List<AccountDTO> listUsers = accountService.getAllUser();
+		model.addAttribute("listUsers", listUsers);
+		
 		model.addAttribute("listColors", listColors);
 
 		model.addAttribute("saleNoteForm", new SaleNoteForm());
