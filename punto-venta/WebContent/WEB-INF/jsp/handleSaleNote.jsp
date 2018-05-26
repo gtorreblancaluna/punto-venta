@@ -49,7 +49,7 @@
 			</td>
 			<td>
 			<span class="input-group-text">Sucursal : 
-						<select name="officeId" class="form-control">
+						<select name="storeDTO.storeId" class="form-control">
 									<option value="0">- Seleccione -</option>
 								<c:forEach items="${listOffices}" var="office">
 									<option value="${office.officeId}">${office.name}</option>
@@ -66,7 +66,8 @@
 			    <thead>
 			      <tr>
 			      	<th>#</th>
-			        <th>Articulo</th>
+			        <th>Articulo</th>			        
+			        <th>Color</th>
 			        <th>Descripci&oacute;n</th>
 			        <th>Cantidad</th>
 			        <th>Precio</th>
@@ -86,6 +87,15 @@
 							</c:forEach>	
 						</select>			        
 			        </td>			      
+			        
+			         <td>
+				        <select name="items[0].color.colorId" class="form-control selColors">
+						<option value="0">- Seleccione -</option>
+							<c:forEach items="${listColors}" var="color">
+								<option value="${color.colorId}">${color.description}</option>
+							</c:forEach>	
+						</select>			        
+			        </td>
 			        <td><input type="text" class="form-control" name="items[0].description" id="itemDescription" disabled></td>
 			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					
 			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" disabled></td>
@@ -134,7 +144,8 @@ $( document ).ready(function() {
 		++cont;	
 		$(".table tbody").append("<tr>"
 			+"<td style='width:2%'><span class='input-group-text'>"+ (cont+1) +"</span></td>"
-			+"<td><select name='items[0].itemId' class='form-control selItems'><option value='0'>- Seleccione -</option><c:forEach items='${listItems}' var='item'><option value='${item.itemId}|${item.description}|${item.salePrice}'>${item.description}</option></c:forEach></select></td>"
+			+"<td><select name='items["+cont+"].itemId' class='form-control selItems'><option value='0'>- Seleccione -</option><c:forEach items='${listItems}' var='item'><option value='${item.itemId}|${item.description}|${item.salePrice}'>${item.description}</option></c:forEach></select></td>"
+			+"<td><select name='items["+cont+"].color.colorId' class='form-control selItems'><option value='0'>- Seleccione -</option><c:forEach items='${listColors}' var='color'><option value='${color.colorId}'>${color.description}</option></c:forEach></select></td>"
 			+"<td><input type='text' class='form-control' name='items["+ cont +"].description' id='itemDescription' disabled></td>"
 			+"<td><input type='number' class='form-control' name='items["+ cont +"].amountEntry' id='amountItem' ></td>"
 			+"<td><input type='number' class='form-control' name='items["+ cont +"].salePrice' id='itemPrice' disabled></td>"

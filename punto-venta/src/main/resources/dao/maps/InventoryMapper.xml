@@ -2,7 +2,7 @@
 <mapper namespace="mx.com.proyect.puntoventa.web.dao.InventoryDAO">
 
 	<resultMap id="itemResultMap" type="itemDTO">
-		<result property="itemId" column="cl_inventario" />
+		<result property="itemId" column="cl_articulo" />
 		<result property="date" column="fecha_alta" />		
 		<result property="description" column="descripcion" />
 		<result property="unitMeasurement" column="unidad_medida" />
@@ -12,7 +12,11 @@
 		<result property="stock" column="cantidad_existente" />
 		<result property="fgStatus" column="fg_estatus" />		
 		<result property="storeDTO.storeId" column="cl_almacen" />
-		<result property="storeDTO.description" column="ds_descripcion" />		
+		<result property="storeDTO.description" column="ds_descripcion" />	
+		
+		<result property="colorDTO.colorId" column="ds_descripcion" />
+		<result property="colorDTO.description" column="ds_descripcion" />
+		<result property="colorDTO.status" column="ds_descripcion" />			
 	</resultMap>
 	
 	<resultMap id="storeResultMap" type="storeDTO">
@@ -23,40 +27,41 @@
 
 	<select id="findByIdItem" resultMap="itemResultMap" parameterType="long">
 		SELECT i.*, a.cl_almacen, a.ds_descripcion
-		FROM c_inventario i INNER JOIN c_almacen a ON (i.cl_almacen = a.cl_almacen)
-		WHERE cl_inventario = #{id}
+		FROM c_articulo i 
+		INNER JOIN c_almacen a ON (i.cl_almacen = a.cl_almacen)
+		INNER JOIN c_color c ON (i.cl_color = c.cl_color)
+		WHERE cl_articulo = #{id}
 	</select>
 	
-	<select id="validateItem" resultMap="itemResultMap" parameterType="loginForm">
-		SELECT * FROM c_inventario WHERE email = #{email} AND password = #{password} 
-		AND fg_activo = '1'
-	</select>
-
+	
 	<select id="getAllItems" resultMap="itemResultMap">
 		SELECT i.*, a.cl_almacen, a.ds_descripcion
-		FROM c_inventario i INNER JOIN c_almacen a ON (i.cl_almacen = a.cl_almacen)
+		FROM c_articulo i 
+		INNER JOIN c_almacen a ON (i.cl_almacen = a.cl_almacen)
+		INNER JOIN c_color c ON (i.cl_color = c.cl_color)
 		WHERE i.fg_estatus = '1'
 	</select>
 
 	<insert id="addItem" parameterType="accountDTO">
-		INSERT INTO c_inventario
-		(cl_almacen,descripcion,unidad_medida,cantidad_entrada,cantidad_salida,precio_venta,cantidad_existente)
+		INSERT INTO c_articulo
+		(cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,cantidad_salida,precio_venta,cantidad_existente)
 		values
-		(#{storeDTO.storeId},#{description},#{unitMeasurement},#{amountEntry},#{amountOutput},#{salePrice},#{stock})
+		(#{storeDTO.storeId},#{color.colorId},#{description},#{unitMeasurement},#{amountEntry},#{amountOutput},#{salePrice},#{stock})
 	</insert>
 	<update id="updateItem" parameterType="accountDTO">
-		UPDATE c_inventario SET
+		UPDATE c_articulo SET
 		cl_almacen = #{storeDTO.storeId},
+		cl_color = #{color.colorId},
 		descripcion = #{description},
 		unidad_medida = #{unitMeasurement},
 		cantidad_entrada =	#{amountEntry},
 		cantidad_salida = #{amountOutput},
 		precio_venta = #{salePrice},
 		cantidad_existente = #{stock},
-		WHERE cl_inventario = #{itemId}
+		WHERE cl_articulo = #{itemId}
 	</update>
 	<delete id="deleteItem" parameterType="accountDTO">
-		UPDATE c_inventario SET fg_estatus = '0' WHERE cl_inventario = #{itemId}
+		UPDATE c_articulo SET fg_estatus = '0' WHERE cl_articulo = #{itemId}
 	</delete>
 	
 	<select id="getAllStore" resultMap="storeResultMap">

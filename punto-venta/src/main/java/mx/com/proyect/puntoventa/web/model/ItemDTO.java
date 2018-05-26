@@ -1,8 +1,11 @@
 package mx.com.proyect.puntoventa.web.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class ItemDTO {
+public class ItemDTO implements Serializable {	
+	
+	private static final long serialVersionUID = 413296597983426254L;
 	// id producto
 	private String itemId;
 	// fecha de alta
@@ -23,9 +26,17 @@ public class ItemDTO {
 	private Float stock;
 	// bandera estatus
 	private String fgStatus;
+	// objeto color
+	private ColorDTO color;
 	
 	
 	
+	public ColorDTO getColor() {
+		return color;
+	}
+	public void setColor(ColorDTO color) {
+		this.color = color;
+	}
 	public StoreDTO getStoreDTO() {
 		return storeDTO;
 	}

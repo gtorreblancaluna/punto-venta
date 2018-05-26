@@ -1,12 +1,14 @@
 package mx.com.proyect.puntoventa.web.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import java.sql.Timestamp;
 
-public class AccountDTO {
+public class AccountDTO implements Serializable {	
 	
+	private static final long serialVersionUID = 413296597983426251L;
 	
 	private String userId;
 	private String email;

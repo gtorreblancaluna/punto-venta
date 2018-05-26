@@ -1,11 +1,15 @@
 package mx.com.proyect.puntoventa.web.model;
 
+import java.io.Serializable;
+
 /**
  * GTL 2018.05.22
  * POJO para las sucursales
  * */
 
-public class OfficeDTO {
+public class OfficeDTO implements Serializable {	
+	
+	private static final long serialVersionUID = 413296597983426255L;
 	private Float officeId;
 	//nombre
 	private String name;

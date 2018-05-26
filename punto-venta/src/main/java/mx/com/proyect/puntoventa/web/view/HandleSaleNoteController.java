@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
+import mx.com.proyect.puntoventa.web.model.ColorDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.OfficeDTO;
 import mx.com.proyect.puntoventa.web.service.AccountService;
 import mx.com.proyect.puntoventa.web.service.ClientService;
+import mx.com.proyect.puntoventa.web.service.ColorService;
 import mx.com.proyect.puntoventa.web.service.InventoryService;
 import mx.com.proyect.puntoventa.web.service.OfficeService;
 
@@ -35,6 +37,8 @@ public class HandleSaleNoteController {
 	ClientService clientService;
 	@Autowired
 	OfficeService officeService;
+	@Autowired
+	ColorService colorService;
 
 	// vista principal
 	@RequestMapping(value = "handleSaleNote.do", method = RequestMethod.GET)
@@ -43,8 +47,10 @@ public class HandleSaleNoteController {
 		List<ItemDTO> listItems = inventoryService.getAll();
 		List<AccountDTOclient> listClients = clientService.getAll();
 		List<OfficeDTO> listOffices = officeService.getAll();
+		List<ColorDTO> listColors = colorService.getAll();
 		
 
+		model.addAttribute("listColors", listColors);
 		model.addAttribute("listClients", listClients);
 		model.addAttribute("saleNoteForm", new SaleNoteForm());
 		model.addAttribute("listItems", listItems);
@@ -61,6 +67,10 @@ public class HandleSaleNoteController {
 		
 		// traemos los productos del almacen
 		List<ItemDTO> listItems = inventoryService.getAll();
+		List<ColorDTO> listColors = colorService.getAll();
+		
+
+		model.addAttribute("listColors", listColors);
 
 		model.addAttribute("saleNoteForm", new SaleNoteForm());
 		model.addAttribute("listItems", listItems);

@@ -1,7 +1,11 @@
 package mx.com.proyect.puntoventa.web.model;
 // 2018.05.18 GTL, POJO ALMACEN
 
-public class StoreDTO {
+import java.io.Serializable;
+
+public class StoreDTO implements Serializable {	
+	
+	private static final long serialVersionUID = 413296597983426256L;
 	// id almacen
 	private Integer storeId;
 	// descripcion

@@ -1,8 +1,11 @@
 package mx.com.proyect.puntoventa.web.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class AccountDTOclient {
+public class AccountDTOclient implements Serializable {	
+	
+	private static final long serialVersionUID = 413296597983426252L;
 
 	private String userId;
 	private String name;
