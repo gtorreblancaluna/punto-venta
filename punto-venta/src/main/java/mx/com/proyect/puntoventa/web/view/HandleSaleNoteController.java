@@ -82,11 +82,12 @@ public class HandleSaleNoteController {
 		model.addAttribute("listUsers", listUsers);
 		
 		model.addAttribute("listColors", listColors);
-
+		model.addAttribute("messageSucess","Se agrego con exito la nota, total de articulos: "+saleNoteForm.getItems().size());
 		model.addAttribute("saleNoteForm", new SaleNoteForm());
 		model.addAttribute("listItems", listItems);
 		model.addAttribute("listClients", listClients);
 		model.addAttribute("listOffices", listOffices);
+		
 		return "handleSaleNote";
 	}
 

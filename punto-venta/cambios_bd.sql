@@ -137,6 +137,7 @@ CREATE TABLE k_detalle_venta(
 cl_detalle_venta INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
 cl_venta INTEGER UNSIGNED NOT NULL,
 cl_articulo INTEGER UNSIGNED NOT NULL,
+cantidad INTEGER NOT NULL,
 PRIMARY KEY (cl_detalle_venta),
 CONSTRAINT fk_cl_venta FOREIGN KEY fk_cl_venta (cl_venta) 
 	REFERENCES c_venta(cl_venta)

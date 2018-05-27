@@ -18,6 +18,19 @@
 <body>
 
 <div class="container " style="">
+	<c:if test="${messageSucess != null}">
+		<div class="alert alert-success">
+  			<strong>Success!</strong> ${messageSucess}
+		</div>
+
+		</c:if>
+		<c:if test="${messageError != null}">
+		<div class="alert alert-danger">
+  			<strong>Error! </strong> ${messageError}
+		</div>
+		</c:if>
+
+
 	<div class="page-header">
 		<div class="row">
 			<div class="col">
@@ -27,7 +40,14 @@
 		</div>
 	</div>
 	
-	<!-- inicio de Body despues de header de venta-dia -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAdd">Agregar nota</button>
+<div id="modalAdd" class="modal fade" role="dialog" >
+ <div class="modal-content" style="width: 1000px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Agregar nota</h4>
+      </div>
+      <div class="modal-body">     
 <form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="saleNoteForm" id="addSaleNoteForm">
 	<table>
 		<tr>
@@ -118,6 +138,14 @@
 			  <input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="add" value="Enviar" />	
 	  	</div> <!-- end row -->
 	  	</form:form>
+	  	
+	   <p>Agregar nota</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+    </div><!-- end modal -->
 	</div> <!-- end container -->
 	
 	

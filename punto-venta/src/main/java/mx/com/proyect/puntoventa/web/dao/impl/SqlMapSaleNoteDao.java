@@ -15,12 +15,12 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 	@Override
 	public boolean add(SaleNoteForm saleNoteForm) {
 		getSqlSession().insert("addSaleNote",saleNoteForm);
-		// insertamos los detalles		
-		
+		// insertamos los detalles				
 		for(ItemDTO item : saleNoteForm.getItems()) {
 			Map<String,Object> param = new HashMap<>();
 			param.put("saleId", saleNoteForm.getSaleId());
 			param.put("itemId", item.getItemId());
+			param.put("amount", item.getAmountEntry());
 			getSqlSession().insert("addSaleNoteDetails",param);
 		}
 		return true;

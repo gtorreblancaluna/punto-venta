@@ -24,8 +24,8 @@
 	</insert>
 	
 	<insert id="addSaleNoteDetails" parameterType="java.util.Map" >		
-     		INSERT INTO k_detalle_venta (cl_venta,cl_articulo) 
-     		VALUES (#{saleId},#{itemId})    	
+   		INSERT INTO k_detalle_venta (cl_venta,cl_articulo,cantidad) 
+   		VALUES (#{saleId},#{itemId},#{amount})    	
 	</insert>
 	
 </mapper>
