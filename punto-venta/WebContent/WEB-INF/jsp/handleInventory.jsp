@@ -9,7 +9,7 @@
 
 </head>
 <body>
- <div class="container">
+ <div class="container" style="box-shadow: 0 0 30px blue;">
 
 		<c:if test="${message != null}">
 		<div class="alert alert-success">
@@ -17,6 +17,7 @@
 		</div>
 
 		</c:if>
+		
 		<c:if test="${messageError != null}">
 		<div class="alert alert-danger">
   			<strong>Error! </strong> ${messageError}
