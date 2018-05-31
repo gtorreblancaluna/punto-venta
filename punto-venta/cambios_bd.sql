@@ -97,6 +97,12 @@ PRIMARY KEY (cl_sucursal)
 )
 ENGINE = InnoDB;
 
+
+--tabla provedores
+
+
+
+
 INSERT INTO c_sucursal (nombre,calle) VALUES ('sucursal_1','calle');
 INSERT INTO c_sucursal (nombre,calle) VALUES ('sucursal_2','calle');
 INSERT INTO c_sucursal (nombre,calle) VALUES ('sucursal_3','calle');
@@ -192,6 +198,23 @@ CONSTRAINT fk1_cl_color FOREIGN KEY fk1_cl_color (cl_color)
 )
 ENGINE = InnoDB;
 
+<<<<<<< .mine
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_2','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_3','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_4','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_5','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_6','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_7','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_8','pieza',600,22000,500,'1');
+||||||| .r60
+INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_2','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_3','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_4','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_5','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_6','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_7','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_8','pieza',600,22000,500,'1');
+=======
 INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_2','pieza',600,22000,500,'1');
 INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','2','sala_3','pieza',600,22000,500,'1');
 INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_4','pieza',600,22000,500,'1');
@@ -199,6 +222,7 @@ INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_e
 INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_6','pieza',600,22000,500,'1');
 INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_7','pieza',600,22000,500,'1');
 INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_8','pieza',600,22000,500,'1');
+>>>>>>> .r63
 
 --Table productos, 2018.05.17 ESTA PENDIENTE ESTA TABLA, NO SE CREA POR EL MOMENTO 
 create table c_productos(
@@ -257,11 +281,48 @@ INSERT INTO c_puesto (ds_descripcion) VALUES ('administrador');
 INSERT INTO c_puesto (ds_descripcion) VALUES ('vendedor');
 INSERT INTO c_puesto (ds_descripcion) VALUES ('chofer');
 
+<<<<<<< .mine
+create table c_provedor(
+cl_provedor integer unsigned not null auto_increment,
+nProvedor varchar(50) not null,
+calle varchar(50),
+colonia varchar(50),
+municipio varchar(50),
+cp integer(5),
+tel1 varchar(12),
+tel2 varchar(12),
+fg_estatus ENUM('1','0') NOT NULL DEFAULT '1',
+primary key (cl_provedor))
 
 
+insert into c_provedor values(1,'Jonathan',null,null,null,null,null,'5557633029',1);	
+insert into c_provedor values(2,'Wendy soto',null,null,null,null,null,'5564137424',1);	
+insert into c_provedor values(3,'Gerardo ramirez',null,null,null,null,null,'5564128775',1);	
+insert into c_provedor values(4,'Francisco barrazan',null,null,null,null,null,'5563217507',1);	
+insert into c_provedor values(5,'Carlos Gonzalez',null,null,null,null,null,'7221268891',1);	
+insert into c_provedor values(6,'Daniel Ramirez',null,null,null,null,null,'5573111908',1);	
+insert into c_provedor values(7,'Salvador',null,null,null,null,null,'7225523747',1);	
+insert into c_provedor values(8,'Fernando Martinez',null,null,null,null,null,'7223004830',1);	
+insert into c_provedor values(9,'Beni Andrade',null,null,null,null,null,'5563478996',1);	
+insert into c_provedor values(10,'Antonio Inter Salas',null,null,null,null,null,'5549965268',1);	
+insert into c_provedor values(11,'Rolando Lopez',null,null,'nezahualcoyotl',null,null,'4425594500',1);	
+||||||| .r60
+=======
+
+
+>>>>>>> .r63
 					
 					
 					
+INSERT INTO c_inventario (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_2','pieza',600,22000,500,'1');
+INSERT INTO c_inventario (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_3','pieza',600,22000,500,'1');
+INSERT INTO c_inventario (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_4','pieza',600,22000,500,'1');
+INSERT INTO c_inventario (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_5','pieza',600,22000,500,'1');
+INSERT INTO c_inventario (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_6','pieza',600,22000,500,'1');
+INSERT INTO c_inventario (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_7','pieza',600,22000,500,'1');
+INSERT INTO c_inventario (cl_almacen,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','sala_8','pieza',600,22000,500,'1');
+
+
 					
 					
 					
