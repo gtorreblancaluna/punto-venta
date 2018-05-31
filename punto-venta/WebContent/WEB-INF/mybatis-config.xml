@@ -22,9 +22,12 @@
 		<typeAlias alias="storeDTO"   type="mx.com.proyect.puntoventa.web.model.StoreDTO" />
 		<typeAlias alias="officeDTO"   type="mx.com.proyect.puntoventa.web.model.OfficeDTO" />
 		<typeAlias alias="colorDTO"   type="mx.com.proyect.puntoventa.web.model.ColorDTO" />
+
+		<typeAlias alias="providerDTO" type="mx.com.proyect.puntoventa.web.model.ProviderDTO" />
 		<typeAlias alias="jobDTO"   type="mx.com.proyect.puntoventa.web.model.JobDTO" />
 		<typeAlias alias="saleNoteForm"   type="mx.com.proyect.puntoventa.web.forms.SaleNoteForm" />
 	
+
 	
 		
 		

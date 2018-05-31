@@ -67,6 +67,10 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 	
+	<bean id="providerDao" class="mx.com.proyect.puntoventa.web.dao.impl.SqlMapProviderDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
 
 
 </beans>
