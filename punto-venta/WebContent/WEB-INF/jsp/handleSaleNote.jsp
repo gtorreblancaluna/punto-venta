@@ -96,7 +96,7 @@ $( document ).ready(function() {
 			</td>
 			<td>
 				<span class="input-group-text">Cliente : 
-						<select name="userId" class="form-control">
+						<select name="userId" class="form-control userId" >
 									<option value="0">- Seleccione -</option>
 								<c:forEach items="${listClients}" var="client">
 									<option value="${client.userId}">${client.name} ${client.firstName}</option>
@@ -107,7 +107,7 @@ $( document ).ready(function() {
 			<td>
 <%-- 				<span class="input-group-text">Vendedor :<input type="text" class="form-control" value="${sessionScope.accountSession.name }" disabled></span> --%>
 					<span class="input-group-text">Vendedor : 
-						<select name="sellerId" class="form-control">
+						<select name="sellerId" class="form-control sellerId" >
 									<option value="0">- Seleccione -</option>
 								<c:forEach items="${listUsers}" var="user">
 									<!-- Solo mostrar usuarios que sean vendedores -->
@@ -120,7 +120,7 @@ $( document ).ready(function() {
 			</td>
 			<td>
 			<span class="input-group-text">Sucursal : 
-				<select name="storeDTO.storeId" class="form-control">
+				<select name="storeDTO.storeId" class="form-control" id="storeId">
 							<option value="0">- Seleccione -</option>
 						<c:forEach items="${listOffices}" var="office">
 							<option value="${office.officeId}">${office.name}</option>
@@ -140,7 +140,7 @@ $( document ).ready(function() {
 			    <thead>
 			      <tr>
 			      	<th>#</th>
-			      	<th>Buscar por id</th>
+			      	<th style="width:5%;">Buscar por id</th>
 			        <th>Articulo</th>			        
 			        <th>Color</th>
 			        <th>Descripci&oacute;n</th>

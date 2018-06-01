@@ -69,24 +69,26 @@ public class HandleSaleNoteController {
 			@ModelAttribute ("saleNoteForm") SaleNoteForm saleNoteForm, Model model) {
 		
 		// agregando pedido a la bd
-		saleNoteService.add(saleNoteForm);
+		saleNoteService.add(saleNoteForm);		
 		
+		// cargar datos al JSP
 		List<AccountDTOclient> listClients = clientService.getAll();
+		model.addAttribute("listClients", listClients);
 		List<OfficeDTO> listOffices = officeService.getAll();
-		
+		model.addAttribute("listOffices", listOffices);		
 		// traemos los productos del almacen
 		List<ItemDTO> listItems = inventoryService.getAll();
+		model.addAttribute("listItems", listItems);
 		List<ColorDTO> listColors = colorService.getAll();
-		
+		model.addAttribute("listColors", listColors);		
 		List<AccountDTO> listUsers = accountService.getAllUser();
-		model.addAttribute("listUsers", listUsers);
+		model.addAttribute("listUsers", listUsers);		
 		
-		model.addAttribute("listColors", listColors);
 		model.addAttribute("messageSucess","Se agrego con exito la nota, total de articulos: "+saleNoteForm.getItems().size());
 		model.addAttribute("saleNoteForm", new SaleNoteForm());
-		model.addAttribute("listItems", listItems);
-		model.addAttribute("listClients", listClients);
-		model.addAttribute("listOffices", listOffices);
+		
+		
+		
 		
 		return "handleSaleNote";
 	}

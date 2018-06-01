@@ -25,8 +25,14 @@ public class SaleNoteServiceFacade {
 	public String getItemById(@RequestBody String id) {
 		ItemDTO item = inventoryService.findById(new Long (id));
 		
-		Map<String,Object> myMap = new HashMap<>();
-	        myMap.put("itemId", item.getItemId());
+		
+			Map<String,Object> myMap = new HashMap<>();
+			
+			if(item == null) {
+				 myMap.put("itemId", 0);
+			}else {
+				 myMap.put("itemId", item.getItemId());
+			}	       
 	        ObjectMapper mapper = new ObjectMapper();
 	        String json = "";
 	        try {
