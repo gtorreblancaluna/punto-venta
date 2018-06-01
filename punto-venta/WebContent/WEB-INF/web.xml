@@ -23,7 +23,8 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
       /WEB-INF/application-beans-dao.xml
-      /WEB-INF/application-beans-util.xml             
+      /WEB-INF/application-beans-util.xml  
+<!--       /WEB-INF/application-beans-security.xml            -->
     </param-value>
 	</context-param>
 	

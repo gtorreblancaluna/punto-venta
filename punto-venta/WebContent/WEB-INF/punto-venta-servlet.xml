@@ -17,6 +17,7 @@
 	
 
 	<context:component-scan base-package="mx.com.proyect.puntoventa.web.view" />
+	<context:component-scan base-package="mx.com.proyect.puntoventa.web.service.facade" />
 	<context:component-scan base-package="mx.com.proyect.puntoventa.web.service.impl" />
 	<context:component-scan base-package="mx.com.proyect.puntoventa.web.dao.impl" />
 
