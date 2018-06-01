@@ -29,8 +29,18 @@ public class AccountDTO implements Serializable {
 	// bandera para saber si esta activo
 	private String fgActivo;
 	
+	private boolean mobile;
 	
 	
+	
+	
+	
+	public boolean isMobile() {
+		return mobile;
+	}
+	public void setMobile(boolean mobile) {
+		this.mobile = mobile;
+	}
 	public JobDTO getJob() {
 		return job;
 	}

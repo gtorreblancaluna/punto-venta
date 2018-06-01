@@ -14,7 +14,7 @@ public class SqlMapInventoryDao extends SqlSessionDaoSupport implements Inventor
 
 	@Override
 	public ItemDTO findById(Long id) {		
-		return (ItemDTO) getSqlSession().selectOne("findByIdItem");
+		return (ItemDTO) getSqlSession().selectOne("findByIdItem",id);
 	}
 
 	@Override

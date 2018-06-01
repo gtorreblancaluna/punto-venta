@@ -3,15 +3,21 @@ package mx.com.proyect.puntoventa.web.view;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.service.AccountService;
 
+@Component
+@SessionAttributes("accountSession")
 @Controller
 public class LoginController {
 	
@@ -29,6 +35,7 @@ public class LoginController {
 		AccountDTO a = accountService.validateUser(loginForm);				
 		if(a != null) {		
 			request.getSession().setAttribute("accountSession", a);		
+			model.addAttribute("accountSession",a);
 			return "bienvenida";
 		}else{
 			model.addAttribute("message","Usuario o contrase\u00F1a no coinciden");
