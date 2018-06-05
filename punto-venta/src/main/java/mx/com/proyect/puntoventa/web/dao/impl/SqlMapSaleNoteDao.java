@@ -7,8 +7,10 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import mx.com.proyect.puntoventa.web.dao.SaleNoteDAO;
+import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
+import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 
 public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteDAO {
 
@@ -42,6 +44,11 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 	public List<SaleNoteForm> getAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<ResultQuerySaleNote> getByFilter(SaleNoteFilter saleNoteFilter) {
+		return getSqlSession().selectList("getSaleNoteByFilter",saleNoteFilter);
 	}
 
 }

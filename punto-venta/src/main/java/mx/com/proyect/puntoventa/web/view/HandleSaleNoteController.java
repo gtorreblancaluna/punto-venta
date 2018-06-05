@@ -14,12 +14,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.OfficeDTO;
+import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 import mx.com.proyect.puntoventa.web.service.AccountService;
 import mx.com.proyect.puntoventa.web.service.ClientService;
 import mx.com.proyect.puntoventa.web.service.ColorService;
@@ -86,11 +89,19 @@ public class HandleSaleNoteController {
 		
 		model.addAttribute("messageSucess","Se agrego con exito la nota, total de articulos: "+saleNoteForm.getItems().size());
 		model.addAttribute("saleNoteForm", new SaleNoteForm());
-		
-		
-		
-		
 		return "handleSaleNote";
 	}
+	
+	    // traer las notas por el filtro consultado
+		@RequestMapping(value = "handleSaleNote.do", params = "filter")
+		public String getSaleNoteByFilter(HttpServletRequest request, 
+				@ModelAttribute ("saleNoteFilter") SaleNoteFilter saleNoteFilter, Model model) {
+			
+			List<ResultQuerySaleNote> listSaleNoteByFilter = saleNoteService.getByFilter(saleNoteFilter);			
+			//añadimos el resultado de la consulta al JSP
+			model.addAttribute("listSaleNoteByFilter", listSaleNoteByFilter);
+			
+			return null;
+		}
 
 }

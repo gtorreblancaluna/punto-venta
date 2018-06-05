@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class OfficeDTO implements Serializable {	
 	
 	private static final long serialVersionUID = 413296597983426255L;
-	private Float officeId;
+	private Integer officeId;
 	//nombre
 	private String name;
 	//calle
@@ -28,11 +28,10 @@ public class OfficeDTO implements Serializable {
 	// telefono secundario
 	private String tel2;
 	
-	
-	public Float getOfficeId() {
+	public Integer getOfficeId() {
 		return officeId;
 	}
-	public void setOfficeId(Float officeId) {
+	public void setOfficeId(Integer officeId) {
 		this.officeId = officeId;
 	}
 	public String getName() {

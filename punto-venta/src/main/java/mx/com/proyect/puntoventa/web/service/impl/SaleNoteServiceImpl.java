@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.com.proyect.puntoventa.web.dao.SaleNoteDAO;
+import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
+import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 import mx.com.proyect.puntoventa.web.service.SaleNoteService;
 
 @Service("saleNoteServiceImpl")
@@ -58,6 +60,11 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	public List<SaleNoteForm> getAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<ResultQuerySaleNote> getByFilter(SaleNoteFilter saleNoteFilter) {
+		return saleNoteDao.getByFilter(saleNoteFilter);
 	}
 
 }

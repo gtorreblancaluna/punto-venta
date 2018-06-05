@@ -1,14 +1,14 @@
 $( document ).ready(function() {
 	
 		
-	$(".table tbody").on('keypress', function(e){
+	$(".tableAddNote tbody").on('keypress', function(e){
 		 var code = (e.keyCode ? e.keyCode : e.which);
 	        if(code==13)
 	        	event.preventDefault();  
 	 });
 	
 	// 2018.05.22 GTL funcion para calcular el total a pagar por articulo
-	$(".table tbody").on('change','#amountItem', function(){	
+	$(".tableAddNote tbody").on('change','#amountItem', function(){	
 		var amount = $(this).val();	
 		var $tr = $(this).closest('tr');		
 		var price = $tr.find('#itemPrice').val();
@@ -18,7 +18,7 @@ $( document ).ready(function() {
 	
 	function total(){
 		var total=0;
-		  $("table tbody tr").each(function () {
+		  $(".tableAddNote tbody tr").each(function () {
             stotal = $(this).find("td").eq(7).find(".totalItem").val();
             if(stotal != undefined && stotal != "")
           	  total += parseFloat(stotal);
@@ -27,7 +27,7 @@ $( document ).ready(function() {
 	}
 		
 	// 2018.05.22 GTL Funcion para colocar los demas valores en los inputs del articulo
-	$(".table tbody").on('change','.selItems', function(){	
+	$(".tableAddNote tbody").on('change','.selItems', function(){	
 //		var val = $(this).val().split("|");		
 //		var val = $(this).attr("data-item").split("|");	
 		var val = $('option:selected', this).attr('data-value').split("|");
@@ -42,14 +42,14 @@ $( document ).ready(function() {
 	
 	
 	// funcion para eliminar una fila de la tabla
-	$(".table tbody").on('click','.btnDelete', function(){
+	$(".tableAddNote tbody").on('click','.btnDelete', function(){
 		if(confirm("\u00BFEliminar fila?"))
 			$(this).closest('tr').remove();		
 	});		
 	document.getElementById("dateForm").valueAsDate = new Date()	
 	
 	// funcion para buscar por id el articulo
-	$(".table tbody").on('keypress','#txtFindItemById', function(e){
+	$(".tableAddNote tbody").on('keypress','#txtFindItemById', function(e){
 		 var code = (e.keyCode ? e.keyCode : e.which);
 	        if(code==13){
 	        	event.preventDefault(); 
@@ -98,11 +98,11 @@ $( document ).ready(function() {
 	};// end ajax
 	
 	// validando formulario
-	$("form").submit(function (e) {
-		return validateForm();	
+	$('form[name="saleNoteForm"]').submit(function (e) {
+		return validateFormAddNote();	
 	});
 	
-	function validateForm(){
+	function validateFormAddNote(){
 		 var msgError="";
 		    var valid=true;
 		    var count=0;
@@ -117,7 +117,7 @@ $( document ).ready(function() {
 				msgError += ++count + ". Faltan valores para agregar a la venta\n";
 			}else{		
 			// recorrremos la tabla para validar sus valores
-			  $("table tbody tr").each(function () {
+			  $("tableAddNote tbody tr").each(function () {
 		            var itemId = $(this).find("td").eq(2).find(".selItems").val();
 		            var colorId = $(this).find("td").eq(3).find(".selColors").val();
 		            var amountItem = $(this).find("td").eq(5).find("#amountItem").val();	  

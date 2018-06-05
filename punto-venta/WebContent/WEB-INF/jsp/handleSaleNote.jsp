@@ -22,7 +22,7 @@ $( document ).ready(function() {
 	// funcion para agregar una fila a la tabla
 	function addRow(){	
 		++cont;	
-		$(".table tbody").append("<tr>"			
+		$(".tableAddNote tbody").append("<tr>"			
 			+"<td style='width:2%'><span class='input-group-text'>"+ (cont+1) +"</span></td>"
 			+"<td><input type='number' class='form-control' name='' id='txtFindItemById'></td>"
 			+"<td>" +
@@ -80,6 +80,45 @@ $( document ).ready(function() {
 		</div>
 	</div>
 	
+	<!--2018.06.05 Formulario para aplicar busqueda por filtro -->
+	<form:form modelAttribute="saleNoteFilter" action="handleSaleNote.do" method="post" name="saleNoteFilter" 
+	id="getSaleNoteByFilter" style="margin: 50px;">
+		<p>Consultar nota de venta</p>
+		<table class="tableFilter">
+		<tbody>
+			<tr>
+				<td>
+					<span class="input-group-text">Fecha inicial:<input type="date" name="iniDateFilter" id="iniDateFilter" class="form-control"> </span>
+				</td>
+				<td>
+					<span class="input-group-text">Fecha final:<input type="date" name="endDateFilter" id="endDateFilter" class="form-control"> </span>
+				</td>
+				<td>
+					<span class="input-group-text">Descripci&oacute;n:<input type="text" name="descriptionFilter" id="descriptionFilter" class="form-control"></span>
+				</td>
+				<td>
+					<span class="input-group-text">Sucursal : 
+						<select name="officeIdFilter" class="form-control" id="officeIdFilter">
+									<option value="0">- Seleccione -</option>
+								<c:forEach items="${listOffices}" var="office">
+									<option value="${office.officeId}">${office.name}</option>
+								</c:forEach>	
+						</select>
+					</span>
+				</td>
+				<td>
+					<span class="input-group-text">Nombre del cliente<input type="text" name="customerNameFilter" id="customerNameFilter" class="form-control"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				 <input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="filter" value="Enviar" />	
+				</td>
+			</tr>
+		</tbody>
+		</table>	
+	</form:form>
+	
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAdd">Agregar nota</button>
 <div id="modalAdd" class="modal fade" role="dialog" >
  <div class="modal-content" style="width: 1000px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
@@ -89,7 +128,7 @@ $( document ).ready(function() {
       </div>
       <div class="modal-body">     
 <form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="saleNoteForm" id="addSaleNoteForm">
-	<table>
+	<table >
 		<tr>
 			<td>
 				<span class="input-group-text">Fecha :<input type="date" name="dateSaleNote" id="dateForm" class="form-control dateForm"> </span>
@@ -136,7 +175,7 @@ $( document ).ready(function() {
 	</table>
 	
 	<div class="row">
-     		<table class="table">
+     		<table class="tableAddNote">
 			    <thead>
 			      <tr>
 			      	<th>#</th>
