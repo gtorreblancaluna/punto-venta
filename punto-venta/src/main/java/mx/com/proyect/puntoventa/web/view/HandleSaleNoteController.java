@@ -98,10 +98,53 @@ public class HandleSaleNoteController {
 				@ModelAttribute ("saleNoteFilter") SaleNoteFilter saleNoteFilter, Model model) {
 			
 			List<ResultQuerySaleNote> listSaleNoteByFilter = saleNoteService.getByFilter(saleNoteFilter);			
-			//añadimos el resultado de la consulta al JSP
+			//obtenemos el resultado y enviamos al JSP
 			model.addAttribute("listSaleNoteByFilter", listSaleNoteByFilter);
+			model.addAttribute("messageSucess","Total de registros encontrados: "+listSaleNoteByFilter.size());
 			
-			return null;
+			
+			// cargar datos al JSP
+			List<AccountDTOclient> listClients = clientService.getAll();
+			model.addAttribute("listClients", listClients);
+			List<OfficeDTO> listOffices = officeService.getAll();
+			model.addAttribute("listOffices", listOffices);		
+			// traemos los productos del almacen
+			List<ItemDTO> listItems = inventoryService.getAll();
+			model.addAttribute("listItems", listItems);
+			List<ColorDTO> listColors = colorService.getAll();
+			model.addAttribute("listColors", listColors);		
+			List<AccountDTO> listUsers = accountService.getAllUser();
+			model.addAttribute("listUsers", listUsers);		
+			// fin cargar datos al JSP
+			
+			return "handleSaleNote";
+		}
+		
+		
+		// actualizar nota
+		@RequestMapping(value = "handleSaleNote.do", params = "update")
+		public String updateSaleNote(HttpServletRequest request, 
+				@ModelAttribute ("saleNoteForm") SaleNoteForm saleNoteForm, Model model) {
+			
+			// actualizar pedido a la bd
+			saleNoteService.update(saleNoteForm);		
+			
+			// cargar datos al JSP
+			List<AccountDTOclient> listClients = clientService.getAll();
+			model.addAttribute("listClients", listClients);
+			List<OfficeDTO> listOffices = officeService.getAll();
+			model.addAttribute("listOffices", listOffices);		
+			// traemos los productos del almacen
+			List<ItemDTO> listItems = inventoryService.getAll();
+			model.addAttribute("listItems", listItems);
+			List<ColorDTO> listColors = colorService.getAll();
+			model.addAttribute("listColors", listColors);		
+			List<AccountDTO> listUsers = accountService.getAllUser();
+			model.addAttribute("listUsers", listUsers);		
+			
+			model.addAttribute("messageSucess","Se actualizo con exito la nota, total de articulos: "+saleNoteForm.getItems().size());
+			model.addAttribute("saleNoteForm", new SaleNoteForm());
+			return "handleSaleNote";
 		}
 
 }

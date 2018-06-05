@@ -13,5 +13,6 @@ public interface SaleNoteDAO {
 	boolean delete(SaleNoteForm saleNoteForm);
 	List<SaleNoteForm> getAll();
 	List<ResultQuerySaleNote> getByFilter(SaleNoteFilter saleNoteFilter);
+	SaleNoteForm getSaleNoteById(Integer id);
 
 }

@@ -13,5 +13,5 @@ public interface SaleNoteService {
 	boolean delete(SaleNoteForm saleNoteForm);
 	List<SaleNoteForm> getAll();
 	public List<ResultQuerySaleNote> getByFilter(SaleNoteFilter saleNoteFilter);
-
+	SaleNoteForm getSaleNoteById(Integer id);
 }

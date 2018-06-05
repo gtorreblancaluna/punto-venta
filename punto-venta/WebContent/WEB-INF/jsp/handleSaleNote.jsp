@@ -14,15 +14,19 @@
 <script type="text/javascript">
 
 $( document ).ready(function() {
-	$( "#addRow" ).click(function() {
-		addRow();
+	
+	$( "#addRow-add" ).click(function() {
+		addRow("AddNote");
+	});
+	$( "#addRow-update" ).click(function() {
+		addRow("UpdateNote");
 	});
 	var cont = 0;
 
 	// funcion para agregar una fila a la tabla
-	function addRow(){	
+	function addRow(val){	
 		++cont;	
-		$(".tableAddNote tbody").append("<tr>"			
+		$(".table"+val+" tbody").append("<tr>"			
 			+"<td style='width:2%'><span class='input-group-text'>"+ (cont+1) +"</span></td>"
 			+"<td><input type='number' class='form-control' name='' id='txtFindItemById'></td>"
 			+"<td>" +
@@ -84,7 +88,7 @@ $( document ).ready(function() {
 	<form:form modelAttribute="saleNoteFilter" action="handleSaleNote.do" method="post" name="saleNoteFilter" 
 	id="getSaleNoteByFilter" style="margin: 50px;">
 		<p>Consultar nota de venta</p>
-		<table class="tableFilter">
+		<table class="table tableFilter">
 		<tbody>
 			<tr>
 				<td>
@@ -111,13 +115,46 @@ $( document ).ready(function() {
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td colspan=5>
 				 <input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="filter" value="Enviar" />	
 				</td>
 			</tr>
 		</tbody>
 		</table>	
 	</form:form>
+	
+	<c:if test="${not empty listSaleNoteByFilter}">
+	<!-- Mostramos el resultado de la consulta -->
+		<div class="containerShowResultQuery">
+		<table class="table tableShowResultQuery">
+		<thead>
+		<tr>
+			<th>id</th>
+			<th>Fecha registro</th>
+			<th>Fecha de entrega</th>
+			<th>Descripci&oacute;n</th>
+			<th>Cliente</th>
+			<th>Sucursal</th>
+			<th>Usuario</th>
+		</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${listSaleNoteByFilter}" var="saleNote">
+			<tr>
+				<td><a href="#" onclick="getSaleNoteById('${saleNote.saleId}');return false;" >${saleNote.saleId }</a></td>
+				<td>${saleNote.saleDate }</td>
+				<td>${saleNote.dateDelivery }</td>
+				<td>${saleNote.description }</td>
+				<td>${saleNote.nameCustomer }</td>
+				<td>${saleNote.nameOffice }</td>
+				<td>${saleNote.nameUser }</td>
+			</tr>
+			</c:forEach>
+		</tbody>
+		</table>
+		</div>
+	</c:if>
+	
 	
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAdd">Agregar nota</button>
 <div id="modalAdd" class="modal fade" role="dialog" >
@@ -175,7 +212,7 @@ $( document ).ready(function() {
 	</table>
 	
 	<div class="row">
-     		<table class="tableAddNote">
+     		<table class="table tableAddNote">
 			    <thead>
 			      <tr>
 			      	<th>#</th>
@@ -217,7 +254,7 @@ $( document ).ready(function() {
 			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					
 			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" disabled></td>
 			        <td><input type="number" class="form-control totalItem" name="" id="totalItem" disabled></td>
-			        <td><input type="button" class="btn btn-info btn-lg" id="addRow" value="Agregar" /></td>			        
+			        <td><input type="button" class="btn btn-info btn-lg" id="addRow-add" value="Agregar" /></td>			        
 			      </tr>			
 			      	      	      
 			    </tbody>			    
@@ -232,7 +269,130 @@ $( document ).ready(function() {
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
-    </div><!-- end modal -->
+    </div><!-- end modal add -->
+    
+    
+    
+    
+    
+    <div id="modalUpdate" class="modal fade" role="dialog" >
+ <div class="modal-content" style="width: 1000px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Actualizar nota</h4>
+      </div>
+      <div class="modal-body">     
+<form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="saleNoteForm" id="updateSaleNoteForm">
+	<table >
+		<tr>
+			<td>
+				<span class="input-group-text">Fecha :<input type="date" name="dateSaleNote" id="dateForm" class="form-control dateForm"> </span>
+			</td>
+			<td>
+				<span class="input-group-text">Cliente : 
+						<select name="userId" class="form-control userId" >
+									<option value="0">- Seleccione -</option>
+								<c:forEach items="${listClients}" var="client">
+									<option value="${client.userId}">${client.name} ${client.firstName}</option>
+								</c:forEach>	
+						</select>	
+				</span>				
+			</td>
+			<td>
+<%-- 				<span class="input-group-text">Vendedor :<input type="text" class="form-control" value="${sessionScope.accountSession.name }" disabled></span> --%>
+					<span class="input-group-text">Vendedor : 
+						<select name="sellerId" class="form-control sellerId" >
+									<option value="0">- Seleccione -</option>
+								<c:forEach items="${listUsers}" var="user">
+									<!-- Solo mostrar usuarios que sean vendedores -->
+									<c:if test="${user.job.description eq 'vendedor' }">
+										<option value="${user.userId}">${user.name} ${user.firstName}</option>
+									</c:if>									
+								</c:forEach>	
+						</select>	
+				</span>	
+			</td>
+			<td>
+			<span class="input-group-text">Sucursal : 
+				<select name="storeDTO.storeId" class="form-control" id="storeId">
+							<option value="0">- Seleccione -</option>
+						<c:forEach items="${listOffices}" var="office">
+							<option value="${office.officeId}">${office.name}</option>
+						</c:forEach>	
+				</select>
+			</span>
+			
+			</td>
+			<td>
+				<p style="font-weight: 900;  font-size: 20px;">Total a pagar: $<span id="totalPagar"></span></p>
+			</td>
+		</tr>
+	</table>
+	
+	<div class="row">
+     		<table class="table tableUpdateNote">
+			    <thead>
+			      <tr>
+			      	<th>#</th>
+			      	<th style="width:5%;">Buscar por id</th>
+			        <th>Articulo</th>			        
+			        <th>Color</th>
+			        <th>Descripci&oacute;n</th>
+			        <th>Cantidad</th>
+			        <th>Precio</th>
+			        <th>Total</th>
+			        <th></th>			        
+			      </tr>
+			    </thead>
+			    <tbody>
+			     <tr>
+			     	<td style="width:2%"><span class="input-group-text" >1</span></td>
+			     	<td >
+			     		<input type="number" class="form-control" name="" id="txtFindItemById" >
+			     	</td>			     		
+			        <td >
+			        	
+				        <select name="items[0].itemIdForm" class="form-control selItems">
+						<option value="0" data-value="0">- Seleccione -</option>
+							<c:forEach items="${listItems}" var="item">
+								<option value="${item.itemId}" data-value="${item.itemId}|${item.description}|${item.salePrice}" >${item.description}</option>
+							</c:forEach>	
+						</select>			        
+			        </td>			      
+			        
+			         <td>
+				        <select name="items[0].color.colorId" class="form-control selColors">
+						<option value="0">- Seleccione -</option>
+							<c:forEach items="${listColors}" var="color">
+								<option value="${color.colorId}">${color.description}</option>
+							</c:forEach>	
+						</select>			        
+			        </td>
+			        <td><input type="text" class="form-control" name="items[0].description" id="itemDescription" disabled></td>
+			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					
+			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" disabled></td>
+			        <td><input type="number" class="form-control totalItem" name="" id="totalItem" disabled></td>
+			        <td><input type="button" class="btn btn-info btn-lg" id="addRow-update" value="Agregar" /></td>			        
+			      </tr>			
+			      	      	      
+			    </tbody>			    
+			  </table>
+			  <input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="update" value="Enviar" />	
+	  	</div> <!-- end row -->
+	  	</form:form>
+	  	
+	   <p>Actualizar nota</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+    </div><!-- end modal update -->
+    
+    
+    
+    
+    
 	</div> <!-- end container -->
 
 </body>

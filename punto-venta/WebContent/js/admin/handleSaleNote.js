@@ -1,5 +1,6 @@
 $( document ).ready(function() {
 	
+	
 		
 	$(".tableAddNote tbody").on('keypress', function(e){
 		 var code = (e.keyCode ? e.keyCode : e.which);
@@ -139,5 +140,46 @@ $( document ).ready(function() {
 		    }
 	}// end valid form
 	
+	// ----------------------------------------------- funciones para actualizar la nota
 	
-});
+	
+	//funcion para eliminar una fila de la tabla
+	$(".tableUpdateNote tbody").on('click','.btnDelete', function(){
+		if(confirm("\u00BFEliminar fila?"))
+			$(this).closest('tr').remove();		
+	});	
+	
+}); // end document ready
+
+//2018.06.05 GTL Obtener una nota por id
+function getSaleNoteById(id){
+	var data = {}
+	var x = id;
+	if(id != ''){			
+			
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "getSaleNoteById.do",
+			data : x,
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {
+				
+				console.log(data)
+				$('#modalUpdate').modal('toggle');
+				
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);				
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+		});
+	}else{
+		alert("No se recibio el parametro, porfavor recarga la pagina e intentalo de nuevo :( ")
+	}
+}
+
+

@@ -67,4 +67,9 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 		return saleNoteDao.getByFilter(saleNoteFilter);
 	}
 
+	@Override
+	public SaleNoteForm getSaleNoteById(Integer id) {
+		return saleNoteDao.getSaleNoteById(id);
+	}
+
 }
