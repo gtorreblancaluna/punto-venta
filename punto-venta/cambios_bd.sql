@@ -241,4 +241,24 @@ INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_e
 INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_7','pieza',600,22000,500,'1');
 INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_8','pieza',600,22000,500,'1');
 
+--urgente
+-- cambios en tabla sucursales 6 junio 2018
+
+DELETE FROM `puntoventa`.`c_sucursal` WHERE `cl_sucursal`='7';
+DELETE FROM `puntoventa`.`c_sucursal` WHERE `cl_sucursal`='1';
+DELETE FROM `puntoventa`.`c_sucursal` WHERE `cl_sucursal`='2';
+DELETE FROM `puntoventa`.`c_sucursal` WHERE `cl_sucursal`='3';
+DELETE FROM `puntoventa`.`c_sucursal` WHERE `cl_sucursal`='4';
+DELETE FROM `puntoventa`.`c_sucursal` WHERE `cl_sucursal`='5';
+DELETE FROM `puntoventa`.`c_sucursal` WHERE `cl_sucursal`='6';
+
+INSERT INTO `puntoventa`.`c_sucursal` (`cl_sucursal`, `nombre`, `calle`, `t_fijo`) VALUES ('1', 'TOLUCA 1', 'PINOSUAREZ', '7222426467');
+INSERT INTO `puntoventa`.`c_sucursal` (`cl_sucursal`, `nombre`, `calle`, `t_fijo`) VALUES ('2', 'TOLUCA 2', 'ADOLFO LOPEZ MATEOS', '7223186761');
+INSERT INTO `puntoventa`.`c_sucursal` (`cl_sucursal`, `nombre`, `calle`, `colonia`, `municipio`, `estado`, `t_fijo`) VALUES ('3', 'TOLUCA 3', 'PASEO TOLLOCAN', 'UNIVERSIDAD', 'TOLUCA', 'TOLUCA', '7222121844');
+
+-- cambios en la tabla c_usuario 
+-- hay que asignarle de donde es cada Usuario de que sucursal 
+ALTER TABLE `puntoventa`.`c_usuario` 
+ADD COLUMN `cl_sucursal` INT(10) UNSIGNED NOT NULL AFTER `fg_activo`;
+
 -- FIN DEL SCRIPT

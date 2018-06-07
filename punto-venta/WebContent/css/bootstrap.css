@@ -13,6 +13,21 @@ section,
 summary {
   display: block;
 }
+
+.opacity{
+   opacity: 0.6;
+  
+}
+
+
+		  .texto{
+   width:200px;
+   height:70px;
+   color: #000;
+   float:inherit;
+   position:relative;
+   text-align: center;
+}
 audio,
 canvas,
 progress,
