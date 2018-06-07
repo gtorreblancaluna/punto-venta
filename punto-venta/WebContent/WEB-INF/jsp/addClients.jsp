@@ -8,7 +8,12 @@
 	
 <title>Punto Venta:: Clientes</title>
 
+<style>
+body{
+	background-image:url("http://www.thomaslhomme.com/wp-content/uploads/2014/03/Cool-Website-Backgrounds.jpg");
 
+}
+</style>
 	
 </head>
 <body >
