@@ -87,33 +87,6 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 </head>
 <body>
 
-
-
-
-
-
-<!------ Include the above in your HEAD tag ---------->
-
-<!-- <div class="login"> -->
-<!--     <h1>Login</h1> -->
-<%--     <form method="post"> --%>
-<!--     	<input type="text" name="u" placeholder="Username" required="required" /> -->
-<!--         <input type="password" name="p" placeholder="Password" required="required" /> -->
-<!--         <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button> -->
-<%--     </form> --%>
-<!--     <br> -->
-<!--     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
-<!-- <!-- login bootsnipp --> -->
-<!-- <ins class="adsbygoogle" -->
-<!--      style="display:block" -->
-<!--      data-ad-client="ca-pub-9155049400353686" -->
-<!--      data-ad-slot="9589048256" -->
-<!--      data-ad-format="auto"></ins> -->
-     
-<!-- <script> -->
-<!-- </script> -->
-<!-- </div> -->
-
 	<img src="http://4.bp.blogspot.com/_ULyzAtmDLDw/TMcDr-xnE-I/AAAAAAAAACM/vAs4m43hUMg/S860-R/Dibujo.JPG" class="rounded mx-auto d-block" alt="...">
 	
 	<div class="container">

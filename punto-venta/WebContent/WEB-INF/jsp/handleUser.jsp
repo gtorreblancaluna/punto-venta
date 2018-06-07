@@ -119,12 +119,21 @@ $( document ).ready(function() {
 					<label>Admin: </label>
 					<input type="checkbox" id="fgAdmin" name="fgAdmin" class="form-control">
 				</div>
-				
-					<div class="form-group">
+				<div class="form-group mb-3">
+				 <select class="custom-select" name="job.jobId" id="job.jobId">
+					
+					<option selected>Puesto</option>
+					<option value="1"> Administrador</option>
+					<option value="2"> Vendedor</option>
+					<option value="3"> Chofer</option>
+					</select>
+				</div>				
+								
+				<div class="form-group">
 					<input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="addUser" value="Enviar" />					
 				</div>
+				
 		</form:form>
-		   <p>Agregar usuario</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

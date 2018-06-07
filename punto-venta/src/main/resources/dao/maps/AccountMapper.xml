@@ -39,9 +39,10 @@
 
 	<insert id="insertUser" parameterType="accountDTO">
 		INSERT INTO c_usuario
-		(cl_puesto,nombre,ap_paterno,ap_materno,email,fe_alta,password,fg_admin)
+		(cl_puesto,nombre,ap_paterno,ap_materno,email,fe_alta,password,fg_admin,fg_activo)
 		VALUES
-		(#{job.jobId},#{name},#{firstName},#{secondName},#{email},#{addDate},#{password},#{admin})
+		
+		(#{job.jobId},#{name},#{firstName},#{secondName},#{email},#{addDate},#{password},#{admin},"1")
 	</insert>
 	<update id="updateUser" parameterType="accountDTO">
 		UPDATE c_usuario SET
