@@ -1,5 +1,10 @@
 
-<footer id="myFooter">
+<footer id="myFooter" style="position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;">
 <div class="card-footer text-muted">
 	<div class="row">
 		<div class="col-5">
@@ -22,23 +27,4 @@
 
 
 
-<!-- 	<div class="row"> -->
-<!-- 		<div class="col"> -->
-			
-		
-<!-- 											 				<ul> -->
-<!-- 													                <li><a href="#">HST-POS-18</a></li> -->
-<!-- 													                <li><a href="#">Contact us</a></li> -->
-<!-- 													                <li><a href="#">Reviews</a></li> -->
-<!-- 													                <li><a href="#">Terms of service</a></li> -->
-<!-- 											          		 </ul> -->
-<!-- 											            </div> -->
-<!-- 														<p class="footer-copyright">© 2018 HST</p> -->
-<!-- 														<div class="footer-social"> -->
-<!-- 											            <a href="#" class="social-icons"><i class="fa fa-facebook"></i></a> -->
-<!-- 											            <a href="#" class="social-icons"><i class="fa fa-google-plus"></i></a> -->
-<!-- 											            <a href="#" class="social-icons"><i class="fa fa-twitter"></i></a> -->
-<!--        	 </div> -->
-        
-<!--         </div> -->
 </footer>
