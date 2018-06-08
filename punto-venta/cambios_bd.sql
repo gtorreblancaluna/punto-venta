@@ -203,13 +203,11 @@ PRIMARY KEY (cl_venta),
 CONSTRAINT fk_cl_cliente FOREIGN KEY fk_cl_cliente (cl_cliente) 
 	REFERENCES c_cliente(cl_cliente)
 	ON DELETE CASCADE
-    ON UPDATE CASCADE,
-    
-CONSTRAINT fk_cl_sucursal FOREIGN KEY fk_cl_sucursal (cl_sucursal) 
+    ON UPDATE CASCADE,    
+CONSTRAINT fk_venta_cl_sucursal FOREIGN KEY fk_venta_cl_sucursal (cl_sucursal) 
 	REFERENCES c_sucursal(cl_sucursal)
 	ON DELETE CASCADE
     ON UPDATE CASCADE,
-
 CONSTRAINT fk_cl_usuario FOREIGN KEY fk_cl_usuario (cl_usuario) 
 	REFERENCES c_usuario(cl_usuario)
 	ON DELETE CASCADE
