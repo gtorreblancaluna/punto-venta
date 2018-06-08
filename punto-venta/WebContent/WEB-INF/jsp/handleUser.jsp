@@ -9,8 +9,7 @@
 <title>punto de venta :: admin usuarios</title>
 <style>
 
-
-			    
+		    
         .row > div {
         background:#f2f2f2;
         margin: 14px 0;
@@ -45,10 +44,13 @@
 html { width: 100%; height:100%; overflow:hidden; }
 
 body{
-	background-image:url("http://www.thomaslhomme.com/wp-content/uploads/2014/03/Cool-Website-Backgrounds.jpg");
+	background-image:url(""WebContent/WEB-INF/images/m1.jpg"");
 
 }
+ table{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+ }
 
 table td {
   text-align: center;
@@ -56,6 +58,7 @@ table td {
   color: white;
   font-size: 13px;
 }
+
 </style>
 <script type="text/javascript">
 $( document ).ready(function() {
@@ -90,7 +93,7 @@ $( document ).ready(function() {
 </script>
 </head>
 <body>
- <div class="container">
+ <div class="container" style="box-shadow: 0 0 30px black;">
 
 		<c:if test="${message != null}">
 		<div class="alert alert-success texto">
