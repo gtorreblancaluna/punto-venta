@@ -260,5 +260,115 @@ INSERT INTO `puntoventa`.`c_sucursal` (`cl_sucursal`, `nombre`, `calle`, `coloni
 -- hay que asignarle de donde es cada Usuario de que sucursal 
 ALTER TABLE `puntoventa`.`c_usuario` 
 ADD COLUMN `cl_sucursal` INT(10) UNSIGNED NOT NULL AFTER `fg_activo`;
+-- ADD PROVEDORES
+
+INSERT INTO `puntoventa`.`c_proveedor` (`cl_proveedor`, `nombre`, `password`, `t_celular`) VALUES ('1', 'JONATHAN', '', '5557633029');
+
+--PRODUCTOS
+
+UPDATE `puntoventa`.`c_articulo` SET `descripcion`='' WHERE `cl_articulo`='1';
+DELETE FROM `puntoventa`.`c_articulo` WHERE `cl_articulo`='7';
+DELETE FROM `puntoventa`.`c_articulo` WHERE `cl_articulo`='2';
+DELETE FROM `puntoventa`.`c_articulo` WHERE `cl_articulo`='3';
+DELETE FROM `puntoventa`.`c_articulo` WHERE `cl_articulo`='4';
+DELETE FROM `puntoventa`.`c_articulo` WHERE `cl_articulo`='5';
+DELETE FROM `puntoventa`.`c_articulo` WHERE `cl_articulo`='6';
+
+--INSERT PRODUCTOS
+
+insert into c_articulo values(2,now(),1,1,'DIANA C/DIVAN','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(3,now(),1,1,'ANAHI','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(4,now(),1,1,'SALA CASA 3,2,1','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(5,now(),1,1,'JANA 3,2,1','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(6,now(),1,1,'BELICE MODULAR C/RECLINABLE VASO Y ADUIO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(7,now(),1,1,'CASA CALIFORNIA 3,2,1 5 RECLINABLES 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(8,now(),1,1,'CALIFORNIA 3,2,1 1 RECLINABLE	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(9,now(),1,1,'CONVERTI CAMA 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(10,now(),1,1,'SALA LUCY  2 DIVAN 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(11,now(),1,1,'SALA EMA MODULAR  C/RECINABLE , PORTAVASO Y AUDIO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(12,now(),1,1,'SALA MELANY 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(13,now(),1,1,'SALA IMPERIO 2 ESQUINAS 2 DIAVAN C/RECLINABLE,PORTAVASO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(14,now(),1,1,'SALA VERA 3,2,1 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(15,now(),1,1,'SALA CORDOBA	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(16,now(),1,1,'SALA ESTEFANY 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(17,now(),1,1,'SALA BELGICA 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(18,now(),1,1,'SALA MIA 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(19,now(),1,1,'SALA BRITANY 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(20,now(),1,1,'SALA MANCHESTER 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(21,now(),1,1,'SALA ITALIA 3,2,1 C/RECLINABLE Y PORTAVASO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(22,now(),1,1,'SALA BRITANNY DE CHEZ 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(23,now(),1,1,'SALA DUQUE 3,2,1 C/RECLINABLE ,PORTAVASO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(24,now(),1,1,'SOFACAMA AMY 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(25,now(),1,1,'SOFACAMA PORTAVASO 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(26,now(),1,1,'SALA REYNA 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(27,now(),1,1,'SALA VIANEY MODULAR 2 ESQUINA 2 DIVAN C/RECLINABLE,PORTAVASO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(28,now(),1,1,'DIANA COSTURA 3,2,1 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(29,now(),1,1,'EMA 2 ESQUINAS 2 DIVAN C/RECLINABLE,PORTAVASO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(30,now(),1,1,'BRENDA 3,2,1 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(31,now(),1,1,'FRANCIA	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(32,now(),1,1,'DEVANE 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(33,now(),1,1,'ABANICO 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(34,now(),1,1,'TOLLOCAN 2 ESQUINA 2 DIAVN C/RECLINABLE,PORTAVASO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(35,now(),1,1,'JUNIOR CON BRAZO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(36,now(),1,1,'DIANA ECO 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(37,now(),1,1,'ONTARIO 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(38,now(),1,1,'SALA JUNIOR ESCUADRA	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(39,now(),1,1,'BRENDA 2 ESQUINAS 2 DIAVAN	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(40,now(),1,1,'DIANA DE COSTURA MODULAR	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(41,now(),1,1,'PLUS 3,2,1 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(42,now(),1,1,'GINA 2 ESQUINA 2 DIVAN 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(43,now(),1,1,'GINA 3,2,1 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(44,now(),1,1,'GONDOLA 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(45,now(),1,1,'VALENCIA 3,2,1 C/RECLINABLE,PORTAVASO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(46,now(),1,1,'CARTIER 3,2,1 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(47,now(),1,1,'VALENCIA 2 ESQUINA 2 DIAVN C/RECLINABLE,PORTAVASO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(48,now(),1,1,'EVES 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(49,now(),1,1,'LUIS XXV 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(50,now(),1,1,'VENECIA 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(51,now(),1,1,'EUROPA 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(52,now(),1,1,'VOGUE 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(53,now(),1,1,'DIANA MOLDURA 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(54,now(),1,1,'CHAT MODULAR 2 ESQUINA 2 DIAVN C/RECLINABLE,PORTAVASO,AUDIO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(55,now(),1,1,'BRASILIA 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(56,now(),1,1,'AMERICA 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(57,now(),1,1,'CHESTER 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(58,now(),1,1,'ERIKA 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(59,now(),1,1,'VERA 2 ESQUINA DOS	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(60,now(),1,1,'SILLON REDONDO 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(61,now(),1,1,'SALA IMPERIO  2 ESQUINA 2 DIVAN 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(62,now(),1,1,'SALA IMPERIO 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(63,now(),1,1,'REPOSET CALIFORNIA	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(64,now(),1,1,'REPOSET EMA	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(65,now(),1,1,'REPOSET VALENCIA	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(66,now(),1,1,'SILLONES OREJONES	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(67,now(),1,1,'SILLON OREJON MINI 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(68,now(),1,1,'MESA DE TUBOS CUADRADA	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(69,now(),1,1,'MESA DE TUBOS RECTANGULAR	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(70,now(),1,1,'MESA DE TUBOS CUADRADA 90 * 90	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(71,now(),1,1,'COMEDOR DE 6 SILLAS	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(72,now(),1,1,'COMEDOR DE 4 SILLAS	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(73,now(),1,1,'COMEDOR DE 8 SILLAS	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(74,now(),1,1,'MESA CON TABURETE	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(75,now(),1,1,'JUEGOS DE COJINES 6PZAS	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(76,now(),1,1,'COJIN 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(77,now(),1,1,'MUEBLE PARA COCINA 	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(78,now(),1,1,'RECAMARA SALVADOR	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(79,now(),1,1,'RECAMARA	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(80,now(),1,1,'FLOTTER	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(81,now(),1,1,'SWEDE	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(82,now(),1,1,'VELVERT	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(83,now(),1,1,'LINO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(84,now(),1,1,'IBIZA	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(85,now(),1,1,'TELA DECORADA	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(86,now(),1,1,'GRAPA CASCO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(87,now(),1,1,'GRAPA TAPIZ	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(88,now(),1,1,'CAJA PATA FRANCIA	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(89,now(),1,1,'COSCAL PATA BOLA PLASTICO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(90,now(),1,1,'TIRATACHUELA C/FORRO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(91,now(),1,1,'TIRACHUELA S/FORRO	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(92,now(),1,1,'CAJA HERRAJES	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(93,now(),1,1,'FLORIDA 3,2,1	','PAQUETE',0,0,0,0,1);
+insert into c_articulo values(94,now(),1,1,'ROMA 3,2,1 RECLINABLE 8PORTAVASOS	','PAQUETE',0,0,0,0,1);
+
 
 -- FIN DEL SCRIPT
