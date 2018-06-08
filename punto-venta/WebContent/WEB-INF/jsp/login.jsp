@@ -87,7 +87,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 </head>
 <body>
 
-	<img src="http://4.bp.blogspot.com/_ULyzAtmDLDw/TMcDr-xnE-I/AAAAAAAAACM/vAs4m43hUMg/S860-R/Dibujo.JPG" class="rounded mx-auto d-block" alt="...">
+	<img src="https://s33.postimg.cc/w2rvzhmm7/Logo_Muebles_Florida.png" width="550px" height="400px" class="rounded mx-auto d-block" alt="...">
 	
 	<div class="container">
 		<c:if test="${message != null}">
