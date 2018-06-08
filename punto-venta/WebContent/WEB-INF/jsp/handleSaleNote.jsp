@@ -12,21 +12,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	
 <title>Punto Venta:: Notas</title>
 <script type="text/javascript">
+var u_cont=0;
 
-$( document ).ready(function() {
-	
+$( document ).ready(function() {	
+
 	$( "#addRow-add" ).click(function() {
-		addRow("AddNote");
+		addRow();
 	});
 	$( "#addRow-update" ).click(function() {
-		addRow("UpdateNote");
+		addRowUpdate();
 	});
 	var cont = 0;
 
-	// funcion para agregar una fila a la tabla
-	function addRow(val){	
+	// funcion para agregar una fila a la tabla de agregar nota
+	function addRow(){	
 		++cont;	
-		$(".table"+val+" tbody").append("<tr>"			
+		$(".tableAddNote tbody").append("<tr>"			
 			+"<td style='width:2%'><span class='input-group-text'>"+ (cont+1) +"</span></td>"
 			+"<td><input type='number' class='form-control' name='' id='txtFindItemById'></td>"
 			+"<td>" +
@@ -51,8 +52,92 @@ $( document ).ready(function() {
 			+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
 			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
 		+"</tr>");
-	};	
+	};
+	
+	// funcion para agregar una fila a la tabla de actualizar nota
+	function addRowUpdate(){			
+		$(".tableUpdateNote tbody").append("<tr>"			
+			+"<td style='width:2%'><span class='input-group-text'>"+ (u_cont+1) +"</span></td>"
+			+"<td><input type='number' class='form-control' name='' id='txtFindItemById'></td>"
+			+"<td>" +
+					"<select name='items["+u_cont+"].itemIdForm' class='form-control selItems'>" +
+					"<option value='0' data-value='0'>- Seleccione -</option> " +
+					"<c:forEach items='${listItems}' var='item'>" +
+						"<option value='${item.itemId}' data-value='${item.itemId}|${item.description}|${item.salePrice}' >${item.description}</option> " +
+					"</c:forEach> " +
+					"</select>" +
+			"</td>"
+			+"<td>" +
+					"<select name='items["+u_cont+"].color.colorId' class='form-control selColors'>" +
+					"<option value='0'>- Seleccione -</option> " +
+					"<c:forEach items='${listColors}' var='color'>" +
+						"<option value='${color.colorId}'>${color.description}</option> " +
+					"</c:forEach> " +
+					"</select>" +
+			"</td>"
+			+"<td><input type='text' class='form-control' name='items["+ u_cont +"].description' id='itemDescription' disabled></td>"
+			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].amountEntry' id='amountItem' ></td>"
+			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].salePrice' id='itemPrice' disabled></td>"
+			+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
+			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
+		+"</tr>");
+		u_cont++;
+	};
+	
+	
+	
 });
+
+//agregar los detalles de la venta
+function addSaleDetailNoteForm(items){
+//	$('.tableUpdateNote').remove();
+	var $tableUpdateNote = $('.tableUpdateNote');
+	
+	$.each(items, function(index, value) {	 
+		
+		$(".tableUpdateNote tbody").append("<tr>"			
+			+"<td style='width:2%'><span class='input-group-text tr-count"+(u_cont+1)+"'>"+ (u_cont+1) +"</span></td>"
+			+"<td><input type='number' class='form-control' name='' id='txtFindItemById'></td>"
+			+"<td>" +
+					"<select name='items["+u_cont+"].itemIdForm' class='form-control selItems'>" +
+					"<option value='0' data-value='0'>- Seleccione -</option> " +
+					"<c:forEach items='${listItems}' var='item'>" +
+						"<option value='${item.itemId}' data-value='${item.itemId}|${item.description}|${item.salePrice}' >${item.description}</option> " +
+					"</c:forEach> " +					
+					"</select>" +
+			"</td>"
+			+"<td>" +
+					"<select name='items["+u_cont+"].color.colorId' class='form-control selColors'>" +
+					"<option value='0'>- Seleccione -</option> " +
+					"<c:forEach items='${listColors}' var='color'>" +
+						"<option value='${color.colorId}'>${color.description}</option> " +
+					"</c:forEach> " +
+					"</select>" +
+			"</td>"
+			+"<td><input type='text' class='form-control' name='items["+ u_cont +"].description' id='itemDescription' disabled></td>"
+			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].amountEntry' id='amountItem' ></td>"
+			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].salePrice' id='itemPrice' disabled></td>"
+			+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
+			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
+		+"</tr>");
+		
+		// ahora colocamos el valor del articulo en las filas		
+		var $tr = $tableUpdateNote.find(".tr-count"+(u_cont+1)+"").closest('tr');
+		$tr.find('.selItems').val(value.itemId);				
+		var val = $('option:selected', $tr).attr('data-value').split("|");						
+		$tr.find('#itemDescription').val(val[1]);
+		$tr.find('#itemPrice').val(val[2]);
+		$tr.find('#amountItem').val(value.amount);
+		$tr.find('.selColors').val(value.colorId);
+		var amount = $tr.find('#amountItem').val();
+		$tr.find('#totalItem').val(amount*val[2]);
+		u_cont++;
+		
+	});	// end for each
+	
+	totalUpdateForm();	
+	
+}
 
 </script>
 </head>
@@ -196,7 +281,7 @@ $( document ).ready(function() {
 			</td>
 			<td>
 			<span class="input-group-text">Sucursal : 
-				<select name="storeDTO.storeId" class="form-control" id="storeId">
+				<select name="storeDTO.storeId" class="form-control storeId" id="storeId">
 							<option value="0">- Seleccione -</option>
 						<c:forEach items="${listOffices}" var="office">
 							<option value="${office.officeId}">${office.name}</option>
@@ -278,15 +363,16 @@ $( document ).ready(function() {
     <div id="modalUpdate" class="modal fade" role="dialog" >
  <div class="modal-content" style="width: 1000px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close closeUpdateForm" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Actualizar nota</h4>
       </div>
       <div class="modal-body">     
-<form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="saleNoteForm" id="updateSaleNoteForm">
-	<table >
+<form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="updateSaleNoteForm" id="updateSaleNoteForm">
+	<input type="hidden" name="saleId" class="saleId" id="saleId" value="">
+	<table class="table tableSaleNoteForm">
 		<tr>
 			<td>
-				<span class="input-group-text">Fecha :<input type="date" name="dateSaleNote" id="dateForm" class="form-control dateForm"> </span>
+				<span class="input-group-text">Fecha :<input type="date" name="dateSaleNote" id="dateFormUpdate" class="form-control dateForm"> </span>
 			</td>
 			<td>
 				<span class="input-group-text">Cliente : 
@@ -314,7 +400,7 @@ $( document ).ready(function() {
 			</td>
 			<td>
 			<span class="input-group-text">Sucursal : 
-				<select name="storeDTO.storeId" class="form-control" id="storeId">
+				<select name="storeId" class="form-control storeId" id="storeId">
 							<option value="0">- Seleccione -</option>
 						<c:forEach items="${listOffices}" var="office">
 							<option value="${office.officeId}">${office.name}</option>
@@ -324,7 +410,7 @@ $( document ).ready(function() {
 			
 			</td>
 			<td>
-				<p style="font-weight: 900;  font-size: 20px;">Total a pagar: $<span id="totalPagar"></span></p>
+				<p style="font-weight: 900;  font-size: 20px;">Total a pagar: $<span id="totalPagarUpdate"></span></p>
 			</td>
 		</tr>
 	</table>
@@ -341,38 +427,38 @@ $( document ).ready(function() {
 			        <th>Cantidad</th>
 			        <th>Precio</th>
 			        <th>Total</th>
-			        <th></th>			        
+			        <th><input type="button" class="btn btn-info btn-lg" id="addRow-update" value="Agregar" /></th>			        
 			      </tr>
 			    </thead>
 			    <tbody>
 			     <tr>
-			     	<td style="width:2%"><span class="input-group-text" >1</span></td>
-			     	<td >
-			     		<input type="number" class="form-control" name="" id="txtFindItemById" >
-			     	</td>			     		
-			        <td >
+<!-- 			     	<td style="width:2%"><span class="input-group-text" >1</span></td> -->
+<!-- 			     	<td > -->
+<!-- 			     		<input type="number" class="form-control" name="" id="txtFindItemById" > -->
+<!-- 			     	</td>			     		 -->
+<!-- 			        <td > -->
 			        	
-				        <select name="items[0].itemIdForm" class="form-control selItems">
-						<option value="0" data-value="0">- Seleccione -</option>
-							<c:forEach items="${listItems}" var="item">
-								<option value="${item.itemId}" data-value="${item.itemId}|${item.description}|${item.salePrice}" >${item.description}</option>
-							</c:forEach>	
-						</select>			        
-			        </td>			      
+<!-- 				        <select name="items[0].itemIdForm" class="form-control selItems"> -->
+<!-- 						<option value="0" data-value="0">- Seleccione -</option> -->
+<%-- 							<c:forEach items="${listItems}" var="item"> --%>
+<%-- 								<option value="${item.itemId}" data-value="${item.itemId}|${item.description}|${item.salePrice}" >${item.description}</option> --%>
+<%-- 							</c:forEach>	 --%>
+<!-- 						</select>			         -->
+<!-- 			        </td>			       -->
 			        
-			         <td>
-				        <select name="items[0].color.colorId" class="form-control selColors">
-						<option value="0">- Seleccione -</option>
-							<c:forEach items="${listColors}" var="color">
-								<option value="${color.colorId}">${color.description}</option>
-							</c:forEach>	
-						</select>			        
-			        </td>
-			        <td><input type="text" class="form-control" name="items[0].description" id="itemDescription" disabled></td>
-			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					
-			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" disabled></td>
-			        <td><input type="number" class="form-control totalItem" name="" id="totalItem" disabled></td>
-			        <td><input type="button" class="btn btn-info btn-lg" id="addRow-update" value="Agregar" /></td>			        
+<!-- 			         <td> -->
+<!-- 				        <select name="items[0].color.colorId" class="form-control selColors"> -->
+<!-- 						<option value="0">- Seleccione -</option> -->
+<%-- 							<c:forEach items="${listColors}" var="color"> --%>
+<%-- 								<option value="${color.colorId}">${color.description}</option> --%>
+<%-- 							</c:forEach>	 --%>
+<!-- 						</select>			         -->
+<!-- 			        </td> -->
+<!-- 			        <td><input type="text" class="form-control" name="items[0].description" id="itemDescription" disabled></td> -->
+<!-- 			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					 -->
+<!-- 			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" disabled></td> -->
+<!-- 			        <td><input type="number" class="form-control totalItem" name="" id="totalItem" disabled></td> -->
+<!-- 			        <td><input type="button" class="btn btn-info btn-lg" id="addRow-update" value="Agregar" /></td>			         -->
 			      </tr>			
 			      	      	      
 			    </tbody>			    

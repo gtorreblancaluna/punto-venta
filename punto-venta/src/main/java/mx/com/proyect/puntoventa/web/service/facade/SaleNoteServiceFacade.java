@@ -27,7 +27,7 @@ public class SaleNoteServiceFacade {
 	SaleNoteService saleNoteService;
 	
 	@RequestMapping(value = "/getItemById.do")
-//	@ResponseBody
+	@ResponseBody
 	public String getItemById(@RequestBody String id) {
 		ItemDTO item = inventoryService.findById(new Long (id));
 		
@@ -55,46 +55,14 @@ public class SaleNoteServiceFacade {
 
 	}
 	
+		
+	// obtener datos generales de la venta
 	@RequestMapping(value = "/getSaleNoteById.do")
 	@ResponseBody
-	public String getSaleNoteById(@RequestBody String id) {		
+	public SaleNoteForm getSaleNoteById(@RequestBody String id) {	
 		
-			SaleNoteForm note = saleNoteService.getSaleNoteById(new Integer(id));
-			
-			Map<String,Object> myMap = new HashMap<>();
-			
-			if(note == null) {
-				 myMap.put("saleId", 0);
-			}else {
-				 myMap.put("saleId", note.getSaleId());
-				 myMap.put("dateTimestamp", note.getDateTimestamp());
-				 myMap.put("dateDelivery", note.getDateDelivery());
-				 myMap.put("sellerId", note.getSellerId());
-				 myMap.put("userId", note.getUserId());
-				 myMap.put("storeId", note.getStoreId());
-				 myMap.put("description", note.getDescription());
-				 int cont=0;
-				 for(SaleDetailDTO detail : note.getSaleDetail()) {					 
-					 myMap.put("detail-saleDetailId-"+cont, detail.getSaleDetailId());
-					 myMap.put("detail-saleId-"+cont, detail.getSaleId());
-					 myMap.put("detail-itemId-"+cont, detail.getItemId());
-					 myMap.put("detail-amount-"+cont, detail.getAmount());
-					 cont++;
-				 }
-			}	       
-	        ObjectMapper mapper = new ObjectMapper();
-	        String json = "";
-	        try {
-	            json = mapper.writeValueAsString(myMap);
-	        } catch (JsonProcessingException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        } catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	       
-		
-		return json;
+			SaleNoteForm note = saleNoteService.getSaleNoteById(new Integer(id));			
+			return note;			
 
 	}
 

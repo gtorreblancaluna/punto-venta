@@ -5,13 +5,14 @@ import java.io.Serializable;
 public class ColorDTO implements Serializable {	
 	
 	private static final long serialVersionUID = 413296597983426253L;
-	private float colorId;
+	private Integer colorId;
 	private String description;
 	private String status;
-	public float getColorId() {
+	
+	public Integer getColorId() {
 		return colorId;
 	}
-	public void setColorId(float colorId) {
+	public void setColorId(Integer colorId) {
 		this.colorId = colorId;
 	}
 	public String getDescription() {
@@ -26,12 +27,6 @@ public class ColorDTO implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	@Override
-	public String toString() {
-		return "ColorDTO [colorId=" + colorId + ", description=" + description + ", status=" + status + "]";
-	}
-	
-	
 	
 	
 }

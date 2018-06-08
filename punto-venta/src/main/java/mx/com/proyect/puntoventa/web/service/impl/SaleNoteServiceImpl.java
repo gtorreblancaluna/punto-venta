@@ -46,7 +46,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 
 	@Override
 	public boolean update(SaleNoteForm saleNoteForm) {
-		// TODO Auto-generated method stub
+		saleNoteDao.update(saleNoteForm);
 		return false;
 	}
 

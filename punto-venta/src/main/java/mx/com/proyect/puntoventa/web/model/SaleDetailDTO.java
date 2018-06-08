@@ -19,6 +19,16 @@ public class SaleDetailDTO implements Serializable {
 	private Integer itemId;
 	// cantidad -> cantidad de articulos en la tabla
 	private Float amount;
+	// cl_color -> id color
+	private Integer colorId;
+	
+	
+	public Integer getColorId() {
+		return colorId;
+	}
+	public void setColorId(Integer colorId) {
+		this.colorId = colorId;
+	}
 	public Integer getSaleDetailId() {
 		return saleDetailId;
 	}

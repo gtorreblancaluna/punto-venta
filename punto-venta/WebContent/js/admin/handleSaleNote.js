@@ -1,3 +1,5 @@
+
+
 $( document ).ready(function() {
 	
 	
@@ -103,6 +105,11 @@ $( document ).ready(function() {
 		return validateFormAddNote();	
 	});
 	
+	// validando formulario actualizar
+	$('form[name="updateSaleNoteForm"]').submit(function (e) {
+		return validateFormUpdateNote();	
+	});
+	
 	function validateFormAddNote(){
 		 var msgError="";
 		    var valid=true;
@@ -118,7 +125,7 @@ $( document ).ready(function() {
 				msgError += ++count + ". Faltan valores para agregar a la venta\n";
 			}else{		
 			// recorrremos la tabla para validar sus valores
-			  $("tableAddNote tbody tr").each(function () {
+			  $(".tableAddNote tbody tr").each(function () {
 		            var itemId = $(this).find("td").eq(2).find(".selItems").val();
 		            var colorId = $(this).find("td").eq(3).find(".selColors").val();
 		            var amountItem = $(this).find("td").eq(5).find("#amountItem").val();	  
@@ -135,7 +142,7 @@ $( document ).ready(function() {
 		    	alert(msgError);
 		    	return valid;
 		    }else{
-		    	valid = confirm("Confirma para continuar");
+		    	return valid = confirm("Confirma para continuar");
 		    	
 		    }
 	}// end valid form
@@ -148,6 +155,28 @@ $( document ).ready(function() {
 		if(confirm("\u00BFEliminar fila?"))
 			$(this).closest('tr').remove();		
 	});	
+	
+	
+	//funcion para calcular el total a pagar por articulo
+	$(".tableUpdateNote tbody").on('change','#amountItem', function(){	
+		var amount = $(this).val();	
+		var $tr = $(this).closest('tr');		
+		var price = $tr.find('#itemPrice').val();
+		$tr.find('#totalItem').val(amount*price);
+		totalUpdateForm();	
+	});
+
+	//Funcion para colocar los demas valores en los inputs del articulo
+	$(".tableUpdateNote tbody").on('change','.selItems', function(){	
+		var val = $('option:selected', this).attr('data-value').split("|");
+		var $tr = $(this).closest('tr');		
+		$tr.find('#itemDescription').val(val[1]);
+		$tr.find('#itemPrice').val(val[2]);	
+		$tr.find('#amountItem').val(1);	
+		var amount = $tr.find('#amountItem').val();
+		$tr.find('#totalItem').val(amount*val[2]);
+		totalUpdateForm();
+	});
 	
 }); // end document ready
 
@@ -164,11 +193,15 @@ function getSaleNoteById(id){
 			data : x,
 			dataType : 'json',
 			timeout : 100000,
-			success : function(data) {
-				
+			success : function(data) {				
+				$(".tableUpdateNote tbody").empty();
+				u_cont=0;
 				console.log(data)
+				document.updateSaleNoteForm.saleId.value = data.saleId;
+				$('.saleId').val(data.saleId);
+				addSaleNoteForm(data);
+				addSaleDetailNoteForm(data.saleDetail);
 				$('#modalUpdate').modal('toggle');
-				
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);				
@@ -181,5 +214,72 @@ function getSaleNoteById(id){
 		alert("No se recibio el parametro, porfavor recarga la pagina e intentalo de nuevo :( ")
 	}
 }
+
+// agregar los datos a la ventana de actualizacion
+function addSaleNoteForm(data){
+	
+	var $tableSaleNoteForm = $('.tableSaleNoteForm');
+	$tableSaleNoteForm.find('.userId').val(data.userId);
+	$tableSaleNoteForm.find('.sellerId').val(data.sellerId);
+	$tableSaleNoteForm.find('.storeId').val(data.storeId);
+	document.getElementById("dateFormUpdate").valueAsDate = new Date(data.dateDelivery)	
+}
+
+function totalUpdateForm(){
+	var total=0;
+	  $(".tableUpdateNote tbody tr").each(function () {
+        stotal = $(this).find("td").eq(7).find(".totalItem").val();
+        if(stotal != undefined && stotal != "")
+      	  total += parseFloat(stotal);
+    })
+  $('#totalPagarUpdate').html(new Intl.NumberFormat('es-MX').format(total));
+}
+
+function validateFormUpdateNote(){
+	 var msgError="";
+	    var valid=true;
+	    var count=0;
+		
+	    var $tableUpdateNote = $('.tableSaleNoteForm');
+	    
+		var date = $tableUpdateNote.find('#dateFormUpdate').val();
+		var userId = $tableUpdateNote.find('.userId').val();
+		var sellerId = $tableUpdateNote.find('.sellerId').val();
+		var storeId = $tableUpdateNote.find('#storeId').val();
+		
+		if(date === '' || userId === '0' || sellerId === '0' || storeId === '0'){
+			valid=false;
+			msgError += ++count + ". Faltan valores para agregar a la venta\n";
+		}else{		
+		// recorrremos la tabla para validar sus valores
+		  $(".tableUpdateNote tbody tr").each(function () {
+	            var itemId = $(this).find("td").eq(2).find(".selItems").val();
+	            var colorId = $(this).find("td").eq(3).find(".selColors").val();
+	            var amountItem = $(this).find("td").eq(5).find("#amountItem").val();	  
+	            
+	            if(itemId === '0' || colorId === '0' || amountItem === ''){
+	            	valid=false;
+	            	msgError += ++count + ". Faltan valores para agregar a la venta\n";
+	            }
+	           
+	      });
+		}	    
+	    
+	    if(!valid){
+	    	alert(msgError);
+	    	return valid;
+	    }else{
+	    	return valid = confirm("Confirma para continuar");
+	    	
+	    }
+}// end valid form
+
+
+
+
+
+
+
+
 
 

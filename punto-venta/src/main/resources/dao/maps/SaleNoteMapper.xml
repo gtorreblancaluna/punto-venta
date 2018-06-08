@@ -15,6 +15,7 @@
 		<result property="saleDetailId" column="cl_detalle_venta" />
 		<result property="saleId" column="cl_venta" />
 		<result property="itemId" column="cl_articulo" />
+		<result property="colorId" column="cl_color" />
 		<result property="amount" column="cantidad" />				
 	</resultMap>
 	
@@ -22,8 +23,8 @@
 		<result property="saleId" column="cl_venta" />
 		<result property="dateTimestamp" column="fe_registro" />
 		<result property="dateDelivery" column="fe_entrega" />
-		<result property="sellerId" column="cl_cliente" />
-		<result property="userId" column="cl_usuario" />
+		<result property="userId" column="cl_cliente" />
+		<result property="sellerId" column="cl_usuario" />
 		<result property="storeId" column="cl_sucursal" />
 		<result property="description" column="ds_descripcion" />		
 	</resultMap>
@@ -39,8 +40,8 @@
 	</insert>
 	
 	<insert id="addSaleNoteDetails" parameterType="java.util.Map" >		
-   		INSERT INTO k_detalle_venta (cl_venta,cl_articulo,cantidad) 
-   		VALUES (#{saleId},#{itemId},#{amount})    	
+   		INSERT INTO k_detalle_venta (cl_venta,cl_articulo,cl_color,cantidad) 
+   		VALUES (#{saleId},#{itemId},#{colorId},#{amount})    	
 	</insert>
 	<select id="getSaleNoteByFilter" parameterType="saleNoteFilter" resultMap="resultMapQuerySaleNote">
 		SELECT v.cl_venta,v.fe_registro,v.fe_entrega,v.ds_descripcion,
@@ -76,5 +77,19 @@
 	<select id="getDetailSaleNoteById" parameterType="java.lang.Integer" resultMap="resultMapSaleNoteDetail">
 		SELECT * FROM k_detalle_venta WHERE cl_venta = #{id}
 	</select>
+	
+	<update id="updateSaleNote" parameterType="saleNoteForm">
+		UPDATE c_venta SET
+		fe_entrega = #{dateSaleNote},
+		cl_cliente = #{userId},
+		cl_usuario = #{sellerId},
+		cl_sucursal = #{storeId}
+		WHERE cl_venta = #{saleId}
+		
+	</update>
+	
+	<delete id="removeDetailSaleNote" parameterType="java.lang.Integer">
+		DELETE FROM k_detalle_venta WHERE cl_venta = #{saleId}
+	</delete>
 	
 </mapper>

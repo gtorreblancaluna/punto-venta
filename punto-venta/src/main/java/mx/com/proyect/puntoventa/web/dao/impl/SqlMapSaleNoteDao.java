@@ -23,6 +23,7 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 			param.put("saleId", saleNoteForm.getSaleId());
 			param.put("itemId", item.getItemId());
 			param.put("amount", item.getAmountEntry());
+			param.put("colorId", item.getColor().getColorId());
 			getSqlSession().insert("addSaleNoteDetails",param);
 		}
 		return true;
@@ -30,8 +31,22 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 
 	@Override
 	public boolean update(SaleNoteForm saleNoteForm) {
-		// TODO Auto-generated method stub
-		return false;
+		// primero actualizamos la tabla c_venta
+		getSqlSession().update("updateSaleNote",saleNoteForm);
+		
+		//borramos los detalles de la venta para despues insertarlos
+		getSqlSession().delete("removeDetailSaleNote",saleNoteForm.getSaleId());
+		
+		// ahora agregamos los articulos que envian desde la vista actualizar nota de venta
+		for(ItemDTO item : saleNoteForm.getItems()) {
+			Map<String,Object> param = new HashMap<>();
+			param.put("saleId", saleNoteForm.getSaleId());
+			param.put("itemId", item.getItemIdForm());
+			param.put("amount", item.getAmountEntry());
+			param.put("colorId", item.getColor().getColorId());
+			getSqlSession().insert("addSaleNoteDetails",param);
+		}		
+		return true;
 	}
 
 	@Override
