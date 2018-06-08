@@ -157,12 +157,9 @@ CREATE TABLE c_usuario (
  )
 ENGINE = InnoDB;
 
-INSERT INTO c_usuario (cl_puesto,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('1','Gerardo','Torreblanca','Luna','gtorre@email.com','123456','1','1');
-INSERT INTO c_usuario (cl_puesto,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('2','Armando','Gonzales','Borja','armando@email.com','123456','1','1');
+INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('1','1','Gerardo','Torreblanca','Luna','gtorre@email.com','123456','1','1');
+INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('2','1','Armando','Gonzales','Borja','armando@email.com','123456','1','1');
 
--- 2018.05.17 solo si existe la tabla c_usuario agregar lo siguiente
--- ALTER TABLE c_usuario
--- ADD fg_activo ENUM('1','0') NOT NULL DEFAULT '1';
 
 -- Tabla Inventarios
 CREATE TABLE c_articulo(
