@@ -1,10 +1,5 @@
 
-<footer id="myFooter" style="
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 30px;
-  color: white;">
+<footer id="myFooter" style="width: 100%;margin:45px;color: transparent;">
 <div class="card-footer text-muted">
 	<div class="row">
 		<div class="col-5">
