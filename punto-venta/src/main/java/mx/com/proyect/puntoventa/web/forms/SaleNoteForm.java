@@ -16,7 +16,7 @@ public class SaleNoteForm {
 	private String storeId;
 	private String sellerId;
 	private String dateSaleNote;
-	// almacenara el detalle de la venta
+	// almacenara el detalle de la venta para mostrar en la vista
 	private List<SaleDetailDTO> saleDetail;
 	private List<ItemDTO> items;
 	// fecha de registro

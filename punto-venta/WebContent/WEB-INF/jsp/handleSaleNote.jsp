@@ -123,12 +123,12 @@ function addSaleDetailNoteForm(items){
 		
 		// ahora colocamos el valor del articulo en las filas		
 		var $tr = $tableUpdateNote.find(".tr-count"+(u_cont+1)+"").closest('tr');
-		$tr.find('.selItems').val(value.itemId);				
+		$tr.find('.selItems').val(value.item.itemId);				
 		var val = $('option:selected', $tr).attr('data-value').split("|");						
 		$tr.find('#itemDescription').val(val[1]);
 		$tr.find('#itemPrice').val(val[2]);
 		$tr.find('#amountItem').val(value.amount);
-		$tr.find('.selColors').val(value.colorId);
+		$tr.find('.selColors').val(value.color.colorId);
 		var amount = $tr.find('#amountItem').val();
 		$tr.find('#totalItem').val(amount*val[2]);
 		u_cont++;
@@ -221,18 +221,20 @@ function addSaleDetailNoteForm(items){
 			<th>Cliente</th>
 			<th>Sucursal</th>
 			<th>Usuario</th>
+			<th></th>
 		</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${listSaleNoteByFilter}" var="saleNote">
 			<tr>
-				<td><a href="#" onclick="getSaleNoteById('${saleNote.saleId}');return false;" >${saleNote.saleId }</a></td>
+				<td><a href="javascript:void();" onclick="getSaleNoteById('${saleNote.saleId}');return false;" >${saleNote.saleId }</a></td>
 				<td>${saleNote.saleDate }</td>
 				<td>${saleNote.dateDelivery }</td>
 				<td>${saleNote.description }</td>
 				<td>${saleNote.nameCustomer }</td>
 				<td>${saleNote.nameOffice }</td>
 				<td>${saleNote.nameUser }</td>
+				<td><a href="javascript:void();" onclick="javascript:generatePdf(${saleNote.saleId });">Imprimir</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>

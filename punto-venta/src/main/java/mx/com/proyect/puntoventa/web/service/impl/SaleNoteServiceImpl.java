@@ -12,6 +12,7 @@ import mx.com.proyect.puntoventa.web.dao.SaleNoteDAO;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
+import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 import mx.com.proyect.puntoventa.web.service.SaleNoteService;
 
@@ -70,6 +71,11 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	@Override
 	public SaleNoteForm getSaleNoteById(Integer id) {
 		return saleNoteDao.getSaleNoteById(id);
+	}
+
+	@Override
+	public SaleNoteDTO getSaleById(Integer id) {
+		return saleNoteDao.getSaleById(id);
 	}
 
 }

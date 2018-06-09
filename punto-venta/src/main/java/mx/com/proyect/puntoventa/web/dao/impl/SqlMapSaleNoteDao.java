@@ -10,6 +10,7 @@ import mx.com.proyect.puntoventa.web.dao.SaleNoteDAO;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
+import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 
 public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteDAO {
@@ -71,6 +72,13 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 		SaleNoteForm saleNoteForm = getSqlSession().selectOne("getSaleNoteById",id);
 		saleNoteForm.setSaleDetail(getSqlSession().selectList("getDetailSaleNoteById",id));
 		return saleNoteForm;
+	}
+
+	@Override
+	public SaleNoteDTO getSaleById(Integer id) {
+		SaleNoteDTO saleNote = getSqlSession().selectOne("getSaleById",id);
+		saleNote.setSaleDetails(getSqlSession().selectList("getDetailSaleNoteById",id));
+		return saleNote;
 	}
 
 }

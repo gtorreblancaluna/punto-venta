@@ -16,19 +16,12 @@ public class SaleDetailDTO implements Serializable {
 	// cl_venta -> id de la venta
 	private Integer saleId;
 	// cl_articulo -> id del articulo
-	private Integer itemId;
+	private ItemDTO item;
 	// cantidad -> cantidad de articulos en la tabla
 	private Float amount;
 	// cl_color -> id color
-	private Integer colorId;
+	private ColorDTO color;
 	
-	
-	public Integer getColorId() {
-		return colorId;
-	}
-	public void setColorId(Integer colorId) {
-		this.colorId = colorId;
-	}
 	public Integer getSaleDetailId() {
 		return saleDetailId;
 	}
@@ -41,11 +34,11 @@ public class SaleDetailDTO implements Serializable {
 	public void setSaleId(Integer saleId) {
 		this.saleId = saleId;
 	}
-	public Integer getItemId() {
-		return itemId;
+	public ItemDTO getItem() {
+		return item;
 	}
-	public void setItemId(Integer itemId) {
-		this.itemId = itemId;
+	public void setItem(ItemDTO item) {
+		this.item = item;
 	}
 	public Float getAmount() {
 		return amount;
@@ -53,9 +46,14 @@ public class SaleDetailDTO implements Serializable {
 	public void setAmount(Float amount) {
 		this.amount = amount;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public ColorDTO getColor() {
+		return color;
 	}
+	public void setColor(ColorDTO color) {
+		this.color = color;
+	}
+	
+	
 	
 	
 	
