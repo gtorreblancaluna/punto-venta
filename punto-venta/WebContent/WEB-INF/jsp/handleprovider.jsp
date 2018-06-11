@@ -5,7 +5,37 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Punto de Venta :: Provedores</title>
+<script>
+// codigo para la validacion de campos Input 
+function Solo_Numerico(variable){
+        Numer=parseInt(variable);
+        if (isNaN(Numer)){
+            return "";
+        }
+        return Numer;
+    }
+    function ValNumero(Control){
+        Control.value=Solo_Numerico(Control.value);
+    }
+    
+function Valida_cinco(variable){
+	if(variable.lenght>0 && variable.lenght<=5){
+		Num=parseInt(variable);
+		return Num;
+	}else{
+		return ="";
+		alert("verificar Codigo Postal");
+	}
+} 
+
+function Valida_ci(Control2){
+	Control2.value=Valida_cinco(Control2.value);
+}
+
+</script>
+
 </head>
+
 <body>
 	<div class="container">
 			
@@ -82,7 +112,7 @@
 				</div>
 				<div class="form-group">
 					<label>Calle</label>
-					<input type="text" id="street" name="street"  placeholder="" class="form-control">	
+					<input type="text" id="street" name="street"  onkeyUp="return ValNumero(this);" placeholder="" class="form-control"/>	
 				</div>
 				<div class="form-group">
 					<label>Colonia</label>
@@ -98,15 +128,15 @@
 				</div>
 				<div class="form-group">
 					<label>C.P.</label>
-					<input type="number" id="cp" name="cp" placeholder="" class="form-control">
+					<input type="text" name="cp" maxlength="5" class="form-control">
 				</div>
 				<div class="form-group">
 					<label>Telefono Primario</label>
-					<input type="number" id="tel1" name="tel1" placeholder="" class="form-control">
+					<input type="text" id="tel1" name="tel1" placeholder="" maxlength="10" class="form-control">
 				</div>
 				<div class="form-group">
 					<label>Telefono Secundario</label>
-					<input type="number" id="tel2" name="tel2" placeholder="" class="form-control">
+					<input type="text" id="tel2" name="tel2" placeholder="" maxlength="10" class="form-control">
 				</div>
 				
 					<div class="form-group">
