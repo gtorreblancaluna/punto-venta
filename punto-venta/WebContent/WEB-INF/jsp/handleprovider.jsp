@@ -65,7 +65,7 @@
 	</c:if>
 		<button type="button" class="btn btn-info btnl-lg" data-toggle="modal" data-target="#modalAdd">Agregar Proveedor</button>
 	
-	
+<!-- 	Modulo despliegue agregar PRoveedor  -->
 	 <div id="modalAdd" class="modal fade" role="dialog" >
  <div class="modal-content" style="width: 700px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
       <div class="modal-header">
@@ -80,20 +80,40 @@
 					<label>Nombre - Proveedor</label>
 					<input type="text" id="nProvider" name="nProvider" placeholder="" class="form-control">
 				</div>
-				<br>
-				<label style="align-content: center">Direccion</label>
 				<div class="form-group">
 					<label>Calle</label>
-					<input type="text" id="street" name="street"  placeholder="" class="form-group">
-					
+					<input type="text" id="street" name="street"  placeholder="" class="form-control">	
 				</div>
-				
+				<div class="form-group">
+					<label>Colonia</label>
+					<input type="text" id="colony" name="colony" placeholder="" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Estado</label>
+					<input type="text" id="state" name="state" placeholder="" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Municipio</label>
+					<input type="text" id="municipality" name="municipality" placeholder="" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>C.P.</label>
+					<input type="number" id="cp" name="cp" placeholder="" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Telefono Primario</label>
+					<input type="number" id="tel1" name="tel1" placeholder="" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Telefono Secundario</label>
+					<input type="number" id="tel2" name="tel2" placeholder="" class="form-control">
+				</div>
 				
 					<div class="form-group">
 					<input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="add" value="Enviar" />					
 				</div>
 		</form:form>
-		   <p>Agregar producto</p>
+		   <p>Agregar Proveedor</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

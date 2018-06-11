@@ -44,7 +44,7 @@
 html { width: 100%; height:100%; overflow:hidden; }
 
 body{
-	background-image:url(""WebContent/WEB-INF/images/m1.jpg"");
+	background-image:url("WebContent/WEB-INF/images/m1.jpg");
 
 }
  table{
