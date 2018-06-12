@@ -9,11 +9,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.util.WebUtils;
 
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
@@ -30,8 +33,8 @@ import mx.com.proyect.puntoventa.web.service.InventoryService;
 import mx.com.proyect.puntoventa.web.service.OfficeService;
 import mx.com.proyect.puntoventa.web.service.SaleNoteService;
 
-@Controller
 
+@Controller
 public class HandleSaleNoteController {
 
 	@Autowired
@@ -49,7 +52,8 @@ public class HandleSaleNoteController {
 
 	// vista principal
 	@RequestMapping(value = "handleSaleNote.do", method = RequestMethod.GET)
-	public String showSaleNote(HttpServletRequest request, Model model) {
+	public String showSaleNote( HttpServletRequest request, Model model) {		
+		
 		// traemos los productos del almacen
 		List<ItemDTO> listItems = inventoryService.getAll();
 		List<AccountDTOclient> listClients = clientService.getAll();
@@ -63,6 +67,7 @@ public class HandleSaleNoteController {
 		model.addAttribute("saleNoteForm", new SaleNoteForm());
 		model.addAttribute("listItems", listItems);
 		model.addAttribute("listOffices", listOffices);
+		
 		return "handleSaleNote";
 	}
 

@@ -9,7 +9,7 @@
     http://www.directwebremoting.org/schema/spring-dwr
     http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd
     http://www.springframework.org/schema/aop
-    http://www.springframework.org/schema/aop/spring-aop-2.0.xsd"
+   http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"
     default-autowire="byName">	
 
 
@@ -30,5 +30,8 @@
       		</list>
     	</property>
   	</bean>
+  		
+ 
+  
 	
 </beans>

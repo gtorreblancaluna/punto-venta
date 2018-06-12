@@ -14,7 +14,9 @@
 <script type="text/javascript">
 var u_cont=0;
 
-$( document ).ready(function() {	
+$( document ).ready(function() {
+	
+	alert('${accountSession}')
 
 	$( "#addRow-add" ).click(function() {
 		addRow();

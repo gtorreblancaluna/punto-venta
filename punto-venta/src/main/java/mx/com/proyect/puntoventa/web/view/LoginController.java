@@ -16,8 +16,7 @@ import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.service.AccountService;
 
-@Component
-@SessionAttributes("accountSession")
+
 @Controller
 public class LoginController {
 	
@@ -34,8 +33,7 @@ public class LoginController {
 	public String loginProcess(HttpServletRequest request, HttpServletResponse response, @ModelAttribute LoginForm loginForm, Model model){
 		AccountDTO a = accountService.validateUser(loginForm);				
 		if(a != null) {		
-			request.getSession().setAttribute("accountSession", a);		
-			model.addAttribute("accountSession",a);
+			request.getSession().setAttribute("accountSession", a);
 			return "bienvenida";
 		}else{
 			model.addAttribute("message","Usuario o contrase\u00F1a no coinciden");

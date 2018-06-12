@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.sql.Timestamp;
 
 public class AccountDTO implements Serializable {	
