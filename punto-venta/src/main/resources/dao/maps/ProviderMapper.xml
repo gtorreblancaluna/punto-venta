@@ -1,5 +1,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mx.com.proyect.puntoventa.web.dao.ProviderDAO">
 	
+ <resultMap id="providerResultMap" type="providerDTO">
+ 	<result property="providerId" column="providerId"/>
+ 	<result property="nProvider" column="nombre"/>
+ 	<result property="street" column="calle"/>
+ 	<result property="colony" column="colonia"/>
+ 	<result property="state" column="estado"/>
+ 	<result property="municipality" column="municipio"/>
+ 	<result property="cp" column="cp"/>
+ 	<result property="tel1" column="tel1"/>
+ 	<result property="tel2" column="tel2"/>	
+ </resultMap>
 
+<select id="findByIdProvider" resultMap="providerResultMap" parameterType="Long">
+	SELECT u.*, p.cl_proveedor AS providerId
+	FROM c_proveedor u 	
+	INNER JOIN c_proveedor p ON (u.cl_proveedor = p.cl_proveedor)
+	WHERE cl_proveedor= #{id}
+</select>
+ 
+ 
 </mapper>

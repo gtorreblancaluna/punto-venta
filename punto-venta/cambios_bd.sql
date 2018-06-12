@@ -243,4 +243,13 @@ INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_e
 INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_7','pieza',600,22000,500,'1');
 INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_8','pieza',600,22000,500,'1');
 
+
+-- 11 de junio de 2018 
+-- alterar tabla proveedores
+
+ALTER TABLE `puntoventa`.`c_proveedor` 
+DROP COLUMN `password`,
+DROP COLUMN `ap_materno`,
+DROP COLUMN `ap_paterno`;
+
 -- FIN DEL SCRIPT

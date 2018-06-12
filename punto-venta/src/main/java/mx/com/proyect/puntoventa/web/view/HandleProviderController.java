@@ -21,13 +21,9 @@ public class HandleProviderController {
 	
 	@RequestMapping(value = "/handleProvider.do" , method = RequestMethod.GET)
 	public String showhandleProvider(HttpServletRequest request , org.springframework.ui.Model model){
-//		List<ProviderDTO> listProviders = providerService.getAll();
-//		model.addAttribute("listProviders",listProviders);
-//		
-//		//traer lista de provedores
-//		
-//		//retornar hacia el jsp para interactuar con el 
-//		model.addAttribute("provider", new  ProviderDTO());
+		List<ProviderDTO> listProviders = providerService.getAll();
+		model.addAttribute("listProviders",listProviders);
+		model.addAttribute("provider", new  ProviderDTO());
 		return "handleprovider";
 	}
 

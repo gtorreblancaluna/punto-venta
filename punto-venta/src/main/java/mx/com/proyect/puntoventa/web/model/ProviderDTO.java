@@ -1,6 +1,7 @@
 package mx.com.proyect.puntoventa.web.model;
 
 public class ProviderDTO {
+	private int providerId;
 	private String nProvider;
 	private String street;
 	private String colony;
@@ -9,6 +10,14 @@ public class ProviderDTO {
 	private int tel1;
 	private int tel2;
 	private int fg_status;
+	
+	
+	public int getProviderId() {
+		return providerId;
+	}
+	public void setProviderId(int providerId) {
+		this.providerId = providerId;
+	}
 	public String getnProvider() {
 		return nProvider;
 	}
@@ -59,8 +68,9 @@ public class ProviderDTO {
 	}
 	@Override
 	public String toString() {
-		return "ProviderDTO [nProvider=" + nProvider + ", street=" + street + ", colony=" + colony + ", municipality="
-				+ municipality + ", CP=" + CP + ", tel1=" + tel1 + ", tel2=" + tel2 + ", fg_status=" + fg_status + "]";
+		return "ProviderDTO [providerId=" + providerId + ", nProvider=" + nProvider + ", street=" + street + ", colony="
+				+ colony + ", municipality=" + municipality + ", CP=" + CP + ", tel1=" + tel1 + ", tel2=" + tel2
+				+ ", fg_status=" + fg_status + "]";
 	}
 	
 	

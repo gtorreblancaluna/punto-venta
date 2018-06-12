@@ -69,17 +69,17 @@ function Valida_ci(Control2){
 					
 				</tr>
 			</thead>
-			<c:forEach items="${listItems}" var="item">
+			<c:forEach items="${listProviders}" var="item">
 				<tr>
-					<td>${item.itemId}</td>
-					<td>$(item.nProveedor)</td>
+					<td>${item.providerId}</td>
+					<td>$(item.nProvider)</td>
 					<td>${item.street}</td>
-					<td>${item.colonu}</td>
-					<td>Estado</td>
-					<td>Municipio</td>
-					<td>CP</td>
-					<td>Telefono 1</td>
-					<td>Telefono 2</td>
+					<td>${item.colony}</td>
+					<td>${item.state}</td>
+					<td>${item.municipality}</td>
+					<td>${item.cp}</td>
+					<td>${item.tel1}</td>
+					<td>${item.tel2}</td>
 					<td><button type="button" class="btn btn-info btn-lg btnUpdate" id="btnUpdate" data-toogle="modal" data-target="#modalUpdate">Editar</button>  </td>	
 					<td>
 						<form:form action="handleprovider.do" method="post" name="deleteform" id="deleteform">
