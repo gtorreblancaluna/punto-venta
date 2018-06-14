@@ -1,13 +1,14 @@
 package mx.com.proyect.puntoventa.web.service.impl;
 
-import java.security.Timestamp;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mx.com.proyect.puntoventa.web.dao.InventoryDAO;
 import mx.com.proyect.puntoventa.web.dao.SaleNoteDAO;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
@@ -21,12 +22,14 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 
 	@Autowired
 	SaleNoteDAO saleNoteDao;
+	@Autowired
+	InventoryDAO inventoryDao;
 	
 	@Override
 	public boolean add(SaleNoteForm saleNoteForm) {
-		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		   
 		    java.util.Date date = dateFormat.parse(saleNoteForm.getDateSaleNote());
 		    java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
 		    saleNoteForm.setDateTimestamp(timestamp);
@@ -39,8 +42,30 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 			item.setItemId(new Integer(array[0]));
 		}
 		
-		//2018.05.26 por el momento solo lo agregamos a la sucursal 1
-		saleNoteForm.setStoreId("1");
+		 Calendar cal = Calendar.getInstance();
+		 cal.set(Calendar.HOUR_OF_DAY, 0);
+		 cal.set(Calendar.MINUTE, 0);
+		 cal.set(Calendar.SECOND, 0);
+		 Date today = cal.getTime();
+		 
+		 String todayString = dateFormat.format(today);
+	    
+		// si la venta es igual a hoy , entonces se descontara los articulos de la bd
+		if(todayString.equals(saleNoteForm.getDateSaleNote())) {
+			// ponemos status de entregado
+			saleNoteForm.setStatus("5");
+			for(ItemDTO item : saleNoteForm.getItems()) {
+				//descontamos los articulos de la bd
+				ItemDTO itemDTO = inventoryDao.getItemById(item.getItemId());
+				float stock_anterior = itemDTO.getStock();
+				float stock_actual = stock_anterior - item.getAmountEntry();
+				inventoryDao.decreaseStockByItemid(stock_actual,item.getItemId());
+			} 
+	    }else {
+	    	//ponemos status de registrado
+	    	saleNoteForm.setStatus("1");
+	    }
+		
 		saleNoteDao.add(saleNoteForm);
 		return true;
 	}
@@ -77,5 +102,6 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	public SaleNoteDTO getSaleById(Integer id) {
 		return saleNoteDao.getSaleById(id);
 	}
+	
 
 }

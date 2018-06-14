@@ -8,7 +8,7 @@
 <fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
 <html>
 <head>
-<script type="text/javascript" src="js/admin/handleSaleNote.js?v1.0"></script>
+<script type="text/javascript" src="js/admin/handleDelivery.js?v1.0"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	
 <title>Punto Venta:: Notas</title>
 <script type="text/javascript">
@@ -16,7 +16,7 @@ var u_cont=0;
 
 $( document ).ready(function() {
 	
-	alert('${accountSession}')
+// 	alert('${accountSession}')
 
 	$( "#addRow-add" ).click(function() {
 		addRow();
@@ -33,7 +33,7 @@ $( document ).ready(function() {
 			+"<td style='width:2%'><span class='input-group-text'>"+ (cont+1) +"</span></td>"
 			+"<td><input type='number' class='form-control' name='' id='txtFindItemById'></td>"
 			+"<td>" +
-					"<select name='items["+cont+"].itemIdForm' class='form-control selItems'>" +
+					"<select name='details["+cont+"].item.itemIdForm' class='form-control selItems'>" +
 					"<option value='0' data-value='0'>- Seleccione -</option> " +
 					"<c:forEach items='${listItems}' var='item'>" +
 						"<option value='${item.itemId}' data-value='${item.itemId}|${item.description}|${item.salePrice}' >${item.description}</option> " +
@@ -41,17 +41,15 @@ $( document ).ready(function() {
 					"</select>" +
 			"</td>"
 			+"<td>" +
-					"<select name='items["+cont+"].color.colorId' class='form-control selColors'>" +
+					"<select name='details["+cont+"].item.color.colorId' class='form-control selColors'>" +
 					"<option value='0'>- Seleccione -</option> " +
 					"<c:forEach items='${listColors}' var='color'>" +
 						"<option value='${color.colorId}'>${color.description}</option> " +
 					"</c:forEach> " +
 					"</select>" +
 			"</td>"
-			+"<td><input type='text' class='form-control' name='items["+ cont +"].description' id='itemDescription' disabled></td>"
-			+"<td><input type='number' class='form-control' name='items["+ cont +"].amountEntry' id='amountItem' ></td>"
-			+"<td><input type='number' class='form-control' name='items["+ cont +"].salePrice' id='itemPrice' disabled></td>"
-			+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
+			+"<td><input type='text' class='form-control' name='details["+cont+"].item.description' id='itemDescription' disabled></td>"
+			+"<td><input type='number' class='form-control' name='details["+cont+"].item.amountEntry' id='amountItem' ></td>"
 			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
 		+"</tr>");
 	};
@@ -165,16 +163,16 @@ function addSaleDetailNoteForm(items){
 	<div class="page-header">
 		<div class="row">
 			<div class="col">
-				<h1>Venta-dia</h1>
+				<h1>Entregas</h1>
 			</div>
 			
 		</div>
 	</div>
 	
 	<!--2018.06.05 Formulario para aplicar busqueda por filtro -->
-	<form:form modelAttribute="saleNoteFilter" action="handleSaleNote.do" method="post" name="saleNoteFilter" 
+	<form:form modelAttribute="saleNoteFilter" action="handleDelivery.do" method="post" name="saleNoteFilter" 
 	id="getSaleNoteByFilter" style="margin: 50px;">
-		<p>Consultar nota de venta</p>
+		<p>Consultar mis entregas</p>
 		<table class="table tableFilter">
 		<tbody>
 			<tr>
@@ -197,9 +195,9 @@ function addSaleDetailNoteForm(items){
 						</select>
 					</span>
 				</td>
-				<td>
-					<span class="input-group-text">Nombre del cliente<input type="text" name="customerNameFilter" id="customerNameFilter" class="form-control"></span>
-				</td>
+<!-- 				<td> -->
+<!-- 					<span class="input-group-text">Nombre del cliente<input type="text" name="customerNameFilter" id="customerNameFilter" class="form-control"></span> -->
+<!-- 				</td> -->
 			</tr>
 			<tr>
 				<td colspan=5>
@@ -210,7 +208,7 @@ function addSaleDetailNoteForm(items){
 		</table>	
 	</form:form>
 	
-	<c:if test="${not empty listSaleNoteByFilter}">
+	<c:if test="${not empty listDelivery}">
 	<!-- Mostramos el resultado de la consulta -->
 		<div class="containerShowResultQuery">
 		<table class="table tableShowResultQuery">
@@ -219,24 +217,22 @@ function addSaleDetailNoteForm(items){
 			<th>id</th>
 			<th>Fecha registro</th>
 			<th>Fecha de entrega</th>
-			<th>Descripci&oacute;n</th>
-			<th>Cliente</th>
+			<th>Descripci&oacute;n</th>			
 			<th>Sucursal</th>
 			<th>Usuario</th>
 			<th></th>
 		</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${listSaleNoteByFilter}" var="saleNote">
+			<c:forEach items="${listDelivery}" var="delivery">
 			<tr>
-				<td><a href="javascript:void();" onclick="getSaleNoteById('${saleNote.saleId}');return false;" >${saleNote.saleId }</a></td>
-				<td>${saleNote.saleDate }</td>
-				<td>${saleNote.dateDelivery }</td>
-				<td>${saleNote.description }</td>
-				<td>${saleNote.nameCustomer }</td>
-				<td>${saleNote.nameOffice }</td>
-				<td>${saleNote.nameUser }</td>
-				<td><a href="javascript:void();" onclick="javascript:generatePdf(${saleNote.saleId });">Imprimir</a></td>
+				<td><a href="javascript:void();" onclick="getSaleNoteById('${delivery.saleId}');return false;" >${delivery.saleId }</a></td>
+				<td>${delivery.saleDate }</td>
+				<td>${delivery.dateDelivery }</td>
+				<td>${delivery.description }</td>				
+				<td>${delivery.nameOffice }</td>
+				<td>${delivery.nameUser }</td>
+				<td><a href="javascript:void();" onclick = "javascript:generatePdf(${delivery.saleId});">Imprimir</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
@@ -245,47 +241,24 @@ function addSaleDetailNoteForm(items){
 	</c:if>
 	
 	
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAdd">Agregar nota</button>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAdd">Agregar entrega</button>
 <div id="modalAdd" class="modal fade" role="dialog" >
  <div class="modal-content" style="width: 1000px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Agregar nota</h4>
+        <h4 class="modal-title">Agregar entrega</h4>
       </div>
       <div class="modal-body">     
-<form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="saleNoteForm" id="addSaleNoteForm">
+<form:form modelAttribute="deliveryForm" action="handleDelivery.do" method="post" name="deliveryForm" id="addDeliveryForm">
 	<table >
 		<tr>
 			<td>
-				<span class="input-group-text">Fecha :<input type="date" name="dateSaleNote" id="dateForm" class="form-control dateForm"> </span>
+				<span class="input-group-text">Fecha :<input type="date" name="formatedDateDelivery" id="dateForm" class="form-control dateForm"> </span>
 			</td>
-			<td>
-				<span class="input-group-text">Cliente : 
-						<select name="userId" class="form-control userId" >
-									<option value="0">- Seleccione -</option>
-								<c:forEach items="${listClients}" var="client">
-									<option value="${client.userId}">${client.name} ${client.firstName}</option>
-								</c:forEach>	
-						</select>	
-				</span>				
-			</td>
-			<td>
-<%-- 				<span class="input-group-text">Vendedor :<input type="text" class="form-control" value="${sessionScope.accountSession.name }" disabled></span> --%>
-					<span class="input-group-text">Vendedor : 
-						<select name="sellerId" class="form-control sellerId" >
-									<option value="0">- Seleccione -</option>
-								<c:forEach items="${listUsers}" var="user">
-									<!-- Solo mostrar usuarios que sean vendedores -->
-									<c:if test="${user.job.description eq 'vendedor' }">
-										<option value="${user.userId}">${user.name} ${user.firstName}</option>
-									</c:if>									
-								</c:forEach>	
-						</select>	
-				</span>	
-			</td>
+			
 			<td>
 			<span class="input-group-text">Sucursal : 
-				<select name="storeId" class="form-control storeId" id="storeId">
+				<select name="office.officeId" class="form-control storeId" id="officeId">
 							<option value="0">- Seleccione -</option>
 						<c:forEach items="${listOffices}" var="office">
 							<option value="${office.officeId}">${office.name}</option>
@@ -294,9 +267,7 @@ function addSaleDetailNoteForm(items){
 			</span>
 			
 			</td>
-			<td>
-				<p style="font-weight: 900;  font-size: 20px;">Total a pagar: $<span id="totalPagar"></span></p>
-			</td>
+			
 		</tr>
 	</table>
 	
@@ -309,9 +280,7 @@ function addSaleDetailNoteForm(items){
 			        <th>Articulo</th>			        
 			        <th>Color</th>
 			        <th>Descripci&oacute;n</th>
-			        <th>Cantidad</th>
-			        <th>Precio</th>
-			        <th>Total</th>
+			        <th>Cantidad</th>			        
 			        <th></th>			        
 			      </tr>
 			    </thead>
@@ -321,9 +290,8 @@ function addSaleDetailNoteForm(items){
 			     	<td >
 			     		<input type="number" class="form-control" name="" id="txtFindItemById" >
 			     	</td>			     		
-			        <td >
-			        	
-				        <select name="items[0].itemIdForm" class="form-control selItems">
+			        <td>			        	
+				        <select name="details[0].item.itemIdForm" class="form-control selItems">
 						<option value="0" data-value="0">- Seleccione -</option>
 							<c:forEach items="${listItems}" var="item">
 								<option value="${item.itemId}" data-value="${item.itemId}|${item.description}|${item.salePrice}" >${item.description}</option>
@@ -332,17 +300,15 @@ function addSaleDetailNoteForm(items){
 			        </td>			      
 			        
 			         <td>
-				        <select name="items[0].color.colorId" class="form-control selColors">
+				        <select name="details[0].item.color.colorId" class="form-control selColors">
 						<option value="0">- Seleccione -</option>
 							<c:forEach items="${listColors}" var="color">
 								<option value="${color.colorId}">${color.description}</option>
 							</c:forEach>	
 						</select>			        
 			        </td>
-			        <td><input type="text" class="form-control" name="items[0].description" id="itemDescription" disabled></td>
-			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					
-			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" disabled></td>
-			        <td><input type="number" class="form-control totalItem" name="" id="totalItem" disabled></td>
+			        <td><input type="text" class="form-control" name="details[0].item.description" id="itemDescription" disabled></td>
+			        <td><input type="number" class="form-control" name="details[0].item.amountEntry" id="amountItem"></td> 					
 			        <td><input type="button" class="btn btn-info btn-lg" id="addRow-add" value="Agregar" /></td>			        
 			      </tr>			
 			      	      	      
@@ -352,7 +318,7 @@ function addSaleDetailNoteForm(items){
 	  	</div> <!-- end row -->
 	  	</form:form>
 	  	
-	   <p>Agregar nota</p>
+	   <p>Agregar entrega</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -371,9 +337,9 @@ function addSaleDetailNoteForm(items){
         <h4 class="modal-title">Actualizar nota</h4>
       </div>
       <div class="modal-body">     
-<form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="updateSaleNoteForm" id="updateSaleNoteForm">
+<form:form modelAttribute="deliveryForm" action="handleDelivery.do" method="post" name="updatedeliveryForm" id="updatedeliveryForm">
 	<input type="hidden" name="saleId" class="saleId" id="saleId" value="">
-	<table class="table tableSaleNoteForm">
+	<table class="table tableDeliveryForm">
 		<tr>
 			<td>
 				<span class="input-group-text">Fecha :<input type="date" name="dateSaleNote" id="dateFormUpdate" class="form-control dateForm"> </span>

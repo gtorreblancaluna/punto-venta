@@ -300,7 +300,7 @@ function validateFormUpdateNote(){
 
 // funcion para mandar a imprimir
 function generatePdf(id){
-    var url = "generate_pdf_sale_note.do?idOp="+id+"";
+    var url = "generate_pdf_delivery.do?idOp="+id+"";
     var type = 'Comprobante';
     var properties = 'toolbar=0,scrollbars=1,location=0,statusbar=1,menubar=1,resizable=1,height=450,width=600,top=200,left=200';
     var voucher = window.open( url, type, properties );

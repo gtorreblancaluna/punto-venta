@@ -56,9 +56,9 @@
 			SELECT LAST_INSERT_ID() as id
 		</selectKey>
 		INSERT INTO c_venta
-		(cl_cliente,cl_usuario,cl_sucursal,fe_entrega)
+		(cl_cliente,cl_usuario,cl_sucursal,fe_entrega,cl_estatus_venta)
 		VALUES
-		(#{userId},#{sellerId},#{storeId},#{dateTimestamp})
+		(#{userId},#{sellerId},#{storeId},#{dateTimestamp},#{status})
 	</insert>
 
 	<insert id="addSaleNoteDetails" parameterType="java.util.Map">
@@ -67,6 +67,7 @@
 		VALUES
 		(#{saleId},#{itemId},#{colorId},#{amount})
 	</insert>
+	
 	<select id="getSaleNoteByFilter" parameterType="saleNoteFilter"
 		resultMap="resultMapQuerySaleNote">
 		SELECT v.cl_venta,v.fe_registro,v.fe_entrega,v.ds_descripcion,

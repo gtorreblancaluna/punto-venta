@@ -1,6 +1,8 @@
 package mx.com.proyect.puntoventa.web.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.dao.DataAccessException;
@@ -49,6 +51,20 @@ public class SqlMapInventoryDao extends SqlSessionDaoSupport implements Inventor
 	public List<StoreDTO> getAllStore() {
 		
 		return getSqlSession().selectList("getAllStore");
+	}
+
+	@Override
+	public ItemDTO getItemById(int id) {
+		return getSqlSession().selectOne("getItemById",id);
+	}
+
+	@Override
+	public boolean decreaseStockByItemid(float stock,Integer id) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("stock", stock);
+		param.put("id", id);
+		getSqlSession().update("decreaseStockByItemid",param);
+		return true;
 	}
 
 }

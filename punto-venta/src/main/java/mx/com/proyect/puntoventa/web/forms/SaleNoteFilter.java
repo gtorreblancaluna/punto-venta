@@ -17,7 +17,15 @@ public class SaleNoteFilter {
 	private String officeIdFilter;
 	// nombre del cliente
 	private String customerNameFilter;
+	// id usuario
+	private String userId;	
 	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public String getIniDateFilter() {
 		return iniDateFilter;
 	}

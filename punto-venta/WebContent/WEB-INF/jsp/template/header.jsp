@@ -39,6 +39,7 @@
 	      
 	      	<li><a>LLegadas</a></li>
 	      	<li><a>Reporte diario</a></li>
+	      	<li><a href="handleDelivery.do">Entregas</a></li>
 	      	
 	      </ul>
 	      

@@ -28,9 +28,12 @@
 		<typeAlias alias="saleNoteForm"   type="mx.com.proyect.puntoventa.web.forms.SaleNoteForm" />
 		
 		<typeAlias alias="resultQuerySaleNote"   type="mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote" />
+		<typeAlias alias="resultQueryDelivery"   type="mx.com.proyect.puntoventa.web.resultsQuerys.ResultQueryDelivery" />
 		<typeAlias alias="saleNoteFilter"   type="mx.com.proyect.puntoventa.web.forms.SaleNoteFilter" />		
 		<typeAlias alias="saleDetailDTO"   type="mx.com.proyect.puntoventa.web.model.SaleDetailDTO" />	
 		<typeAlias alias="saleNoteDTO"   type="mx.com.proyect.puntoventa.web.model.SaleNoteDTO" />		
+		<typeAlias alias="deliveryDTO"   type="mx.com.proyect.puntoventa.web.model.DeliveryDTO" />		
+		<typeAlias alias="deliveryDetailDTO"   type="mx.com.proyect.puntoventa.web.model.DeliveryDetailDTO" />		
 	
 		
 

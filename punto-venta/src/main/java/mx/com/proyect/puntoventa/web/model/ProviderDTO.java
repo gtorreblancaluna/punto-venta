@@ -1,28 +1,87 @@
 package mx.com.proyect.puntoventa.web.model;
 
+/**
+ * @author Gerardo Torreblanca
+ * 2018.06.14
+ * POJO que contendra resultados del query a la tabla c_proveedor
+ * Almacena datos de los proveedores
+ * */
+
+import java.sql.Timestamp;
+
 public class ProviderDTO {
+	
 	private int providerId;
-	private String nProvider;
+	private String name;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String password;
+	private Timestamp registerDate;
+	private String tel_fijo;
+	private String tel_movil;
 	private String street;
 	private String colony;
+	private String cp;
 	private String municipality;
-	private int CP;
-	private int tel1;
-	private int tel2;
-	private int fg_status;
+	private String state;
+	private String status;
 	
 	
+	public Timestamp getRegisterDate() {
+		return registerDate;
+	}
+	public void setRegisterDate(Timestamp registerDate) {
+		this.registerDate = registerDate;
+	}
 	public int getProviderId() {
 		return providerId;
 	}
 	public void setProviderId(int providerId) {
 		this.providerId = providerId;
 	}
-	public String getnProvider() {
-		return nProvider;
+	public String getName() {
+		return name;
 	}
-	public void setnProvider(String nProvider) {
-		this.nProvider = nProvider;
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getTel_fijo() {
+		return tel_fijo;
+	}
+	public void setTel_fijo(String tel_fijo) {
+		this.tel_fijo = tel_fijo;
+	}
+	public String getTel_movil() {
+		return tel_movil;
+	}
+	public void setTel_movil(String tel_movil) {
+		this.tel_movil = tel_movil;
 	}
 	public String getStreet() {
 		return street;
@@ -36,41 +95,29 @@ public class ProviderDTO {
 	public void setColony(String colony) {
 		this.colony = colony;
 	}
+	public String getCp() {
+		return cp;
+	}
+	public void setCp(String cp) {
+		this.cp = cp;
+	}
 	public String getMunicipality() {
 		return municipality;
 	}
 	public void setMunicipality(String municipality) {
 		this.municipality = municipality;
 	}
-	public int getCP() {
-		return CP;
+	public String getState() {
+		return state;
 	}
-	public void setCP(int cP) {
-		CP = cP;
+	public void setState(String state) {
+		this.state = state;
 	}
-	public int getTel1() {
-		return tel1;
+	public String getStatus() {
+		return status;
 	}
-	public void setTel1(int tel1) {
-		this.tel1 = tel1;
-	}
-	public int getTel2() {
-		return tel2;
-	}
-	public void setTel2(int tel2) {
-		this.tel2 = tel2;
-	}
-	public int getFg_status() {
-		return fg_status;
-	}
-	public void setFg_status(int fg_status) {
-		this.fg_status = fg_status;
-	}
-	@Override
-	public String toString() {
-		return "ProviderDTO [providerId=" + providerId + ", nProvider=" + nProvider + ", street=" + street + ", colony="
-				+ colony + ", municipality=" + municipality + ", CP=" + CP + ", tel1=" + tel1 + ", tel2=" + tel2
-				+ ", fg_status=" + fg_status + "]";
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

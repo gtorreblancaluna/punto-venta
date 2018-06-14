@@ -17,5 +17,6 @@ public interface InventoryDAO {
 	boolean delete(ItemDTO item);
 	public List<ItemDTO> getAll();
 	public List<StoreDTO> getAllStore();
-
+	ItemDTO getItemById(int id);
+	boolean decreaseStockByItemid(float stock, Integer id);
 }

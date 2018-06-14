@@ -78,8 +78,35 @@ ENGINE = InnoDB;
 INSERT INTO c_puesto (ds_descripcion) VALUES ('administrador');
 INSERT INTO c_puesto (ds_descripcion) VALUES ('vendedor');
 INSERT INTO c_puesto (ds_descripcion) VALUES ('chofer');
-INSERT INTO c_puesto (ds_descripcion) VALUES ('proveedor');
+INSERT INTO c_puesto (ds_descripcion) VALUES ('chofer');
 
+-- tabla de proveedores
+
+CREATE TABLE c_proveedor(
+cl_proveedor INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+nombre VARCHAR(45) NOT NULL DEFAULT '',
+ap_paterno VARCHAR(45),
+ap_materno VARCHAR(45),
+email VARCHAR(45),
+password VARCHAR(45),
+fe_alta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+tel_fijo INTEGER(12),
+tel_celular INTEGER(12),
+calle VARCHAR(30),
+colonia VARCHAR(30),
+cp INTEGER (5),
+municipio VARCHAR(30),
+estado VARCHAR(30),
+fg_activo ENUM('1','0') NOT NULL DEFAULT '1',
+PRIMARY KEY(cl_proveedor)  
+)
+ENGINE = InnoDB;
+
+INSERT INTO c_proveedor (nombre,ap_paterno,ap_materno,email,password) VALUES ('nombre_proveedor_1','ap_paterno_1','ap_materno_1','proveedor1@email.com','123456');
+INSERT INTO c_proveedor (nombre,ap_paterno,ap_materno,email,password) VALUES ('nombre_proveedor_2','ap_paterno_2','ap_materno_2','proveedor2@email.com','123456');
+INSERT INTO c_proveedor (nombre,ap_paterno,ap_materno,email,password) VALUES ('nombre_proveedor_3','ap_paterno_3','ap_materno_3','proveedor3@email.com','123456');
+INSERT INTO c_proveedor (nombre,ap_paterno,ap_materno,email,password) VALUES ('nombre_proveedor_4','ap_paterno_4','ap_materno_4','proveedor4@email.com','123456');
+INSERT INTO c_proveedor (nombre,ap_paterno,ap_materno,email,password) VALUES ('nombre_proveedor_5','ap_paterno_5','ap_materno_5','proveedor5@email.com','123456');
 -- tabla clientes 
 
 CREATE TABLE c_cliente(
@@ -165,8 +192,6 @@ ENGINE = InnoDB;
 
 INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('1','1','Gerardo','Torreblanca','Luna','gtorre@email.com','123456','1','1');
 INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('2','1','Armando','Gonzales','Borja','armando@email.com','123456','1','1');
--- agregamos usuario ROL PROVEEDOR
-INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('4','1','luis','proveedor 1','ap_paterno','proveedor@email.com','123456','1','1');
 
 
 -- Tabla Inventarios

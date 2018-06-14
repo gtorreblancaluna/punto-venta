@@ -220,16 +220,15 @@
 		</dependency>
 
 	<dependency>
-        <groupId>org.springframework.security</groupId>
-        <artifactId>spring-security-config</artifactId>
-        <version>3.0.1.RELEASE</version>
-    </dependency>
-    
-    <dependency>
     <groupId>org.springframework.security</groupId>
     <artifactId>spring-security-web</artifactId>
-    <version>3.0.5.RELEASE</version>
-</dependency>
+    <version>5.0.5.RELEASE</version>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-config</artifactId>
+    <version>5.0.5.RELEASE</version>
+  </dependency>
     
    		
 			<!-- template sitemesh decorator easier than tiles library -->
@@ -249,6 +248,12 @@
 
 	</dependencies>
 
-
+<repositories>
+  <repository>
+    <id>spring-milestone</id>
+    <name>Spring Milestone Repository</name>
+    <url>https://repo.spring.io/milestone</url>
+  </repository>
+</repositories>
 
 </project>

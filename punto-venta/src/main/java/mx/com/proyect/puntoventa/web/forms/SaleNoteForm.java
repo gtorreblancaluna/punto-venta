@@ -24,8 +24,16 @@ public class SaleNoteForm {
 	// fecha de entrega
 	private Timestamp dateDelivery;
 	private String description;
-	
-	
+	// estatus de venta
+	private String status;	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public List<SaleDetailDTO> getSaleDetail() {
 		return saleDetail;
@@ -106,5 +114,6 @@ public class SaleNoteForm {
 	public void setItems(List<ItemDTO> items) {
 		this.items = items;
 	}
+	
 
 }

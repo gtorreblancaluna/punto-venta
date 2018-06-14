@@ -66,4 +66,13 @@
 	<select id="getAllStore" resultMap="storeResultMap">
 		SELECT * FROM c_almacen WHERE fg_estatus = '1'
 	</select>
+	
+	<select id="getItemById" parameterType="java.lang.Integer" resultMap="itemResultMap">
+		SELECT * FROM c_articulo WHERE cl_articulo = #{id}
+	</select>
+	
+	<update id="decreaseStockByItemid" parameterType="java.util.Map">
+		UPDATE c_articulo SET cantidad_existente = #{stock} WHERE cl_articulo = #{id}
+	</update>
+	
 </mapper>
