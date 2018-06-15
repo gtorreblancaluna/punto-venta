@@ -16,7 +16,7 @@ var u_cont=0;
 
 $( document ).ready(function() {
 	
-	alert('${accountSession}')
+// 	alert('${accountSession}')
 
 	$( "#addRow-add" ).click(function() {
 		addRow();

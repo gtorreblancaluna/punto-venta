@@ -15,14 +15,14 @@
 	default-autowire="byName">
 
 	
-
+	<context:component-scan base-package="mx.com.proyect.puntoventa.web.view.pdf" />
+	<context:component-scan base-package="mx.com.proyect.puntoventa.web.service.facade" />
+	<context:component-scan base-package="mx.com.proyect.puntoventa.web.service.impl" />
+	<context:component-scan base-package="mx.com.proyect.puntoventa.web.dao.impl" />
 	<context:component-scan base-package="mx.com.proyect.puntoventa.web.view" />
 	<context:annotation-config />
 	<mvc:annotation-driven />
-<!-- 	<context:component-scan base-package="mx.com.proyect.puntoventa.web.view.pdf" /> -->
-<!-- 	<context:component-scan base-package="mx.com.proyect.puntoventa.web.service.facade" /> -->
-<!-- 	<context:component-scan base-package="mx.com.proyect.puntoventa.web.service.impl" /> -->
-<!-- 	<context:component-scan base-package="mx.com.proyect.puntoventa.web.dao.impl" /> -->
+	
 
 	<mvc:resources location="/css/" mapping="/css/**"
 		cache-period="604800" />
