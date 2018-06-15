@@ -24,7 +24,7 @@
 		<param-value>
       /WEB-INF/application-beans-dao.xml
       /WEB-INF/application-beans-util.xml  
-<!--       /WEB-INF/application-beans-security.xml            -->
+      /WEB-INF/application-beans-security.xml           
     </param-value>
 	</context-param>
 	
@@ -53,6 +53,17 @@
 	<listener>
 		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>		
 	</listener>
+	
+	<!-- DelegatingFilterProxy -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>mx.com.proyect.puntoventa.web.util.security.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 	
 		<filter>
 		<filter-name>sitemesh</filter-name>

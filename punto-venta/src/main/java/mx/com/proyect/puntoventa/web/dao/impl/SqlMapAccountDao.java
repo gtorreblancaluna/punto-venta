@@ -54,4 +54,10 @@ public class SqlMapAccountDao extends SqlSessionDaoSupport implements AccountDAO
 		return true;
 	}
 
+	@Override
+	public AccountDTO getAccount(String email) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("getAccount",email);
+	}
+
 }

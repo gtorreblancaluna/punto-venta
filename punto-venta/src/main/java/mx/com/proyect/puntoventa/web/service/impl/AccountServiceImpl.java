@@ -56,4 +56,10 @@ public class AccountServiceImpl implements AccountService {
 		return true;
 	}
 
+	@Override
+	public AccountDTO getAccount(String email) {
+		// TODO Auto-generated method stub
+		return accountDao.getAccount(email);
+	}
+
 }

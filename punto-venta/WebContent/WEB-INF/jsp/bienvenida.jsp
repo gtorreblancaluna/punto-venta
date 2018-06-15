@@ -109,7 +109,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 <div class="page opacity">
 		<div class="row">
 			<div class="col-12" style="text-align: center;">
-				<h1>Bienvenido <c:out value="${accountSession.email}"></c:out></h1>
+				<h1>Bienvenido <c:out value="${userSession.email}"></c:out></h1>
 			</div>
 			
 		</div>

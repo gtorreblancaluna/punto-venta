@@ -34,7 +34,7 @@ public class LoginController {
 	public String loginProcess(HttpSession session, HttpServletResponse response, @ModelAttribute LoginForm loginForm, Model model){
 		AccountDTO a = accountService.validateUser(loginForm);				
 		if(a != null) {		
-			session.setAttribute("accountSession", a);
+			session.setAttribute("userSession", a);
 			return "bienvenida";
 		}else{
 			model.addAttribute("message","Usuario o contrase\u00F1a no coinciden");

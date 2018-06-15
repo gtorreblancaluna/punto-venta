@@ -38,9 +38,6 @@
 		cache-period="31556926" />
 
 
-	
-
-
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
@@ -49,6 +46,10 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<bean name="/login.do"
+		class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="login" />
+	</bean>
 	
 
 

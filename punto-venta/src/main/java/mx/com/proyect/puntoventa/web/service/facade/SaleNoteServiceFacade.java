@@ -59,10 +59,31 @@ public class SaleNoteServiceFacade {
 	// obtener datos generales de la venta
 	@RequestMapping(value = "/getSaleNoteById.do")
 	@ResponseBody
-	public SaleNoteForm getSaleNoteById(@RequestBody String id) {	
+//	public SaleNoteForm getSaleNoteById(@RequestBody String id) {	
+		public String getSaleNoteById(@RequestBody String id) {
 		
-			SaleNoteForm note = saleNoteService.getSaleNoteById(new Integer(id));			
-			return note;			
+		SaleNoteForm note = saleNoteService.getSaleNoteById(new Integer(id));			
+//		return note;	
+		
+		Map<String,Object> myMap = new HashMap<>();
+		
+		
+		myMap.put("noteForm", note);		
+			
+			       
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(myMap);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	       
+	
+        return json;
 
 	}
 

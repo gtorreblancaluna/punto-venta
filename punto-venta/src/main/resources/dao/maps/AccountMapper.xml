@@ -57,4 +57,8 @@
 	<delete id="deleteUser" parameterType="accountDTO">
 		UPDATE c_usuario SET fg_activo = '0' WHERE cl_usuario = #{userId}
 	</delete>
+	
+	<select id="getAccount" parameterType="java.lang.String" resultMap="accountResultMap">
+		SELECT * FROM c_usuario WHERE email = #{email}
+	</select>
 </mapper>

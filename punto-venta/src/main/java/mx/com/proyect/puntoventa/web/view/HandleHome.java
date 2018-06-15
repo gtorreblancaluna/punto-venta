@@ -14,12 +14,9 @@ import org.springframework.ui.Model;
 
 
 @Controller
-public class HandleHome {
-
-	@Autowired
-	AccountService accountService;
+public class HandleHome {	
 	
-	@RequestMapping(value = "/welcome.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
 	public String showBienvenida(HttpServletRequest request, Model model) {
 		return"bienvenida";
 	}

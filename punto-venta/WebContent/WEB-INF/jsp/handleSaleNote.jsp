@@ -270,7 +270,7 @@ function addSaleDetailNoteForm(items){
 				</span>				
 			</td>
 			<td>
-<%-- 				<span class="input-group-text">Vendedor :<input type="text" class="form-control" value="${sessionScope.accountSession.name }" disabled></span> --%>
+<%-- 				<span class="input-group-text">Vendedor :<input type="text" class="form-control" value="${sessionScope.userSession.name }" disabled></span> --%>
 					<span class="input-group-text">Vendedor : 
 						<select name="sellerId" class="form-control sellerId" >
 									<option value="0">- Seleccione -</option>
@@ -389,7 +389,7 @@ function addSaleDetailNoteForm(items){
 				</span>				
 			</td>
 			<td>
-<%-- 				<span class="input-group-text">Vendedor :<input type="text" class="form-control" value="${sessionScope.accountSession.name }" disabled></span> --%>
+<%-- 				<span class="input-group-text">Vendedor :<input type="text" class="form-control" value="${sessionScope.userSession.name }" disabled></span> --%>
 					<span class="input-group-text">Vendedor : 
 						<select name="sellerId" class="form-control sellerId" >
 									<option value="0">- Seleccione -</option>

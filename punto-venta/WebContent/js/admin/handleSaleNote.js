@@ -221,10 +221,10 @@ function getSaleNoteById(id){
 				$(".tableUpdateNote tbody").empty();
 				u_cont=0;
 				console.log(data)
-				document.updateSaleNoteForm.saleId.value = data.saleId;
-				$('.saleId').val(data.saleId);
-				addSaleNoteForm(data);
-				addSaleDetailNoteForm(data.saleDetail);
+				document.updateSaleNoteForm.saleId.value = data.noteForm.saleId;
+				$('.saleId').val(data.noteForm.saleId);
+				addSaleNoteForm(data.noteForm);
+				addSaleDetailNoteForm(data.noteForm.saleDetail);
 				$('#modalUpdate').modal('toggle');
 			},
 			error : function(e) {

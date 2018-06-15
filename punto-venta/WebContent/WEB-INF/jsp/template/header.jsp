@@ -11,9 +11,9 @@
       <a class="navbar-brand" href="javascript:void(0);">Punto Venta</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="welcome.do">Home</a></li>
+      <li class="active"><a href="index.do">Home</a></li>
      
-      <c:if test="${not empty sessionScope.accountSession}">
+      <c:if test="${not empty sessionScope.userSession}">
        <li class="active"><a href="logout.do">Salir</a></li>
        
 	      <li class="dropdown">

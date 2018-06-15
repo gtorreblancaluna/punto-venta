@@ -17,7 +17,7 @@ public interface AccountService {
 	boolean updateUser(AccountDTO account);
 	boolean deleteUser(AccountDTO account);
 	public List<AccountDTO> getAllUser();
-
+	AccountDTO getAccount(String email);
 }
 
 

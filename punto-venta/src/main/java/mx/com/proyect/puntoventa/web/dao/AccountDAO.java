@@ -18,5 +18,7 @@ public interface AccountDAO {
 	void insert(AccountDTO account);
 	
 	boolean deleteUser(AccountDTO account);
+	AccountDTO getAccount(String email);
+	
 
 }

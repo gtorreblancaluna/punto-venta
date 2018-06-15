@@ -69,7 +69,7 @@ public class HandleDeliveryController {
 		public String addSaleNote(HttpServletRequest request, 
 				@ModelAttribute ("deliveryForm") DeliveryDTO deliveryForm, Model model) {
 			AccountDTO account = null;
-			account = (AccountDTO) WebUtils.getSessionAttribute(request, "accountSession");
+			account = (AccountDTO) WebUtils.getSessionAttribute(request, "userSession");
 			if(account == null) {
 				account = new AccountDTO();
 				account.setUserId("1");
@@ -100,7 +100,7 @@ public class HandleDeliveryController {
 				@ModelAttribute ("saleNoteFilter") SaleNoteFilter saleNoteFilter, Model model) {
 			
 			AccountDTO account = null;
-			account = (AccountDTO) WebUtils.getSessionAttribute(request, "accountSession");
+			account = (AccountDTO) WebUtils.getSessionAttribute(request, "userSession");
 			if(account == null) {
 				account = new AccountDTO();
 				account.setUserId("1");
