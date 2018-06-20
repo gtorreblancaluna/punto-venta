@@ -23,7 +23,7 @@ body{
 		<c:out value="${messageView}"></c:out>
 	</c:if>
 
-	<form:form commandName="clientDTO" action="addClient.do" method="post" name="addClient">
+	<form:form modelAttribute="clientDTO" action="addClient.do" method="post" name="addClient">
 
 				<div class="page-header">
 					<div	class=".row-btsp">

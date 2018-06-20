@@ -24,7 +24,7 @@
 		<result property="fgStatus" column="fg_estatus" />		
 	</resultMap>
 
-	<select id="findByIdItem" resultMap="itemResultMap" parameterType="long">
+	<select id="findByIdItem" resultMap="itemResultMap" parameterType="java.lang.Long">
 		SELECT i.*, a.cl_almacen, a.ds_descripcion, c.cl_color AS color_id, c.ds_descripcion AS color_descripcion, c.fg_estatus AS color_estatus
 		FROM c_articulo i 
 		INNER JOIN c_almacen a ON (i.cl_almacen = a.cl_almacen)
@@ -41,13 +41,13 @@
 		WHERE i.fg_estatus = '1'
 	</select>
 
-	<insert id="addItem" parameterType="accountDTO">
+	<insert id="addItem" parameterType="itemDTO">
 		INSERT INTO c_articulo
 		(cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,cantidad_salida,precio_venta,cantidad_existente)
 		values
 		(#{storeDTO.storeId},#{color.colorId},#{description},#{unitMeasurement},#{amountEntry},#{amountOutput},#{salePrice},#{stock})
 	</insert>
-	<update id="updateItem" parameterType="accountDTO">
+	<update id="updateItem" parameterType="itemDTO">
 		UPDATE c_articulo SET
 		cl_almacen = #{storeDTO.storeId},
 		cl_color = #{color.colorId},
@@ -56,10 +56,10 @@
 		cantidad_entrada =	#{amountEntry},
 		cantidad_salida = #{amountOutput},
 		precio_venta = #{salePrice},
-		cantidad_existente = #{stock},
+		cantidad_existente = #{stock}
 		WHERE cl_articulo = #{itemId}
 	</update>
-	<delete id="deleteItem" parameterType="accountDTO">
+	<delete id="deleteItem" parameterType="itemDTO">
 		UPDATE c_articulo SET fg_estatus = '0' WHERE cl_articulo = #{itemId}
 	</delete>
 	

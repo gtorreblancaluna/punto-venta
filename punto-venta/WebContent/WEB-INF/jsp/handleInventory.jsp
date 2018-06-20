@@ -37,7 +37,8 @@
 				<td>id</td>
 				<td>fecha alta</td>
 				<td>almacen</td>
-				<td>descripcion</td>				
+				<td>descripcion</td>	
+				<td>color</td>				
 				<td>U.M.</td>
 				<td>cantidad entrada</td>
 				<td>cantidad salida</td>
@@ -49,8 +50,9 @@
 		 		<tr>
 		 			<td>${item.itemId}</td>
 		 			<td>${item.date}</td>
-		 			<td>${item.storeDTO.description}</td>	
-		 			<td>${item.description}</td>		 			
+		 			<td>${item.storeDTO.description}</td>		 			
+		 			<td>${item.description}</td>	
+		 			<td>${item.color.description}</td>		 			
 		 			<td>${item.unitMeasurement}</td>
 		 			<td>${item.amountEntry}</td>
 		 			<td>${item.amountOutput}</td>		 			
@@ -91,6 +93,17 @@
 				<option value="0">- Seleccione -</option>
 					<c:forEach items="${listStore}" var="store">
 						<option value="${store.storeId}">${store.description}</option>
+					</c:forEach>	
+				</select>
+				</div>
+				
+				<div class="form-group">
+					<label>Color: </label>
+<!-- 					<input type="text" id="storeDescription" name="storeDTO.description" placeholder="" class="form-control"> -->
+				<select name="color.colorId" >
+				<option value="0">- Seleccione -</option>
+					<c:forEach items="${listColors}" var="color">
+						<option value="${color.colorId}">${color.description}</option>
 					</c:forEach>	
 				</select>
 				</div>
@@ -143,7 +156,7 @@
 		<form:form modelAttribute="ItemDTO" action="handleInventory.do" method="post" name="updateForm" id="updateForm">
 				
 				<input type="hidden" name="itemId" id="itemId">
-				
+					
 				<div class="form-group">
 					<label>Almacen: </label>
 					<select name="storeDTO.storeId" id="selStoreId" class="selStoreId">
@@ -152,6 +165,16 @@
 							<option value="${store.storeId}">${store.description}</option>
 						</c:forEach>	
 					</select>
+				</div>
+				<div class="form-group">
+					<label>Color: </label>
+<!-- 					<input type="text" id="storeDescription" name="storeDTO.description" placeholder="" class="form-control"> -->
+				<select name="color.colorId" class="selColorId" >
+				<option value="0">- Seleccione -</option>
+					<c:forEach items="${listColors}" var="color">
+						<option value="${color.colorId}">${color.description}</option>
+					</c:forEach>	
+				</select>
 				</div>
 				<div class="form-group">
 					<label>Descripci&oacute;n: </label>
@@ -179,7 +202,7 @@
 				</div>
 				
 					<div class="form-group">
-					<input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="add" value="Enviar" />					
+					<input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="update" value="Enviar" />					
 				</div>
 		</form:form>
 		   <p>Editar producto</p>
@@ -220,16 +243,18 @@ $( document ).ready(function() {
 		        if(i===3)
 		        	$updateForm.find('#description').val(item.innerHTML);
 		        if(i===4)
+		        	$updateForm.find('.selColorId').val(getColorSelect(item.innerHTML));
+		        if(i===5)
 		        	$updateForm.find('#unitMeasurement').val(item.innerHTML);
 		        
-		        if(i===5)
-		        	$updateForm.find('#amountEntry').val(item.innerHTML);
 		        if(i===6)
-		        	$updateForm.find('#amountOutput').val(item.innerHTML);
+		        	$updateForm.find('#amountEntry').val(item.innerHTML);
 		        if(i===7)
+		        	$updateForm.find('#amountOutput').val(item.innerHTML);
+		        if(i===8)
 		        	$updateForm.find('#salePrice').val(item.innerHTML);
 		        
-		        if(i===8)
+		        if(i===9)
 		        	$updateForm.find('#stock').val(item.innerHTML);
 		       
 		        
@@ -238,6 +263,17 @@ $( document ).ready(function() {
 		    function getValueSelect(text){		    	
 		    	var value = 0;
 		    	$( ".selStoreId option" ).each(function( index ) {
+		    		var x = $(this).text();
+		    		if(x == text){
+		    			value = index;
+		    		}
+// 		    		  console.log( index + ": " + $( this ).text() );
+		    	});
+		    	return value;
+		    }
+		    function getColorSelect(text){		    	
+		    	var value = 0;
+		    	$( ".selColorId option" ).each(function( index ) {
 		    		var x = $(this).text();
 		    		if(x == text){
 		    			value = index;
