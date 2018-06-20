@@ -24,6 +24,10 @@ public class AccountDTO implements Serializable {
 	//fecha de alta
 	private Timestamp addDate;
 	private String admin;
+	// sucursal a la que pertenece
+	private OfficeDTO office;
+	
+	
 
 	// fecha en que se registro
 	private Timestamp feAlta;
@@ -38,6 +42,12 @@ public class AccountDTO implements Serializable {
 	
 	
 	
+	public OfficeDTO getOffice() {
+		return office;
+	}
+	public void setOffice(OfficeDTO office) {
+		this.office = office;
+	}
 	public boolean isMobile() {
 		return mobile;
 	}

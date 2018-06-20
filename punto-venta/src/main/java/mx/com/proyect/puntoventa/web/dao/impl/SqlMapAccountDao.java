@@ -6,6 +6,8 @@ import java.util.List;
 import mx.com.proyect.puntoventa.web.dao.AccountDAO;
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
+import mx.com.proyect.puntoventa.web.model.JobDTO;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Component;
 
@@ -58,6 +60,12 @@ public class SqlMapAccountDao extends SqlSessionDaoSupport implements AccountDAO
 	public AccountDTO getAccount(String email) {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("getAccount",email);
+	}
+
+	@Override
+	public List<JobDTO> getAllJobs() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("getAllJobs");
 	}
 
 }

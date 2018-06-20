@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
+import mx.com.proyect.puntoventa.web.model.JobDTO;
+import mx.com.proyect.puntoventa.web.model.OfficeDTO;
 import mx.com.proyect.puntoventa.web.service.AccountService;
+import mx.com.proyect.puntoventa.web.service.OfficeService;
 
 @Controller
 public class HandleUserController {
@@ -23,12 +26,21 @@ public class HandleUserController {
 	// inyectar dependencias de spring
 	@Autowired
 	AccountService accountService;
+	@Autowired
+	OfficeService officeService;
 
 	// mostrar la vista principal
 	@RequestMapping(value = "/handleUser.do", method = RequestMethod.GET)
 	public String showHandleUser(HttpServletRequest request, Model model) {
-		List<AccountDTO> listUser = accountService.getAllUser();
+		
+		
+		List<AccountDTO> listUser = accountService.getAllUser();		
 		model.addAttribute("listUser", listUser);
+		List<JobDTO> listJobs = accountService.getAllJobs();
+		model.addAttribute("listJobs", listJobs);
+		List<OfficeDTO> listOffices = officeService.getAll();
+		model.addAttribute("listOffices", listOffices);
+		
 		model.addAttribute("account", new AccountDTO());
 		return "handleUser";
 	}
@@ -40,6 +52,10 @@ public class HandleUserController {
 		List<AccountDTO> listUser = accountService.getAllUser();
 		model.addAttribute("listUser", listUser);
 		model.addAttribute("account", account);
+		List<JobDTO> listJobs = accountService.getAllJobs();
+		model.addAttribute("listJobs", listJobs);
+		List<OfficeDTO> listOffices = officeService.getAll();
+		model.addAttribute("listOffices", listOffices);
 		model.addAttribute("message", "Exito al registrar el usuario: " + account.getEmail());
 		return "handleUser";
 	}
@@ -50,6 +66,10 @@ public class HandleUserController {
 		accountService.updateUser(account);		
 		List<AccountDTO> listUser = accountService.getAllUser();
 		model.addAttribute("listUser", listUser);
+		List<JobDTO> listJobs = accountService.getAllJobs();
+		model.addAttribute("listJobs", listJobs);
+		List<OfficeDTO> listOffices = officeService.getAll();
+		model.addAttribute("listOffices", listOffices);
 		model.addAttribute("message", "Exito al actualizar el usuario: " + account.getEmail());
 		return "handleUser";
 	}
@@ -82,6 +102,10 @@ public class HandleUserController {
 
 		List<AccountDTO> listUser = accountService.getAllUser();
 		model.addAttribute("listUser", listUser);
+		List<JobDTO> listJobs = accountService.getAllJobs();
+		model.addAttribute("listJobs", listJobs);
+		List<OfficeDTO> listOffices = officeService.getAll();
+		model.addAttribute("listOffices", listOffices);
 		return "handleUser";
 	}
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
+import mx.com.proyect.puntoventa.web.model.JobDTO;
 
 
 public interface AccountService {
@@ -18,6 +19,8 @@ public interface AccountService {
 	boolean deleteUser(AccountDTO account);
 	public List<AccountDTO> getAllUser();
 	AccountDTO getAccount(String email);
+	public List<JobDTO> getAllJobs();
+	
 }
 
 

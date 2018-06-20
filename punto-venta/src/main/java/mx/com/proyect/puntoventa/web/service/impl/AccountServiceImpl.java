@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import mx.com.proyect.puntoventa.web.dao.AccountDAO;
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
+import mx.com.proyect.puntoventa.web.model.JobDTO;
 import mx.com.proyect.puntoventa.web.service.AccountService;
 
 @Service ("accountService")
@@ -60,6 +61,12 @@ public class AccountServiceImpl implements AccountService {
 	public AccountDTO getAccount(String email) {
 		// TODO Auto-generated method stub
 		return accountDao.getAccount(email);
+	}
+
+	@Override
+	public List<JobDTO> getAllJobs() {
+		// TODO Auto-generated method stub
+		return accountDao.getAllJobs();
 	}
 
 }
