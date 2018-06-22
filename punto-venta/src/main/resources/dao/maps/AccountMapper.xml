@@ -13,6 +13,8 @@
 		<result property="fgActivo" column="fg_activo" />
 		<result property="job.jobId" column="puestoId" />
 		<result property="job.description" column="descripcion_puesto" />
+		<result property="office.officeId" column="cl_sucursal" />
+		<result property="office.name" column="nombre_sucursal" />
 	</resultMap>
 	
 	<resultMap id="resultMapJobs" type="jobDTO">
@@ -37,9 +39,11 @@
 	</select>
 
 	<select id="getAllUsers" resultMap="accountResultMap">
-		SELECT u.*, p.cl_puesto AS puestoId, p.ds_descripcion AS descripcion_puesto
+		SELECT u.*, p.cl_puesto AS puestoId, p.ds_descripcion AS descripcion_puesto,
+		s.nombre AS nombre_sucursal
 		FROM c_usuario u
 		INNER JOIN c_puesto p ON (u.cl_puesto = p.cl_puesto)	
+		INNER JOIN c_sucursal s ON (u.cl_sucursal = s.cl_sucursal)
 		WHERE u.fg_activo = '1'
 	</select>
 

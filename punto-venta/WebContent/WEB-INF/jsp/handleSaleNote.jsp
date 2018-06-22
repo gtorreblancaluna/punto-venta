@@ -123,16 +123,21 @@ function addSaleDetailNoteForm(items){
 			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
 		+"</tr>");
 		
-		// ahora colocamos el valor del articulo en las filas		
-		var $tr = $tableUpdateNote.find(".tr-count"+(u_cont+1)+"").closest('tr');
+		// ahora colocamos el valor del articulo en las filas	
+		var $tr="";
+		$tr = $tableUpdateNote.find(".tr-count"+(u_cont+1)+"").closest('tr');
 		$tr.find('.selItems').val(value.item.itemId);				
-		var val = $('option:selected', $tr).attr('data-value').split("|");						
-		$tr.find('#itemDescription').val(val[1]);
-		$tr.find('#itemPrice').val(val[2]);
+// 		var val = $('option:selected', $tr.find('.selItems')).attr('data-value').split("|");	
+// 		var val = $tr.find('.selItems option').val(value.item.itemId).attr('data-value').split("|");
+// 		$tr.find('#itemDescription').val(val[1]);
+// 		$tr.find('#itemPrice').val(val[2]);
+		$tr.find('#itemDescription').val(value.item.description);
+		$tr.find('#itemPrice').val(value.item.salePrice);
 		$tr.find('#amountItem').val(value.amount);
 		$tr.find('.selColors').val(value.color.colorId);
-		var amount = $tr.find('#amountItem').val();
-		$tr.find('#totalItem').val(amount*val[2]);
+		var amount = parseFloat(value.amount);
+		var salePrice = parseFloat(value.item.salePrice);
+		$tr.find('#totalItem').val(amount*salePrice);
 		u_cont++;
 		
 	});	// end for each

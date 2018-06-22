@@ -34,12 +34,47 @@ $( document ).ready(function() {
 		        if(i===1)
 		        	$updateForm.find('#name').val(item.innerHTML);
 		        if(i===2)
+		        	$updateForm.find('#apPaterno').val(item.innerHTML);
+		        if(i===3)
+		        	$updateForm.find('#apMaterno').val(item.innerHTML);
+		        if(i===4)
 		        	$updateForm.find('#email').val(item.innerHTML);
+		        if(i===5)
+		        	$updateForm.find('#jobId').val(getJobSelect(item.innerHTML));
+		        if(i===6)
+		        	$updateForm.find('#officeId').val(getOfficeSelect(item.innerHTML));
 		        
 // 		        alert(values);
 		    });
-		    console.log(values);
+// 		    console.log(values);
+
+		   
 	});
+	
+	 function getJobSelect(text){		    	
+	    	var value = 0;
+	    	$( ".selJobId option" ).each(function( index ) {
+	    		var x = $(this).text();
+	    		if(x == text){
+	    			value = index;
+	    		}
+//	    		  console.log( index + ": " + $( this ).text() );
+	    	});
+	    	return value;
+	    }
+	 	function getOfficeSelect(text){		    	
+	    	var value = 0;
+	    	$( ".selOfficeId option" ).each(function( index ) {
+	    		var x = $(this).text();
+	    		if(x == text){
+	    			value = index;
+	    		}
+//	    		  console.log( index + ": " + $( this ).text() );
+	    	});
+	    	return value;
+	    }
+	
+	 	
 });
 </script>
 </head>
@@ -65,16 +100,23 @@ $( document ).ready(function() {
 			<tr>
 				<td><h5 style="">id</h5></td>
 				<td>Nombre</td>
+				<td>Ap Paterno</td>
+				<td>Ap Materno</td>
 				<td>Email</td>
-				<td>Admin</td>				
+				<td>Puesto</td>
+				<td>Sucursal</td>
 			</tr>
 		</thead>
 			<c:forEach items="${listUser}" var="user">		
 		 		<tr>
 		 			<td>${user.userId}</td>
 		 			<td>${user.name}</td>
-		 			<td>${user.email }</td>
-		 			<td><c:out default="None" escapeXml="true" value="${user.fgAdmin eq '1' ? 'Admin' : '-' }" /></td>
+		 			<td>${user.firstName}</td>
+		 			<td>${user.secondName}</td>
+		 			<td>${user.email}</td>
+<%-- 		 			<td><c:out default="None" escapeXml="true" value="${user.fgAdmin eq '1' ? 'Admin' : '-' }" /></td> --%>
+					<td>${user.job.description}</td>
+					<td>${user.office.name}</td>
 		 			<td><button type="button" class="btn btn-info btn-lg btnUpdateUser" id="btnUpdateUser" data-toggle="modal" data-target="#modalUpdateUser">Editar</button></td>
 		 			<td>		 			
 		 			<form:form action="handleUser.do" method="post" name="deleteUserForm" id="deleteUserForm">
@@ -189,10 +231,25 @@ $( document ).ready(function() {
 					<label>Password: </label>
 					<input type="password" id="password" name="password" placeholder="Password" class="form-control">
 				</div>
-				<div class="form-group">
-					<label>Admin: </label>
-					<input type="checkbox" id="fgAdmin" name="fgAdmin" class="form-control">
+				
+				<div class="form-group">	
+					<label>Puesto:</label>
+					<select name="job.jobId" class="form-control selJobId" id="jobId" >
+						<option value="0">- Seleccione -</option>
+						<c:forEach items="${listJobs}" var="job">
+							<option value="${job.jobId}">${job.description}</option>
+						</c:forEach>	
+					</select>
 				</div>
+				<div class="form-group">	
+					<label>Sucursal:</label>
+					<select name="office.officeId" class="form-control selOfficeId" id="officeId" >
+						<option value="0">- Seleccione -</option>
+						<c:forEach items="${listOffices}" var="office">
+							<option value="${office.officeId}">${office.name}</option>
+						</c:forEach>	
+					</select>
+				</div>				
 				
 					<div class="form-group">
 					<input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="updateUser" value="Enviar" />					
