@@ -30,7 +30,7 @@
 		<result property="userId" column="cl_cliente" />
 		<result property="sellerId" column="cl_usuario" />
 		<result property="storeId" column="cl_sucursal" />
-		<result property="description" column="ds_descripcion" />
+		<result property="description" column="ds_descripcion" />		
 	</resultMap>
 
 	<resultMap id="resultMapSaleNoteDto" type="saleNoteDTO">
@@ -63,9 +63,9 @@
 
 	<insert id="addSaleNoteDetails" parameterType="java.util.Map">
 		INSERT INTO
-		k_detalle_venta (cl_venta,cl_articulo,cl_color,cantidad)
+		k_detalle_venta (cl_venta,cl_articulo,cl_color,cantidad,precio_articulo)
 		VALUES
-		(#{saleId},#{itemId},#{colorId},#{amount})
+		(#{saleId},#{itemId},#{colorId},#{amount},#{itemSalePrice})
 	</insert>
 	
 	<select id="getSaleNoteByFilter" parameterType="saleNoteFilter"
@@ -107,11 +107,10 @@
 		SELECT * FROM c_venta WHERE cl_venta = #{id}
 	</select>
 
-	<select id="getDetailSaleNoteById" parameterType="java.lang.Integer"
-		resultMap="resultMapSaleNoteDetail">
+	<select id="getDetailSaleNoteById" parameterType="java.lang.Integer"	resultMap="resultMapSaleNoteDetail">
 		SELECT dv.*, c.ds_descripcion AS descripcion_color,
 		a.descripcion AS descripcion_articulo, a.unidad_medida AS
-		unidad_medida_articulo, a.precio_venta AS precio_venta_articulo
+		unidad_medida_articulo, dv.precio_articulo AS precio_venta_articulo
 		FROM k_detalle_venta dv
 		INNER JOIN c_articulo a ON (dv.cl_articulo = a.cl_articulo)
 		INNER JOIN c_color c ON (dv.cl_color = c.cl_color)
@@ -122,8 +121,7 @@
 		UPDATE c_venta SET
 		fe_entrega = #{dateSaleNote},
 		cl_cliente = #{userId},
-		cl_usuario =
-		#{sellerId},
+		cl_usuario = #{sellerId},
 		cl_sucursal = #{storeId}
 		WHERE cl_venta = #{saleId}
 

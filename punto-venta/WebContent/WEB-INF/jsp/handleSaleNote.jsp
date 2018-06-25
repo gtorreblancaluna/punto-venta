@@ -50,7 +50,7 @@ $( document ).ready(function() {
 			"</td>"
 			+"<td><input type='text' class='form-control' name='items["+ cont +"].description' id='itemDescription' disabled></td>"
 			+"<td><input type='number' class='form-control' name='items["+ cont +"].amountEntry' id='amountItem' ></td>"
-			+"<td><input type='number' class='form-control' name='items["+ cont +"].salePrice' id='itemPrice' disabled></td>"
+			+"<td><input type='number' class='form-control' name='items["+ cont +"].salePrice' id='itemPrice'></td>"
 			+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
 			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
 		+"</tr>");
@@ -79,7 +79,7 @@ $( document ).ready(function() {
 			"</td>"
 			+"<td><input type='text' class='form-control' name='items["+ u_cont +"].description' id='itemDescription' disabled></td>"
 			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].amountEntry' id='amountItem' ></td>"
-			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].salePrice' id='itemPrice' disabled></td>"
+			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].salePrice' id='itemPrice'></td>"
 			+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
 			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
 		+"</tr>");
@@ -118,7 +118,7 @@ function addSaleDetailNoteForm(items){
 			"</td>"
 			+"<td><input type='text' class='form-control' name='items["+ u_cont +"].description' id='itemDescription' disabled></td>"
 			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].amountEntry' id='amountItem' ></td>"
-			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].salePrice' id='itemPrice' disabled></td>"
+			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].salePrice' id='itemPrice' ></td>"
 			+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
 			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
 		+"</tr>");
@@ -346,7 +346,7 @@ function addSaleDetailNoteForm(items){
 			        </td>
 			        <td><input type="text" class="form-control" name="items[0].description" id="itemDescription" disabled></td>
 			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					
-			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" disabled></td>
+			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" ></td>
 			        <td><input type="number" class="form-control totalItem" name="" id="totalItem" disabled></td>
 			        <td><input type="button" class="btn btn-info btn-lg" id="addRow-add" value="Agregar" /></td>			        
 			      </tr>			

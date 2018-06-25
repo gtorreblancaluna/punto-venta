@@ -19,6 +19,15 @@ $( document ).ready(function() {
 		total();	
 	});
 	
+	// 2018.05.22 GTL funcion para calcular el total a pagar por articulo
+	$(".tableAddNote tbody").on('change','#itemPrice', function(){	
+		var price = $(this).val();	
+		var $tr = $(this).closest('tr');		
+		var amount = $tr.find('#amountItem').val();
+		$tr.find('#totalItem').val(amount*price);
+		total();	
+	});
+	
 	function total(){
 		var total=0;
 		  $(".tableAddNote tbody tr").each(function () {
@@ -186,6 +195,14 @@ $( document ).ready(function() {
 		var amount = $(this).val();	
 		var $tr = $(this).closest('tr');		
 		var price = $tr.find('#itemPrice').val();
+		$tr.find('#totalItem').val(amount*price);
+		totalUpdateForm();	
+	});
+	
+	$(".tableUpdateNote tbody").on('change','#itemPrice', function(){	
+		var price = $(this).val();	
+		var $tr = $(this).closest('tr');		
+		var amount = $tr.find('#amountItem').val();
 		$tr.find('#totalItem').val(amount*price);
 		totalUpdateForm();	
 	});

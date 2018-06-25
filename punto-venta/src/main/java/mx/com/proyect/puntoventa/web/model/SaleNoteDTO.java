@@ -31,9 +31,8 @@ public class SaleNoteDTO implements Serializable {
 	// status
 	private String status;
 	// detalle de la venta	
-	
 	private List<SaleDetailDTO> saleDetails;
-
+	
 	public String getSaleId() {
 		return saleId;
 	}

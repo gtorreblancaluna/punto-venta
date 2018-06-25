@@ -21,7 +21,16 @@ public class SaleDetailDTO implements Serializable {
 	private Float amount;
 	// cl_color -> id color
 	private ColorDTO color;
+	// precio del articulo
+	private Float itemSalePrice;
 	
+	
+	public Float getItemSalePrice() {
+		return itemSalePrice;
+	}
+	public void setItemSalePrice(Float itemSalePrice) {
+		this.itemSalePrice = itemSalePrice;
+	}
 	public Integer getSaleDetailId() {
 		return saleDetailId;
 	}

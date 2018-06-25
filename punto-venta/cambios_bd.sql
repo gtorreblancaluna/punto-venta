@@ -231,6 +231,7 @@ cl_venta INTEGER UNSIGNED NOT NULL,
 cl_articulo INTEGER UNSIGNED NOT NULL,
 cl_color INTEGER UNSIGNED NOT NULL,
 cantidad INTEGER NOT NULL,
+precio_articulo DECIMAL(9,2),
 PRIMARY KEY (cl_detalle_venta),
 CONSTRAINT fk_cl_venta FOREIGN KEY fk_cl_venta (cl_venta) 
 	REFERENCES c_venta(cl_venta)
