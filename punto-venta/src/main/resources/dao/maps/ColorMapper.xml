@@ -9,7 +9,14 @@
 	</resultMap>	
 
 	<select id="getAllColors" resultMap="colorResultMap">
-		SELECT * FROM c_color WHERE fg_estatus = '1'
+		SELECT * FROM c_color WHERE fg_estatus = '1' ORDER BY ds_descripcion
 	</select>
+	
+	<insert id="addColor" parameterType="colorDTO">
+		<selectKey resultType="java.lang.Integer" keyProperty="colorId"	order="AFTER">
+			SELECT LAST_INSERT_ID() as id
+		</selectKey>
+		INSERT INTO c_color (ds_descripcion) VALUES (#{description})
+	</insert>
 
 </mapper>

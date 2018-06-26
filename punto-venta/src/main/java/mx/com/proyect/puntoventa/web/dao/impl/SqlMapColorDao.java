@@ -10,9 +10,9 @@ import mx.com.proyect.puntoventa.web.model.ColorDTO;
 public class SqlMapColorDao extends SqlSessionDaoSupport implements ColorDAO {
 
 	@Override
-	public boolean add(ColorDTO color) {
-		// TODO Auto-generated method stub
-		return false;
+	public ColorDTO add(ColorDTO color) {
+		getSqlSession().insert("addColor",color);
+		return color;
 	}
 
 	@Override

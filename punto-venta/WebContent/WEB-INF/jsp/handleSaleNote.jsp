@@ -13,6 +13,7 @@
 <title>Punto Venta:: Notas</title>
 <script type="text/javascript">
 var u_cont=0;
+var g_colors="";
 
 $( document ).ready(function() {
 	
@@ -30,7 +31,7 @@ $( document ).ready(function() {
 	function addRow(){	
 		++cont;	
 		$(".tableAddNote tbody").append("<tr>"			
-			+"<td style='width:2%'><span class='input-group-text'>"+ (cont+1) +"</span></td>"
+			+"<td style='width:2%'><span class='input-group-text tr-count-addNote"+(cont)+"'>"+ (cont) +"</span></td>"
 			+"<td><input type='number' class='form-control' name='' id='txtFindItemById'></td>"
 			+"<td>" +
 					"<select name='items["+cont+"].itemIdForm' class='form-control selItems'>" +
@@ -54,12 +55,29 @@ $( document ).ready(function() {
 			+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
 			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
 		+"</tr>");
+		
+		if(g_colors != ""){
+			var $tableAddNote = $('.tableAddNote');
+			$tr = $tableAddNote.find(".tr-count-addNote"+(cont)+"").closest('tr');	
+			$tr.find('.selColors').empty();
+			
+			$tr.find('.selColors').append($('<option>', {
+			    value: 0,
+			    text: '- Seleccione -'
+			}));
+			$.each(g_colors, function(index, value) {	
+				$tr.find('.selColors').append($('<option>', {
+				    value: value.colorId,
+				    text: value.description
+				}));
+			});	// end for each
+		}
 	};
 	
 	// funcion para agregar una fila a la tabla de actualizar nota
 	function addRowUpdate(){			
 		$(".tableUpdateNote tbody").append("<tr>"			
-			+"<td style='width:2%'><span class='input-group-text'>"+ (u_cont+1) +"</span></td>"
+				+"<td style='width:2%'><span class='input-group-text tr-count"+(u_cont+1)+"'>"+ (u_cont+1) +"</span></td>"
 			+"<td><input type='number' class='form-control' name='' id='txtFindItemById'></td>"
 			+"<td>" +
 					"<select name='items["+u_cont+"].itemIdForm' class='form-control selItems'>" +
@@ -83,6 +101,25 @@ $( document ).ready(function() {
 			+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
 			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
 		+"</tr>");
+		
+		if(g_colors != ""){
+			var $tableUpdateNote = $('.tableUpdateNote');
+			$tr = $tableUpdateNote.find(".tr-count"+(u_cont+1)+"").closest('tr');	
+			$tr.find('.selColors').empty();
+			
+			$tr.find('.selColors').append($('<option>', {
+			    value: 0,
+			    text: '- Seleccione -'
+			}));
+			$.each(g_colors, function(index, value) {	
+				$tr.find('.selColors').append($('<option>', {
+				    value: value.colorId,
+				    text: value.description
+				}));
+			});	// end for each
+		}
+		
+		
 		u_cont++;
 	};
 	
@@ -122,6 +159,22 @@ function addSaleDetailNoteForm(items){
 			+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
 			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
 		+"</tr>");
+		
+		if(g_colors != ""){
+			$tr = $tableUpdateNote.find(".tr-count"+(u_cont+1)+"").closest('tr');	
+			$tr.find('.selColors').empty();
+			
+			$tr.find('.selColors').append($('<option>', {
+			    value: 0,
+			    text: '- Seleccione -'
+			}));
+			$.each(g_colors, function(index, value) {	
+				$tr.find('.selColors').append($('<option>', {
+				    value: value.colorId,
+				    text: value.description
+				}));
+			});	// end for each
+		}
 		
 		// ahora colocamos el valor del articulo en las filas	
 		var $tr="";
@@ -312,7 +365,7 @@ function addSaleDetailNoteForm(items){
 			      	<th>#</th>
 			      	<th style="width:5%;">Buscar por id</th>
 			        <th>Articulo</th>			        
-			        <th>Color</th>
+			        <th>Color<p><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAddColor">+</button></p></th>
 			        <th>Descripci&oacute;n</th>
 			        <th>Cantidad</th>
 			        <th>Precio</th>
@@ -486,8 +539,34 @@ function addSaleDetailNoteForm(items){
     
     
     
-    
-    
+    <!-- modal para agregar color -->
+		<div id="modalAddColor" class="modal fade" role="dialog">
+			<div class="modal-content"
+				style="width: 1000px; height: 600px; margin: auto; margin-top: 30px; overflow: auto;">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Agregar color</h4>
+				</div>
+				<div class="modal-body">
+					<form name="saleNoteForm" id="addColorForm">
+						<p>
+							<input type="text" class="form-control" id="colorDescription">
+						</p>
+
+						<input type="button" onclick="addColor();" class="btn btn-primary btn-lg btn-block login-button" value="Enviar" />
+					</form>
+
+					<p>Agregar color</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+		<!-- end modal add color -->
+
+
+
 	</div> <!-- end container -->
 
 </body>

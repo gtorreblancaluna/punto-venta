@@ -16,9 +16,9 @@ public class ColorServiceImpl implements ColorService {
 	
 	
 	@Override
-	public boolean add(ColorDTO color) {
-		// TODO Auto-generated method stub
-		return false;
+	public ColorDTO add(ColorDTO color) {
+		return colorDao.add(color);
+		 
 	}
 
 	@Override

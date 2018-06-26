@@ -325,7 +325,56 @@ function generatePdf(id){
     voucher.focus();
 };
 
+//2018.06.26 GTL agregar un color via AJAX
+function addColor(){
+	var color = $('#colorDescription').val();
+	if(color != ''){		
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "addColor.do",
+			data : color,
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {				
+				alert(data.message)
+				$('#modalAddColor').modal('toggle');
+				appendsColorsToSelects(data.color);
+				g_colors = data.colors;
+				console.log("COLORS: "+g_colors)
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);	
+				alert("ERROR: "+e)
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+		});
+	}else{
+		alert("No se recibio el parametro, porfavor recarga la pagina e intentalo de nuevo :( ")
+	}
+}
 
+// funcion para agregar los colores a los select despues de realizar un insert
+function appendsColorsToSelects(color){
+	// actualizar la lista de la tabla agregar
+	var $tableAddNote = $('.tableAddNote');
+	$tableAddNote.find('.selColors').append($('<option>', {
+	    value: color.colorId,
+	    text: color.description
+	}));
+	
+	// actualizar la lista de la tabla actualizar
+//	var $tableUpdateNote = $('.tableUpdateNote');	
+//	$tableUpdateNote.find('.selColors').empty();
+//	$.each(colors, function(index, value) {	
+//		$tableUpdateNote.find('.selColors').append($('<option>', {
+//		    value: value.colorId,
+//		    text: value.description
+//		}));
+//	});	// end for each
+}
 
 
 

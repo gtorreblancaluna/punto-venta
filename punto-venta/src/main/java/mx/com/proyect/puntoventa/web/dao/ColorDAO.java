@@ -6,7 +6,7 @@ import mx.com.proyect.puntoventa.web.model.ColorDTO;
 
 public interface ColorDAO {
 	
-	boolean add(ColorDTO color);
+	ColorDTO add(ColorDTO color);
 	List<ColorDTO> getAll();
 	boolean update(ColorDTO color);
 	boolean delete(ColorDTO color);
