@@ -15,6 +15,7 @@
 		<sec:intercept-url pattern="/index.do" access="permitAll" requires-channel="any" />
 		<sec:intercept-url pattern="/getItemById.do*" access="permitAll" requires-channel="any" />
 		<sec:intercept-url pattern="/getSaleNoteById.do*" access="permitAll" requires-channel="any" />
+		<sec:intercept-url pattern="/login.do" access="permitAll" requires-channel="any" />
 
 		<sec:form-login login-processing-url="/j_spring_security_check"
 			login-page="/login.do" default-target-url="/index.do"
