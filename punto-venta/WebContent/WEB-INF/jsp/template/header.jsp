@@ -3,7 +3,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <script type="text/javascript">
-// alert('${accountSession}')
+// if('${sessionScope.userSession}' == '')
+// 	alert('Aun no estas logueado, favor de loguearte!')
 </script>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -13,7 +14,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="index.do">Home</a></li>
      
-      <c:if test="${not empty sessionScope.userSession}">
+      <c:if test="${not empty userSession.account.email}">
        <li class="active"><a href="logout.do">Salir</a></li>
        
 	      <li class="dropdown">

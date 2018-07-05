@@ -102,6 +102,11 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	public SaleNoteDTO getSaleById(Integer id) {
 		return saleNoteDao.getSaleById(id);
 	}
+
+	@Override
+	public List<ResultQuerySaleNote> getSalesToday() {
+		return saleNoteDao.getSalesToday();
+	}
 	
 
 }

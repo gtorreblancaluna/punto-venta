@@ -17,4 +17,5 @@ public interface SaleNoteService {
 	SaleNoteForm getSaleNoteById(Integer id);
 	// contendra lo de la tabla y sus detalles completo
 	SaleNoteDTO getSaleById(Integer id);
+	public List<ResultQuerySaleNote> getSalesToday();
 }

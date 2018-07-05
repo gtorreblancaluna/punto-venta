@@ -149,5 +149,17 @@
 		WHERE
 		v.cl_venta = #{id}
 	</select>
+	
+	<select id="getSalesToday" resultMap="resultMapQuerySaleNote">
+		SELECT v.cl_venta,v.fe_registro,v.fe_entrega,v.ds_descripcion,
+		CONCAT(c.nombre,' ',c.ap_paterno) AS nombre_cliente, s.nombre AS
+		nombre_sucursal,
+		CONCAT(u.nombre,' ',u.ap_paterno) AS nombre_usuario
+		FROM c_venta v
+		INNER JOIN c_cliente c ON (v.cl_cliente = c.cl_cliente)
+		INNER JOIN c_sucursal s ON (v.cl_sucursal = s.cl_sucursal)
+		INNER JOIN c_usuario u ON (v.cl_usuario = u.cl_usuario)
+		WHERE DATE(v.fe_entrega) = #{today}
+	</select>
 
 </mapper>

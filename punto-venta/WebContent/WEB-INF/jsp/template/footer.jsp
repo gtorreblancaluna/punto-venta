@@ -12,7 +12,7 @@
 		<div class="col">
 			<ul>
 				<li></li>
-				<li><a>Correo lulopezdo@gmail.com</a></li>
+				<li><a>contacto: lulopezdo@gmail.com</a></li>
 				<li><a href="https://download.teamviewer.com/download/TeamViewerQS.exe">Asistencia via TeamViewer</a></li>
 				
 			</ul>

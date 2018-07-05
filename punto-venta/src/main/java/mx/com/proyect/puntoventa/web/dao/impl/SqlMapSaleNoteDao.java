@@ -1,5 +1,8 @@
 package mx.com.proyect.puntoventa.web.dao.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +84,14 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 		SaleNoteDTO saleNote = getSqlSession().selectOne("getSaleById",id);
 		saleNote.setSaleDetails(getSqlSession().selectList("getDetailSaleNoteById",id));
 		return saleNote;
+	}
+
+	@Override
+	public List<ResultQuerySaleNote> getSalesToday() {
+		Date date = new Date();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		String today = df.format(date);
+		return getSqlSession().selectList("getSalesToday",today);
 	}
 
 }

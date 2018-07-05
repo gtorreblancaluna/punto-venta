@@ -17,5 +17,6 @@ public interface SaleNoteDAO {
 	List<ResultQuerySaleNote> getByFilter(SaleNoteFilter saleNoteFilter);
 	SaleNoteForm getSaleNoteById(Integer id);
 	SaleNoteDTO getSaleById(Integer id);
+	List<ResultQuerySaleNote> getSalesToday();
 
 }
