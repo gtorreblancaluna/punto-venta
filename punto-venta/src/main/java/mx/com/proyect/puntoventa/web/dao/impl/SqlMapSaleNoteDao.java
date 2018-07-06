@@ -2,6 +2,8 @@ package mx.com.proyect.puntoventa.web.dao.impl;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +16,7 @@ import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
+import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQueryItemsSold;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 
 public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteDAO {
@@ -87,11 +90,46 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 	}
 
 	@Override
-	public List<ResultQuerySaleNote> getSalesToday() {
-		Date date = new Date();
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		String today = df.format(date);
-		return getSqlSession().selectList("getSalesToday",today);
+	public List<ResultQuerySaleNote> getSalesByParameter(String parameter) {
+		if(parameter.equals("today")) {
+			Date date = new Date();
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			String today = df.format(date);
+			return getSqlSession().selectList("getSalesToday",today);
+		}else if(parameter.equals("week")) {
+			return getSqlSession().selectList("getSalesWeek");
+		}else if(parameter.equals("month")) {			
+			Map<String,Object> parameters = new HashMap<>();
+			LocalDate today = LocalDate.now();
+			int month = today.getMonth().getValue();
+			int year = today.getYear();
+			parameters.put("month", month);
+			parameters.put("year", year);
+			return getSqlSession().selectList("getSalesMonth",parameters);
+		}
+		
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getItemsSold() {
+		LocalDate today = LocalDate.now();
+		int month = today.getMonth().getValue();
+		int year = today.getYear();
+		Map<String,Object> result = new HashMap<>();
+		Map<String,Object> parameters = new HashMap<>();
+		parameters.put("month", month);
+		parameters.put("year", year);		
+		
+		List<ResultQueryItemsSold> itemsByDay = getSqlSession().selectList("getItemsByDay",today.toString());
+		List<ResultQueryItemsSold> itemsByWeek = getSqlSession().selectList("getItemsByWeek");
+		List<ResultQueryItemsSold> itemsByMonth = getSqlSession().selectList("getItemsByMonth",parameters);
+		
+		result.put("itemsByDay", itemsByDay);
+		result.put("itemsByWeek", itemsByWeek);
+		result.put("itemsByMonth", itemsByMonth);
+		
+		return result;
 	}
 
 }

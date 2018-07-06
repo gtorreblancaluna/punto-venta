@@ -11,12 +11,14 @@
 <title>punto venta :: bienvenido</title>
 <!-- <link rel="stylesheet" href="../css/bootstrap.min.css"> -->
 <style type="text/css">
-.centered { text-align: center;}
-.container{font-size:12px;}
+
 .row-color{background-color: #000000ad; color:#fff;}
 .bgcol{background-color: #f1c16d3d;}
+.container-salesWeek{max-height: 700px;overflow: auto;}
+.container-salesMonth{max-height: 700px;overflow: auto;}
+.container-salesToday{max-height: 700px;overflow: auto;}
 /* body{background-image:url("http://www.thomaslhomme.com/wp-content/uploads/2014/03/Cool-Website-Backgrounds.jpg"); } */
-body{background-image: url(images/madera.jpg);}
+
 
 </style>
 </head>
@@ -32,14 +34,8 @@ body{background-image: url(images/madera.jpg);}
 	</div>
 	
 	<div class="row centered row-color" >
-	   <div class="col-sm-6 " >
-			<h2 >Venta semanal</h2>			
-	   </div>
-	   <div class="col-sm-6 ">
-	   	 <h2 >Venta mensual</h2>	   	 
-	   	</div>
-	   	<div class="col-sm-12 ">
-	   		<h2>Pedidos del dia</h2>
+	<div class="col-sm-12 ">
+	   		<h3>Pedidos del dia</h3>
 	   		<div class="container-salesToday bgcol">
 	   		<c:if test="${not empty salesToday}">
 	   			<table class="table">
@@ -70,10 +66,172 @@ body{background-image: url(images/madera.jpg);}
 	   			</table>
 	   		</c:if>
 	   		<c:if test="${empty salesToday}">
-	   			<p>No encontre pedidos para hoy</p>
+	   			<p>No encontr&eacute; pedidos para hoy</p>
 	   		</c:if>
 	   		</div>
 	   	</div>
+	
+	
+	   <div class="col-sm-12 " >
+			<h3>Venta semanal</h3>	
+			<div class="container-salesWeek bgcol">
+	   		<c:if test="${not empty salesByWeek}">
+	   			<table class="table">
+	   				<thead>
+		   				<tr>
+		   					<th>Id</th>
+		   					<th>Fecha registro</th>
+		   					<th>Fecha entrega</th>
+		   					<th>Descripci&oacute;n</th>
+		   					<th>Cliente</th>
+		   					<th>Sucursal</th>
+		   					<th>Atendi&oacute;</th>
+		   				</tr>
+	   				</thead>
+	   				<tbody>
+	   					<c:forEach items="${salesByWeek}" var="sale">
+		   					<tr>
+		   						<td>${sale.saleId}</td>
+		   						<td>${sale.saleDate}</td>
+		   						<td>${sale.dateDelivery }</td>
+		   						<td>${sale.description}</td>
+		   						<td>${sale.nameCustomer}</td>
+		   						<td>${sale.nameOffice}</td>
+		   						<td>${sale.nameUser}</td>
+		   					</tr>  	
+	   					</c:forEach>			
+	   				</tbody>
+	   			</table>
+	   		</c:if>
+	   		<c:if test="${empty salesByWeek}">
+	   			<p>No encontr&eacute; ventas de la semana </p>
+	   		</c:if>
+	   		</div>
+	   </div>
+	   <div class="col-sm-12 ">
+	   	 <h3>Venta mensual</h3>
+	   	 <div class="container-salesMonth bgcol">
+	   		<c:if test="${not empty salesByMonth}">
+	   			<table class="table">
+	   				<thead>
+		   				<tr>
+		   					<th>Id</th>
+		   					<th>Fecha registro</th>
+		   					<th>Fecha entrega</th>
+		   					<th>Descripci&oacute;n</th>
+		   					<th>Cliente</th>
+		   					<th>Sucursal</th>
+		   					<th>Atendi&oacute;</th>
+		   				</tr>
+	   				</thead>
+	   				<tbody>
+	   					<c:forEach items="${salesByMonth}" var="sale">
+		   					<tr>
+		   						<td>${sale.saleId}</td>
+		   						<td>${sale.saleDate}</td>
+		   						<td>${sale.dateDelivery }</td>
+		   						<td>${sale.description}</td>
+		   						<td>${sale.nameCustomer}</td>
+		   						<td>${sale.nameOffice}</td>
+		   						<td>${sale.nameUser}</td>
+		   					</tr>  	
+	   					</c:forEach>			
+	   				</tbody>
+	   			</table>
+	   		</c:if>
+	   		<c:if test="${empty salesByMonth}">
+	   			<p>No encontr&eacute; ventas del mes </p>
+	   		</c:if>
+	   		</div>	   	 
+	   	</div>
+	   	
+	   	  <div class="col-sm-12 centered" >
+			<h3>Productos del dia </h3>	
+			<div class="container-itemsByDay bgcol">
+	   		<c:if test="${not empty itemsByDay}">
+	   			<table class="table">
+	   				<thead>
+		   				<tr>
+		   					<th>Id</th>
+		   					<th>Total</th>
+		   					<th>Descripci&oacute;n</th>		   					
+		   				</tr>
+	   				</thead>
+	   				<tbody>
+	   					<c:forEach items="${itemsByDay}" var="item">
+		   					<tr>
+		   						<td>${item.itemId}</td>
+		   						<td>${item.total}</td>
+		   						<td>${item.description }</td>		   					
+		   					</tr>  	
+	   					</c:forEach>			
+	   				</tbody>
+	   			</table>
+	   		</c:if>
+	   		<c:if test="${empty itemsByDay}">
+	   			<p>No encontr&eacute; articulos vendidos el dia de hoy </p>
+	   		</c:if>
+	   		</div>
+	   </div>
+	   
+	   <div class="col-sm-12 centered" >
+			<h3>Productos de esta semana </h3>	
+			<div class="container-itemsByDay bgcol">
+	   		<c:if test="${not empty itemsByWeek}">
+	   			<table class="table">
+	   				<thead>
+		   				<tr>
+		   					<th>Id</th>
+		   					<th>Total</th>
+		   					<th>Descripci&oacute;n</th>		   					
+		   				</tr>
+	   				</thead>
+	   				<tbody>
+	   					<c:forEach items="${itemsByWeek}" var="item">
+		   					<tr>
+		   						<td>${item.itemId}</td>
+		   						<td>${item.total}</td>
+		   						<td>${item.description }</td>		   					
+		   					</tr>  	
+	   					</c:forEach>			
+	   				</tbody>
+	   			</table>
+	   		</c:if>
+	   		<c:if test="${empty itemsByWeek}">
+	   			<p>No encontr&eacute; articulos vendidos en esta semana </p>
+	   		</c:if>
+	   		</div>
+	   </div>
+	   
+	   <div class="col-sm-12 " >
+			<h3>Productos de este mes </h3>	
+			<div class="container-itemsByDay bgcol">
+	   		<c:if test="${not empty itemsByMonth}">
+	   			<table class="table">
+	   				<thead>
+		   				<tr>
+		   					<th>Id</th>
+		   					<th>Total</th>
+		   					<th>Descripci&oacute;n</th>		   					
+		   				</tr>
+	   				</thead>
+	   				<tbody>
+	   					<c:forEach items="${itemsByMonth}" var="item">
+		   					<tr>
+		   						<td>${item.itemId}</td>
+		   						<td>${item.total}</td>
+		   						<td>${item.description }</td>		   					
+		   					</tr>  	
+	   					</c:forEach>			
+	   				</tbody>
+	   			</table>
+	   		</c:if>
+	   		<c:if test="${empty itemsByMonth}">
+	   			<p>No encontr&eacute; articulos vendidos en este mes </p>
+	   		</c:if>
+	   		</div>
+	   </div>
+	   	
 	</div>
 </div>
 

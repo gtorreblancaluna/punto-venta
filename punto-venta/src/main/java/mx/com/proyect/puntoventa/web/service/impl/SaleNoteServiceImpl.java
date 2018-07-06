@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -104,8 +105,13 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	}
 
 	@Override
-	public List<ResultQuerySaleNote> getSalesToday() {
-		return saleNoteDao.getSalesToday();
+	public List<ResultQuerySaleNote> getSalesByParameter(String parameter) {
+		return saleNoteDao.getSalesByParameter(parameter);
+	}
+
+	@Override
+	public Map<String,Object> getItemsSold() {		
+		return saleNoteDao.getItemsSold();
 	}
 	
 

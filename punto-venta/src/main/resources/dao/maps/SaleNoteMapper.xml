@@ -1,6 +1,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mx.com.proyect.puntoventa.web.dao.SaleNoteDAO">
 
+	<resultMap id="resultMapQueryItemsSold" type="resultQueryItemsSold">
+		<result property="total" column="total_articulos" />
+		<result property="itemId" column="cl_articulo" />
+		<result property="description" column="descripcion" />
+		<result property="itemPrice" column="precio_articulo" />		
+	</resultMap>
+
 	<resultMap id="resultMapQuerySaleNote" type="resultQuerySaleNote">
 		<result property="saleId" column="cl_venta" />
 		<result property="saleDate" column="fe_registro" />
@@ -149,8 +156,8 @@
 		WHERE
 		v.cl_venta = #{id}
 	</select>
-	
-	<select id="getSalesToday" resultMap="resultMapQuerySaleNote">
+	<!-- obtener las ventas del dia -->
+	<select id="getSalesToday" resultMap="resultMapQuerySaleNote" parameterType="java.lang.String">
 		SELECT v.cl_venta,v.fe_registro,v.fe_entrega,v.ds_descripcion,
 		CONCAT(c.nombre,' ',c.ap_paterno) AS nombre_cliente, s.nombre AS
 		nombre_sucursal,
@@ -160,6 +167,62 @@
 		INNER JOIN c_sucursal s ON (v.cl_sucursal = s.cl_sucursal)
 		INNER JOIN c_usuario u ON (v.cl_usuario = u.cl_usuario)
 		WHERE DATE(v.fe_entrega) = #{today}
+	</select>
+	<!-- obtener las ventas de la semana -->
+	<select id="getSalesWeek" resultMap="resultMapQuerySaleNote">
+		SELECT v.cl_venta,v.fe_registro,v.fe_entrega,v.ds_descripcion,
+		CONCAT(c.nombre,' ',c.ap_paterno) AS nombre_cliente, s.nombre AS
+		nombre_sucursal,
+		CONCAT(u.nombre,' ',u.ap_paterno) AS nombre_usuario
+		FROM c_venta v
+		INNER JOIN c_cliente c ON (v.cl_cliente = c.cl_cliente)
+		INNER JOIN c_sucursal s ON (v.cl_sucursal = s.cl_sucursal)
+		INNER JOIN c_usuario u ON (v.cl_usuario = u.cl_usuario)
+		WHERE YEARWEEK(v.fe_entrega) = YEARWEEK(CURDATE())
+		AND v.cl_estatus_venta = 5
+	</select>
+	<!-- obtener las ventas del mes -->
+	<select id="getSalesMonth" resultMap="resultMapQuerySaleNote" parameterType="java.util.Map">
+		SELECT v.cl_venta,v.fe_registro,v.fe_entrega,v.ds_descripcion,
+		CONCAT(c.nombre,' ',c.ap_paterno) AS nombre_cliente, s.nombre AS
+		nombre_sucursal,
+		CONCAT(u.nombre,' ',u.ap_paterno) AS nombre_usuario
+		FROM c_venta v
+		INNER JOIN c_cliente c ON (v.cl_cliente = c.cl_cliente)
+		INNER JOIN c_sucursal s ON (v.cl_sucursal = s.cl_sucursal)
+		INNER JOIN c_usuario u ON (v.cl_usuario = u.cl_usuario)
+		WHERE MONTH(v.fe_entrega) = #{month} AND YEAR(v.fe_entrega) = #{year}
+		AND v.cl_estatus_venta = 5
+	</select>
+	<!-- obtener los articulos vendidos en el dia  -->
+	<select id="getItemsByDay" resultMap="resultMapQueryItemsSold" parameterType="java.lang.String">
+		SELECT COUNT(dv.cl_articulo) AS total_articulos, a.cl_articulo, a.descripcion, dv.precio_articulo
+		FROM k_detalle_venta dv
+		INNER JOIN c_venta v ON (v.cl_venta = dv.cl_venta)
+		INNER JOIN c_articulo a ON (a.cl_articulo = dv.cl_articulo)
+		WHERE v.cl_estatus_venta = 5
+		AND DATE(v.fe_entrega) = #{today}
+		GROUP BY dv.cl_articulo
+	</select>
+	<!-- obtener los articulos vendidos en la semana -->
+	<select id="getItemsByWeek" resultMap="resultMapQueryItemsSold">
+		SELECT COUNT(dv.cl_articulo) AS total_articulos, a.cl_articulo, a.descripcion, dv.precio_articulo
+		FROM k_detalle_venta dv
+		INNER JOIN c_venta v ON (v.cl_venta = dv.cl_venta)
+		INNER JOIN c_articulo a ON (a.cl_articulo = dv.cl_articulo)
+		WHERE v.cl_estatus_venta = 5
+		AND YEARWEEK(v.fe_entrega) = YEARWEEK(CURDATE())
+		GROUP BY dv.cl_articulo
+	</select>
+	<!-- obtener los articulos vendidos en el mes -->
+	<select id="getItemsByMonth" resultMap="resultMapQueryItemsSold" parameterType="java.util.Map">
+		SELECT COUNT(dv.cl_articulo) AS total_articulos, a.cl_articulo, a.descripcion, dv.precio_articulo
+		FROM k_detalle_venta dv
+		INNER JOIN c_venta v ON (v.cl_venta = dv.cl_venta)
+		INNER JOIN c_articulo a ON (a.cl_articulo = dv.cl_articulo)
+		WHERE v.cl_estatus_venta = 5
+		AND MONTH(v.fe_entrega) = #{month} AND YEAR(v.fe_entrega) = #{year}
+		GROUP BY dv.cl_articulo
 	</select>
 
 </mapper>

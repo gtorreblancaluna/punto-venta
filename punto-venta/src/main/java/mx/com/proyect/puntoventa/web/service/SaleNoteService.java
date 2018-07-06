@@ -1,6 +1,7 @@
 package mx.com.proyect.puntoventa.web.service;
 
 import java.util.List;
+import java.util.Map;
 
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
@@ -17,5 +18,6 @@ public interface SaleNoteService {
 	SaleNoteForm getSaleNoteById(Integer id);
 	// contendra lo de la tabla y sus detalles completo
 	SaleNoteDTO getSaleById(Integer id);
-	public List<ResultQuerySaleNote> getSalesToday();
+	public List<ResultQuerySaleNote> getSalesByParameter(String parameter);
+	public Map<String,Object> getItemsSold();
 }
