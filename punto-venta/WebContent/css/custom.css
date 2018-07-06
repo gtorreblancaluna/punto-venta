@@ -1,3 +1,6 @@
 body{background-image: url(../images/madera.jpg);}
 .centered { text-align: center;}
-.container{font-size:12px;}
+.container{font-size:12px;color:#fff;}
+.btn-dark{background-color: #000;color:#fff !important;}
+.modal-content{color:#000;}
+/* body h1 {color:#fff;} */

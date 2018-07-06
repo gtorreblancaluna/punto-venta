@@ -261,7 +261,7 @@ function addSaleDetailNoteForm(items){
 			</tr>
 			<tr>
 				<td colspan=5>
-				 <input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="filter" value="Enviar" />	
+				 <input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
 				</td>
 			</tr>
 		</tbody>
@@ -303,7 +303,7 @@ function addSaleDetailNoteForm(items){
 	</c:if>
 	
 	
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAdd">Agregar nota</button>
+<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAdd">Agregar nota</button>
 <div id="modalAdd" class="modal fade" role="dialog" >
  <div class="modal-content" style="width: 1000px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
       <div class="modal-header">
@@ -365,7 +365,7 @@ function addSaleDetailNoteForm(items){
 			      	<th>#</th>
 			      	<th style="width:5%;">Buscar por id</th>
 			        <th>Articulo</th>			        
-			        <th>Color<p><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAddColor">+</button></p></th>
+			        <th>Color<p><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddColor">+</button></p></th>
 			        <th>Descripci&oacute;n</th>
 			        <th>Cantidad</th>
 			        <th>Precio</th>
@@ -401,19 +401,19 @@ function addSaleDetailNoteForm(items){
 			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					
 			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" ></td>
 			        <td><input type="number" class="form-control totalItem" name="" id="totalItem" disabled></td>
-			        <td><input type="button" class="btn btn-info btn-lg" id="addRow-add" value="Agregar" /></td>			        
+			        <td><input type="button" class="btn btn-dark" id="addRow-add" value="Agregar" /></td>			        
 			      </tr>			
 			      	      	      
 			    </tbody>			    
 			  </table>
-			  <input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="add" value="Enviar" />	
+			  <input type="submit" class="btn btn-dark" name="add" value="Enviar" />	
 	  	</div> <!-- end row -->
 	  	</form:form>
 	  	
 	   <p>Agregar nota</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
     </div><!-- end modal add -->
@@ -489,7 +489,7 @@ function addSaleDetailNoteForm(items){
 			        <th>Cantidad</th>
 			        <th>Precio</th>
 			        <th>Total</th>
-			        <th><input type="button" class="btn btn-info btn-lg" id="addRow-update" value="Agregar" /></th>			        
+			        <th><input type="button" class="btn btn-dark" id="addRow-update" value="Agregar" /></th>			        
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -525,14 +525,14 @@ function addSaleDetailNoteForm(items){
 			      	      	      
 			    </tbody>			    
 			  </table>
-			  <input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="update" value="Enviar" />	
+			  <input type="submit" class="btn btn-dark" name="update" value="Enviar" />	
 	  	</div> <!-- end row -->
 	  	</form:form>
 	  	
 	   <p>Actualizar nota</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
     </div><!-- end modal update -->
@@ -553,13 +553,13 @@ function addSaleDetailNoteForm(items){
 							<input type="text" class="form-control" id="colorDescription">
 						</p>
 
-						<input type="button" onclick="addColor();" class="btn btn-primary btn-lg btn-block login-button" value="Enviar" />
+						<input type="button" onclick="addColor();" class="btn btn-dark" value="Enviar" />
 					</form>
 
 					<p>Agregar color</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
 				</div>
 			</div>
 		</div>
