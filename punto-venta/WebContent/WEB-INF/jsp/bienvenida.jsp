@@ -12,8 +12,7 @@
 <!-- <link rel="stylesheet" href="../css/bootstrap.min.css"> -->
 <style type="text/css">
 
-.row-color{background-color: #000000ad; color:#fff;}
-.bgcol{background-color: #f1c16d3d;}
+
 .container-salesWeek{max-height: 700px;overflow: auto;}
 .container-salesMonth{max-height: 700px;overflow: auto;}
 .container-salesToday{max-height: 700px;overflow: auto;}

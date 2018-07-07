@@ -170,78 +170,81 @@ function addSaleDetailNoteForm(items){
 	</div>
 	
 	<!--2018.06.05 Formulario para aplicar busqueda por filtro -->
-	<form:form modelAttribute="saleNoteFilter" action="handleDelivery.do" method="post" name="saleNoteFilter" 
-	id="getSaleNoteByFilter" style="margin: 50px;">
+	<form:form modelAttribute="saleNoteFilter" action="handleDelivery.do" method="post" name="saleNoteFilter"	id="getSaleNoteByFilter" >
+		<div class="container-result">	
 		<p>Consultar mis entregas</p>
-		<table class="table tableFilter">
-		<tbody>
-			<tr>
-				<td>
-					<span class="input-group-text">Fecha inicial:<input type="date" name="iniDateFilter" id="iniDateFilter" class="form-control"> </span>
-				</td>
-				<td>
-					<span class="input-group-text">Fecha final:<input type="date" name="endDateFilter" id="endDateFilter" class="form-control"> </span>
-				</td>
-				<td>
-					<span class="input-group-text">Descripci&oacute;n:<input type="text" name="descriptionFilter" id="descriptionFilter" class="form-control"></span>
-				</td>
-				<td>
-					<span class="input-group-text">Sucursal : 
-						<select name="officeIdFilter" class="form-control" id="officeIdFilter">
-									<option value="0">- Seleccione -</option>
-								<c:forEach items="${listOffices}" var="office">
-									<option value="${office.officeId}">${office.name}</option>
-								</c:forEach>	
-						</select>
-					</span>
-				</td>
-<!-- 				<td> -->
-<!-- 					<span class="input-group-text">Nombre del cliente<input type="text" name="customerNameFilter" id="customerNameFilter" class="form-control"></span> -->
-<!-- 				</td> -->
-			</tr>
-			<tr>
-				<td colspan=5>
-				 <input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="filter" value="Enviar" />	
-				</td>
-			</tr>
-		</tbody>
-		</table>	
+			<table class="table tableFilter bgcol">
+			<tbody>
+				<tr>
+					<td>
+						<span class="input-group-text">Fecha inicial:<input type="date" name="iniDateFilter" id="iniDateFilter" class="form-control"> </span>
+					</td>
+					<td>
+						<span class="input-group-text">Fecha final:<input type="date" name="endDateFilter" id="endDateFilter" class="form-control"> </span>
+					</td>
+					<td>
+						<span class="input-group-text">Descripci&oacute;n:<input type="text" name="descriptionFilter" id="descriptionFilter" class="form-control"></span>
+					</td>
+					<td>
+						<span class="input-group-text">Sucursal : 
+							<select name="officeIdFilter" class="form-control" id="officeIdFilter">
+										<option value="0">- Seleccione -</option>
+									<c:forEach items="${listOffices}" var="office">
+										<option value="${office.officeId}">${office.name}</option>
+									</c:forEach>	
+							</select>
+						</span>
+					</td>
+	<!-- 				<td> -->
+	<!-- 					<span class="input-group-text">Nombre del cliente<input type="text" name="customerNameFilter" id="customerNameFilter" class="form-control"></span> -->
+	<!-- 				</td> -->
+				</tr>
+				<tr>
+					<td colspan=5>
+					 <input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
+					</td>
+				</tr>
+			</tbody>
+			</table>	
+		</div>	
 	</form:form>
 	
 	<c:if test="${not empty listDelivery}">
 	<!-- Mostramos el resultado de la consulta -->
-		<div class="containerShowResultQuery">
-		<table class="table tableShowResultQuery">
-		<thead>
-		<tr>
-			<th>id</th>
-			<th>Fecha registro</th>
-			<th>Fecha de entrega</th>
-			<th>Descripci&oacute;n</th>			
-			<th>Sucursal</th>
-			<th>Usuario</th>
-			<th></th>
-		</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${listDelivery}" var="delivery">
-			<tr>
-				<td><a href="javascript:void();" onclick="getSaleNoteById('${delivery.saleId}');return false;" >${delivery.saleId }</a></td>
-				<td>${delivery.saleDate }</td>
-				<td>${delivery.dateDelivery }</td>
-				<td>${delivery.description }</td>				
-				<td>${delivery.nameOffice }</td>
-				<td>${delivery.nameUser }</td>
-				<td><a href="javascript:void();" onclick = "javascript:generatePdf(${delivery.saleId});">Imprimir</a></td>
-			</tr>
-			</c:forEach>
-		</tbody>
-		</table>
+		<div class="containerShowResultQuery container-result">
+			<div class="bgcol">
+				<table class="table tableShowResultQuery ">
+				<thead>
+				<tr>
+					<th>id</th>
+					<th>Fecha registro</th>
+					<th>Fecha de entrega</th>
+					<th>Descripci&oacute;n</th>			
+					<th>Sucursal</th>
+					<th>Usuario</th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${listDelivery}" var="delivery">
+					<tr>
+						<td><a href="javascript:void();" onclick="getSaleNoteById('${delivery.saleId}');return false;" >${delivery.saleId }</a></td>
+						<td>${delivery.saleDate }</td>
+						<td>${delivery.dateDelivery }</td>
+						<td>${delivery.description }</td>				
+						<td>${delivery.nameOffice }</td>
+						<td>${delivery.nameUser }</td>
+						<td><a href="javascript:void();" onclick = "javascript:generatePdf(${delivery.saleId});">Imprimir</a></td>
+					</tr>
+					</c:forEach>
+				</tbody>
+				</table>
+			</div>
 		</div>
 	</c:if>
 	
 	
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAdd">Agregar entrega</button>
+<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAdd">Agregar entrega</button>
 <div id="modalAdd" class="modal fade" role="dialog" >
  <div class="modal-content" style="width: 1000px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
       <div class="modal-header">
@@ -309,19 +312,19 @@ function addSaleDetailNoteForm(items){
 			        </td>
 			        <td><input type="text" class="form-control" name="details[0].item.description" id="itemDescription" disabled></td>
 			        <td><input type="number" class="form-control" name="details[0].item.amountEntry" id="amountItem"></td> 					
-			        <td><input type="button" class="btn btn-info btn-lg" id="addRow-add" value="Agregar" /></td>			        
+			        <td><input type="button" class="btn btn-dark" id="addRow-add" value="Agregar" /></td>			        
 			      </tr>			
 			      	      	      
 			    </tbody>			    
 			  </table>
-			  <input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="add" value="Enviar" />	
+			  <input type="submit" class="btn btn-dark" name="add" value="Enviar" />	
 	  	</div> <!-- end row -->
 	  	</form:form>
 	  	
 	   <p>Agregar entrega</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
     </div><!-- end modal add -->
@@ -397,7 +400,7 @@ function addSaleDetailNoteForm(items){
 			        <th>Cantidad</th>
 			        <th>Precio</th>
 			        <th>Total</th>
-			        <th><input type="button" class="btn btn-info btn-lg" id="addRow-update" value="Agregar" /></th>			        
+			        <th><input type="button" class="btn btn-dark" id="addRow-update" value="Agregar" /></th>			        
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -433,14 +436,14 @@ function addSaleDetailNoteForm(items){
 			      	      	      
 			    </tbody>			    
 			  </table>
-			  <input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="update" value="Enviar" />	
+			  <input type="submit" class="btn btn-dark" name="update" value="Enviar" />	
 	  	</div> <!-- end row -->
 	  	</form:form>
 	  	
 	   <p>Actualizar nota</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
     </div><!-- end modal update -->

@@ -230,140 +230,145 @@ function addSaleDetailNoteForm(items){
 	</div>
 	
 	<!--2018.06.05 Formulario para aplicar busqueda por filtro -->
-	<form:form modelAttribute="saleNoteFilter" action="handleSaleNote.do" method="post" name="saleNoteFilter" 
-	id="getSaleNoteByFilter" style="margin: 50px;">
-		<p>Consultar nota de venta</p>
-		<table class="table tableFilter">
-		<tbody>
-			<tr>
-				<td>
-					<span class="input-group-text">Fecha inicial:<input type="date" name="iniDateFilter" id="iniDateFilter" class="form-control"> </span>
-				</td>
-				<td>
-					<span class="input-group-text">Fecha final:<input type="date" name="endDateFilter" id="endDateFilter" class="form-control"> </span>
-				</td>
-				<td>
-					<span class="input-group-text">Descripci&oacute;n:<input type="text" name="descriptionFilter" id="descriptionFilter" class="form-control"></span>
-				</td>
-				<td>
-					<span class="input-group-text">Sucursal : 
-						<select name="officeIdFilter" class="form-control" id="officeIdFilter">
-									<option value="0">- Seleccione -</option>
-								<c:forEach items="${listOffices}" var="office">
-									<option value="${office.officeId}">${office.name}</option>
-								</c:forEach>	
-						</select>
-					</span>
-				</td>
-				<td>
-					<span class="input-group-text">Nombre del cliente<input type="text" name="customerNameFilter" id="customerNameFilter" class="form-control"></span>
-				</td>
-			</tr>
-			<tr>
-				<td colspan=5>
-				 <input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
-				</td>
-			</tr>
-		</tbody>
-		</table>	
+	<form:form modelAttribute="saleNoteFilter" action="handleSaleNote.do" method="post" name="saleNoteFilter" id="getSaleNoteByFilter" >
+		<div class="container-result">	
+			<p>Consultar nota de venta</p>
+			<table class="table tableFilter bgcol">
+			<tbody>
+				<tr>
+					<td>
+						<span class="input-group-text">Fecha inicial:<input type="date" name="iniDateFilter" id="iniDateFilter" class="form-control"> </span>
+					</td>
+					<td>
+						<span class="input-group-text">Fecha final:<input type="date" name="endDateFilter" id="endDateFilter" class="form-control"> </span>
+					</td>
+					<td>
+						<span class="input-group-text">Descripci&oacute;n:<input type="text" name="descriptionFilter" id="descriptionFilter" class="form-control"></span>
+					</td>
+					<td>
+						<span class="input-group-text">Sucursal : 
+							<select name="officeIdFilter" class="form-control" id="officeIdFilter">
+										<option value="0">- Seleccione -</option>
+									<c:forEach items="${listOffices}" var="office">
+										<option value="${office.officeId}">${office.name}</option>
+									</c:forEach>	
+							</select>
+						</span>
+					</td>
+					<td>
+						<span class="input-group-text">Nombre del cliente<input type="text" name="customerNameFilter" id="customerNameFilter" class="form-control"></span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=5>
+					 <input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
+					</td>
+				</tr>
+			</tbody>
+			</table>	
+		</div>
 	</form:form>
 	
 	<c:if test="${not empty listSaleNoteByFilter}">
 	<!-- Mostramos el resultado de la consulta -->
-		<div class="containerShowResultQuery">
-		<table class="table tableShowResultQuery">
-		<thead>
-		<tr>
-			<th>id</th>
-			<th>Fecha registro</th>
-			<th>Fecha de entrega</th>
-			<th>Descripci&oacute;n</th>
-			<th>Cliente</th>
-			<th>Sucursal</th>
-			<th>Usuario</th>
-			<th></th>
-		</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${listSaleNoteByFilter}" var="saleNote">
-			<tr>
-				<td><a href="javascript:void();" onclick="getSaleNoteById('${saleNote.saleId}');return false;" >${saleNote.saleId }</a></td>
-				<td>${saleNote.saleDate }</td>
-				<td>${saleNote.dateDelivery }</td>
-				<td>${saleNote.description }</td>
-				<td>${saleNote.nameCustomer }</td>
-				<td>${saleNote.nameOffice }</td>
-				<td>${saleNote.nameUser }</td>
-				<td><a href="javascript:void();" onclick="javascript:generatePdf(${saleNote.saleId });">Imprimir</a></td>
-			</tr>
-			</c:forEach>
-		</tbody>
-		</table>
+		<div class="containerShowResultQuery container-result">
+			<div class="bgcol">
+				<table class="table tableShowResultQuery">
+				<thead>
+				<tr>
+					<th>id</th>
+					<th>Fecha registro</th>
+					<th>Fecha de entrega</th>
+					<th>Descripci&oacute;n</th>
+					<th>Cliente</th>
+					<th>Sucursal</th>
+					<th>Usuario</th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${listSaleNoteByFilter}" var="saleNote">
+					<tr>
+						<td><a href="javascript:void();" onclick="getSaleNoteById('${saleNote.saleId}');return false;" >${saleNote.saleId }</a></td>
+						<td>${saleNote.saleDate }</td>
+						<td>${saleNote.dateDelivery }</td>
+						<td>${saleNote.description }</td>
+						<td>${saleNote.nameCustomer }</td>
+						<td>${saleNote.nameOffice }</td>
+						<td>${saleNote.nameUser }</td>
+						<td><a href="javascript:void();" onclick="javascript:generatePdf(${saleNote.saleId });">Imprimir</a></td>
+					</tr>
+					</c:forEach>
+				</tbody>
+				</table>
+			</div>
 		</div>
 	</c:if>
 	
 	
 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAdd">Agregar nota</button>
 <div id="modalAdd" class="modal fade" role="dialog" >
- <div class="modal-content" style="width: 1000px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
+ <div class="modal-content" >
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Agregar nota</h4>
       </div>
       <div class="modal-body">     
 <form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="saleNoteForm" id="addSaleNoteForm">
-	<table >
-		<tr>
-			<td>
-				<span class="input-group-text">Fecha :<input type="date" name="dateSaleNote" id="dateForm" class="form-control dateForm"> </span>
-			</td>
-			<td>
-				<span class="input-group-text">Cliente : 
-						<select name="userId" class="form-control userId" >
-									<option value="0">- Seleccione -</option>
-								<c:forEach items="${listClients}" var="client">
-									<option value="${client.userId}">${client.name} ${client.firstName}</option>
-								</c:forEach>	
-						</select>	
-				</span>				
-			</td>
-			<td>
-<%-- 				<span class="input-group-text">Vendedor :<input type="text" class="form-control" value="${sessionScope.userSession.name }" disabled></span> --%>
-					<span class="input-group-text">Vendedor : 
-						<select name="sellerId" class="form-control sellerId" >
-									<option value="0">- Seleccione -</option>
-								<c:forEach items="${listUsers}" var="user">
-									<!-- Solo mostrar usuarios que sean vendedores -->
-									<c:if test="${user.job.description eq 'vendedor' }">
-										<option value="${user.userId}">${user.name} ${user.firstName}</option>
-									</c:if>									
-								</c:forEach>	
-						</select>	
-				</span>	
-			</td>
-			<td>
-			<span class="input-group-text">Sucursal : 
-				<select name="storeId" class="form-control storeId" id="storeId">
-							<option value="0">- Seleccione -</option>
-						<c:forEach items="${listOffices}" var="office">
-							<option value="${office.officeId}">${office.name}</option>
-						</c:forEach>	
-				</select>
-			</span>
-			
-			</td>
-			<td>
-				<p style="font-weight: 900;  font-size: 20px;">Total a pagar: $<span id="totalPagar"></span></p>
-			</td>
-		</tr>
-	</table>
+	<div class="info-modal-header">
+		<table class="table" >
+			<tr>
+				<td>
+					<span class="input-group-text">Fecha :<input type="date" name="dateSaleNote" id="dateForm" class="form-control dateForm"> </span>
+				</td>
+				<td>
+					<span class="input-group-text">Cliente : 
+							<select name="userId" class="form-control userId" >
+										<option value="0">- Seleccione -</option>
+									<c:forEach items="${listClients}" var="client">
+										<option value="${client.userId}">${client.name} ${client.firstName}</option>
+									</c:forEach>	
+							</select>	
+					</span>				
+				</td>
+				<td>
+	<%-- 				<span class="input-group-text">Vendedor :<input type="text" class="form-control" value="${sessionScope.userSession.name }" disabled></span> --%>
+						<span class="input-group-text">Vendedor : 
+							<select name="sellerId" class="form-control sellerId" >
+										<option value="0">- Seleccione -</option>
+									<c:forEach items="${listUsers}" var="user">
+										<!-- Solo mostrar usuarios que sean vendedores -->
+										<c:if test="${user.job.description eq 'vendedor' }">
+											<option value="${user.userId}">${user.name} ${user.firstName}</option>
+										</c:if>									
+									</c:forEach>	
+							</select>	
+					</span>	
+				</td>
+				<td>
+				<span class="input-group-text">Sucursal : 
+					<select name="storeId" class="form-control storeId" id="storeId">
+								<option value="0">- Seleccione -</option>
+							<c:forEach items="${listOffices}" var="office">
+								<option value="${office.officeId}">${office.name}</option>
+							</c:forEach>	
+					</select>
+				</span>
+				
+				</td>
+				<td>
+					<p style="font-weight: 900;  font-size: 20px;">Total a pagar: $<span id="totalPagar"></span></p>
+				</td>
+			</tr>
+		</table>
+	</div>
 	
 	<div class="row">
      		<table class="table tableAddNote">
 			    <thead>
 			      <tr>
 			      	<th>#</th>
-			      	<th style="width:5%;">Buscar por id</th>
+			      	<th style="width:10%;">Buscar por id</th>
 			        <th>Articulo</th>			        
 			        <th>Color<p><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddColor">+</button></p></th>
 			        <th>Descripci&oacute;n</th>
@@ -423,7 +428,7 @@ function addSaleDetailNoteForm(items){
     
     
     <div id="modalUpdate" class="modal fade" role="dialog" >
- <div class="modal-content" style="width: 1000px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
+ <div class="modal-content" >
       <div class="modal-header">
         <button type="button" class="close closeUpdateForm" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Actualizar nota</h4>
