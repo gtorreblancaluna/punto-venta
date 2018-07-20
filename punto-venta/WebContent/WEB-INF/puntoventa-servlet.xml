@@ -46,10 +46,10 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-<!-- 	<bean name="/login.do" -->
-<!-- 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"> -->
-<!-- 		<property name="viewName" value="login" /> -->
-<!-- 	</bean> -->
+	<bean name="/login.do"
+		class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="login" />
+	</bean>
 	
 
 

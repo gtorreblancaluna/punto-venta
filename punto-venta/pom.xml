@@ -20,9 +20,9 @@
 <!-- 	</parent> -->
 
 	<groupId>proyect</groupId>
-	<artifactId>punto-venta</artifactId>
+	<artifactId>puntoventa</artifactId>
 	<packaging>war</packaging>
-	<name>punto-venta</name>
+	<name>puntoventa</name>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<testSourceDirectory>src/test/java</testSourceDirectory>
@@ -34,7 +34,7 @@
 			</testResource>
 		</testResources>
 		<directory>target</directory>
-		<finalName>punto-venta</finalName>
+		<finalName>puntoventa</finalName>
 
 		<plugins>
 <!-- 			<plugin> -->

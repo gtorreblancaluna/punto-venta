@@ -11,8 +11,12 @@ import java.sql.Timestamp;
 
 public class AccountDTO implements Serializable {	
 	
-	private static final long serialVersionUID = 413296597983426251L;
+//	private static final long serialVersionUID = 413296597983426251L;
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 	private String userId;
 	private String email;
 	private String name;

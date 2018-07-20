@@ -2,20 +2,26 @@ package mx.com.proyect.puntoventa.web.view;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 /* GTL 2018.05.21
  * Controlador para las notas de venta
  * 
  * */
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
@@ -25,6 +31,7 @@ import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.OfficeDTO;
+import mx.com.proyect.puntoventa.web.model.UserSession;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 import mx.com.proyect.puntoventa.web.service.AccountService;
 import mx.com.proyect.puntoventa.web.service.ClientService;
@@ -38,21 +45,36 @@ import mx.com.proyect.puntoventa.web.service.SaleNoteService;
 public class HandleSaleNoteController {
 
 	@Autowired
-	AccountService accountService;
+	private AccountService accountService;
 	@Autowired
-	InventoryService inventoryService;
+	private InventoryService inventoryService;
 	@Autowired
-	ClientService clientService;
+	private ClientService clientService;
 	@Autowired
-	OfficeService officeService;
+	private OfficeService officeService;
 	@Autowired
-	ColorService colorService;
+	private ColorService colorService;
 	@Autowired
-	SaleNoteService saleNoteService;
+	private SaleNoteService saleNoteService;
 
 	// vista principal
-	@RequestMapping(value = "handleSaleNote.do", method = RequestMethod.GET)
-	public String showSaleNote( HttpServletRequest request, Model model) {		
+	@GetMapping(value = "handleSaleNote.do")
+	public ModelAndView showSaleNote( HttpServletRequest request,HttpServletResponse response) {		
+		ModelAndView modelAndView = new ModelAndView("handleSaleNote");
+//		UserSession userSession = (UserSession) WebUtils.getSessionAttribute( request, "userSession" );
+//		HttpSession session = request.getSession(true);
+//		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		
+		HttpSession session = request.getSession();
+//		if (request.getParameter("JSESSIONID") != null) {
+//		    Cookie userCookie = new Cookie("JSESSIONID", request.getParameter("JSESSIONID"));
+//		    response.addCookie(userCookie);
+//		} else {
+//		    String sessionId = session.getId();
+//		    Cookie userCookie = new Cookie("JSESSIONID", sessionId);
+//		    response.addCookie(userCookie);
+//		}
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		
 		// traemos los productos del almacen
 		List<ItemDTO> listItems = inventoryService.getAll();
@@ -60,25 +82,23 @@ public class HandleSaleNoteController {
 		List<OfficeDTO> listOffices = officeService.getAll();
 		List<ColorDTO> listColors = colorService.getAll();
 		List<AccountDTO> listUsers = accountService.getAllUser();
-		model.addAttribute("listUsers", listUsers);
+		modelAndView.addObject("listUsers", listUsers);
 
-		model.addAttribute("listColors", listColors);
-		model.addAttribute("listClients", listClients);
-		model.addAttribute("saleNoteForm", new SaleNoteForm());
-		model.addAttribute("listItems", listItems);
-		model.addAttribute("listOffices", listOffices);
+		modelAndView.addObject("listColors", listColors);
+		modelAndView.addObject("listClients", listClients);
+		modelAndView.addObject("saleNoteForm", new SaleNoteForm());
+		modelAndView.addObject("listItems", listItems);
+		modelAndView.addObject("listOffices", listOffices);
 		
-		return "handleSaleNote";
+		return modelAndView;
 	}
 
 	// agregar nota
-	@RequestMapping(value = "handleSaleNote.do", params = "add")
+	@PostMapping(value = "handleSaleNote.do", params = "add")
 	public String addSaleNote(HttpServletRequest request, 
-			@ModelAttribute ("saleNoteForm") SaleNoteForm saleNoteForm, Model model) {
-		
+			@ModelAttribute ("saleNoteForm") SaleNoteForm saleNoteForm, Model model) {		
 		// agregando pedido a la bd
 		saleNoteService.add(saleNoteForm);		
-		
 		// cargar datos al JSP
 		List<AccountDTOclient> listClients = clientService.getAll();
 		model.addAttribute("listClients", listClients);
@@ -98,7 +118,7 @@ public class HandleSaleNoteController {
 	}
 	
 	    // traer las notas por el filtro consultado
-		@RequestMapping(value = "handleSaleNote.do", params = "filter")
+	@PostMapping(value = "handleSaleNote.do", params = "filter")
 		public String getSaleNoteByFilter(HttpServletRequest request, 
 				@ModelAttribute ("saleNoteFilter") SaleNoteFilter saleNoteFilter, Model model) {
 			
@@ -127,7 +147,7 @@ public class HandleSaleNoteController {
 		
 		
 		// actualizar nota
-		@RequestMapping(value = "handleSaleNote.do", params = "update")
+	@PostMapping(value = "handleSaleNote.do", params = "update")
 		public String updateSaleNote(HttpServletRequest request, 
 				@ModelAttribute ("saleNoteForm") SaleNoteForm saleNoteForm, Model model) {
 			

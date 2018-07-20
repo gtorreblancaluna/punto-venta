@@ -23,10 +23,8 @@
 		<c:if test="${message != null}">
 			<div class="message"><c:out value="${message}"></c:out></div>
 			</c:if>
-			<form:form modelAttribute="loginForm" action="loginProcess.do" method="post" name="loginForm">
+			<form:form modelAttribute="loginForm" action="login.do" method="post" name="loginForm">
 <%-- 		<form id="loginForm" method="POST" data-avia-form-id="1" class="loginForm avia-builder-el-2 avia-builder-el-first "> --%>
-				
-
 			<div class="row">	
 						<br>
 						<div class="col-12">
