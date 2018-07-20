@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
@@ -31,7 +33,8 @@ public class LoginController {
 	private SaleNoteService saleNoteService;
 	
 	
-	@GetMapping(value = "/login.do")
+//	@GetMapping(value = "/login.do")
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public ModelAndView showLogin( HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView("login");	
 		HttpSession httpSession = request.getSession();
@@ -52,8 +55,8 @@ public class LoginController {
 	}
 	
 	@SuppressWarnings("unchecked")
-//	@PostMapping(value = "/loginProcess.do")
-	@PostMapping
+	@RequestMapping(value = "/loginProcess.do", method = RequestMethod.POST)
+//	@PostMapping
 	public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response, 
 			@ModelAttribute LoginForm loginForm){
 		

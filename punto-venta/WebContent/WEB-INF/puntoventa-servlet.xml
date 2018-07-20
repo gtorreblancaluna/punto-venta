@@ -24,18 +24,12 @@
 	<mvc:annotation-driven />
 	
 
-	<mvc:resources location="/css/" mapping="/css/**"
-		cache-period="604800" />
-	<mvc:resources location="/images/" mapping="/images/**"
-		cache-period="31556926" />
-	<mvc:resources location="/js/" mapping="/js/**"
-		cache-period="31556926" />
-	<mvc:resources location="/media/" mapping="/media/**"
-		cache-period="31556926" />
-	<mvc:resources location="/resources/" mapping="/resources/**"
-		cache-period="604800" />
-	<mvc:resources location="/sounds/" mapping="/sounds/**"
-		cache-period="31556926" />
+	<mvc:resources location="/css/" mapping="/css/**" cache-period="604800" />
+	<mvc:resources location="/images/" mapping="/images/**"	cache-period="31556926" />
+	<mvc:resources location="/js/" mapping="/js/**"	cache-period="31556926" />
+	<mvc:resources location="/media/" mapping="/media/**"	cache-period="31556926" />
+	<mvc:resources location="/resources/" mapping="/resources/**"	cache-period="604800" />
+	<mvc:resources location="/sounds/" mapping="/sounds/**"	cache-period="31556926" />
 
 
 	<bean id="viewResolver"
