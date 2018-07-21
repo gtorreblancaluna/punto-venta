@@ -55,4 +55,22 @@
 	<select id="getAllClient" resultMap="clientResultMap" >
 		SELECT * FROM c_cliente WHERE status = '1' ORDER BY nombre
 	</select>
+	<select id="getCustomerByFilter" resultMap="clientResultMap" parameterType="customerFilter">
+		SELECT * 
+		FROM c_cliente 
+		WHERE status = '1' 
+		<if test="name != null and name != '' ">
+			AND nombre LIKE '%#{name}%'
+		</if>
+		<if test="firstName != null and firstName != '' ">
+			AND ap_paterno LIKE '%#{firstName}%'
+		</if>
+		<if test="lastName != null and lastName != '' ">
+			AND ap_materno LIKE '%#{lastName}%'
+		</if>
+		<if test="email != null and email != '' ">
+			AND email LIKE '%#{email}%'
+		</if>
+		ORDER BY nombre
+	</select>
 </mapper>

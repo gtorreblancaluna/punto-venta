@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>punto de venta :: admin usuarios</title>
+<title>punto de venta :: admin clientes</title>
 <style>		    
     
 
@@ -16,8 +16,7 @@ $( document ).ready(function() {
 	//confirmar eliminar	
 	$('form[name="deleteUserForm"]').submit(function() {
 	   return confirm("confirma para continuar");	   
-	});
-	
+	});	
 	
 	$( '.btnUpdateUser' ).click(function() {
 		var $updateForm = $("#updateUserForm");
@@ -40,41 +39,12 @@ $( document ).ready(function() {
 		        if(i===4)
 		        	$updateForm.find('#email').val(item.innerHTML);
 		        if(i===5)
-		        	$updateForm.find('#jobId').val(getJobSelect(item.innerHTML));
+		        	$updateForm.find('#tel1').val(item.innerHTML);
 		        if(i===6)
-		        	$updateForm.find('#officeId').val(getOfficeSelect(item.innerHTML));
+		        	$updateForm.find('#tel2').val(item.innerHTML);
 		        
-// 		        alert(values);
-		    });
-// 		    console.log(values);
-
-		   
-	});
-	
-	 function getJobSelect(text){		    	
-	    	var value = 0;
-	    	$( ".selJobId option" ).each(function( index ) {
-	    		var x = $(this).text();
-	    		if(x == text){
-	    			value = index;
-	    		}
-//	    		  console.log( index + ": " + $( this ).text() );
-	    	});
-	    	return value;
-	    }
-	 	function getOfficeSelect(text){		    	
-	    	var value = 0;
-	    	$( ".selOfficeId option" ).each(function( index ) {
-	    		var x = $(this).text();
-	    		if(x == text){
-	    			value = index;
-	    		}
-//	    		  console.log( index + ": " + $( this ).text() );
-	    	});
-	    	return value;
-	    }
-	
-	 	
+		    });		   
+	});	 	
 });
 </script>
 </head>
@@ -96,13 +66,46 @@ $( document ).ready(function() {
 		<div class="page-header">
 		<div class="row">
 			<div class="col">
-				<h1>Usuarios</h1>
+				<h1>Clientes</h1>
 			</div>
 			
 		</div>
-	</div>
-		<!-- Mostramos los usuarios -->
-		<c:if test="${not empty listUser}">
+		</div>
+		
+		<!--2018.07.21 Formulario para aplicar busqueda por filtro -->
+	<form:form modelAttribute="customerFilter" action="handleCustomer.do" method="post" name="handleCustomer" id="getCustomerByFilter" >
+		<div class="container-result">	
+			<p>Consultar clientes por filtro</p>
+			<table class="table tableFilter bgcol">
+			<tbody>
+				<tr>
+					<td>
+						<span class="input-group-text">Nombre:<input type="text" name="name" id="" class="form-control"> </span>
+					</td>
+					<td>
+						<span class="input-group-text">Apellido Paterno:<input type="text" name="firstName" id="" class="form-control"> </span>
+					</td>
+					<td>
+						<span class="input-group-text">Apellido Materno:<input type="text" name="lastName" id="" class="form-control"></span>
+					</td>
+					<td>
+						<span class="input-group-text">Email:<input type="text" name="email" id="" class="form-control"></span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=5>
+					 <input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
+					</td>
+				</tr>
+			</tbody>
+			</table>	
+		</div>
+	</form:form>
+		
+		
+		
+		<!-- Mostramos los clientes por filtro-->
+		<c:if test="${not empty customersByFilter}">
 		<div class="containerShowResultQuery container-result">
 		<table class="table tableShowResultQuery">
 		<thead>
@@ -112,21 +115,19 @@ $( document ).ready(function() {
 				<th>Ap Paterno</th>
 				<th>Ap Materno</th>
 				<th>Email</th>
-				<th>Puesto</th>
-				<th>Sucursal</th>
+				<th></th>
+				<th></th>
+				
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${listUser}" var="user">		
+			<c:forEach items="${customersByFilter}" var="user">		
 		 		<tr>
 		 			<td>${user.userId}</td>
 		 			<td>${user.name}</td>
 		 			<td>${user.firstName}</td>
 		 			<td>${user.secondName}</td>
 		 			<td>${user.email}</td>
-<%-- 		 			<td><c:out default="None" escapeXml="true" value="${user.fgAdmin eq '1' ? 'Admin' : '-' }" /></td> --%>
-					<td>${user.job.description}</td>
-					<td>${user.office.name}</td>
 		 			<td><button type="button" class="btn btn-dark btnUpdateUser" id="btnUpdateUser" data-toggle="modal" data-target="#modalUpdateUser">Editar</button></td>
 		 			<td>		 			
 		 			<form:form action="handleUser.do" method="post" name="deleteUserForm" id="deleteUserForm">
@@ -140,7 +141,7 @@ $( document ).ready(function() {
 	 		</table>
 	 		</div>
 		</c:if>
-		<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddUser">Agregar usuario</button>
+		<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddUser">Agregar cliente</button>
 
 
 
@@ -150,10 +151,10 @@ $( document ).ready(function() {
  <div class="modal-content" style="width: 700px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Agregar Usuario</h4>
+        <h4 class="modal-title">Agregar Cliente</h4>
       </div>
       <div class="modal-body">     
-		<form:form modelAttribute="account" action="handleUser.do" method="post" name="addUserForm">
+		<form:form modelAttribute="clientDTO" action="handleCustomer.do" method="post" name="addUserForm">
 				<div class="form-group">
 					<label>Nombre: </label>
 					<input type="text" id="name" name="name" placeholder="Nombre" class="form-control">
@@ -171,36 +172,20 @@ $( document ).ready(function() {
 					<input type="text" id="email" name="email" placeholder="Email" class="form-control">
 				</div>
 				<div class="form-group">
-					<label>Password: </label>
-					<input type="password" id="password" name="password" placeholder="Password" class="form-control">
+					<label>Tel1: </label>
+					<input type="number" id="tel1" name="tel1" placeholder="Telefono celular" class="form-control">
 				</div>
 				<div class="form-group">	
-					<label>Puesto:</label>
-					<select name="job.jobId" class="form-control" id="jobId">
-						<option value="0">- Seleccione -</option>
-						<c:forEach items="${listJobs}" var="job">
-							<option value="${job.jobId}">${job.description}</option>
-						</c:forEach>	
-					</select>
+					<label>Tel2:</label>
+					<input type="number" id="tel2" name="tel2" placeholder="Telefono casa" class="form-control">
 				</div>
 				<div class="form-group">	
-					<label>Sucursal:</label>
-					<select name="office.officeId" class="form-control" id="officeId">
-						<option value="0">- Seleccione -</option>
-						<c:forEach items="${listOffices}" var="office">
-							<option value="${office.officeId}">${office.name}</option>
-						</c:forEach>	
-					</select>
-				</div>
-<!-- 				<div class="form-group"> -->
-<!-- 					<label>Admin: </label> -->
-<!-- 					<input type="checkbox" id="fgAdmin" name="fgAdmin" class="form-control"> -->
-<!-- 				</div> -->
-				
-								
+					<label>Direccion:</label>
+					<input type="text" id="adress" name="adress" placeholder="Direccion" class="form-control">
+				</div>						
 								
 				<div class="form-group">
-					<input type="submit" class="btn btn-dark login-button" name="addUser" value="Enviar" />					
+					<input type="submit" class="btn btn-dark login-button" name="add" value="Enviar" />					
 				</div>
 				
 		</form:form>
@@ -218,11 +203,10 @@ $( document ).ready(function() {
  <div class="modal-content" style="width: 700px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Editar Usuario</h4>
+        <h4 class="modal-title">Editar Cliente</h4>
       </div>
       <div class="modal-body">     
-		<form:form modelAttribute="account" action="handleUser.do" method="post" name="updateUserForm" id="updateUserForm">
-		<input type="hidden" name="userId" id="userId">
+		<form:form modelAttribute="clientDTO" action="handleCustomer.do" method="post" name="addUserForm">
 				<div class="form-group">
 					<label>Nombre: </label>
 					<input type="text" id="name" name="name" placeholder="Nombre" class="form-control">
@@ -240,34 +224,24 @@ $( document ).ready(function() {
 					<input type="text" id="email" name="email" placeholder="Email" class="form-control">
 				</div>
 				<div class="form-group">
-					<label>Password: </label>
-					<input type="password" id="password" name="password" placeholder="Password" class="form-control">
-				</div>
-				
-				<div class="form-group">	
-					<label>Puesto:</label>
-					<select name="job.jobId" class="form-control selJobId" id="jobId" >
-						<option value="0">- Seleccione -</option>
-						<c:forEach items="${listJobs}" var="job">
-							<option value="${job.jobId}">${job.description}</option>
-						</c:forEach>	
-					</select>
+					<label>Tel1: </label>
+					<input type="number" id="tel1" name="tel1" placeholder="Telefono celular" class="form-control">
 				</div>
 				<div class="form-group">	
-					<label>Sucursal:</label>
-					<select name="office.officeId" class="form-control selOfficeId" id="officeId" >
-						<option value="0">- Seleccione -</option>
-						<c:forEach items="${listOffices}" var="office">
-							<option value="${office.officeId}">${office.name}</option>
-						</c:forEach>	
-					</select>
-				</div>				
-				
-					<div class="form-group">
-					<input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="updateUser" value="Enviar" />					
+					<label>Tel2:</label>
+					<input type="number" id="tel2" name="tel2" placeholder="Telefono casa" class="form-control">
 				</div>
+				<div class="form-group">	
+					<label>Direccion:</label>
+					<input type="text" id="adress" name="adress" placeholder="Direccion" class="form-control">
+				</div>						
+								
+				<div class="form-group">
+					<input type="submit" class="btn btn-dark login-button" name="update" value="Enviar" />					
+				</div>
+				
 		</form:form>
-		   <p>Editar usuario</p>
+		   <p>Editar cliente</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

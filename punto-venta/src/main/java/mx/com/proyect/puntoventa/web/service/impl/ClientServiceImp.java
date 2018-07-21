@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.com.proyect.puntoventa.web.dao.ClientDAO;
+import mx.com.proyect.puntoventa.web.forms.CustomerFilter;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.service.ClientService;
 
@@ -50,6 +51,12 @@ public class ClientServiceImp implements ClientService{
 	public List<AccountDTOclient> getAll() {
 		// TODO Auto-generated method stub
 		return clientDAO.getAll();
+	}
+
+	@Override
+	public List<AccountDTOclient> getCustomerByFilter(CustomerFilter customerFilter) {
+		// TODO Auto-generated method stub
+		return clientDAO.getCustomerByFilter(customerFilter);
 	}
 	
 }

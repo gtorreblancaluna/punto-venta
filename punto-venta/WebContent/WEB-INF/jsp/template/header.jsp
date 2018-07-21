@@ -13,7 +13,9 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="index.do">Home</a></li>
-     
+     <c:if test="${empty userSession.account.email}">
+     	<li class="active"><a href="login.do">Login</a></li>
+     </c:if>
       <c:if test="${not empty userSession.account.email}">
        <li class="active"><a href="logout.do">Salir</a></li>
        
@@ -21,7 +23,7 @@
 	       <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">Sistema</a>
 	       	<ul class="dropdown-menu">
 	       				<li><a href="handleUser.do">Usuarios</a></li>
-	       				<li><a href="showAddClnt.do">Clientes</a></li>
+	       				<li><a href="handleCustomer.do">Clientes</a></li>
 					    <li><a href="handleProvider.do">Proveedores</a></li>
 					    <li><a href="handleInventory.do">Inventario</a></li>					    
 	      	 </ul>
@@ -31,7 +33,7 @@
 	   				<ul class="dropdown-menu">
 	   							<li><a> Pedidos</a></li>
 	   							<li><a href="handleSaleNote.do"> Notas Venta</a></li>
-	   							<li><a> Administracion</a></li>
+	   							<li><a> Administraci&oacute;n</a></li>
 	   							<li><a> Reportes</a></li>
 	   				</ul></li>
 	      

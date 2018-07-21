@@ -2,6 +2,7 @@ package mx.com.proyect.puntoventa.web.dao;
 
 import java.util.List;
 
+import mx.com.proyect.puntoventa.web.forms.CustomerFilter;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 
 public interface ClientDAO {
@@ -11,5 +12,6 @@ public interface ClientDAO {
 	boolean deleteClient(AccountDTOclient a);
 	AccountDTOclient getClientById(String id);
 	List<AccountDTOclient> getAll();
+	List<AccountDTOclient> getCustomerByFilter(CustomerFilter customerFilter);
 	
 }

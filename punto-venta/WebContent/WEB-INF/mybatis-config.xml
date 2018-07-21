@@ -35,7 +35,8 @@
 		<typeAlias alias="saleNoteDTO"   type="mx.com.proyect.puntoventa.web.model.SaleNoteDTO" />		
 		<typeAlias alias="deliveryDTO"   type="mx.com.proyect.puntoventa.web.model.DeliveryDTO" />		
 		<typeAlias alias="deliveryDetailDTO"   type="mx.com.proyect.puntoventa.web.model.DeliveryDetailDTO" />		
-	
+		<typeAlias alias="customerFilter"   type="mx.com.proyect.puntoventa.web.forms.CustomerFilter" />		
+		
 		
 
 	</typeAliases>

@@ -22,7 +22,15 @@ public class AccountDTOclient implements Serializable {
 	private String city;
 	private String email;
 	private Timestamp addDate;	
+	private String adress;
 	
+	
+	public String getAdress() {
+		return adress;
+	}
+	public void setAdress(String adress) {
+		this.adress = adress;
+	}
 	public Timestamp getAddDate() {
 		return addDate;
 	}
