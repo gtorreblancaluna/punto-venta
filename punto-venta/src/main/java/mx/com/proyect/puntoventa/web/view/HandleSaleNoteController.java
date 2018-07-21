@@ -88,6 +88,10 @@ public class HandleSaleNoteController {
 			@ModelAttribute ("saleNoteForm") SaleNoteForm saleNoteForm, Model model) {		
 		// agregando pedido a la bd
 		saleNoteService.add(saleNoteForm);		
+		
+		// se marco imprimir la nota despues de agregar los datos a bd
+		if (saleNoteForm.isPrintSaleNote())
+			model.addAttribute("printSaleId",saleNoteForm.getSaleId());
 		// cargar datos al JSP
 		List<AccountDTOclient> listClients = clientService.getAll();
 		model.addAttribute("listClients", listClients);

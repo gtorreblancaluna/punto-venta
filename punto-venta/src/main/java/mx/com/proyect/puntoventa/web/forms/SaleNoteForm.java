@@ -26,6 +26,17 @@ public class SaleNoteForm {
 	private String description;
 	// estatus de venta
 	private String status;	
+	// desea imprimir la nota despues de agregar la venta
+	private boolean printSaleNote;
+	
+
+	public boolean isPrintSaleNote() {
+		return printSaleNote;
+	}
+
+	public void setPrintSaleNote(boolean printSaleNote) {
+		this.printSaleNote = printSaleNote;
+	}
 
 	public String getStatus() {
 		return status;

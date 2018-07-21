@@ -107,6 +107,7 @@
 				CONCAT('%',#{customerNameFilter},'%')
 			</if>
 		</where>
+		ORDER BY v.cl_venta DESC
 	</select>
 
 	<select id="getSaleNoteById" parameterType="java.lang.Integer"

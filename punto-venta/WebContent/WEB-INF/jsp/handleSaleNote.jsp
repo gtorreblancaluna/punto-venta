@@ -18,6 +18,10 @@ var g_colors="";
 $( document ).ready(function() {
 	
 // 	alert('${accountSession}')
+	if('${printSaleId}' != ''){	
+		var idSaleToPrint = parseFloat('${printSaleId}');
+		generatePdf(idSaleToPrint);
+	}
 
 	$( "#addRow-add" ).click(function() {
 		addRow();
@@ -318,6 +322,16 @@ function addSaleDetailNoteForm(items){
 	<div class="info-modal-header">
 		<table class="table" >
 			<tr>
+				<td>
+				<label style="cursor:pointer;">
+<%-- 					<form:checkbox path="printSaleNote" checked="checked" /> --%>
+					<input type="checkbox" name="printSaleNote" checked>
+					<span> Deseo imprimir nota al finalizar</span>
+				</label>		
+			</td>
+			</tr>
+			<tr>
+			
 				<td>
 					<span class="input-group-text">Fecha :<input type="date" name="dateSaleNote" id="dateForm" class="form-control dateForm"> </span>
 				</td>
