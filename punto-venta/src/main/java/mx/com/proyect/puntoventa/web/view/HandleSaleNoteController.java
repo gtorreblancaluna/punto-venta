@@ -61,19 +61,8 @@ public class HandleSaleNoteController {
 	@GetMapping(value = "handleSaleNote.do")
 	public ModelAndView showSaleNote( HttpServletRequest request,HttpServletResponse response) {		
 		ModelAndView modelAndView = new ModelAndView("handleSaleNote");
-//		UserSession userSession = (UserSession) WebUtils.getSessionAttribute( request, "userSession" );
-//		HttpSession session = request.getSession(true);
-//		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		
 		HttpSession session = request.getSession();
-//		if (request.getParameter("JSESSIONID") != null) {
-//		    Cookie userCookie = new Cookie("JSESSIONID", request.getParameter("JSESSIONID"));
-//		    response.addCookie(userCookie);
-//		} else {
-//		    String sessionId = session.getId();
-//		    Cookie userCookie = new Cookie("JSESSIONID", sessionId);
-//		    response.addCookie(userCookie);
-//		}
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		
 		// traemos los productos del almacen
