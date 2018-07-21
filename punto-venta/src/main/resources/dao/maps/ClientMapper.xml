@@ -60,16 +60,16 @@
 		FROM c_cliente 
 		WHERE status = '1' 
 		<if test="name != null and name != '' ">
-			AND nombre LIKE '%#{name}%'
+			AND nombre LIKE CONCAT('%',#{name},'%')
 		</if>
 		<if test="firstName != null and firstName != '' ">
-			AND ap_paterno LIKE '%#{firstName}%'
+			AND ap_paterno LIKE CONCAT('%',#{ap_paterno},'%')
 		</if>
 		<if test="lastName != null and lastName != '' ">
-			AND ap_materno LIKE '%#{lastName}%'
+			AND ap_materno LIKE CONCAT('%',#{ap_materno},'%')
 		</if>
 		<if test="email != null and email != '' ">
-			AND email LIKE '%#{email}%'
+			AND email LIKE CONCAT('%',#{email},'%')
 		</if>
 		ORDER BY nombre
 	</select>
