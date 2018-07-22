@@ -76,7 +76,7 @@ public class GeneratePDFSaleNoteController {
 			headerInfoTable.setTotalWidth(new float[]{ 160, 160, 160 });
 			headerInfoTable.setLockedWidth(true);
 			headerInfoTable.setWidthPercentage(100f);
-		    int cellHeightInfoTable = 13;
+		    int cellHeightInfoTable = 16;
 		    int fontSizeNormal = 9; //tamaño de fuente normal
 		    int fontSizeSmall = 8; // tamaño de fuenta pequeña
 		    
@@ -86,141 +86,107 @@ public class GeneratePDFSaleNoteController {
 	        cell.setBorder(Rectangle.NO_BORDER);
 	        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 	        headerInfoTable.addCell(cell);
-		    
-		    cell = new PdfPCell(new Phrase("FOLIO: "+saleNote.getSaleId() ,new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
-	        cell.setFixedHeight(cellHeightInfoTable);
-	        cell.setColspan(1);
-	        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-	        headerInfoTable.addCell(cell);
-		    
-		    cell = new PdfPCell(new Phrase("M U E B L E S   F L O R I D A ",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
-	        cell.setFixedHeight(cellHeightInfoTable);
-	        cell.setBorder(Rectangle.NO_BORDER);
-	        cell.setColspan(3);
-	        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-	        headerInfoTable.addCell(cell);        
-		    
-	        cell = new PdfPCell(new Phrase("SALA A PRECIO DE FABRICA",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
-	        cell.setFixedHeight(cellHeightInfoTable);
-	        cell.setBorder(Rectangle.NO_BORDER);
-	        cell.setColspan(3);
-	        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-	        headerInfoTable.addCell(cell);
 	        
-	        cell = new PdfPCell(new Phrase("MA DE JESUS ALMARAZ LOPEZ",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
-	        cell.setFixedHeight(cellHeightInfoTable);
-	        cell.setBorder(Rectangle.NO_BORDER);
-	        cell.setColspan(3);
-	        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-	        headerInfoTable.addCell(cell);
+	        document.add(new Phrase("\n"));  // salto de linea
+	        document.add(new Phrase("\n"));
+	        document.add(new Phrase("\n"));
 	        
-	        cell = new PdfPCell(new Phrase("RFC: AALJ560807265  AALJ560807MMCLPS02",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
-	        cell.setFixedHeight(cellHeightInfoTable);
-	        cell.setBorder(Rectangle.NO_BORDER);
-	        cell.setColspan(3);
-	        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-	        headerInfoTable.addCell(cell);
+	        document.add(new Phrase("\n"));
+     
+	        document.add(new Phrase("                                                                                             "
+	        		+ "                                                                                                                             "+saleNote.getSaleId(),new Font(Font.HELVETICA,cellHeightInfoTable,Font.BOLD)));
+
 	        
-	        cell = new PdfPCell(new Phrase("PASEO TOLLOCAN NO.147 COL.UNIVERSIDAD TOLUCA, MEX.",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
-	        cell.setFixedHeight(cellHeightInfoTable);
-	        cell.setBorder(Rectangle.NO_BORDER);
-	        cell.setColspan(3);
-	        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-	        headerInfoTable.addCell(cell);	       
-	      	        
-	        cell = new PdfPCell(new Phrase("Tels. 318-02-57. 318-02-58 Y 212-18-44" ,new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
-	        cell.setFixedHeight(cellHeightInfoTable);
-	        cell.setBorder(Rectangle.NO_BORDER);
-	        cell.setColspan(3);
-	        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-	        headerInfoTable.addCell(cell);
-	        
-	        cell = new PdfPCell(new Phrase("www.mueblesflorida.com.mx   -  floridamuebleria@yahoo.com.mx" ,new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
-	        cell.setFixedHeight(cellHeightInfoTable);
-	        cell.setBorder(Rectangle.NO_BORDER);
-	        cell.setColspan(3);
-	        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-	        headerInfoTable.addCell(cell);
-	        document.add(headerInfoTable);
+			
 	        
 	       //INFORMACION DEL CLIENTE
 	   
 	        document.add(new Phrase("\n"));  // salto de linea
 	        
 			PdfPTable table = new PdfPTable(3);
-			table.setTotalWidth(new float[]{ 80, 160, 160 });
+		
+			table.setTotalWidth(new float[]{ 200, 160, 160 });
 		    table.setLockedWidth(true);
-		    int cellHeight = 12;
+		    int cellHeight = 14;
+		    int cellHi=13;
 		    
 		    Date dateDelivery = new Date(saleNote.getDeliveryDate().getTime()); 
 		    DateFormat formatoFecha;		    
 		    formatoFecha = DateFormat.getDateInstance(DateFormat.FULL);
 
-	        cell = new PdfPCell(new Phrase("Toluca, Mex, fecha entrega: "+formatoFecha.format(dateDelivery), new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
-	        cell.setFixedHeight(cellHeight);
-	        cell.setVerticalAlignment(Element.ALIGN_CENTER);
-	        cell.setBorder(Rectangle.NO_BORDER);
-	        cell.setColspan(3);
-	        table.addCell(cell);	        
-		    
-	        // second row
-	        cell = new PdfPCell(new Phrase("Se\u00F1or: "+saleNote.getClient().getName()+" "+saleNote.getClient().getFirstName(), new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
-	        cell.setFixedHeight(cellHeight);
-	        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-	        cell.setBorder(Rectangle.NO_BORDER);
-	        cell.setColspan(3);
-	        table.addCell(cell);	         
-	        
+		    document.add(new Phrase("  \n"));
+		    document.add(new Phrase("Toluca, Mex, a "+formatoFecha.format(dateDelivery), new Font(Font.HELVETICA,14, Font.NORMAL)));
 	        String addressClient = saleNote.getClient().getStreet()+" "+saleNote.getClient().getColony()+" "+saleNote.getClient().getDelegation()+" "+saleNote.getClient().getCp();
+	        document.add(new Phrase(" \n"+addressClient, new Font(Font.HELVETICA,12,Font.BOLD)));
+		document.add(new Phrase("  \n "));
+//	        cell = new PdfPCell(new Phrase(" ", new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
+//	        cell.setFixedHeight(cellHeight);
+//	        cell.setVerticalAlignment(Element.ALIGN_CENTER);
+//	        cell.setBorder(Rectangle.NO_BORDER);
+//	        cell.setColspan(3);
+//	        table.addCell(cell);	        
+//		    
+//	        // second row
+//	        cell = new PdfPCell(new Phrase(" ", new Font(Font.HELVETICA, cellHeightInfoTable, Font.NORMAL)));
+//	        cell.setFixedHeight(cellHeight);
+//	        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//	        cell.setBorder(Rectangle.NO_BORDER);
+//	        cell.setColspan(3);
+//	        table.addCell(cell);	         
+//	        
+//	        //cliente string concatenacion de variables 
+//	        String addressClient = saleNote.getClient().getStreet()+" "+saleNote.getClient().getColony()+" "+saleNote.getClient().getDelegation()+" "+saleNote.getClient().getCp();
+//	        
 	        
-	        // third row
-	        cell = new PdfPCell(new Phrase("Direcci\u00F3n: "+addressClient, new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
-	        cell.setFixedHeight(cellHeight);
-	        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-	        cell.setBorder(Rectangle.NO_BORDER);
-	        cell.setColspan(3);
-	        table.addCell(cell); 
-
-	        cell = new PdfPCell(new Phrase("Descripci\u00F3n: "+saleNote.getDescription(), new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
-	        cell.setFixedHeight(cellHeight);
-	        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-	        cell.setBorder(Rectangle.NO_BORDER);
-	        table.addCell(cell);	       
-	        
-	        // FIN INFORMACION DEL CLIENTE
-	    
+//	        // third row
+//	        cell = new PdfPCell(new Phrase("Direcci\u00F3n: "+addressClient, new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
+//	        cell.setFixedHeight(cellHeight);
+//	        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//	        cell.setBorder(Rectangle.NO_BORDER);
+//	        cell.setColspan(3);
+	         
+//
+//	        cell = new PdfPCell(new Phrase("Descripci\u00F3n: "+saleNote.getDescription(), new Font(Font.HELVETICA, cellHeightInfoTable, Font.NORMAL)));
+//	        cell.setFixedHeight(cellHeight);
+//	        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//	        cell.setBorder(Rectangle.NO_BORDER);
+//	        table.addCell(cell);	       
+//	        
+//	        // FIN INFORMACION DEL CLIENTE
+//	    
 	        document.add(table);
 	      
 	        // salto de linea
 	        document.add(new Phrase("\n"));
 	        // Agregando tabla para los detalles
 	        PdfPTable tableDetails = new PdfPTable(5);
-	        tableDetails.setTotalWidth(new float[]{ 40, 120, 100, 100, 100 });
+//	        tableDetails.setTotalWidth(new float[]{ 40, 120, 100, 100, 100 });
+	        tableDetails.setTotalWidth(new float[] {50,110,140,160,100});
 	        tableDetails.setLockedWidth(true);
 		    int cellHeightDetails = 13;
 		    // tabla para el detalle de la venta
 		    // cantidad | descripcion | color | precio | subtotal   
 	        
 	    	// cabecera detalles
-	        PdfPCell cellDetails = new PdfPCell(new Phrase("CANT.",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
+	        PdfPCell cellDetails = new PdfPCell(new Phrase("",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
  	        cellDetails.setFixedHeight(cellHeightDetails);
  	        
  	        tableDetails.addCell(cellDetails);
  	        
- 	        cellDetails = new PdfPCell(new Phrase("DESCRIPCI\u00D3N",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
+ 	        cellDetails = new PdfPCell(new Phrase("",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
 	        cellDetails.setFixedHeight(cellHeightDetails);
 	        
 	        tableDetails.addCell(cellDetails);
 	        
-	        cellDetails = new PdfPCell(new Phrase("COLOR",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
+	        cellDetails = new PdfPCell(new Phrase("",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
 	        cellDetails.setFixedHeight(cellHeightDetails);
 	        tableDetails.addCell(cellDetails);
 	        
-	        cellDetails = new PdfPCell(new Phrase("PRECIO U.",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
+	        cellDetails = new PdfPCell(new Phrase("",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
 	        cellDetails.setFixedHeight(cellHeightDetails);
 	        tableDetails.addCell(cellDetails);
 	        
-	        cellDetails = new PdfPCell(new Phrase("IMPORTE",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
+	        cellDetails = new PdfPCell(new Phrase("",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
 	        cellDetails.setFixedHeight(cellHeightDetails);
 	        
 	        tableDetails.addCell(cellDetails);
