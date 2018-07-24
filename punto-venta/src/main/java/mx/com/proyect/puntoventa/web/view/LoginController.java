@@ -68,7 +68,13 @@ public class LoginController {
 		AccountDTO account = accountService.validateUser(loginForm);				
 		if(userSession==null)
 			userSession = new UserSession(null);
-		if(account != null) {
+		
+		if(account == null) {
+			modelAndView.addObject("message","Usuario o contrase\u00F1a no coinciden");
+			modelAndView.setViewName("login");
+			return modelAndView;
+		}
+		if(account != null && !account.getJob().getJobId().equals("4")) {
 			userSession.setAccount(account);
 //			HttpSession session = request.getSession(true);
 			httpSession.setAttribute("userSession", userSession);
@@ -97,11 +103,14 @@ public class LoginController {
 			modelAndView.addObject("itemsByMonth", itemsByMonth);
 			
 			return modelAndView;
-		}else{
-			modelAndView.addObject("message","Usuario o contrase\u00F1a no coinciden");
-			modelAndView.setViewName("login");
+		}else if(account != null && account.getJob().getJobId().equals("4")){
+//			El usuario es un proveedor lo dirigimos a la pagina de proveedores
+			userSession.setAccount(account);
+			httpSession.setAttribute("userSession", userSession);
+			modelAndView.setViewName("handleDelivery");
 			return modelAndView;
 		}
+		return null;
 	}
 	
 	
