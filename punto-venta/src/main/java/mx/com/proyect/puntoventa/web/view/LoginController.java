@@ -104,7 +104,7 @@ public class LoginController {
 			
 			return modelAndView;
 		}else if(account != null && account.getJob().getJobId().equals("4")){
-//			El usuario es un proveedor lo dirigimos a la pagina de proveedores
+			// El usuario es un proveedor lo dirigimos a la pagina de proveedores
 			userSession.setAccount(account);
 			httpSession.setAttribute("userSession", userSession);
 			modelAndView.setViewName("handleDelivery");
