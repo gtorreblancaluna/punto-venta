@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
+import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.StoreDTO;
 
@@ -16,4 +17,5 @@ public interface InventoryService {
 	boolean delete(ItemDTO account);
 	public List<ItemDTO> getAll();
 	public List<StoreDTO> getAllStore();
+	public List<ItemDTO> getItemsByFilter(SaleNoteFilter saleNoteFilter);
 }

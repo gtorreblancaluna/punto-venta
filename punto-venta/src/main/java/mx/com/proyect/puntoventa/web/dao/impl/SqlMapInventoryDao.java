@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 
 import mx.com.proyect.puntoventa.web.dao.InventoryDAO;
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
+import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.StoreDTO;
 
@@ -65,6 +66,12 @@ public class SqlMapInventoryDao extends SqlSessionDaoSupport implements Inventor
 		param.put("id", id);
 		getSqlSession().update("decreaseStockByItemid",param);
 		return true;
+	}
+
+	@Override
+	public List<ItemDTO> getItemsByFilter(SaleNoteFilter saleNoteFilter) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("getItemsByFilter",saleNoteFilter);
 	}
 
 }

@@ -26,52 +26,111 @@
 		<div class="alert alert-danger">
   			<strong>Error! </strong> ${messageError}
 		</div>
-
 		</c:if>
-		<!-- Mostramos los usuarios -->
+		<div class="page-header">
+		<div class="row">
+			<div class="col">
+				<h1>Inventario</h1>
+			</div>
+			
+		</div>
+		</div>
+		
+	<!--2018.07.21 Formulario para aplicar busqueda por filtro -->
+	<form:form modelAttribute="saleNoteFilter" action="handleInventory.do" method="post" name="handleInventory" id="getItemsByFilter" >
+		<div class="container-result">	
+			<p>Consultar productos por filtro</p>
+			<table class="table tableFilter bgcol">
+			<tbody>
+				<tr>
+					<td>
+						<span class="input-group-text">Fecha de alta inicial:<input type="date" name="iniDateFilter" id="iniDateFilter" class="form-control"> </span>
+					</td>
+					<td>
+						<span class="input-group-text">Fecha alta final:<input type="date" name="endDateFilter" id="endDateFilter" class="form-control"> </span>
+					</td>
+					<td>
+						<span class="input-group-text">Descripci&oacute;n:<input type="text" name="descriptionFilter" id="" class="form-control"> </span>
+					</td>
+					<td>
+						<span class="input-group-text">Almacen: 
+							<select name="storeIdFilter" class="form-control" id="storeIdFilter">
+										<option value="">- Seleccione -</option>
+									<c:forEach items="${listStore}" var="store">
+										<option value="${store.storeId}">${store.description}</option>
+									</c:forEach>	
+							</select>
+						</span>
+					</td>
+					<td>
+					<span class="input-group-text">Color: 
+				        <select name="colorIdFilter" class="form-control selColors">
+						<option value="">- Seleccione -</option>
+							<c:forEach items="${listColors}" var="color">
+								<option value="${color.colorId}">${color.description}</option>
+							</c:forEach>	
+						</select>	
+					</span>		        
+			        </td>					
+				</tr>
+				<tr>
+					<td colspan=5>
+					 <input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
+					</td>
+				</tr>
+			</tbody>
+			</table>	
+		</div>
+	</form:form>
+
+		
+		<!-- Mostramos los productos -->
 		<c:if test="${not empty listItems}">
-		<div class="container-items" style="height: 400px; position: relative; overflow: auto;">
-		<table class="table">
-		<thead>
-			<tr>
-				<td>id</td>
-				<td>fecha alta</td>
-				<td>almacen</td>
-				<td>descripcion</td>	
-				<td>color</td>				
-				<td>U.M.</td>
-				<td>cantidad entrada</td>
-				<td>cantidad salida</td>
-				<td>precio venta</td>				
-				<td>cantidad existente</td>							
-			</tr>
-		</thead>
-			<c:forEach items="${listItems}" var="item">		
-		 		<tr>
-		 			<td>${item.itemId}</td>
-		 			<td>${item.date}</td>
-		 			<td>${item.storeDTO.description}</td>		 			
-		 			<td>${item.description}</td>	
-		 			<td>${item.color.description}</td>		 			
-		 			<td>${item.unitMeasurement}</td>
-		 			<td>${item.amountEntry}</td>
-		 			<td>${item.amountOutput}</td>		 			
-		 			<td>${item.salePrice}</td>
-		 			<td>${item.stock}</td>		 			
-		 			<td><button type="button" class="btn btn-info btn-lg btnUpdate" id="btnUpdate" data-toggle="modal" data-target="#modalUpdate">Editar</button></td>
-		 			<td>		 			
-		 			<form:form action="handleInventory.do" method="post" name="deleteForm" id="deleteForm">
-						<input type="hidden" name="itemId" id="deleteId" value="${item.itemId}">			 	
-		 			 	<input type="submit" class="btn btn-info btn-lg" name="delete" value="Eliminar" />	
-		 			 </form:form>
-		 			</td>
-		 		</tr>	 	
-	 		</c:forEach>
-	 		</table>
+		<div class="containerShowResultQuery container-result">
+		<div class="bgcol">
+<!-- 		<div class="container-items" style="height: 400px; position: relative; overflow: auto;"> -->
+			<table class="table tableShowResultQuery">
+			<thead>
+				<tr>
+					<td>id</td>
+					<td>fecha alta</td>
+					<td>almacen</td>
+					<td>descripci&oacute;n</td>	
+					<td>color</td>				
+					<td>U.M.</td>
+					<td>cantidad entrada</td>
+					<td>cantidad salida</td>
+					<td>precio venta</td>				
+					<td>cantidad existente</td>							
+				</tr>
+			</thead>
+				<c:forEach items="${listItems}" var="item">		
+			 		<tr>
+			 			<td>${item.itemId}</td>
+			 			<td>${item.date}</td>
+			 			<td>${item.storeDTO.description}</td>		 			
+			 			<td>${item.description}</td>	
+			 			<td>${item.color.description}</td>		 			
+			 			<td>${item.unitMeasurement}</td>
+			 			<td>${item.amountEntry}</td>
+			 			<td>${item.amountOutput}</td>		 			
+			 			<td>${item.salePrice}</td>
+			 			<td>${item.stock}</td>		 			
+			 			<td><button type="button" class="btn btn-dark btnUpdate" id="btnUpdate" data-toggle="modal" data-target="#modalUpdate">Editar</button></td>
+			 			<td>		 			
+			 			<form:form action="handleInventory.do" method="post" name="deleteForm" id="deleteForm">
+							<input type="hidden" name="itemId" id="deleteId" value="${item.itemId}">			 	
+			 			 	<input type="submit" class="btn btn-dark" name="delete" value="Eliminar" />	
+			 			 </form:form>
+			 			</td>
+			 		</tr>	 	
+		 		</c:forEach>
+		 		</table>
+		 		</div>
 	 		</div>
 		</c:if>
 		
-		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAdd">Agregar producto</button>
+		<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAdd">Agregar producto</button>
 
 
 
@@ -133,13 +192,13 @@
 				</div>
 				
 					<div class="form-group">
-					<input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="add" value="Enviar" />					
+					<input type="submit" class="btn btn-dark" name="add" value="Enviar" />					
 				</div>
 		</form:form>
 		   <p>Agregar producto</p>
       </div>
       <div class="modal-footer" style="bottom: 20px;">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
     </div>
@@ -202,13 +261,13 @@
 				</div>
 				
 					<div class="form-group">
-					<input type="submit" class="btn btn-primary btn-lg btn-block login-button" name="update" value="Enviar" />					
+					<input type="submit" class="btn btn-dark" name="update" value="Enviar" />					
 				</div>
 		</form:form>
 		   <p>Editar producto</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
     </div> <!-- fin modal editar -->   

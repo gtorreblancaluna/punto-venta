@@ -75,4 +75,24 @@
 		UPDATE c_articulo SET cantidad_existente = #{stock} WHERE cl_articulo = #{id}
 	</update>
 	
+	<select id="getItemsByFilter" resultMap="itemResultMap" parameterType="saleNoteFilter">
+		SELECT * FROM c_articulo
+		WHERE fg_estatus = '1'
+		<if	test="iniDateFilter != null and endDateFilter != null and iniDateFilter != '' and endDateFilter != '' ">
+			<![CDATA[ 
+				AND fecha_alta >= CONCAT(#{iniDateFilter},' 000000') AND fecha_alta <= CONCAT(#{endDateFilter},' 235959')
+			]]>				
+		</if>
+		<if test="descriptionFilter != null and descriptionFilter != '' ">
+				AND descripcion LIKE CONCAT('%',#{descriptionFilter},'%')
+		</if>
+		<if test="storeIdFilter != null and storeIdFilter != '' ">
+				AND cl_almacen = #{storeIdFilter}
+		</if>
+		<if test="colorIdFilter != null and colorIdFilter != '' ">
+				AND cl_color = #{colorIdFilter}
+		</if>
+		ORDER BY fecha_alta DESC
+	</select>
+	
 </mapper>

@@ -197,13 +197,13 @@
 	</select>
 	<!-- obtener los articulos vendidos en el dia  -->
 	<select id="getItemsByDay" resultMap="resultMapQueryItemsSold" parameterType="java.lang.String">
-		SELECT COUNT(dv.cl_articulo) AS total_articulos, a.cl_articulo, a.descripcion, dv.precio_articulo
+		SELECT COUNT(a.cl_articulo) AS total_articulos, a.cl_articulo, a.descripcion, dv.precio_articulo      	
 		FROM k_detalle_venta dv
 		INNER JOIN c_venta v ON (v.cl_venta = dv.cl_venta)
 		INNER JOIN c_articulo a ON (a.cl_articulo = dv.cl_articulo)
 		WHERE v.cl_estatus_venta = 5
 		AND DATE(v.fe_entrega) = #{today}
-		GROUP BY dv.cl_articulo
+		GROUP BY a.cl_articulo
 	</select>
 	<!-- obtener los articulos vendidos en la semana -->
 	<select id="getItemsByWeek" resultMap="resultMapQueryItemsSold">

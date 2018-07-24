@@ -107,39 +107,41 @@ $( document ).ready(function() {
 		<!-- Mostramos los clientes por filtro-->
 		<c:if test="${not empty customersByFilter}">
 		<div class="containerShowResultQuery container-result">
-		<table class="table tableShowResultQuery">
-		<thead>
-			<tr>
-				<th>id</th>
-				<th>Nombre</th>
-				<th>Ap Paterno</th>
-				<th>Ap Materno</th>
-				<th>Email</th>
-				<th></th>
-				<th></th>
-				
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${customersByFilter}" var="user">		
-		 		<tr>
-		 			<td>${user.userId}</td>
-		 			<td>${user.name}</td>
-		 			<td>${user.firstName}</td>
-		 			<td>${user.secondName}</td>
-		 			<td>${user.email}</td>
-		 			<td><button type="button" class="btn btn-dark btnUpdateUser" id="btnUpdateUser" data-toggle="modal" data-target="#modalUpdateUser">Editar</button></td>
-		 			<td>		 			
-		 			<form:form action="handleUser.do" method="post" name="deleteUserForm" id="deleteUserForm">
-						<input type="hidden" name="userId" id="deleteUserId" value="${user.userId}">			 	
-		 			 	<input type="submit" class="btn btn btn-dark" name="deleteUser" value="Eliminar" />	
-		 			 </form:form>
-		 			</td>
-		 		</tr>	 	
-	 		</c:forEach>
-	 	</tbody>
+		<div class="bgcol">
+			<table class="table tableShowResultQuery">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Nombre</th>
+						<th>Ap Paterno</th>
+						<th>Ap Materno</th>
+						<th>Email</th>
+						<th></th>
+						<th></th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${customersByFilter}" var="user">		
+				 		<tr>
+				 			<td>${user.userId}</td>
+				 			<td>${user.name}</td>
+				 			<td>${user.firstName}</td>
+				 			<td>${user.secondName}</td>
+				 			<td>${user.email}</td>
+				 			<td><button type="button" class="btn btn-dark btnUpdateUser" id="btnUpdateUser" data-toggle="modal" data-target="#modalUpdateUser">Editar</button></td>
+				 			<td>		 			
+				 			<form:form action="handleUser.do" method="post" name="deleteUserForm" id="deleteUserForm">
+								<input type="hidden" name="userId" id="deleteUserId" value="${user.userId}">			 	
+				 			 	<input type="submit" class="btn btn btn-dark" name="delete" value="Eliminar" />	
+				 			 </form:form>
+				 			</td>
+				 		</tr>	 	
+			 		</c:forEach>
+			 	</tbody>
 	 		</table>
-	 		</div>
+	 	</div>
+	 	</div>
 		</c:if>
 		<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddUser">Agregar cliente</button>
 

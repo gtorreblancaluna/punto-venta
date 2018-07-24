@@ -19,7 +19,25 @@ public class SaleNoteFilter {
 	private String customerNameFilter;
 	// id usuario
 	private String userId;	
+	// id color
+	private String colorIdFilter;
+	// id almacen
+	private String storeIdFilter;
 	
+	
+	
+	public String getStoreIdFilter() {
+		return storeIdFilter;
+	}
+	public void setStoreIdFilter(String storeIdFilter) {
+		this.storeIdFilter = storeIdFilter;
+	}
+	public String getColorIdFilter() {
+		return colorIdFilter;
+	}
+	public void setColorIdFilter(String colorIdFilter) {
+		this.colorIdFilter = colorIdFilter;
+	}
 	public String getUserId() {
 		return userId;
 	}

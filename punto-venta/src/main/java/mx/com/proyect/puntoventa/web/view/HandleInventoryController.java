@@ -8,36 +8,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.StoreDTO;
 import mx.com.proyect.puntoventa.web.service.ColorService;
 import mx.com.proyect.puntoventa.web.service.InventoryService;
+import mx.com.proyect.puntoventa.web.service.OfficeService;
 
 @Controller
 public class HandleInventoryController {
 
 	// inyectar dependencias de spring
 		@Autowired
-		InventoryService inventoryService;
+		private InventoryService inventoryService;
 		@Autowired
-		ColorService colorService;
+		private ColorService colorService;
+		@Autowired
+		private OfficeService officeService;
 
 		// mostrar la vista principal
 		@RequestMapping(value = "/handleInventory.do", method = RequestMethod.GET)
 		public String showhandleInventory(HttpServletRequest request, Model model) {
-			List<ItemDTO> listItems = inventoryService.getAll();
-			model.addAttribute("listItems", listItems);	
+//			List<ItemDTO> listItems = inventoryService.getAll();
+//			model.addAttribute("listItems", listItems);	
 			
 			// traer la lista de almacenes
 			List<StoreDTO> listStore = inventoryService.getAllStore();
 			model.addAttribute("listStore", listStore);	
 			List<ColorDTO> listColors = colorService.getAll();
 			model.addAttribute("listColors", listColors);
+			model.addAttribute("listOffices", officeService.getAll());
 			
 			model.addAttribute("item", new ItemDTO());
 			return "handleInventory";
@@ -53,6 +59,7 @@ public class HandleInventoryController {
 			model.addAttribute("message", "Exito al registrar el producto: " + item.getDescription());
 			List<ColorDTO> listColors = colorService.getAll();
 			model.addAttribute("listColors", listColors);
+			model.addAttribute("listOffices", officeService.getAll());
 			return "handleInventory";
 		}
 
@@ -67,6 +74,7 @@ public class HandleInventoryController {
 			model.addAttribute("listStore", listStore);	
 			List<ColorDTO> listColors = colorService.getAll();
 			model.addAttribute("listColors", listColors);
+			model.addAttribute("listOffices", officeService.getAll());
 			model.addAttribute("message", "Exito al actualizar el producto: " + item.getDescription());
 			return "handleInventory";
 		}
@@ -97,14 +105,28 @@ public class HandleInventoryController {
 			if(messageError!=null)
 				model.addAttribute("messageError",messageError);
 
-			List<ItemDTO> listItem = inventoryService.getAll();
-			model.addAttribute("listItem", listItem);
+//			List<ItemDTO> listItem = inventoryService.getAll();
+//			model.addAttribute("listItem", listItem);
 			// traer la lista de almacenes
 			List<StoreDTO> listStore = inventoryService.getAllStore();
 			model.addAttribute("listStore", listStore);	
 			List<ColorDTO> listColors = colorService.getAll();
 			model.addAttribute("listColors", listColors);
+			// sucursales
+			model.addAttribute("listOffices", officeService.getAll());
 						
+			return "handleInventory";
+		}
+		
+		@PostMapping(value = "handleInventory.do", params = "filter")
+		public String getSaleNoteByFilter(HttpServletRequest request, 
+				@ModelAttribute ("saleNoteFilter") SaleNoteFilter saleNoteFilter, Model model) {
+			
+			model.addAttribute("listItems", inventoryService.getItemsByFilter(saleNoteFilter));
+			model.addAttribute("listStore", inventoryService.getAllStore());			
+			model.addAttribute("listColors", colorService.getAll());
+			// sucursales
+			model.addAttribute("listOffices", officeService.getAll());
 			return "handleInventory";
 		}
 	
