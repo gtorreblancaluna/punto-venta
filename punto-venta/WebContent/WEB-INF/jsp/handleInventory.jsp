@@ -64,7 +64,7 @@
 					</td>
 					<td>
 					<span class="input-group-text">Color: 
-				        <select name="colorIdFilter" class="form-control selColors">
+				        <select name="colorIdFilter" class="form-control">
 						<option value="">- Seleccione -</option>
 							<c:forEach items="${listColors}" var="color">
 								<option value="${color.colorId}">${color.description}</option>
@@ -330,14 +330,14 @@ $( document ).ready(function() {
 		    	});
 		    	return value;
 		    }
+		    
 		    function getColorSelect(text){		    	
 		    	var value = 0;
-		    	$( ".selColorId option" ).each(function( index ) {
+		    	$( ".selColorId option" ).each(function(key, index ) {
 		    		var x = $(this).text();
 		    		if(x == text){
-		    			value = index;
+						value = index.value;
 		    		}
-// 		    		  console.log( index + ": " + $( this ).text() );
 		    	});
 		    	return value;
 		    }

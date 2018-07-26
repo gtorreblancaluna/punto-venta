@@ -76,23 +76,26 @@
 	</update>
 	
 	<select id="getItemsByFilter" resultMap="itemResultMap" parameterType="saleNoteFilter">
-		SELECT * FROM c_articulo
-		WHERE fg_estatus = '1'
+		SELECT articulo.*, almacen.ds_descripcion, color.ds_descripcion AS color_descripcion
+		FROM c_articulo articulo
+		INNER JOIN c_almacen almacen ON (almacen.cl_almacen = articulo.cl_almacen)
+		INNER JOIN c_color color ON (color.cl_color = articulo.cl_color)
+		WHERE articulo.fg_estatus = '1'
 		<if	test="iniDateFilter != null and endDateFilter != null and iniDateFilter != '' and endDateFilter != '' ">
 			<![CDATA[ 
-				AND fecha_alta >= CONCAT(#{iniDateFilter},' 000000') AND fecha_alta <= CONCAT(#{endDateFilter},' 235959')
+				AND articulo.fecha_alta >= CONCAT(#{iniDateFilter},' 000000') AND articulo.fecha_alta <= CONCAT(#{endDateFilter},' 235959')
 			]]>				
 		</if>
 		<if test="descriptionFilter != null and descriptionFilter != '' ">
-				AND descripcion LIKE CONCAT('%',#{descriptionFilter},'%')
+				AND articulo.descripcion LIKE CONCAT('%',#{descriptionFilter},'%')
 		</if>
 		<if test="storeIdFilter != null and storeIdFilter != '' ">
-				AND cl_almacen = #{storeIdFilter}
+				AND articulo.cl_almacen = #{storeIdFilter}
 		</if>
 		<if test="colorIdFilter != null and colorIdFilter != '' ">
-				AND cl_color = #{colorIdFilter}
+				AND articulo.cl_color = #{colorIdFilter}
 		</if>
-		ORDER BY fecha_alta DESC
+		ORDER BY articulo.fecha_alta DESC
 	</select>
 	
 </mapper>
