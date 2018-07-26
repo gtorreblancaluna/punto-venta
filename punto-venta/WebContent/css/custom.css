@@ -7,3 +7,4 @@ body{background-image: url(../images/madera.jpg);}
 .container-result { background-color: #000000ad; color: #fff;padding:15px;}
 .bgcol{background-color: #f1c16d3d;}
 .info-modal-header{background-color: #eae7e7;border-radius: 5px;}
+.containerShowResultQuery{height: 800px;overflow: auto;}

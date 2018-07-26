@@ -53,8 +53,8 @@ public class HandleInventoryController {
 		@RequestMapping(value = "/handleInventory.do", params = "add")
 		public String add(HttpServletRequest request, @ModelAttribute ItemDTO item, Model model) {
 			inventoryService.add(item);			
-			List<ItemDTO> listItems = inventoryService.getAll();
-			model.addAttribute("listItems", listItems);
+//			List<ItemDTO> listItems = inventoryService.getAll();
+//			model.addAttribute("listItems", listItems);
 			model.addAttribute("item", new ItemDTO());
 			model.addAttribute("message", "Exito al registrar el producto: " + item.getDescription());
 			List<ColorDTO> listColors = colorService.getAll();
@@ -67,8 +67,8 @@ public class HandleInventoryController {
 		@RequestMapping(value = "/handleInventory.do", params = "update")
 		public String update(HttpServletRequest request, @ModelAttribute ItemDTO item, Model model) {
 			inventoryService.update(item);		
-			List<ItemDTO> listItems = inventoryService.getAll();
-			model.addAttribute("listItems", listItems);
+//			List<ItemDTO> listItems = inventoryService.getAll();
+//			model.addAttribute("listItems", listItems);
 			// traer la lista de almacenes
 			List<StoreDTO> listStore = inventoryService.getAllStore();
 			model.addAttribute("listStore", listStore);	
