@@ -262,6 +262,16 @@ function addSaleDetailNoteForm(items){
 					<td>
 						<span class="input-group-text">Nombre del cliente<input type="text" name="customerNameFilter" id="customerNameFilter" class="form-control"></span>
 					</td>
+					<td>
+						<span class="input-group-text">Estatus: 
+							<select name="statusFilter" class="form-control" id="statusFilter">
+										<option value="0">- Seleccione -</option>
+									<c:forEach items="${listStatus}" var="status">
+										<option value="${status.statusId}">${status.description}</option>
+									</c:forEach>	
+							</select>
+						</span>
+					</td>
 				</tr>
 				<tr>
 					<td colspan=5>
@@ -287,6 +297,7 @@ function addSaleDetailNoteForm(items){
 					<th>Cliente</th>
 					<th>Sucursal</th>
 					<th>Usuario</th>
+					<th>Estatus</th>
 					<th></th>
 				</tr>
 				</thead>
@@ -294,12 +305,13 @@ function addSaleDetailNoteForm(items){
 					<c:forEach items="${listSaleNoteByFilter}" var="saleNote">
 					<tr>
 						<td><a href="javascript:void();" onclick="getSaleNoteById('${saleNote.saleId}');return false;" >${saleNote.saleId }</a></td>
-						<td>${saleNote.saleDate }</td>
-						<td>${saleNote.dateDelivery }</td>
-						<td>${saleNote.description }</td>
-						<td>${saleNote.nameCustomer }</td>
-						<td>${saleNote.nameOffice }</td>
-						<td>${saleNote.nameUser }</td>
+						<td>${saleNote.saleDate}</td>
+						<td>${saleNote.dateDelivery}</td>
+						<td>${saleNote.description}</td>
+						<td>${saleNote.nameCustomer}</td>
+						<td>${saleNote.nameOffice}</td>
+						<td>${saleNote.nameUser}</td>
+						<td>${saleNote.status.description}</td>
 						<td><a href="javascript:void();" onclick="javascript:generatePdf(${saleNote.saleId });">Imprimir</a></td>
 					</tr>
 					</c:forEach>
@@ -318,7 +330,8 @@ function addSaleDetailNoteForm(items){
         <h4 class="modal-title">Agregar nota</h4>
       </div>
       <div class="modal-body">     
-<form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="saleNoteForm" id="addSaleNoteForm">
+	
+	<form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="saleNoteForm" id="addSaleNoteForm">
 	<div class="info-modal-header">
 		<table class="table" >
 			<tr>
@@ -328,7 +341,10 @@ function addSaleDetailNoteForm(items){
 					<input type="checkbox" name="printSaleNote" checked>
 					<span> Deseo imprimir nota al finalizar</span>
 				</label>		
-			</td>
+				</td>
+				<td colspan=4>
+					<span class="input-group-text">Descripci&oacute;n:<input type="text" name="description" id="dateForm" class="form-control dateForm"> </span>
+				</td>
 			</tr>
 			<tr>
 			
@@ -451,6 +467,11 @@ function addSaleDetailNoteForm(items){
 <form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="updateSaleNoteForm" id="updateSaleNoteForm">
 	<input type="hidden" name="saleId" class="saleId" id="saleId" value="">
 	<table class="table tableSaleNoteForm">
+		<tr>
+			<td colspan=4>
+				<span class="input-group-text">Descripci&oacute;n:<input type="text" name="description" id="descriptionFormUpdate" class="form-control dateForm"> </span>
+			</td>
+		</tr>
 		<tr>
 			<td>
 				<span class="input-group-text">Fecha :<input type="date" name="dateSaleNote" id="dateFormUpdate" class="form-control dateForm"> </span>

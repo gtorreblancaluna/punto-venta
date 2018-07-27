@@ -70,9 +70,11 @@ public class HandleSaleNoteController {
 		List<AccountDTOclient> listClients = clientService.getAll();
 		List<OfficeDTO> listOffices = officeService.getAll();
 		List<ColorDTO> listColors = colorService.getAll();
-		List<AccountDTO> listUsers = accountService.getAllUser();
+		List<AccountDTO> listUsers = accountService.getAllUser();	
+		
+		
+		modelAndView.addObject("listStatus", saleNoteService.getSalesStatus());
 		modelAndView.addObject("listUsers", listUsers);
-
 		modelAndView.addObject("listColors", listColors);
 		modelAndView.addObject("listClients", listClients);
 		modelAndView.addObject("saleNoteForm", new SaleNoteForm());
@@ -104,6 +106,7 @@ public class HandleSaleNoteController {
 		model.addAttribute("listColors", listColors);		
 		List<AccountDTO> listUsers = accountService.getAllUser();
 		model.addAttribute("listUsers", listUsers);		
+		model.addAttribute("listStatus", saleNoteService.getSalesStatus());
 		
 		model.addAttribute("messageSucess","Se agrego con exito la nota, total de articulos: "+saleNoteForm.getItems().size());
 		model.addAttribute("saleNoteForm", new SaleNoteForm());
@@ -134,6 +137,7 @@ public class HandleSaleNoteController {
 			List<AccountDTO> listUsers = accountService.getAllUser();
 			model.addAttribute("listUsers", listUsers);		
 			// fin cargar datos al JSP
+			model.addAttribute("listStatus", saleNoteService.getSalesStatus());
 			
 			return "handleSaleNote";
 		}
@@ -159,6 +163,7 @@ public class HandleSaleNoteController {
 			model.addAttribute("listColors", listColors);		
 			List<AccountDTO> listUsers = accountService.getAllUser();
 			model.addAttribute("listUsers", listUsers);		
+			model.addAttribute("listStatus", saleNoteService.getSalesStatus());
 			
 			model.addAttribute("messageSucess","Se actualizo con exito la nota, total de articulos: "+saleNoteForm.getItems().size());
 			model.addAttribute("saleNoteForm", new SaleNoteForm());

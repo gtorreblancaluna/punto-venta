@@ -29,7 +29,7 @@ public class SaleNoteDTO implements Serializable {
 	// descripcion
 	private String description;
 	// status
-	private String status;
+	private SaleStatusDTO status;
 	// detalle de la venta	
 	private List<SaleDetailDTO> saleDetails;
 	
@@ -89,20 +89,20 @@ public class SaleNoteDTO implements Serializable {
 		this.description = description;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	public List<SaleDetailDTO> getSaleDetails() {
 		return saleDetails;
 	}
 
 	public void setSaleDetails(List<SaleDetailDTO> saleDetails) {
 		this.saleDetails = saleDetails;
+	}
+
+	public SaleStatusDTO getStatus() {
+		return status;
+	}
+
+	public void setStatus(SaleStatusDTO status) {
+		this.status = status;
 	}
 	
 	

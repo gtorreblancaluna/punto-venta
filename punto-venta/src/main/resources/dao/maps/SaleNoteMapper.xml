@@ -16,6 +16,9 @@
 		<result property="nameCustomer" column="nombre_cliente" />
 		<result property="nameOffice" column="nombre_sucursal" />
 		<result property="nameUser" column="nombre_usuario" />
+		
+		<result property="status.statusId" column="cl_estatus_venta" />
+		<result property="status.description" column="descripcion_estatus_venta" />
 	</resultMap>
 
 	<resultMap id="resultMapSaleNoteDetail" type="saleDetailDTO">
@@ -48,6 +51,7 @@
 		<result property="client.name" column="nombre_cliente" />
 		<result property="client.firstName" column="ap_paterno_cliente" />
 		<result property="client.secondName" column="ap_materno_cliente" />
+		<result property="client.adress" column="direccion_cliente" />
 		<result property="account.userId" column="cl_usuario" />
 		<result property="account.name" column="nombre_usuario" />
 		<result property="account.firstName" column="ap_paterno_usuario" />
@@ -55,17 +59,25 @@
 		<result property="store.storeId" column="cl_sucursal" />
 		<result property="store.description" column="nombre_sucursal" />
 		<result property="description" column="ds_descripcion" />
+<!-- 		estatus de venta -->
+		<result property="status.statusId" column="cl_estatus_venta" />
+		<result property="status.description" column="descripcion_estatus" />
 	</resultMap>
+	
+	<resultMap id="resultMapSaleStatus" type="saleStatusDTO">
+		<result property="statusId" column="cl_estatus_venta" />
+		<result property="description" column="ds_descripcion" />				
+	</resultMap>
+	
 
 	<insert id="addSaleNote" parameterType="saleNoteForm">
-		<selectKey resultType="java.lang.Integer" keyProperty="saleId"
-			order="AFTER">
+		<selectKey resultType="java.lang.Integer" keyProperty="saleId" order="AFTER">
 			SELECT LAST_INSERT_ID() as id
 		</selectKey>
 		INSERT INTO c_venta
-		(cl_cliente,cl_usuario,cl_sucursal,fe_entrega,cl_estatus_venta)
+		(cl_cliente,cl_usuario,cl_sucursal,fe_entrega,cl_estatus_venta,ds_descripcion)
 		VALUES
-		(#{userId},#{sellerId},#{storeId},#{dateTimestamp},#{status})
+		(#{userId},#{sellerId},#{storeId},#{dateTimestamp},#{status.statusId},#{description})
 	</insert>
 
 	<insert id="addSaleNoteDetails" parameterType="java.util.Map">
@@ -75,23 +87,22 @@
 		(#{saleId},#{itemId},#{colorId},#{amount},#{itemSalePrice})
 	</insert>
 	
-	<select id="getSaleNoteByFilter" parameterType="saleNoteFilter"
-		resultMap="resultMapQuerySaleNote">
+	<select id="getSaleNoteByFilter" parameterType="saleNoteFilter"	resultMap="resultMapQuerySaleNote">
 		SELECT v.cl_venta,v.fe_registro,v.fe_entrega,v.ds_descripcion,
 		CONCAT(c.nombre,' ',c.ap_paterno) AS nombre_cliente, s.nombre AS
 		nombre_sucursal,
-		CONCAT(u.nombre,' ',u.ap_paterno) AS nombre_usuario
+		CONCAT(u.nombre,' ',u.ap_paterno) AS nombre_usuario,
+		estatus.ds_descripcion AS descripcion_estatus_venta
 		FROM c_venta v
 		INNER JOIN c_cliente c ON (v.cl_cliente = c.cl_cliente)
 		INNER JOIN c_sucursal s ON (v.cl_sucursal = s.cl_sucursal)
-		INNER JOIN
-		c_usuario u ON (v.cl_usuario = u.cl_usuario)
+		INNER JOIN c_usuario u ON (v.cl_usuario = u.cl_usuario)
+		INNER JOIN c_estatus_venta estatus ON (v.cl_estatus_venta = estatus.cl_estatus_venta)
 		<where>
-			<if
-				test="iniDateFilter != null and endDateFilter != null and iniDateFilter != '' and endDateFilter != '' ">
-			<![CDATA[ 
-			AND v.fe_entrega >= CONCAT(#{iniDateFilter},' 000000') AND v.fe_entrega <= CONCAT(#{endDateFilter},' 235959')
-			]]>
+			<if	test="iniDateFilter != null and endDateFilter != null and iniDateFilter != '' and endDateFilter != '' ">
+				<![CDATA[ 
+					AND v.fe_entrega >= CONCAT(#{iniDateFilter},' 000000') AND v.fe_entrega <= CONCAT(#{endDateFilter},' 235959')
+				]]>
 				<!-- AND (v.fe_entrega BETWEEN STR_TO_DATE(#{iniDateFilter},'%Y/%m/%d') 
 					AND STR_TO_DATE(CONCAT(#{endDateFilter}, ' 235959'),'%Y/%m/%d %H%i%s') ) -->
 			</if>
@@ -99,12 +110,14 @@
 				AND v.ds_descripcion LIKE
 				CONCAT('%',#{descriptionFilter},'%')
 			</if>
-			<if test="officeIdFilter != 0 ">
+			<if test="officeIdFilter != null and officeIdFilter != 0 ">
 				AND v.cl_sucursal IN (#{officeIdFilter})
 			</if>
 			<if test="customerNameFilter != null and customerNameFilter != '' ">
-				AND CONCAT(u.nombre,' ',u.ap_paterno) LIKE
-				CONCAT('%',#{customerNameFilter},'%')
+				AND CONCAT(u.nombre,' ',u.ap_paterno) LIKE CONCAT('%',#{customerNameFilter},'%')
+			</if>
+			<if test="statusFilter != null and statusFilter != 0 ">
+				AND v.cl_estatus_venta = (#{statusFilter})
 			</if>
 		</where>
 		ORDER BY v.cl_venta DESC
@@ -130,32 +143,32 @@
 		fe_entrega = #{dateSaleNote},
 		cl_cliente = #{userId},
 		cl_usuario = #{sellerId},
-		cl_sucursal = #{storeId}
+		cl_sucursal = #{storeId},
+		ds_descripcion = #{description}
 		WHERE cl_venta = #{saleId}
-
 	</update>
 
 	<delete id="removeDetailSaleNote" parameterType="java.lang.Integer">
-		DELETE FROM
-		k_detalle_venta WHERE cl_venta = #{saleId}
+		DELETE FROM	k_detalle_venta WHERE cl_venta = #{saleId}
 	</delete>
 
 	<select id="getSaleById" resultMap="resultMapSaleNoteDto">
-		SELECT v.*,c.nombre AS
-		nombre_cliente ,c.ap_paterno AS ap_paterno_cliente,c.ap_materno AS
-		ap_materno_cliente,
-		u.nombre AS nombre_usuario, u.ap_paterno AS
-		ap_paterno_usuario, u.ap_materno
-		AS ap_materno_usuario,
-		s.nombre AS
-		nombre_sucursal
+		SELECT v.*, 
+		c.nombre AS	nombre_cliente, 
+		c.ap_paterno AS ap_paterno_cliente,
+		c.ap_materno AS	ap_materno_cliente,
+		c.direccion AS direccion_cliente,
+		u.nombre AS nombre_usuario, 
+		u.ap_paterno AS	ap_paterno_usuario, 
+		u.ap_materno AS ap_materno_usuario,
+		s.nombre AS	nombre_sucursal,
+		status.ds_descripcion AS descripcion_estatus
 		FROM c_venta v
-		INNER JOIN c_cliente c ON (v.cl_cliente =
-		c.cl_cliente)
+		INNER JOIN c_cliente c ON (v.cl_cliente = c.cl_cliente)
 		INNER JOIN c_usuario u ON (v.cl_usuario = u.cl_usuario)
 		INNER JOIN c_sucursal s ON (v.cl_sucursal = s.cl_sucursal)
-		WHERE
-		v.cl_venta = #{id}
+		INNER JOIN c_estatus_venta status ON (v.cl_estatus_venta = status.cl_estatus_venta)
+		WHERE v.cl_venta = #{id}
 	</select>
 	<!-- obtener las ventas del dia -->
 	<select id="getSalesToday" resultMap="resultMapQuerySaleNote" parameterType="java.lang.String">
@@ -224,6 +237,9 @@
 		WHERE v.cl_estatus_venta = 5
 		AND MONTH(v.fe_entrega) = #{month} AND YEAR(v.fe_entrega) = #{year}
 		GROUP BY dv.cl_articulo
+	</select>
+	<select id="getSalesStatus" resultMap="resultMapSaleStatus">
+		SELECT * FROM c_estatus_venta ORDER BY ds_descripcion
 	</select>
 
 </mapper>

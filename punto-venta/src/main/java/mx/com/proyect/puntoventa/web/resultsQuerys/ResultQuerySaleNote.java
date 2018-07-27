@@ -2,6 +2,8 @@ package mx.com.proyect.puntoventa.web.resultsQuerys;
 
 import java.sql.Timestamp;
 
+import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
+
 /** GTL 2018.06.05
  *  POJO que contendra los resultados del query para las notas
  * 
@@ -23,8 +25,15 @@ public class ResultQuerySaleNote {
 	private String nameOffice;
 	// nombre_usuario
 	private String nameUser;
+	// status
+	private SaleStatusDTO status;	
 	
-	
+	public SaleStatusDTO getStatus() {
+		return status;
+	}
+	public void setStatus(SaleStatusDTO status) {
+		this.status = status;
+	}
 	public Integer getSaleId() {
 		return saleId;
 	}

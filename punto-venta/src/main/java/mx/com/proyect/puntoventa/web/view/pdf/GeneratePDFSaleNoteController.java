@@ -123,12 +123,10 @@ public class GeneratePDFSaleNoteController {
 //		        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 //		        cell.setBorder(Rectangle.NO_BORDER);
 //		        cell.setColspan(3);
-//		        table.addCell(cell);
-			    
-			    
-			    String addressClient = saleNote.getClient().getStreet()+" "+saleNote.getClient().getColony()+" "+saleNote.getClient().getDelegation()+" "+saleNote.getClient().getCp();
-		        document.add(new Phrase(" \n"+addressClient, new Font(Font.HELVETICA,12,Font.HELVETICA)));
-			document.add(new Phrase("  \n "));
+//		        table.addCell(cell);			    
+//			    String addressClient = saleNote.getClient().getStreet()+" "+saleNote.getClient().getColony()+" "+saleNote.getClient().getDelegation()+" "+saleNote.getClient().getCp();
+		        document.add(new Phrase(" \n"+saleNote.getClient().getAdress(), new Font(Font.HELVETICA,12,Font.HELVETICA)));
+		        document.add(new Phrase("  \n "));
 	//	        cell = new PdfPCell(new Phrase(" ", new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
 	//	        cell.setFixedHeight(cellHeight);
 	//	        cell.setVerticalAlignment(Element.ALIGN_CENTER);

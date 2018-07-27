@@ -16,6 +16,7 @@ import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
+import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQueryItemsSold;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 
@@ -130,6 +131,11 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 		result.put("itemsByMonth", itemsByMonth);
 		
 		return result;
+	}
+
+	@Override
+	public List<SaleStatusDTO> getSalesStatus() {
+		return getSqlSession().selectList("getSalesStatus");
 	}
 
 }

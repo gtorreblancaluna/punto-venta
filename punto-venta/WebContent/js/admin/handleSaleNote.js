@@ -263,6 +263,7 @@ function addSaleNoteForm(data){
 	$tableSaleNoteForm.find('.userId').val(data.userId);
 	$tableSaleNoteForm.find('.sellerId').val(data.sellerId);
 	$tableSaleNoteForm.find('.storeId').val(data.storeId);
+	$tableSaleNoteForm.find('#descriptionFormUpdate').val(data.description);
 	document.getElementById("dateFormUpdate").valueAsDate = new Date(data.dateDelivery)	
 }
 

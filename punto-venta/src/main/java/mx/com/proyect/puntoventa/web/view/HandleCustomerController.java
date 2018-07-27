@@ -15,13 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import mx.com.proyect.puntoventa.web.forms.CustomerFilter;
-import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
-import mx.com.proyect.puntoventa.web.model.JobDTO;
-import mx.com.proyect.puntoventa.web.model.OfficeDTO;
-import mx.com.proyect.puntoventa.web.service.AccountService;
 import mx.com.proyect.puntoventa.web.service.ClientService;
 
 @Controller

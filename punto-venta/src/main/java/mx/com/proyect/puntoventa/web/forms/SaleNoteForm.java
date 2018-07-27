@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
+import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
 /* GTL 2018.05.21 
  * POJO para llenar en la vista de NOTA DE VENTA
  * 
@@ -25,10 +26,18 @@ public class SaleNoteForm {
 	private Timestamp dateDelivery;
 	private String description;
 	// estatus de venta
-	private String status;	
+	private SaleStatusDTO status;	
 	// desea imprimir la nota despues de agregar la venta
 	private boolean printSaleNote;
 	
+
+	public SaleStatusDTO getStatus() {
+		return status;
+	}
+
+	public void setStatus(SaleStatusDTO status) {
+		this.status = status;
+	}
 
 	public boolean isPrintSaleNote() {
 		return printSaleNote;
@@ -36,15 +45,7 @@ public class SaleNoteForm {
 
 	public void setPrintSaleNote(boolean printSaleNote) {
 		this.printSaleNote = printSaleNote;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	}	
 
 	public List<SaleDetailDTO> getSaleDetail() {
 		return saleDetail;

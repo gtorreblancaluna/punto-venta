@@ -15,6 +15,7 @@ import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
+import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 import mx.com.proyect.puntoventa.web.service.SaleNoteService;
 
@@ -22,12 +23,14 @@ import mx.com.proyect.puntoventa.web.service.SaleNoteService;
 public class SaleNoteServiceImpl implements SaleNoteService {
 
 	@Autowired
-	SaleNoteDAO saleNoteDao;
+	private SaleNoteDAO saleNoteDao;
 	@Autowired
-	InventoryDAO inventoryDao;
+	private InventoryDAO inventoryDao;
 	
 	@Override
 	public boolean add(SaleNoteForm saleNoteForm) {
+		if(saleNoteForm.getStatus() == null)
+    		saleNoteForm.setStatus(new SaleStatusDTO());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 		   
@@ -54,7 +57,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 		// si la venta es igual a hoy , entonces se descontara los articulos de la bd
 		if(todayString.equals(saleNoteForm.getDateSaleNote())) {
 			// ponemos status de entregado
-			saleNoteForm.setStatus("5");
+			saleNoteForm.getStatus().setStatusId(5);
 			for(ItemDTO item : saleNoteForm.getItems()) {
 				//descontamos los articulos de la bd
 				ItemDTO itemDTO = inventoryDao.getItemById(item.getItemId());
@@ -64,7 +67,9 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 			} 
 	    }else {
 	    	//ponemos status de registrado
-	    	saleNoteForm.setStatus("1");
+	    	
+	    	
+	    	saleNoteForm.getStatus().setStatusId(1);
 	    }
 		
 		saleNoteDao.add(saleNoteForm);
@@ -112,6 +117,12 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	@Override
 	public Map<String,Object> getItemsSold() {		
 		return saleNoteDao.getItemsSold();
+	}
+
+	@Override
+	public List<SaleStatusDTO> getSalesStatus() {
+		// TODO Auto-generated method stub
+		return saleNoteDao.getSalesStatus();
 	}
 	
 
