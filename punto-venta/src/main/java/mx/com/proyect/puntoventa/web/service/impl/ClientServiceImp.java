@@ -19,20 +19,19 @@ public class ClientServiceImp implements ClientService{
 	
 	@Override
 	public boolean insertClient(AccountDTOclient a) {
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		a.setAddDate(timestamp);
-		a.setState(a.getState().trim());
+//		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//		a.setAddDate(timestamp);
+//		a.setState(a.getState().trim());
+		a.setFgActivo("1");
 		return clientDAO.insertClient(a);
 	}
 
 	@Override
 	public boolean updateClient(AccountDTOclient a) {
 		// TODO Auto-generated method stub
-		Timestamp timestamp =new Timestamp(System.currentTimeMillis());
-		a.setAddDate(timestamp);
-		a.setState(a.getState().trim());
+	
 		
-		return false;
+		return clientDAO.updateClient(a);
 	}
 
 	@Override

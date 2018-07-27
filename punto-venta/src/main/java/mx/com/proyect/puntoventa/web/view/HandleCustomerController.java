@@ -1,6 +1,9 @@
 package mx.com.proyect.puntoventa.web.view;
 
-
+/**
+ * GTL 2018.07.25
+ * Controlador para manejar informacion de los clientes
+ * */
 
 import java.util.List;
 
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import mx.com.proyect.puntoventa.web.forms.CustomerFilter;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
+import mx.com.proyect.puntoventa.web.model.JobDTO;
+import mx.com.proyect.puntoventa.web.model.OfficeDTO;
 import mx.com.proyect.puntoventa.web.service.AccountService;
 import mx.com.proyect.puntoventa.web.service.ClientService;
 
@@ -38,6 +43,14 @@ public class HandleCustomerController {
 			model.addAttribute("messageView","Se agrego con exito el Cliente: "+clientDTO.getName()+" "+clientDTO.getFirstName());
 		return "handleCustomer";
 	}
+	
+	// actualizar usuario
+		@RequestMapping(value = "/handleCustomer.do", params = "update")
+		public String updateUser(HttpServletRequest request, @ModelAttribute AccountDTOclient clientDTO, Model model) {
+			clientService.updateClient(clientDTO);							
+			model.addAttribute("messageSucess", "Exito al actualizar el cliente: " + clientDTO.getFirstName()+" "+clientDTO.getSecondName());
+			return "handleCustomer";
+		}
 	
 	// busqueda por filtro
 	@RequestMapping(value = "/handleCustomer.do", params = "filter")

@@ -17,8 +17,8 @@
 		<result property="municipality" column="municipio" />
 		<result property="city" column="ciudad" />
 		<result property="email" column="email" />
-
-		
+		<result property="adress" column="direccion" />		
+		<result property="fgActivo" column="status" />	
 	</resultMap>
 
 	<select id="findById" resultMap="clientResultMap" parameterType="long">
@@ -30,27 +30,29 @@
 	</select>
 
 	<insert id="insertClient" parameterType="clientDTO">
-		insert into c_cliente
-		(nombre,ap_paterno,ap_materno,email,fe_alta,tel1,tel2,calle,delegacion,colonia,cp,municipio,estado,ciudad)
-		values
-		(#{name},#{firstName},#{secondName},#{email},#{addDate},#{tel1},#{tel2},#{street},#{delegation},#{colony},
-		#{cp},#{municipality},#{state},#{city})
+		INSERT INTO c_cliente
+		(nombre,ap_paterno,ap_materno,email,tel1,tel2,
+<!-- 		calle,delegacion,colonia,cp,municipio,estado,ciudad, -->
+		direccion,status)
+		VALUES
+		(#{name},#{firstName},#{secondName},#{email},#{tel1},#{tel2},
+<!-- 		#{street},#{delegation},#{colony},#{cp},#{municipality},#{state},#{city}, -->
+		#{adress},#{fgActivo})
 	</insert>
 	
-	<update id="update" parameterType="clientDTO">
-		update c_usuario set
-		nombre =
-		#{name},
+	<update id="updateCustomer" parameterType="clientDTO">
+		UPDATE c_cliente SET
+		nombre =#{name},
 		ap_paterno = #{firstName},
 		ap_materno = #{secondName},
-		email =
-		#{email},
-		password = #{password}
-		where id_usuario = #{userId}
+		email =	#{email},
+		tel1 = #{tel1},
+		tel2 = #{tel2},
+		direccion = #{adress}
+		WHERE cl_cliente = #{userId}
 	</update>
 	<delete id="remove" parameterType="clientDTO">
-		delete from c_usuario where
-		id_usuario = #{userId}
+		UPDATE c_cliente SET status = '0' WHERE cl_cliente = #{userId}
 	</delete>
 	<select id="getAllClient" resultMap="clientResultMap" >
 		SELECT * FROM c_cliente WHERE status = '1' ORDER BY nombre

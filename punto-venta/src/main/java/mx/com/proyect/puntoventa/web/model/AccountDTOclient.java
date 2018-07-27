@@ -23,8 +23,16 @@ public class AccountDTOclient implements Serializable {
 	private String email;
 	private Timestamp addDate;	
 	private String adress;
+	// bandera para saber si esta activo
+		private String fgActivo;
 	
 	
+	public String getFgActivo() {
+			return fgActivo;
+		}
+		public void setFgActivo(String fgActivo) {
+			this.fgActivo = fgActivo;
+		}
 	public String getAdress() {
 		return adress;
 	}

@@ -42,6 +42,8 @@ $( document ).ready(function() {
 		        	$updateForm.find('#tel1').val(item.innerHTML);
 		        if(i===6)
 		        	$updateForm.find('#tel2').val(item.innerHTML);
+		        if(i===7)
+		        	$updateForm.find('#adress').val(item.innerHTML);
 		        
 		    });		   
 	});	 	
@@ -51,17 +53,16 @@ $( document ).ready(function() {
 <body>
  <div class="container" style="">
 
-		<c:if test="${message != null}">
-		<div class="alert alert-success texto" style="width:100%;">
-  			<strong>Success!</strong> ${message}
+		<c:if test="${messageSucess != null}">
+		<div class="alert alert-success">
+  			<strong>Success!</strong> ${messageSucess}
 		</div>
 
 		</c:if>
 		<c:if test="${messageError != null}">
-		<div class="alert alert-danger" style="width:100%;">
+		<div class="alert alert-danger">
   			<strong>Error! </strong> ${messageError}
 		</div>
-
 		</c:if>
 		<div class="page-header">
 		<div class="row">
@@ -116,9 +117,11 @@ $( document ).ready(function() {
 						<th>Ap Paterno</th>
 						<th>Ap Materno</th>
 						<th>Email</th>
+						<th>tel1</th>
+						<th>tel2</th>
+						<th>Direcci&oacute;n</th>
 						<th></th>
 						<th></th>
-						
 					</tr>
 				</thead>
 				<tbody>
@@ -129,9 +132,12 @@ $( document ).ready(function() {
 				 			<td>${user.firstName}</td>
 				 			<td>${user.secondName}</td>
 				 			<td>${user.email}</td>
+				 			<td>${user.tel1}</td>
+				 			<td>${user.tel2}</td>
+				 			<td style="max-width: 80px;">${user.adress}</td>
 				 			<td><button type="button" class="btn btn-dark btnUpdateUser" id="btnUpdateUser" data-toggle="modal" data-target="#modalUpdateUser">Editar</button></td>
 				 			<td>		 			
-				 			<form:form action="handleUser.do" method="post" name="deleteUserForm" id="deleteUserForm">
+				 			<form:form action="handleCustomer.do" method="post" name="deleteUserForm" id="deleteUserForm">
 								<input type="hidden" name="userId" id="deleteUserId" value="${user.userId}">			 	
 				 			 	<input type="submit" class="btn btn btn-dark" name="delete" value="Eliminar" />	
 				 			 </form:form>
@@ -208,7 +214,8 @@ $( document ).ready(function() {
         <h4 class="modal-title">Editar Cliente</h4>
       </div>
       <div class="modal-body">     
-		<form:form modelAttribute="clientDTO" action="handleCustomer.do" method="post" name="addUserForm">
+		<form:form modelAttribute="clientDTO" action="handleCustomer.do" method="post" name="updateUserForm" id="updateUserForm">
+		<input type="hidden" name="userId" id="userId">		
 				<div class="form-group">
 					<label>Nombre: </label>
 					<input type="text" id="name" name="name" placeholder="Nombre" class="form-control">
@@ -239,7 +246,7 @@ $( document ).ready(function() {
 				</div>						
 								
 				<div class="form-group">
-					<input type="submit" class="btn btn-dark login-button" name="update" value="Enviar" />					
+					<input type="submit" class="btn btn-dark" name="update" value="Enviar" />					
 				</div>
 				
 		</form:form>

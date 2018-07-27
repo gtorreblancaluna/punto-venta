@@ -89,17 +89,18 @@ CREATE TABLE c_cliente(
   ap_materno VARCHAR(45),
   email VARCHAR(45),
   fe_alta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  tel1 INTEGER(12),
-  tel2 INTEGER(12),
+  tel1 VARCHAR(25),
+  tel2 VARCHAR(25),
   calle VARCHAR(30),
-  delegacion varchar(45),
+  delegacion VARCHAR(45),
   colonia VARCHAR(30),
-  cp INTEGER (5),
+  cp VARCHAR (5),
   municipio VARCHAR(30),
   estado VARCHAR(30),
-  ciudad varchar(45),
-  status ENUM('1','0'),
-   PRIMARY KEY(cl_cliente)  
+  ciudad VARCHAR(45),
+  direccion VARCHAR(255),
+  status ENUM('1','0'),  
+  PRIMARY KEY(cl_cliente)  
    
 )
 ENGINE = InnoDB;

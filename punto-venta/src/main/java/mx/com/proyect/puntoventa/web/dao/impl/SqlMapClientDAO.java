@@ -17,8 +17,8 @@ public class SqlMapClientDAO extends SqlSessionDaoSupport implements ClientDAO {
 	}
 
 	@Override
-	public boolean updateClient(AccountDTOclient a) {
-		// TODO Auto-generated method stub
+	public boolean updateClient(AccountDTOclient accountDTOclient) {
+		getSqlSession().insert("updateCustomer", accountDTOclient);
 		return false;
 	}
 
