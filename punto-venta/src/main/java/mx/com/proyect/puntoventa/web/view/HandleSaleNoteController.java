@@ -2,7 +2,7 @@ package mx.com.proyect.puntoventa.web.view;
 
 import java.util.List;
 
-import javax.servlet.http.Cookie;
+
 /* GTL 2018.05.21
  * Controlador para las notas de venta
  * 
@@ -10,20 +10,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.WebUtils;
-
+import mx.com.proyect.puntoventa.web.forms.SaleForm;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
@@ -169,5 +163,44 @@ public class HandleSaleNoteController {
 			model.addAttribute("saleNoteForm", new SaleNoteForm());
 			return "handleSaleNote";
 		}
+	
+	
+	
+	@PostMapping(value = "handleSaleNote.do", params = "change")
+	public String changeStatus(HttpServletRequest request, 
+			@ModelAttribute ("saleForm") SaleForm saleForm, Model model) {
+		
+		try {
+			SaleNoteForm note = saleNoteService.getSaleNoteById(new Integer(saleForm.getSaleId()));
+		
+			if(note == null) {
+				model.addAttribute("messageError","No se encontro la operacion, recarga la pagina porfavor! ");
+				return "handleSaleNote";
+			}
+			saleNoteService.changeStatus(new Integer(saleForm.getSaleId()), new Integer(saleForm.getStatusId()));
+			
+			// cargar datos al JSP
+			List<AccountDTOclient> listClients = clientService.getAll();
+			model.addAttribute("listClients", listClients);
+			List<OfficeDTO> listOffices = officeService.getAll();
+			model.addAttribute("listOffices", listOffices);		
+			// traemos los productos del almacen
+			List<ItemDTO> listItems = inventoryService.getAll();
+			model.addAttribute("listItems", listItems);
+			List<ColorDTO> listColors = colorService.getAll();
+			model.addAttribute("listColors", listColors);		
+			List<AccountDTO> listUsers = accountService.getAllUser();
+			model.addAttribute("listUsers", listUsers);		
+			model.addAttribute("listStatus", saleNoteService.getSalesStatus());
+			model.addAttribute("messageSucess","Se cambio el status de manera exitosa");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+			
+		
+		return "handleSaleNote";
+		
+	}
 
 }

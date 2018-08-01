@@ -1,4 +1,7 @@
-
+/**
+ * Variables globales
+ * */
+var g_saleId;
 
 $( document ).ready(function() {
 	
@@ -115,8 +118,15 @@ $( document ).ready(function() {
 	});
 	
 	// validando formulario actualizar
-	$('form[name="updateSaleNoteForm"]').submit(function (e) {
+	$('form[name="changeStatusForm"]').submit(function (e) {
 		return validateFormUpdateNote();	
+	});
+	
+	// validar formulario cambiar estatus
+	$('form[name="changeStatusForm"]').submit(function (e) {
+		var $form = $('#changeStatusForm');
+		$form.find('input[name="saleId"]').val(g_saleId);
+		return true;	
 	});
 	
 	function validateFormAddNote(){
@@ -379,6 +389,47 @@ function appendsColorsToSelects(color){
 //		    text: value.description
 //		}));
 //	});	// end for each
+}
+
+// 2018.01.08 GTL - abrir ventana modal para cambiar estatus a la venta
+
+function changeStatus (saleId){
+	g_saleId = saleId;
+	var $form = $('#changeStatusForm');
+	$form.find('#saleId' ).val(saleId);
+	$('#modalChangeStatus').modal('show');
+}
+
+// 2018.01.08 GTL, funcion para cambiar el estatus a la venta
+function changeStatusSubmit (){
+//	var $form = $('#changeStatusForm');
+//	var statusId = $form.find('#changeStatusSelect option:selected' ).val();
+////	var arr = { saleId: g_saleId, status: { "statusId":parseInt(statusId) } };	
+//	var arr = ""
+//	if(statusId != ''){		
+//		$.ajax({
+//			type : "POST",
+//			contentType: 'application/json; charset=utf-8',
+//			url : "changeStatus.do",
+////			data : color,
+//			data: arr,
+//			dataType : 'json',
+//			timeout : 100000,
+//			success : function(data) {				
+//				alert(data.message)				
+//			},
+//			error : function(e) {
+//				console.log("ERROR: ", e);	
+//				alert("ERROR: "+e)
+//			},
+//			done : function(e) {
+//				console.log("DONE");
+//			}
+//		});
+//	}else{
+//		alert("No se recibio el parametro, porfavor recarga la pagina e intentalo de nuevo :( ")
+//	}
+	
 }
 
 

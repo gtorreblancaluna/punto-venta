@@ -241,5 +241,9 @@
 	<select id="getSalesStatus" resultMap="resultMapSaleStatus">
 		SELECT * FROM c_estatus_venta ORDER BY ds_descripcion
 	</select>
+	
+	<update id="changeStatusSaleNote" parameterType="java.util.Map">
+		UPDATE c_venta SET cl_estatus_venta = #{statusId} WHERE cl_venta = #{saleId}
+	</update>
 
 </mapper>

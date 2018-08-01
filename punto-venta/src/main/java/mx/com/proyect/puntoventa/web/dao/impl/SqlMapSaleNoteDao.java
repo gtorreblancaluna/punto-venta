@@ -138,4 +138,13 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 		return getSqlSession().selectList("getSalesStatus");
 	}
 
+	@Override
+	public boolean changeStatus(int saleId, int statusId) {
+		Map<String,Object> parameters = new HashMap<>();
+		parameters.put("saleId", saleId);
+		parameters.put("statusId", statusId);
+		getSqlSession().update("changeStatusSaleNote",parameters);
+		return true;
+	}
+
 }

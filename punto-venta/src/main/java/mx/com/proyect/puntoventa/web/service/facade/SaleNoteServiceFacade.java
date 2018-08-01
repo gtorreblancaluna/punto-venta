@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import mx.com.proyect.puntoventa.web.forms.SaleForm;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
@@ -118,6 +119,27 @@ public class SaleNoteServiceFacade {
 	
         return json;
 
+	}
+	
+	/**
+	 * 2018.08.01 GTL
+	 * Metodo para cambiar el estatus a la venta	 * 
+	 * */
+	@RequestMapping(value = "/changeStatus.do")
+	@ResponseBody
+	public Map<String,Object> changeStatus(@RequestBody SaleForm saleNoteForm) {
+		Map<String,Object> respuesta = new HashMap<>();
+//		SaleNoteForm note = saleNoteService.getSaleNoteById(saleNoteForm.getSaleId());
+//		
+//		if(note == null) {
+//			respuesta.put("success", false);
+//			respuesta.put("messate", "No se encontro la operacion id: "+saleNoteForm.getSaleId());
+//			return respuesta;
+//		}
+//		saleNoteService.changeStatus(saleNoteForm.getSaleId(),saleNoteForm.getStatus().getStatusId());
+//		
+		
+		return null;
 	}
 
 }

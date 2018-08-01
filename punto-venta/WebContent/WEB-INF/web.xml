@@ -14,6 +14,7 @@
 		<servlet-name>puntoventa</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
 <!-- 	2018.07.24 En produccion desactivar esto  -->
 <!-- 	<servlet-mapping> -->
 <!-- 		<servlet-name>puntoventa</servlet-name> -->

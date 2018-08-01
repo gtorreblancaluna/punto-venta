@@ -124,6 +124,12 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 		// TODO Auto-generated method stub
 		return saleNoteDao.getSalesStatus();
 	}
+
+	@Override
+	public boolean changeStatus(int saleId, int statusId) {
+		// TODO Auto-generated method stub
+		return saleNoteDao.changeStatus(saleId,statusId);
+	}
 	
 
 }

@@ -21,5 +21,6 @@ public interface SaleNoteDAO {
 	List<ResultQuerySaleNote> getSalesByParameter(String parameter);
 	public Map<String,Object> getItemsSold();
 	public List<SaleStatusDTO> getSalesStatus();
+	boolean changeStatus(int saleId, int statusId);
 
 }

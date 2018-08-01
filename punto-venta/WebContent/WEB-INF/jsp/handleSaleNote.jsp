@@ -8,7 +8,7 @@
 <fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
 <html>
 <head>
-<script type="text/javascript" src="js/admin/handleSaleNote.js?v1.0"></script>
+<script type="text/javascript" src="js/admin/handleSaleNote.js?v1.1"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	
 <title>Punto Venta:: Notas</title>
 <script type="text/javascript">
@@ -311,7 +311,7 @@ function addSaleDetailNoteForm(items){
 						<td>${saleNote.nameCustomer}</td>
 						<td>${saleNote.nameOffice}</td>
 						<td>${saleNote.nameUser}</td>
-						<td>${saleNote.status.description}</td>
+						<td><a href="javascript:void();" onclick="javascript:changeStatus(${saleNote.saleId});">${saleNote.status.description}</a></td>
 						<td><a href="javascript:void();" onclick="javascript:generatePdf(${saleNote.saleId });">Imprimir</a></td>
 					</tr>
 					</c:forEach>
@@ -606,6 +606,40 @@ function addSaleDetailNoteForm(items){
 		<!-- end modal add color -->
 
 
+
+<!-- 2018.08.01 - modal para cambiar estatus a la venta -->
+		<div id="modalChangeStatus" class="modal fade" role="dialog">
+			<div class="modal-content"
+				style="width: 500px; height: 300px; margin: auto; margin-top: 30px; overflow: auto;">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Cambiar estatus</h4>
+				</div>
+				<div class="modal-body">
+					<form:form modelAttribute="saleForm" action="handleSaleNote.do" method="POST" name="changeStatusForm" id="changeStatusForm" >
+						<input type="hidden" name="saleId" class="saleId" id="saleId">						
+						<p>
+							<span class="input-group-text">Cambiar a: 
+							<select name="statusId" class="form-control" id="changeStatusSelect">
+										<option value="0">- Seleccione -</option>
+									<c:forEach items="${listStatus}" var="status">
+										<option value="${status.statusId}">${status.description}</option>
+									</c:forEach>	
+							</select>
+							</span>
+						</p>
+
+						<input type="submit" class="btn btn-dark" name="change" value="Enviar" />
+					</form:form>
+
+					<p>Cambiar estatus</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+		<!-- end modal add color -->
 
 	</div> <!-- end container -->
 
