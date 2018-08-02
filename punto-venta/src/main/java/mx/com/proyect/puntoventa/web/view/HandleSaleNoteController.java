@@ -1,5 +1,9 @@
 package mx.com.proyect.puntoventa.web.view;
 
+import static mx.com.proyect.puntoventa.web.commons.ApplicationConstants.VENTA_ENTREGADO;
+import static mx.com.proyect.puntoventa.web.commons.ApplicationConstants.VENTA_REGISTRADO;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,6 +29,7 @@ import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.OfficeDTO;
+import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.UserSession;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 import mx.com.proyect.puntoventa.web.service.AccountService;
@@ -33,7 +38,6 @@ import mx.com.proyect.puntoventa.web.service.ColorService;
 import mx.com.proyect.puntoventa.web.service.InventoryService;
 import mx.com.proyect.puntoventa.web.service.OfficeService;
 import mx.com.proyect.puntoventa.web.service.SaleNoteService;
-
 
 @Controller
 public class HandleSaleNoteController {
@@ -169,14 +173,25 @@ public class HandleSaleNoteController {
 	@PostMapping(value = "handleSaleNote.do", params = "change")
 	public String changeStatus(HttpServletRequest request, 
 			@ModelAttribute ("saleForm") SaleForm saleForm, Model model) {
+		StringBuilder messageSucess = new StringBuilder();
 		
-		try {
+//		try {
 			SaleNoteForm note = saleNoteService.getSaleNoteById(new Integer(saleForm.getSaleId()));
 		
 			if(note == null) {
 				model.addAttribute("messageError","No se encontro la operacion, recarga la pagina porfavor! ");
 				return "handleSaleNote";
 			}
+			
+			if(note.getStatus().getStatusId() == VENTA_REGISTRADO 
+					&& Integer.parseInt(saleForm.getStatusId()) == VENTA_ENTREGADO) {
+				/** si la venta es registrada y el estatus a cambiar es entregado entonces 
+				 * procedemos a descontar del inventario 
+				 * */
+				saleNoteService.decreaseStockPerSale(note.getSaleDetail());
+				messageSucess.append("Se descontaron "+note.getSaleDetail().size()+" articulos del inventario de manera exitosa ");
+			}
+			
 			saleNoteService.changeStatus(new Integer(saleForm.getSaleId()), new Integer(saleForm.getStatusId()));
 			
 			// cargar datos al JSP
@@ -192,11 +207,12 @@ public class HandleSaleNoteController {
 			List<AccountDTO> listUsers = accountService.getAllUser();
 			model.addAttribute("listUsers", listUsers);		
 			model.addAttribute("listStatus", saleNoteService.getSalesStatus());
-			model.addAttribute("messageSucess","Se cambio el status de manera exitosa");
+			messageSucess.append("| Se cambio el estatus de manera exitosa ");
+			model.addAttribute("messageSucess",messageSucess.toString());
 			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 			
 		
 		return "handleSaleNote";

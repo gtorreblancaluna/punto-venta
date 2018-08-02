@@ -30,6 +30,8 @@
 		<result property="item.description" column="descripcion_articulo" />
 		<result property="item.unitMeasurement" column="unidad_medida_articulo" />
 		<result property="item.salePrice" column="precio_venta_articulo" />
+		<result property="item.stock" column="stock_articulo" />
+		<result property="item.amountEntry" column="cantidad_entrada" />
 		<result property="amount" column="cantidad" />
 	</resultMap>
 
@@ -40,7 +42,10 @@
 		<result property="userId" column="cl_cliente" />
 		<result property="sellerId" column="cl_usuario" />
 		<result property="storeId" column="cl_sucursal" />
-		<result property="description" column="ds_descripcion" />		
+		<result property="description" column="ds_descripcion" />	
+		
+		<result property="status.statusId" column="cl_estatus_venta" />
+		<result property="status.description" column="descripcion_estatus" />	
 	</resultMap>
 
 	<resultMap id="resultMapSaleNoteDto" type="saleNoteDTO">
@@ -123,21 +128,25 @@
 		ORDER BY v.cl_venta DESC
 	</select>
 
-	<select id="getSaleNoteById" parameterType="java.lang.Integer"
-		resultMap="resultMapSaleNote">
-		SELECT * FROM c_venta WHERE cl_venta = #{id}
+	<select id="getSaleNoteById" parameterType="java.lang.Integer" resultMap="resultMapSaleNote">
+		SELECT venta.*, estatus.ds_descripcion AS descripcion_estatus
+		FROM c_venta venta
+		INNER JOIN c_estatus_venta estatus ON (venta.cl_estatus_venta = estatus.cl_estatus_venta)
+		WHERE cl_venta = #{id}
 	</select>
 
 	<select id="getDetailSaleNoteById" parameterType="java.lang.Integer"	resultMap="resultMapSaleNoteDetail">
 		SELECT dv.*, c.ds_descripcion AS descripcion_color,
 		a.descripcion AS descripcion_articulo, a.unidad_medida AS
-		unidad_medida_articulo, dv.precio_articulo AS precio_venta_articulo
+		unidad_medida_articulo, dv.precio_articulo AS precio_venta_articulo,
+		a.cantidad_existente AS stock_articulo,
+		dv.cantidad AS cantidad_vendida
 		FROM k_detalle_venta dv
 		INNER JOIN c_articulo a ON (dv.cl_articulo = a.cl_articulo)
 		INNER JOIN c_color c ON (dv.cl_color = c.cl_color)
 		WHERE dv.cl_venta = #{id}
 	</select>
-
+	
 	<update id="updateSaleNote" parameterType="saleNoteForm">
 		UPDATE c_venta SET
 		fe_entrega = #{dateSaleNote},

@@ -1,6 +1,3 @@
-/**
- * Variables globales
- * */
 var g_saleId;
 
 $( document ).ready(function() {
@@ -118,7 +115,7 @@ $( document ).ready(function() {
 	});
 	
 	// validando formulario actualizar
-	$('form[name="changeStatusForm"]').submit(function (e) {
+	$('form[name="updateSaleNoteForm"]').submit(function (e) {
 		return validateFormUpdateNote();	
 	});
 	

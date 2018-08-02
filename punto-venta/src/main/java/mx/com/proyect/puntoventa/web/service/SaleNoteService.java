@@ -5,6 +5,8 @@ import java.util.Map;
 
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
+import mx.com.proyect.puntoventa.web.model.ItemDTO;
+import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
@@ -23,4 +25,5 @@ public interface SaleNoteService {
 	public Map<String,Object> getItemsSold();
 	public List<SaleStatusDTO> getSalesStatus();
 	boolean changeStatus(int saleId, int statusId);
+	public boolean decreaseStockPerSale(List<SaleDetailDTO> details);
 }

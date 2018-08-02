@@ -1,6 +1,10 @@
 package mx.com.proyect.puntoventa.web.service.impl;
 
+import static mx.com.proyect.puntoventa.web.commons.ApplicationConstants.VENTA_ENTREGADO;
+import static mx.com.proyect.puntoventa.web.commons.ApplicationConstants.VENTA_REGISTRADO;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -14,10 +18,11 @@ import mx.com.proyect.puntoventa.web.dao.SaleNoteDAO;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
+import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
-import mx.com.proyect.puntoventa.web.service.SaleNoteService;
+import mx.com.proyect.puntoventa.web.service.SaleNoteService;;
 
 @Service("saleNoteServiceImpl")
 public class SaleNoteServiceImpl implements SaleNoteService {
@@ -57,7 +62,8 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 		// si la venta es igual a hoy , entonces se descontara los articulos de la bd
 		if(todayString.equals(saleNoteForm.getDateSaleNote())) {
 			// ponemos status de entregado
-			saleNoteForm.getStatus().setStatusId(5);
+			saleNoteForm.getStatus().setStatusId(VENTA_ENTREGADO);
+//			this.decreaseStock(saleNoteForm.getItems());
 			for(ItemDTO item : saleNoteForm.getItems()) {
 				//descontamos los articulos de la bd
 				ItemDTO itemDTO = inventoryDao.getItemById(item.getItemId());
@@ -66,13 +72,24 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 				inventoryDao.decreaseStockByItemid(stock_actual,item.getItemId());
 			} 
 	    }else {
-	    	//ponemos status de registrado
-	    	
-	    	
-	    	saleNoteForm.getStatus().setStatusId(1);
+	    	//ponemos status de registrado	    	
+	    	saleNoteForm.getStatus().setStatusId(VENTA_REGISTRADO);
 	    }
 		
 		saleNoteDao.add(saleNoteForm);
+		return true;
+	}
+	
+	// descontaremos stock desde cambiar estatus
+	public boolean decreaseStockPerSale(List<SaleDetailDTO> details) {				
+		for(SaleDetailDTO detail : details) {
+			//descontamos los articulos de la bd
+			ItemDTO itemDTO = inventoryDao.getItemById(detail.getItem().getItemId());
+			float stock_anterior = itemDTO.getStock();
+			float stock_actual = stock_anterior - detail.getAmount();
+			inventoryDao.decreaseStockByItemid(stock_actual,detail.getItem().getItemId());
+		} 
+		
 		return true;
 	}
 
