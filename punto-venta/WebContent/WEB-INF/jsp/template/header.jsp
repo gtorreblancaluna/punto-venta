@@ -37,7 +37,7 @@
 							<li><a> Pedidos</a></li>
 							<li><a href="handleSaleNote.do">Notas Venta</a></li>
 							<li><a>Administraci&oacute;n</a></li>
-							<li><a>Reportes</a></li>
+<!-- 							<li><a>Reportes</a></li> -->
 						</ul>
 					</li>
 					
@@ -47,6 +47,13 @@
 							<li><a>LLegadas</a></li>
 							<li><a>Reporte diario</a></li>
 							<li><a href="handleDelivery.do">Entregas</a></li>
+						</ul>
+					</li>
+					
+					<li><a class="dropdown-toggle" data-toggle="dropdown"
+						href="javascript:void(0);">Reportes</a>
+						<ul class="dropdown-menu">						
+							<li><a href="salesReports.do">Reportes de ventas</a></li>
 						</ul>
 					</li>
 				</c:if>

@@ -5,6 +5,8 @@ package mx.com.proyect.puntoventa.web.forms;
  * */
 public class SaleNoteFilter {
 
+	// folio - id nota
+	private String saleIdFilter;
 	// fecha inicial
 	private String iniDateFilter;
 	// fecha final
@@ -26,6 +28,12 @@ public class SaleNoteFilter {
 	
 	
 	
+	public String getSaleIdFilter() {
+		return saleIdFilter;
+	}
+	public void setSaleIdFilter(String saleIdFilter) {
+		this.saleIdFilter = saleIdFilter;
+	}
 	public String getStoreIdFilter() {
 		return storeIdFilter;
 	}

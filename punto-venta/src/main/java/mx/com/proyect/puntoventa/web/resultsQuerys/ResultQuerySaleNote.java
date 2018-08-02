@@ -1,7 +1,9 @@
 package mx.com.proyect.puntoventa.web.resultsQuerys;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
 
 /** GTL 2018.06.05
@@ -26,7 +28,7 @@ public class ResultQuerySaleNote {
 	// nombre_usuario
 	private String nameUser;
 	// status
-	private SaleStatusDTO status;	
+	private SaleStatusDTO status;
 	
 	public SaleStatusDTO getStatus() {
 		return status;

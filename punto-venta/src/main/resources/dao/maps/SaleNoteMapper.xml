@@ -124,6 +124,9 @@
 			<if test="statusFilter != null and statusFilter != 0 ">
 				AND v.cl_estatus_venta = (#{statusFilter})
 			</if>
+			<if test="saleIdFilter != null and saleIdFilter != '' ">
+				AND v.cl_venta = (#{saleIdFilter})
+			</if>
 		</where>
 		ORDER BY v.cl_venta DESC
 	</select>
