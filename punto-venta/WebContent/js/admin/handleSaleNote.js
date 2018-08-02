@@ -61,7 +61,7 @@ $( document ).ready(function() {
 		if(confirm("\u00BFEliminar fila?"))
 			$(this).closest('tr').remove();		
 	});		
-	document.getElementById("dateForm").valueAsDate = new Date()	
+//	document.getElementById("dateForm").valueAsDate = new Date()	
 	
 	// funcion para buscar por id el articulo
 	$(".tableAddNote tbody").on('keypress','#txtFindItemById', function(e){
