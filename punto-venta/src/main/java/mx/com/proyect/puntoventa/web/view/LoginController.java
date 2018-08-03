@@ -51,8 +51,9 @@ public class LoginController {
 		}
 		
 		httpSession.setAttribute("userSession", userSession);
-		if(userSession.getAccount().getEmail() != null)
-			 modelAndView.setViewName("index");
+		AccountDTO account = userSession.getAccount();
+		if(account != null)
+			 modelAndView.setViewName("bienvenida");
 		
 		return modelAndView;
 	}
