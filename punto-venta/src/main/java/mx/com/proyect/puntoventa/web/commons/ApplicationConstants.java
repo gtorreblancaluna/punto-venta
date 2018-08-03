@@ -9,4 +9,7 @@ public interface ApplicationConstants {
 	public static final Integer VENTA_ARCHIVADO = 4;
 	public static final Integer VENTA_ENTREGADO = 5;
 	
+  //Mascara fecha grande
+  public static final String MASK_DATE_FORMAT = "EEEEEEEE dd 'de' MMMMMMMMMMMMMM, yyyy";
+	
 }

@@ -30,6 +30,16 @@ public class ResultQuerySaleNote {
 	// status
 	private SaleStatusDTO status;
 	
+	// total de la venta
+	private Float totalAmount;	
+	
+	
+	public Float getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(Float totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 	public SaleStatusDTO getStatus() {
 		return status;
 	}

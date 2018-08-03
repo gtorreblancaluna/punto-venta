@@ -47,9 +47,9 @@ function generatePdf(){
 		if(nombreCliente != ''){
 			cont++;
 			if(cont == 1)
-				parametros += "?nombreCliente="+nombreCliebte+"";
+				parametros += "?nombreCliente="+nombreCliente+"";
 			else
-				parametros += "&nombreCliente="+nombreCliebte+"";
+				parametros += "&nombreCliente="+nombreCliente+"";
 			valid=true;
 		}
 		if(idEstatus != '0'){

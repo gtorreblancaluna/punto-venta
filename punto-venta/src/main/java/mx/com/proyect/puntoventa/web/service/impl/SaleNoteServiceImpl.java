@@ -148,6 +148,12 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 		// TODO Auto-generated method stub
 		return saleNoteDao.changeStatus(saleId,statusId);
 	}
+
+	@Override
+	public Float getTotalSaleById(int id) {
+		// TODO Auto-generated method stub
+		return saleNoteDao.getTotalSaleById(id);
+	}
 	
 
 }

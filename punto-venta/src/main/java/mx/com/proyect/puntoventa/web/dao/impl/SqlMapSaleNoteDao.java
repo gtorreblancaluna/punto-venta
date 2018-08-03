@@ -147,4 +147,10 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 		return true;
 	}
 
+	@Override
+	public Float getTotalSaleById(int id) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("getTotalSaleById",id);
+	}
+
 }

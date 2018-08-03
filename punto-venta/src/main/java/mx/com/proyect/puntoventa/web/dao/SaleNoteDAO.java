@@ -22,5 +22,6 @@ public interface SaleNoteDAO {
 	public Map<String,Object> getItemsSold();
 	public List<SaleStatusDTO> getSalesStatus();
 	boolean changeStatus(int saleId, int statusId);
+	Float getTotalSaleById(int id);
 
 }

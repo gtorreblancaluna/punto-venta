@@ -94,10 +94,9 @@
 	
 	<select id="getSaleNoteByFilter" parameterType="saleNoteFilter"	resultMap="resultMapQuerySaleNote">
 		SELECT v.cl_venta,v.fe_registro,v.fe_entrega,v.ds_descripcion,
-		CONCAT(c.nombre,' ',c.ap_paterno) AS nombre_cliente, s.nombre AS
-		nombre_sucursal,
+		CONCAT(c.nombre,' ',c.ap_paterno) AS nombre_cliente, s.nombre AS nombre_sucursal,
 		CONCAT(u.nombre,' ',u.ap_paterno) AS nombre_usuario,
-		estatus.ds_descripcion AS descripcion_estatus_venta
+		estatus.ds_descripcion AS descripcion_estatus_venta	
 		FROM c_venta v
 		INNER JOIN c_cliente c ON (v.cl_cliente = c.cl_cliente)
 		INNER JOIN c_sucursal s ON (v.cl_sucursal = s.cl_sucursal)
@@ -257,5 +256,9 @@
 	<update id="changeStatusSaleNote" parameterType="java.util.Map">
 		UPDATE c_venta SET cl_estatus_venta = #{statusId} WHERE cl_venta = #{saleId}
 	</update>
+	
+	<select id="getTotalSaleById" parameterType="java.lang.Integer" resultType="java.lang.Float">
+		SELECT SUM(cantidad * precio_articulo) FROM k_detalle_venta WHERE cl_venta = #{id}
+	</select>
 
 </mapper>

@@ -26,4 +26,5 @@ public interface SaleNoteService {
 	public List<SaleStatusDTO> getSalesStatus();
 	boolean changeStatus(int saleId, int statusId);
 	public boolean decreaseStockPerSale(List<SaleDetailDTO> details);
+	Float getTotalSaleById(int id);
 }
