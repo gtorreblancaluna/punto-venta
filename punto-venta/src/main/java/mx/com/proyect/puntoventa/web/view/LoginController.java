@@ -51,7 +51,10 @@ public class LoginController {
 		}
 		
 		httpSession.setAttribute("userSession", userSession);
-		return modelAndView;		
+		if(userSession.getAccount().getEmail() != null)		
+			 modelAndView.setViewName("index");
+		
+		return modelAndView;
 	}
 	
 	@SuppressWarnings("unchecked")
