@@ -47,8 +47,9 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 		}
 		
 		for(ItemDTO item : saleNoteForm.getItems()) {
-			String array[] = item.getItemIdForm().split("|");
-			item.setItemId(new Integer(array[0]));
+//			String array[] = item.getItemIdForm().split("|");
+//			item.setItemId(new Integer(array[0]));
+			item.setItemId(new Integer (item.getItemIdForm()));
 		}
 		
 		 Calendar cal = Calendar.getInstance();
