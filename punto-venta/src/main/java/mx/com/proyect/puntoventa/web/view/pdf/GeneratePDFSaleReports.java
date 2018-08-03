@@ -217,7 +217,7 @@ public class GeneratePDFSaleReports {
 		        tableDetails.addCell(cellDetails);
 		        
 		        float total = 0f;
-		        for(ResultQuerySaleNote result : listSaleNoteByFilter) {		        	
+		        for(ResultQuerySaleNote result : listSaleNoteByFilter) {
 		        	cellDetails = new PdfPCell(new Phrase(result.getSaleId()+"",new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL, new Color(80, 80, 80))));
 		        	cellDetails.setBorder(0);
 		        	cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
@@ -276,14 +276,14 @@ public class GeneratePDFSaleReports {
 		        // agregamos el total
 		        cellDetails = new PdfPCell(new Phrase("Total: ",new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
 	 	        cellDetails.setFixedHeight(cellHeightDetails);
-	// 	        cellDetails.setBorder(Rectangle.TOP);
-	 	        cellDetails.setColspan(6);
+	 	        cellDetails.setBorder(0);
+	 	        cellDetails.setColspan(7);
 	 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 	 	        tableDetails.addCell(cellDetails);		        
 		     
 		        cellDetails = new PdfPCell(new Phrase(NumberFormat.getCurrencyInstance(new Locale("es", "MX")).format(total),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
 		        cellDetails.setFixedHeight(cellHeightDetails);
-	//	        cellDetails.setBorder(Rectangle.TOP);
+		        cellDetails.setBorder(0);
 		        cellDetails.setColspan(1);	        
 		        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 		        tableDetails.addCell(cellDetails);
