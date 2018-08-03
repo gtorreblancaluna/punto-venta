@@ -51,7 +51,7 @@ public class LoginController {
 		}
 		
 		httpSession.setAttribute("userSession", userSession);
-		if(userSession.getAccount().getEmail() != null)		
+		if(userSession.getAccount().getEmail() != null)
 			 modelAndView.setViewName("index");
 		
 		return modelAndView;
