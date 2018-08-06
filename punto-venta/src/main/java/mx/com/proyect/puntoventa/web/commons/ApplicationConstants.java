@@ -8,8 +8,14 @@ public interface ApplicationConstants {
 	public static final Integer VENTA_AUTORIZADO = 3;
 	public static final Integer VENTA_ARCHIVADO = 4;
 	public static final Integer VENTA_ENTREGADO = 5;
-	
-  //Mascara fecha grande
-  public static final String MASK_DATE_FORMAT = "EEEEEEEE dd 'de' MMMMMMMMMMMMMM, yyyy";
-	
+
+	/** constantes para los valores de puesto del usuario */
+	public static final Integer PUESTO_ADMINISTRADOR = 1;
+	public static final Integer PUESTO_VENDEDOR = 2;
+	public static final Integer PUESTO_CHOFER = 3;
+	public static final Integer PUESTO_PROVEEDOR = 4;
+
+	// Mascara fecha grande
+	public static final String MASK_DATE_FORMAT = "EEEEEEEE dd 'de' MMMMMMMMMMMMMM, yyyy";
+
 }

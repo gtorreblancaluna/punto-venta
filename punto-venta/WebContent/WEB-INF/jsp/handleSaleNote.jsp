@@ -245,6 +245,9 @@ function addSaleDetailNoteForm(items){
 			<table class="table tableFilter bgcol">
 			<tbody>
 				<tr>
+					<td style="width:6%;">
+						<span class="input-group-text">Folio:<input type="text" name="saleIdFilter" id="saleIdFilter" class="form-control"> </span>
+					</td>
 					<td>
 						<span class="input-group-text">Fecha inicial:<input type="date" name="iniDateFilter" id="iniDateFilter" class="form-control"> </span>
 					</td>

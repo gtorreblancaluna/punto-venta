@@ -9,6 +9,7 @@ public class JobDTO implements Serializable {
 	private String jobId;
 	private String description;
 	private String status;
+	
 	public String getJobId() {
 		return jobId;
 	}
