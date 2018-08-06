@@ -37,8 +37,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 		if(saleNoteForm.getStatus() == null)
     		saleNoteForm.setStatus(new SaleStatusDTO());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-		   
+		try {		   
 		    java.util.Date date = dateFormat.parse(saleNoteForm.getDateSaleNote());
 		    java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
 		    saleNoteForm.setDateTimestamp(timestamp);
