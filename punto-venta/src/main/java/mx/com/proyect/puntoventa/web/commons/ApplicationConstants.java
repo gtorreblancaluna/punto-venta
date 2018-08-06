@@ -2,6 +2,12 @@ package mx.com.proyect.puntoventa.web.commons;
 
 public interface ApplicationConstants {
 
+	
+	/** ----------------------------------------------------------------------------
+	 *  VALORES ESTATICOS PARA EL MANEJO DEL CATALOGO C_ESTATUS_VENTA EN LA BASE DE DATOS
+	 * ------------------------------------------------------------------------------
+	 * */
+	
 	/** estado de la venta REGISTRADO = 1 */
 	public static final Integer VENTA_REGISTRADO = 1;
 	/** estado de la venta CANCELADO = 2 */
@@ -12,6 +18,11 @@ public interface ApplicationConstants {
 	public static final Integer VENTA_ARCHIVADO = 4;
 	/** estado de la venta ENTREGADO = 2 */
 	public static final Integer VENTA_ENTREGADO = 5;
+	
+	/** ----------------------------------------------------------------------------
+	 *  VALORES ESTATICOS PARA EL MANEJO DEL CATALOGO C_PUESTO EN LA BASE DE DATOS
+	 * ------------------------------------------------------------------------------
+	 * */
 
 	/** estado para el puesto ADMINISTRADOR = 1 */
 	public static final Integer PUESTO_ADMINISTRADOR = 1;
