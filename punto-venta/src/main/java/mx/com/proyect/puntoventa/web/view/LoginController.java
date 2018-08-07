@@ -49,7 +49,7 @@ public class LoginController {
 		
 		httpSession.setAttribute("userSession", userSession);
 		
-		if(userSession != null)
+		if(userSession != null && userSession.getAccount() != null)
 			 modelAndView.setViewName("bienvenida");
 		
 		return modelAndView;
