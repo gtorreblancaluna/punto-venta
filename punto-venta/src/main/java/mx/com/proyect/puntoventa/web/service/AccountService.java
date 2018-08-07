@@ -3,9 +3,8 @@ package mx.com.proyect.puntoventa.web.service;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
-
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
+import mx.com.proyect.puntoventa.web.forms.UserFilter;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.model.JobDTO;
 
@@ -20,6 +19,7 @@ public interface AccountService {
 	public List<AccountDTO> getAllUser();
 	AccountDTO getAccount(String email);
 	public List<JobDTO> getAllJobs();
+	List<AccountDTO> getUserByFilter(UserFilter userFilter);
 	
 }
 

@@ -81,7 +81,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	}
 	
 	// descontaremos stock desde cambiar estatus
-	public boolean decreaseStockPerSale(List<SaleDetailDTO> details) {				
+	public boolean decreaseStockPerSale(List<SaleDetailDTO> details) {
 		for(SaleDetailDTO detail : details) {
 			//descontamos los articulos de la bd
 			ItemDTO itemDTO = inventoryDao.getItemById(detail.getItem().getItemId());

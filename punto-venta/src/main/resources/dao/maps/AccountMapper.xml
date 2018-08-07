@@ -76,5 +76,33 @@
 		SELECT * FROM c_puesto WHERE fg_estatus = '1' ORDER BY ds_descripcion
 	</select>
 	
+	<select id="getUserByFilter" parameterType="userFilter" resultMap="accountResultMap">
+		SELECT u.*, p.cl_puesto AS puestoId, p.ds_descripcion AS descripcion_puesto,
+		s.nombre AS nombre_sucursal
+		FROM c_usuario u
+		INNER JOIN c_puesto p ON (u.cl_puesto = p.cl_puesto)	
+		INNER JOIN c_sucursal s ON (u.cl_sucursal = s.cl_sucursal)
+		WHERE u.fg_activo = '1'
+		<if test="nameFilter != null and nameFilter != '' ">
+			AND u.nombre LIKE CONCAT('%',#{nameFilter},'%')
+		</if>
+		<if test="firstNameFilter != null and firstNameFilter != '' ">
+			AND u.ap_paterno LIKE CONCAT('%',#{firstNameFilter},'%')
+		</if>
+		<if test="lastNameFilter != null and lastNameFilter != '' ">
+			AND u.ap_materno LIKE CONCAT('%',#{lastNameFilter},'%')
+		</if>
+		<if test="emailFilter != null and emailFilter != '' ">
+			AND u.email LIKE CONCAT('%',#{emailFilter},'%')
+		</if>
+		<if test="jobIdFilter != null and jobIdFilter != 0 ">
+			AND u.cl_puesto = #{jobIdFilter}
+		</if>
+		<if test="officeIdFilter != null and officeIdFilter != 0 ">
+			AND u.cl_sucursal = #{officeIdFilter}
+		</if>		
+		ORDER BY nombre
+	</select>
+	
 	
 </mapper>

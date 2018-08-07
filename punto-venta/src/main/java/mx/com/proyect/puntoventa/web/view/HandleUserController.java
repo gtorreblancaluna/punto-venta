@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import mx.com.proyect.puntoventa.web.forms.CustomerFilter;
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
+import mx.com.proyect.puntoventa.web.forms.UserFilter;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
+import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.JobDTO;
 import mx.com.proyect.puntoventa.web.model.OfficeDTO;
 import mx.com.proyect.puntoventa.web.service.AccountService;
@@ -31,16 +34,9 @@ public class HandleUserController {
 
 	// mostrar la vista principal
 	@RequestMapping(value = "/handleUser.do", method = RequestMethod.GET)
-	public String showHandleUser(HttpServletRequest request, Model model) {
+	public String showHandleUser(HttpServletRequest request, Model model) {		
 		
-		
-		List<AccountDTO> listUser = accountService.getAllUser();		
-		model.addAttribute("listUser", listUser);
-		List<JobDTO> listJobs = accountService.getAllJobs();
-		model.addAttribute("listJobs", listJobs);
-		List<OfficeDTO> listOffices = officeService.getAll();
-		model.addAttribute("listOffices", listOffices);
-		
+		model.addAttribute(this.getModelAttributtes(model));		
 		model.addAttribute("account", new AccountDTO());
 		return "handleUser";
 	}
@@ -49,13 +45,9 @@ public class HandleUserController {
 	@RequestMapping(value = "/handleUser.do", params = "addUser")
 	public String addUser(HttpServletRequest request, @ModelAttribute AccountDTO account, Model model) {
 		accountService.addUser(account);
-		List<AccountDTO> listUser = accountService.getAllUser();
-		model.addAttribute("listUser", listUser);
-		model.addAttribute("account", account);
-		List<JobDTO> listJobs = accountService.getAllJobs();
-		model.addAttribute("listJobs", listJobs);
-		List<OfficeDTO> listOffices = officeService.getAll();
-		model.addAttribute("listOffices", listOffices);
+	
+		model.addAttribute("account", account);	
+		model.addAttribute(this.getModelAttributtes(model));
 		model.addAttribute("message", "Exito al registrar el usuario: " + account.getEmail());
 		return "handleUser";
 	}
@@ -64,12 +56,8 @@ public class HandleUserController {
 	@RequestMapping(value = "/handleUser.do", params = "updateUser")
 	public String updateUser(HttpServletRequest request, @ModelAttribute AccountDTO account, Model model) {
 		accountService.updateUser(account);		
-		List<AccountDTO> listUser = accountService.getAllUser();
-		model.addAttribute("listUser", listUser);
-		List<JobDTO> listJobs = accountService.getAllJobs();
-		model.addAttribute("listJobs", listJobs);
-		List<OfficeDTO> listOffices = officeService.getAll();
-		model.addAttribute("listOffices", listOffices);
+		
+		model.addAttribute(this.getModelAttributtes(model));
 		model.addAttribute("message", "Exito al actualizar el usuario: " + account.getEmail());
 		return "handleUser";
 	}
@@ -100,13 +88,28 @@ public class HandleUserController {
 		if(messageError!=null)
 			model.addAttribute("messageError",messageError);
 
-		List<AccountDTO> listUser = accountService.getAllUser();
-		model.addAttribute("listUser", listUser);
-		List<JobDTO> listJobs = accountService.getAllJobs();
-		model.addAttribute("listJobs", listJobs);
-		List<OfficeDTO> listOffices = officeService.getAll();
-		model.addAttribute("listOffices", listOffices);
+
+		model.addAttribute(this.getModelAttributtes(model));
+		
 		return "handleUser";
 	}
+	
+	// busqueda por filtro
+		@RequestMapping(value = "/handleUser.do", params = "filter")
+		public String showUsersByFilter( HttpServletRequest request,@ModelAttribute UserFilter userFilter, Model model) {		
+			List<AccountDTO> listUser = accountService.getUserByFilter(userFilter);
+				model.addAttribute("messageView","Se obtuvieron "+listUser.size()+ " resultados");
+			
+				model.addAttribute("listUser",listUser);
+				model.addAttribute(this.getModelAttributtes(model));
+				
+			return "handleUser";
+		}
+		
+		public Model getModelAttributtes(Model model) {			
+			model.addAttribute("listJobs", accountService.getAllJobs());
+			model.addAttribute("listOffices", officeService.getAll());
+			return model;
+		}
 
 }

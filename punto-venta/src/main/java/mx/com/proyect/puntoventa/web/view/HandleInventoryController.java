@@ -118,6 +118,7 @@ public class HandleInventoryController {
 			return "handleInventory";
 		}
 		
+		// aplicar filtro
 		@PostMapping(value = "handleInventory.do", params = "filter")
 		public String getSaleNoteByFilter(HttpServletRequest request, 
 				@ModelAttribute ("saleNoteFilter") SaleNoteFilter saleNoteFilter, Model model) {

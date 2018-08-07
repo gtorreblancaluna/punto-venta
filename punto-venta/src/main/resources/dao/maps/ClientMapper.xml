@@ -65,10 +65,10 @@
 			AND nombre LIKE CONCAT('%',#{name},'%')
 		</if>
 		<if test="firstName != null and firstName != '' ">
-			AND ap_paterno LIKE CONCAT('%',#{ap_paterno},'%')
+			AND ap_paterno LIKE CONCAT('%',#{firstName},'%')
 		</if>
 		<if test="lastName != null and lastName != '' ">
-			AND ap_materno LIKE CONCAT('%',#{ap_materno},'%')
+			AND ap_materno LIKE CONCAT('%',#{lastName},'%')
 		</if>
 		<if test="email != null and email != '' ">
 			AND email LIKE CONCAT('%',#{email},'%')

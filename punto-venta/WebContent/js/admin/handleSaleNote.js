@@ -127,7 +127,7 @@ $( document ).ready(function() {
 	});
 	
 	function validateFormAddNote(){
-		 var msgError="",msgDate="";
+			var msgError="",msgDate="";
 		    var valid=true,fgDate=false;
 		    var count=0;
 			

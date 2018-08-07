@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import mx.com.proyect.puntoventa.web.dao.AccountDAO;
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
+import mx.com.proyect.puntoventa.web.forms.UserFilter;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.model.JobDTO;
 
@@ -66,6 +67,12 @@ public class SqlMapAccountDao extends SqlSessionDaoSupport implements AccountDAO
 	public List<JobDTO> getAllJobs() {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectList("getAllJobs");
+	}
+
+	@Override
+	public List<AccountDTO> getUserByFilter(UserFilter userFilter) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("getUserByFilter",userFilter);
 	}
 
 }

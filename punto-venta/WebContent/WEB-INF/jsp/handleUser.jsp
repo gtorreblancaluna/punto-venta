@@ -3,6 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -81,18 +82,23 @@ $( document ).ready(function() {
 <body>
  <div class="container" style="">
 
-		<c:if test="${message != null}">
-		<div class="alert alert-success texto" style="width:100%;">
-  			<strong>Success!</strong> ${message}
+		<c:if test="${messageView != null}">
+		<div class="alert alert-success">
+  			<strong>Success!</strong> 
+  			<c:set var = "message" value = "${messageView}"/>
+  			<c:forEach var="item" items="${fn:split(message,'|')}">
+        		<p>${item}</p>
+			</c:forEach>
 		</div>
 
 		</c:if>
 		<c:if test="${messageError != null}">
-		<div class="alert alert-danger" style="width:100%;">
+		<div class="alert alert-danger">
   			<strong>Error! </strong> ${messageError}
 		</div>
-
 		</c:if>
+		
+		
 		<div class="page-header">
 		<div class="row">
 			<div class="col">
@@ -101,6 +107,56 @@ $( document ).ready(function() {
 			
 		</div>
 	</div>
+	
+		<!--2018.08.07 Formulario para aplicar busqueda por filtro -->
+	<form:form modelAttribute="userFilter" action="handleUser.do" method="post" name="handleUser" id="getUsersByFilter" >
+		<div class="container-result">	
+			<p>Consultar usuarios por filtro</p>
+			<table class="table tableFilter bgcol">
+			<tbody>
+				<tr>
+					<td>
+						<span class="input-group-text">Nombre:<input type="text" name="nameFilter" id="" class="form-control"> </span>
+					</td>
+					<td>
+						<span class="input-group-text">Apellido Paterno:<input type="text" name="firstNameFilter" id="" class="form-control"> </span>
+					</td>
+					<td>
+						<span class="input-group-text">Apellido Materno:<input type="text" name="lastNameFilter" id="" class="form-control"></span>
+					</td>
+					<td>
+						<span class="input-group-text">Email:<input type="text" name="emailFilter" id="" class="form-control"></span>
+					</td>
+					<td>
+						<label>Puesto:</label>
+						<select name="jobIdFilter" class="form-control" id="officeIdFilter">
+							<option value="0">- Seleccione -</option>
+							<c:forEach items="${listJobs}" var="job">
+								<option value="${job.jobId}">${job.description}</option>
+							</c:forEach>	
+						</select>
+					</td>
+					<td>
+						<label>Sucursal:</label>
+						<select name="officeIdFilter" class="form-control" id="officeIdFilter">
+							<option value="0">- Seleccione -</option>
+							<c:forEach items="${listOffices}" var="office">
+								<option value="${office.officeId}">${office.name}</option>
+							</c:forEach>	
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=6>
+					 <input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
+					</td>
+				</tr>
+			</tbody>
+			</table>	
+		</div>
+	</form:form>
+	
+	
 		<!-- Mostramos los usuarios -->
 		<c:if test="${not empty listUser}">
 		<div class="containerShowResultQuery container-result">

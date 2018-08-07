@@ -4,6 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
+<script type="text/javascript" src="js/admin/inventory.js?v1.1"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>punto de venta :: Inventario</title>
 <style>
@@ -143,12 +144,12 @@
         <h4 class="modal-title">Agregar producto</h4>
       </div>
       <div class="modal-body">     
-		<form:form modelAttribute="ItemDTO" action="handleInventory.do" method="post" name="addForm">				
+		<form:form modelAttribute="ItemDTO" action="handleInventory.do" method="post" name="addForm" id="addForm">				
 				
 				<div class="form-group">
 					<label>Almacen: </label>
 <!-- 					<input type="text" id="storeDescription" name="storeDTO.description" placeholder="" class="form-control"> -->
-				<select name="storeDTO.storeId" >
+				<select name="storeDTO.storeId" id="selStoreFilter">
 				<option value="0">- Seleccione -</option>
 					<c:forEach items="${listStore}" var="store">
 						<option value="${store.storeId}">${store.description}</option>
@@ -159,7 +160,7 @@
 				<div class="form-group">
 					<label>Color: </label>
 <!-- 					<input type="text" id="storeDescription" name="storeDTO.description" placeholder="" class="form-control"> -->
-				<select name="color.colorId" >
+				<select name="color.colorId" id="selColorId">
 				<option value="0">- Seleccione -</option>
 					<c:forEach items="${listColors}" var="color">
 						<option value="${color.colorId}">${color.description}</option>
@@ -176,11 +177,11 @@
 				</div>
 				<div class="form-group">
 					<label>Cantidad de entrada: </label>
-					<input type="text" id="amountEntry" name="amountEntry" placeholder="" class="form-control">
+					<input type="number" id="amountEntry" name="amountEntry" placeholder="" class="form-control">
 				</div>
 				<div class="form-group">
 					<label>Cantidad de salida: </label>
-					<input type="text" id="amountOutput" name="amountOutput" placeholder="" class="form-control">
+					<input type="number" id="amountOutput" name="amountOutput" placeholder="" class="form-control">
 				</div>
 				<div class="form-group">
 					<label>Precio de venta: </label>
