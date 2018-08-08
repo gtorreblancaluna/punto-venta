@@ -19,7 +19,8 @@
 			<c:if test="${not empty userSession.account.email}">
 			<li class="active"><a href="logout.do">Salir</a></li>
 				<!-- Validamos que el usuario sea diferente a proovedor -->
-				<c:if test="${userSession.account.job.jobId ne '4' }">
+				<c:if test="${userSession.account.job.jobId eq '1' }">
+				<!-- El usuario es un administrador, se mostrara todas las opciones -->
 					<li class="active"><a href="index.do">Home</a></li>
 					
 					<li class="dropdown"><a class="dropdown-toggle"
@@ -65,6 +66,16 @@
 							<li><a>LLegadas</a></li>
 							<li><a>Reporte diario</a></li>
 							<li><a href="handleDelivery.do">Entregas</a></li>
+						</ul>
+					</li>
+				</c:if>
+				
+				<c:if test="${userSession.account.job.jobId eq '2' }">
+				<!-- el usuario es un vendedor, solo mostraremos la opcion de notas de venta -->
+					<li><a class="dropdown-toggle" data-toggle="dropdown"
+						href="javascript:void(0);">Punto Venta</a>
+						<ul class="dropdown-menu">							
+							<li><a href="handleSaleNote.do">Notas Venta</a></li>	
 						</ul>
 					</li>
 				</c:if>
