@@ -3,6 +3,7 @@ package mx.com.proyect.puntoventa.web.view;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.StoreDTO;
+import mx.com.proyect.puntoventa.web.model.UserSession;
 import mx.com.proyect.puntoventa.web.service.ColorService;
 import mx.com.proyect.puntoventa.web.service.InventoryService;
 import mx.com.proyect.puntoventa.web.service.OfficeService;
@@ -52,15 +54,29 @@ public class HandleInventoryController {
 		// agregar 
 		@RequestMapping(value = "/handleInventory.do", params = "add")
 		public String add(HttpServletRequest request, @ModelAttribute ItemDTO item, Model model) {
-			inventoryService.add(item);			
-//			List<ItemDTO> listItems = inventoryService.getAll();
-//			model.addAttribute("listItems", listItems);
-			model.addAttribute("item", new ItemDTO());
-			model.addAttribute("message", "Exito al registrar el producto: " + item.getDescription());
-			List<ColorDTO> listColors = colorService.getAll();
-			model.addAttribute("listColors", listColors);
-			model.addAttribute("listOffices", officeService.getAll());
-			return "handleInventory";
+			HttpSession session = request.getSession();
+			UserSession userSession = (UserSession) session.getAttribute("userSession");
+			
+			if(userSession != null && userSession.getAccount() != null) {			
+				
+				//2018-08-08 se le asigna la sucursal al articulo del usuario logueado
+				item.getOfficeDTO().setOfficeId(userSession.getAccount().getOffice().getOfficeId());
+				
+				inventoryService.add(item);			
+	//			List<ItemDTO> listItems = inventoryService.getAll();
+	//			model.addAttribute("listItems", listItems);
+				model.addAttribute("item", new ItemDTO());
+				model.addAttribute("message", "Exito al registrar el producto: " + item.getDescription());
+				List<ColorDTO> listColors = colorService.getAll();
+				model.addAttribute("listColors", listColors);
+				model.addAttribute("listOffices", officeService.getAll());
+				return "handleInventory";			
+			}else {
+				model.addAttribute("item", new ItemDTO());
+				model.addAttribute("messageError", "ERROR. No se encontro session, porfavor recarga la pagina y logueate correctamente ");
+				return "handleInventory";		
+			}
+			
 		}
 
 		// actualizar 

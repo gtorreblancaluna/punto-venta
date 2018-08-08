@@ -13,7 +13,7 @@ public interface ApplicationConstants {
 	public static final Integer VENTA_AUTORIZADO = 3;
 	/** estado de la venta ARCHIVADO = 4 */
 	public static final Integer VENTA_ARCHIVADO = 4;
-	/** estado de la venta ENTREGADO = 2 */
+	/** estado de la venta ENTREGADO = 5 */
 	public static final Integer VENTA_ENTREGADO = 5;	
 	/** ----------------------------------------------------------------------------
 	 *  VALORES ESTATICOS PARA EL MANEJO DEL CATALOGO C_PUESTO EN LA BASE DE DATOS
@@ -31,4 +31,19 @@ public interface ApplicationConstants {
 	// Mascara fecha grande
 	public static final String MASK_DATE_FORMAT = "EEEEEEEE dd 'de' MMMMMMMMMMMMMM, yyyy";
 
+	/** ----------------------------------------------------------------------------
+	 *  VALORES ESTATICOS PARA EL MANEJO DEL CATALOGO C_ESTATUS_ENTREGAS EN LA BASE DE DATOS
+	 * ------------------------------------------------------------------------------
+	 * */	
+	/** estado de la entrega REGISTRADO = 1 */
+	public static final Integer ENTREGA_REGISTRADO = 1;
+	/** estado de la venta CANCELADO = 2 */
+	public static final Integer ENTREGA_CANCELADO = 2;
+	/** estado de la venta AUTORIZADO = 3 */
+	public static final Integer ENTREGA_AUTORIZADO = 3;
+	/** estado de la venta ARCHIVADO = 4 */
+	public static final Integer ENTREGA_ARCHIVADO = 4;
+	/** estado de la venta ENTREGADO = 5 */
+	public static final Integer ENTREGA_ENTREGADO = 5;
+	
 }

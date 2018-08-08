@@ -15,7 +15,7 @@ public interface InventoryService {
 	boolean add(ItemDTO account);
 	boolean update(ItemDTO account);
 	boolean delete(ItemDTO account);
-	public List<ItemDTO> getAll();
+	public List<ItemDTO> getAll(int sucursalId);
 	public List<StoreDTO> getAllStore();
 	public List<ItemDTO> getItemsByFilter(SaleNoteFilter saleNoteFilter);
 }

@@ -15,7 +15,10 @@
 		<result property="storeDTO.description" column="ds_descripcion" />			
 		<result property="color.colorId" column="color_id" />
 		<result property="color.description" column="color_descripcion" />
-		<result property="color.status" column="color_estatus" />			
+		<result property="color.status" column="color_estatus" />
+		<!-- sucursal -->
+		<result property="officeDTO.officeId" column="cl_sucursal" />
+		<result property="officeDTO.name" column="nombre_sucursal" />		
 	</resultMap>
 	
 	<resultMap id="storeResultMap" type="storeDTO">
@@ -25,27 +28,33 @@
 	</resultMap>
 
 	<select id="findByIdItem" resultMap="itemResultMap" parameterType="java.lang.Long">
-		SELECT i.*, a.cl_almacen, a.ds_descripcion, c.cl_color AS color_id, c.ds_descripcion AS color_descripcion, c.fg_estatus AS color_estatus
+		SELECT s.nombre AS nombre_sucursal, i.*, a.cl_almacen, a.ds_descripcion, c.cl_color AS color_id, c.ds_descripcion AS color_descripcion, c.fg_estatus AS color_estatus
 		FROM c_articulo i 
 		INNER JOIN c_almacen a ON (i.cl_almacen = a.cl_almacen)
 		INNER JOIN c_color c ON (i.cl_color = c.cl_color)
+		INNER JOIN c_sucursal s ON (i.cl_sucursal = s.cl_sucursal)
 		WHERE cl_articulo = #{id}
 	</select>
 	
 	
-	<select id="getAllItems" resultMap="itemResultMap">
-		SELECT i.*, a.cl_almacen, a.ds_descripcion, c.cl_color AS color_id, c.ds_descripcion AS color_descripcion, c.fg_estatus AS color_estatus
+	<select id="getAllItems" resultMap="itemResultMap" parameterType="java.util.Map">
+		SELECT s.nombre AS nombre_sucursal,i.*, a.cl_almacen, a.ds_descripcion, c.cl_color AS color_id, c.ds_descripcion AS color_descripcion, c.fg_estatus AS color_estatus
 		FROM c_articulo i 
 		INNER JOIN c_almacen a ON (i.cl_almacen = a.cl_almacen)
 		INNER JOIN c_color c ON (i.cl_color = c.cl_color)
-		WHERE i.fg_estatus = '1'
+		INNER JOIN c_sucursal s ON (i.cl_sucursal = s.cl_sucursal)
+		WHERE i.fg_estatus = '1' 
+		<if	test="id != null and id != 0 ">
+			AND i.cl_sucursal = #{id}			
+		</if>
+		
 	</select>
 
 	<insert id="addItem" parameterType="itemDTO">
 		INSERT INTO c_articulo
-		(cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,cantidad_salida,precio_venta,cantidad_existente)
+		(cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,cantidad_salida,precio_venta,cantidad_existente)
 		values
-		(#{storeDTO.storeId},#{color.colorId},#{description},#{unitMeasurement},#{amountEntry},#{amountOutput},#{salePrice},#{stock})
+		(#{storeDTO.storeId},#{color.colorId},#{officeDTO.officeId},#{description},#{unitMeasurement},#{amountEntry},#{amountOutput},#{salePrice},#{stock})
 	</insert>
 	<update id="updateItem" parameterType="itemDTO">
 		UPDATE c_articulo SET
@@ -76,10 +85,11 @@
 	</update>
 	
 	<select id="getItemsByFilter" resultMap="itemResultMap" parameterType="saleNoteFilter">
-		SELECT articulo.*, almacen.ds_descripcion, color.ds_descripcion AS color_descripcion
+		SELECT sucursal.nombre AS nombre_sucursal,articulo.*, almacen.ds_descripcion, color.ds_descripcion AS color_descripcion
 		FROM c_articulo articulo
 		INNER JOIN c_almacen almacen ON (almacen.cl_almacen = articulo.cl_almacen)
 		INNER JOIN c_color color ON (color.cl_color = articulo.cl_color)
+		INNER JOIN c_sucursal sucursal ON (articulo.cl_sucursal = sucursal.cl_sucursal)
 		WHERE articulo.fg_estatus = '1'
 		<if	test="iniDateFilter != null and endDateFilter != null and iniDateFilter != '' and endDateFilter != '' ">
 			<![CDATA[ 

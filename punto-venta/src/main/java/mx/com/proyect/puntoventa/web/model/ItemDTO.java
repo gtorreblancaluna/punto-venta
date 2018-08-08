@@ -29,7 +29,15 @@ public class ItemDTO implements Serializable {
 	private String fgStatus;
 	// objeto color
 	private ColorDTO color;
+	// sucursal donde esta registrado el articulo
+	private OfficeDTO officeDTO;	
 	
+	public OfficeDTO getOfficeDTO() {
+		return officeDTO;
+	}
+	public void setOfficeDTO(OfficeDTO officeDTO) {
+		this.officeDTO = officeDTO;
+	}
 	public String getItemIdForm() {
 		return itemIdForm;
 	}

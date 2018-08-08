@@ -176,6 +176,7 @@ cl_articulo INTEGER unsigned NOT NULL AUTO_INCREMENT,
 fecha_alta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 cl_almacen INTEGER UNSIGNED NOT NULL,
 cl_color INTEGER UNSIGNED NOT NULL,
+cl_sucursal INTEGER UNSIGNED NOT NULL,
 descripcion VARCHAR(80) NOT NULL,
 unidad_medida VARCHAR(20),
 cantidad_entrada DECIMAL(9,2) NOT NULL,
@@ -184,6 +185,10 @@ precio_venta DECIMAL(9,2),
 cantidad_existente DECIMAL(9,2),
 fg_estatus ENUM('1','0') NOT NULL DEFAULT '1',
 PRIMARY KEY(cl_articulo),
+CONSTRAINT fk_articulo_cl_sucursal FOREIGN KEY fk_articulo_cl_sucursal (cl_sucursal) 
+	REFERENCES c_sucursal(cl_sucursal)
+	ON DELETE CASCADE
+    ON UPDATE CASCADE,
 CONSTRAINT fk1_cl_almacen FOREIGN KEY fk1_cl_almacen (cl_almacen) 
   REFERENCES c_almacen(cl_almacen)
   ON DELETE CASCADE
@@ -194,6 +199,14 @@ CONSTRAINT fk1_cl_color FOREIGN KEY fk1_cl_color (cl_color)
     ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
+
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_2','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','2','1','sala_3','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_4','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_5','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_6','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_7','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_8','pieza',600,22000,500,'1');
 					
 -- 2018.05.22 GTL Tabla Ventas 
 CREATE TABLE c_venta(
@@ -249,13 +262,6 @@ CONSTRAINT fk_cl_color FOREIGN KEY fk_cl_color (cl_color)
 )
 ENGINE = InnoDB;
 
-INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_2','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','2','sala_3','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_4','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_5','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_6','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_7','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','sala_8','pieza',600,22000,500,'1');
 
 -- 2018.06.14 GTL - tabla entregas, almacenara la informacion para manejar las entregas por parte de un proveedor
 CREATE TABLE c_entrega(

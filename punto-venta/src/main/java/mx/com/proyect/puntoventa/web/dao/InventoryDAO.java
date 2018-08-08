@@ -16,7 +16,7 @@ public interface InventoryDAO {
 	boolean add(ItemDTO item);
 	boolean update(ItemDTO item);
 	boolean delete(ItemDTO item);
-	public List<ItemDTO> getAll();
+	public List<ItemDTO> getAll(int sucursalId);
 	public List<StoreDTO> getAllStore();
 	ItemDTO getItemById(int id);
 	boolean decreaseStockByItemid(float stock, Integer id);

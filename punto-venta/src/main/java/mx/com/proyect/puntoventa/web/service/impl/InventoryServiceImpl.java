@@ -50,9 +50,9 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
-	public List<ItemDTO> getAll() {
+	public List<ItemDTO> getAll(int sucursalId) {
 		// TODO Auto-generated method stub
-		return inventoryDao.getAll();
+		return inventoryDao.getAll(sucursalId);
 	}
 
 	@Override

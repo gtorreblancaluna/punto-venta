@@ -44,8 +44,10 @@ public class SqlMapInventoryDao extends SqlSessionDaoSupport implements Inventor
 	}
 
 	@Override
-	public List<ItemDTO> getAll() {		
-		return getSqlSession().selectList("getAllItems");
+	public List<ItemDTO> getAll(int id) {	
+		Map<String,Object> param = new HashMap<>();
+		param.put("id", id);
+		return getSqlSession().selectList("getAllItems", param);
 	}
 
 	@Override

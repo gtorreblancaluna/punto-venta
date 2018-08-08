@@ -3,14 +3,7 @@ package mx.com.proyect.puntoventa.web.dao.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import mx.com.proyect.puntoventa.web.dao.ProviderDAO;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.model.DeliveryDTO;
