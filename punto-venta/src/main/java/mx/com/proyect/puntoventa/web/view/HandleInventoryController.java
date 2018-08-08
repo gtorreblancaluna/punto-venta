@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
+import mx.com.proyect.puntoventa.web.model.OfficeDTO;
 import mx.com.proyect.puntoventa.web.model.StoreDTO;
 import mx.com.proyect.puntoventa.web.model.UserSession;
 import mx.com.proyect.puntoventa.web.service.ColorService;
@@ -58,7 +59,7 @@ public class HandleInventoryController {
 			UserSession userSession = (UserSession) session.getAttribute("userSession");
 			
 			if(userSession != null && userSession.getAccount() != null) {			
-				
+				item.setOfficeDTO(new OfficeDTO());
 				//2018-08-08 se le asigna la sucursal al articulo del usuario logueado
 				item.getOfficeDTO().setOfficeId(userSession.getAccount().getOffice().getOfficeId());
 				
