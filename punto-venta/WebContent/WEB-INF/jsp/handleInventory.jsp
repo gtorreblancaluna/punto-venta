@@ -72,11 +72,24 @@
 							</c:forEach>	
 						</select>	
 					</span>		        
-			        </td>					
+			        </td>
+			        <td>
+					<span class="input-group-text">Sucursal: 
+				        <select name="officeIdFilter" class="form-control">
+						<option value="">- Seleccione -</option>
+							<c:forEach items="${listOffice}" var="office">
+								<option value="${office.officeId}">${office.description}</option>
+							</c:forEach>	
+						</select>	
+					</span>		        
+			        </td>						
 				</tr>
 				<tr>
-					<td colspan=5>
+					<td colspan=4>
 					 <input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
+					</td>
+					<td colspan=2>
+						<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAdd">Agregar producto</button>
 					</td>
 				</tr>
 			</tbody>
@@ -99,8 +112,8 @@
 					<td>descripci&oacute;n</td>	
 					<td>color</td>				
 					<td>U.M.</td>
-					<td>cantidad entrada</td>
-					<td>cantidad salida</td>
+<!-- 					<td>cantidad entrada</td> -->
+<!-- 					<td>cantidad salida</td> -->
 					<td>precio venta</td>				
 					<td>cantidad existente</td>							
 				</tr>
@@ -113,8 +126,8 @@
 			 			<td>${item.description}</td>	
 			 			<td>${item.color.description}</td>		 			
 			 			<td>${item.unitMeasurement}</td>
-			 			<td>${item.amountEntry}</td>
-			 			<td>${item.amountOutput}</td>		 			
+<%-- 			 			<td>${item.amountEntry}</td> --%>
+<%-- 			 			<td>${item.amountOutput}</td>		 			 --%>
 			 			<td>${item.salePrice}</td>
 			 			<td>${item.stock}</td>		 			
 			 			<td><button type="button" class="btn btn-dark btnUpdate" id="btnUpdate" data-toggle="modal" data-target="#modalUpdate">Editar</button></td>
@@ -131,11 +144,7 @@
 	 		</div>
 		</c:if>
 		
-		<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAdd">Agregar producto</button>
-
-
-
-
+		
 
  <div id="modalAdd" class="modal fade" role="dialog" >
  <div class="modal-content" style="width: 700px; height: 600px; margin: auto; margin-top: 30px;overflow: auto;">
@@ -146,21 +155,29 @@
       <div class="modal-body">     
 		<form:form modelAttribute="ItemDTO" action="handleInventory.do" method="post" name="addForm" id="addForm">				
 				
+<!-- 				<div class="form-group"> -->
+<!-- 					<label>Almacen: </label> -->
+<!-- 					<select name="storeDTO.storeId" id="selStoreFilter"> -->
+<!-- 					<option value="0">- Seleccione -</option> -->
+<%-- 						<c:forEach items="${listStore}" var="store"> --%>
+<%-- 							<option value="${store.storeId}">${store.description}</option> --%>
+<%-- 						</c:forEach>	 --%>
+<!-- 					</select> -->
+<!-- 				</div> -->
+				
 				<div class="form-group">
-					<label>Almacen: </label>
-<!-- 					<input type="text" id="storeDescription" name="storeDTO.description" placeholder="" class="form-control"> -->
-				<select name="storeDTO.storeId" id="selStoreFilter">
-				<option value="0">- Seleccione -</option>
-					<c:forEach items="${listStore}" var="store">
-						<option value="${store.storeId}">${store.description}</option>
-					</c:forEach>	
-				</select>
+					<label>Sucursal: </label>
+					<select name="officeDTO.officeId" id="selOffice" class="form-control">
+					<option value="0">- Seleccione -</option>
+						<c:forEach items="${listOffices}" var="office">
+							<option value="${office.officeId}">${office.description}</option>
+						</c:forEach>	
+					</select>
 				</div>
 				
 				<div class="form-group">
 					<label>Color: </label>
-<!-- 					<input type="text" id="storeDescription" name="storeDTO.description" placeholder="" class="form-control"> -->
-				<select name="color.colorId" id="selColorId">
+				<select name="color.colorId" id="selColorId" class="form-control">
 				<option value="0">- Seleccione -</option>
 					<c:forEach items="${listColors}" var="color">
 						<option value="${color.colorId}">${color.description}</option>
@@ -175,14 +192,14 @@
 					<label>Unidad de Medida: </label>
 					<input type="text" id="unitMeasurement" name="unitMeasurement" placeholder="" class="form-control">
 				</div>
-				<div class="form-group">
-					<label>Cantidad de entrada: </label>
-					<input type="number" id="amountEntry" name="amountEntry" placeholder="" class="form-control">
-				</div>
-				<div class="form-group">
-					<label>Cantidad de salida: </label>
-					<input type="number" id="amountOutput" name="amountOutput" placeholder="" class="form-control">
-				</div>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label>Cantidad de entrada: </label> -->
+<!-- 					<input type="number" id="amountEntry" name="amountEntry" placeholder="" class="form-control"> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<label>Cantidad de salida: </label> -->
+<!-- 					<input type="number" id="amountOutput" name="amountOutput" placeholder="" class="form-control"> -->
+<!-- 				</div> -->
 				<div class="form-group">
 					<label>Precio de venta: </label>
 					<input type="number" id="salePrice" name="salePrice" class="form-control">
@@ -192,15 +209,15 @@
 					<input type="number" id="stock" name="stock" class="form-control">
 				</div>
 				
-					<div class="form-group">
+				<div class="form-group">
 					<input type="submit" class="btn btn-dark" name="add" value="Enviar" />					
 				</div>
 		</form:form>
-		   <p>Agregar producto</p>
+<!-- 		   <p>Agregar producto</p> -->
       </div>
-      <div class="modal-footer" style="bottom: 20px;">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
-      </div>
+<!--       <div class="modal-footer" style="bottom: 20px;"> -->
+<!--         <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button> -->
+<!--       </div> -->
     </div>
     </div>
     
@@ -265,11 +282,11 @@
 					<input type="submit" class="btn btn-dark" name="update" value="Enviar" />					
 				</div>
 		</form:form>
-		   <p>Editar producto</p>
+<!-- 		   <p>Editar producto</p> -->
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
-      </div>
+<!--       <div class="modal-footer"> -->
+<!--         <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button> -->
+<!--       </div> -->
     </div>
     </div> <!-- fin modal editar -->   
     

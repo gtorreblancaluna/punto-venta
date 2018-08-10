@@ -99,11 +99,14 @@
 		<if test="descriptionFilter != null and descriptionFilter != '' ">
 				AND articulo.descripcion LIKE CONCAT('%',#{descriptionFilter},'%')
 		</if>
-		<if test="storeIdFilter != null and storeIdFilter != '' ">
+		<if test="storeIdFilter != null and storeIdFilter != 0 ">
 				AND articulo.cl_almacen = #{storeIdFilter}
 		</if>
-		<if test="colorIdFilter != null and colorIdFilter != '' ">
+		<if test="colorIdFilter != null and colorIdFilter != 0 ">
 				AND articulo.cl_color = #{colorIdFilter}
+		</if>
+		<if test="officeIdFilter != null and officeIdFilter != 0 ">
+				AND articulo.cl_sucursal = #{officeIdFilter}
 		</if>
 		ORDER BY articulo.fecha_alta DESC
 	</select>

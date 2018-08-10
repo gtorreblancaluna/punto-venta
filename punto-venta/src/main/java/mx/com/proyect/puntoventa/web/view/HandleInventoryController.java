@@ -59,11 +59,15 @@ public class HandleInventoryController {
 			UserSession userSession = (UserSession) session.getAttribute("userSession");
 			
 			if(userSession != null && userSession.getAccount() != null) {			
-				item.setOfficeDTO(new OfficeDTO());
+//				item.setOfficeDTO(new OfficeDTO());
 				//2018-08-08 se le asigna la sucursal al articulo del usuario logueado
-				item.getOfficeDTO().setOfficeId(userSession.getAccount().getOffice().getOfficeId());
+//				item.getOfficeDTO().setOfficeId(userSession.getAccount().getOffice().getOfficeId());
 				
-				inventoryService.add(item);			
+				//2018.08.10 Se agregara siempre en el almacen 1, por que solo habra un almacen por sucursal
+				item.setStoreDTO(new StoreDTO());
+				item.getStoreDTO().setStoreId(1);
+				
+				inventoryService.add(item);
 	//			List<ItemDTO> listItems = inventoryService.getAll();
 	//			model.addAttribute("listItems", listItems);
 				model.addAttribute("item", new ItemDTO());

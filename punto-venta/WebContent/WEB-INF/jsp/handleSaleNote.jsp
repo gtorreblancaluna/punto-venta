@@ -285,6 +285,9 @@ function addSaleDetailNoteForm(items){
 					<td colspan=5>
 					 <input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
 					</td>
+					<td colspan=2>
+						<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAdd">Agregar nota</button>
+					</td>
 				</tr>
 			</tbody>
 			</table>	
@@ -330,7 +333,7 @@ function addSaleDetailNoteForm(items){
 	</c:if>
 	
 	
-<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAdd">Agregar nota</button>
+
 <div id="modalAdd" class="modal fade" role="dialog" >
  <div class="modal-content" >
       <div class="modal-header">
@@ -343,14 +346,15 @@ function addSaleDetailNoteForm(items){
 	<div class="info-modal-header">
 		<table class="table" >
 			<tr>
-				<td>
+				<td colspan=5>
 				<label style="cursor:pointer;">
-<%-- 					<form:checkbox path="printSaleNote" checked="checked" /> --%>
 					<input type="checkbox" name="printSaleNote" checked>
 					<span> Deseo imprimir nota al finalizar</span>
 				</label>		
 				</td>
-				<td colspan=4>
+			</tr>
+			<tr>
+				<td colspan=5>
 					<span class="input-group-text">Descripci&oacute;n:<input type="text" name="description" id="dateForm" class="form-control dateForm"> </span>
 				</td>
 			</tr>
@@ -453,11 +457,11 @@ function addSaleDetailNoteForm(items){
 	  	</div> <!-- end row -->
 	  	</form:form>
 	  	
-	   <p>Agregar nota</p>
+<!-- 	   <p>Agregar nota</p> -->
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
-      </div>
+<!--       <div class="modal-footer"> -->
+<!--         <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button> -->
+<!--       </div> -->
     </div>
     </div><!-- end modal add -->
     
@@ -577,11 +581,11 @@ function addSaleDetailNoteForm(items){
 	  	</div> <!-- end row -->
 	  	</form:form>
 	  	
-	   <p>Actualizar nota</p>
+<!-- 	   <p>Actualizar nota</p> -->
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
-      </div>
+<!--       <div class="modal-footer"> -->
+<!--         <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button> -->
+<!--       </div> -->
     </div>
     </div><!-- end modal update -->
     
