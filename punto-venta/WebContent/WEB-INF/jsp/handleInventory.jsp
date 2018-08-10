@@ -77,8 +77,8 @@
 					<span class="input-group-text">Sucursal: 
 				        <select name="officeIdFilter" class="form-control">
 						<option value="">- Seleccione -</option>
-							<c:forEach items="${listOffice}" var="office">
-								<option value="${office.officeId}">${office.description}</option>
+							<c:forEach items="${listOffices}" var="office">
+								<option value="${office.officeId}">${office.name}</option>
 							</c:forEach>	
 						</select>	
 					</span>		        
@@ -170,7 +170,7 @@
 					<select name="officeDTO.officeId" id="selOffice" class="form-control">
 					<option value="0">- Seleccione -</option>
 						<c:forEach items="${listOffices}" var="office">
-							<option value="${office.officeId}">${office.description}</option>
+							<option value="${office.officeId}">${office.name}</option>
 						</c:forEach>	
 					</select>
 				</div>
@@ -234,25 +234,38 @@
 				
 				<input type="hidden" name="itemId" id="itemId">
 					
+<!-- 				<div class="form-group"> -->
+<!-- 					<label>Almacen: </label> -->
+<!-- 					<select name="storeDTO.storeId" id="selStoreId" class="selStoreId form-group"> -->
+<!-- 					<option value="0">- Seleccione -</option> -->
+<%-- 						<c:forEach items="${listStore}" var="store"> --%>
+<%-- 							<option value="${store.storeId}">${store.description}</option> --%>
+<%-- 						</c:forEach>	 --%>
+<!-- 					</select> -->
+<!-- 				</div> -->
+
+
 				<div class="form-group">
-					<label>Almacen: </label>
-					<select name="storeDTO.storeId" id="selStoreId" class="selStoreId">
+					<label>Sucursal: </label>
+					<select name="officeDTO.officeId" id="selOffice" class="form-control">
 					<option value="0">- Seleccione -</option>
-						<c:forEach items="${listStore}" var="store">
-							<option value="${store.storeId}">${store.description}</option>
+						<c:forEach items="${listOffices}" var="office">
+							<option value="${office.officeId}">${office.name}</option>
 						</c:forEach>	
 					</select>
 				</div>
+				
 				<div class="form-group">
 					<label>Color: </label>
-<!-- 					<input type="text" id="storeDescription" name="storeDTO.description" placeholder="" class="form-control"> -->
-				<select name="color.colorId" class="selColorId" >
-				<option value="0">- Seleccione -</option>
-					<c:forEach items="${listColors}" var="color">
-						<option value="${color.colorId}">${color.description}</option>
-					</c:forEach>	
-				</select>
+					<select name="color.colorId" id="selOffice" class="form-control selColorId">
+					<option value="0">- Seleccione -</option>
+						<c:forEach items="${listColors}" var="color">
+							<option value="${color.colorId}">${color.description}</option>
+						</c:forEach>	
+					</select>
 				</div>
+				
+				
 				<div class="form-group">
 					<label>Descripci&oacute;n: </label>
 					<input type="text" id="description" name="description" placeholder="" class="form-control">
