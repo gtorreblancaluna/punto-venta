@@ -355,7 +355,7 @@ function addSaleDetailNoteForm(items){
 			</tr>
 			<tr>
 				<td colspan=5>
-					<span class="input-group-text">Descripci&oacute;n:<input type="text" name="description" id="dateForm" class="form-control dateForm"> </span>
+					<span class="input-group-text">Descripci&oacute;n:<input type="text" name="description" id="description" class="form-control"> </span>
 				</td>
 			</tr>
 			<tr>
@@ -388,14 +388,14 @@ function addSaleDetailNoteForm(items){
 					</span>	
 				</td>
 				<td>
-				<span class="input-group-text">Sucursal : 
-					<select name="storeId" class="form-control storeId" id="storeId">
-								<option value="0">- Seleccione -</option>
-							<c:forEach items="${listOffices}" var="office">
-								<option value="${office.officeId}">${office.name}</option>
-							</c:forEach>	
-					</select>
-				</span>
+<!-- 				<span class="input-group-text">Sucursal :  -->
+<!-- 					<select name="storeId" class="form-control storeId" id="storeId"> -->
+<!-- 								<option value="0">- Seleccione -</option> -->
+<%-- 							<c:forEach items="${listOffices}" var="office"> --%>
+<%-- 								<option value="${office.officeId}">${office.name}</option> --%>
+<%-- 							</c:forEach>	 --%>
+<!-- 					</select> -->
+<!-- 				</span> -->
 				
 				</td>
 				<td>
@@ -481,7 +481,7 @@ function addSaleDetailNoteForm(items){
 	<table class="table tableSaleNoteForm">
 		<tr>
 			<td colspan=4>
-				<span class="input-group-text">Descripci&oacute;n:<input type="text" name="description" id="descriptionFormUpdate" class="form-control dateForm"> </span>
+				<span class="input-group-text">Descripci&oacute;n:<input type="text" name="description" id="descriptionFormUpdate" class="form-control "> </span>
 			</td>
 		</tr>
 		<tr>

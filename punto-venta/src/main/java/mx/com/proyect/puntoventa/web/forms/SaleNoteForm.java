@@ -14,6 +14,7 @@ public class SaleNoteForm {
 	
 	private int saleId;
 	private String userId;
+	// id de la sucursal
 	private String storeId;
 	private String sellerId;
 	private String dateSaleNote;

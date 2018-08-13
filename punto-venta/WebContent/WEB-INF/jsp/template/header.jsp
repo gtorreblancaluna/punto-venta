@@ -35,9 +35,9 @@
 					<li><a class="dropdown-toggle" data-toggle="dropdown"
 						href="javascript:void(0);">Punto Venta</a>
 						<ul class="dropdown-menu">
-							<li><a> Pedidos</a></li>
+<!-- 							<li><a> Pedidos</a></li> -->
 							<li><a href="handleSaleNote.do">Notas Venta</a></li>
-							<li><a>Administraci&oacute;n</a></li>
+<!-- 							<li><a>Administraci&oacute;n</a></li> -->
 <!-- 							<li><a>Reportes</a></li> -->
 						</ul>
 					</li>

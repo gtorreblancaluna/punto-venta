@@ -135,13 +135,13 @@ $( document ).ready(function() {
 			var date = new Date ( x[0],(x[1] - 1),x[2] ,0,0,0) ;
 			var userId = $('.userId').val();
 			var sellerId = $('.sellerId').val();
-			var storeId = $('#storeId').val();
+//			var storeId = $('#storeId').val();
 			var d = new Date();
 			var today = d.getFullYear()+'/'+ (d.getMonth<10 ? '0' : '') + d.getMonth + '/' 
 			+ (d.getDate()<10 ? '0' : '') + d.getDate();
 			d.setHours(0,0,0,0);
 			
-			if($('#dateForm').val() === '' || userId === '0' || sellerId === '0' || storeId === '0'){
+			if($('#dateForm').val() === '' || userId === '0' || sellerId === '0' ){
 				valid=false;
 				msgError += ++count + ". Faltan valores para agregar a la venta\n";
 			}else{		

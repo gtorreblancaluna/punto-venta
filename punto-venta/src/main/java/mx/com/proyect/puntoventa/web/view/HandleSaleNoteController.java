@@ -74,6 +74,8 @@ public class HandleSaleNoteController {
 		
 		if(userSession != null && userSession.getAccount() != null) {			
 			// agregando pedido a la bd
+			//2018.08.13  GTL agregamos el pedido en la sucursal donde se logueo el usuario
+			saleNoteForm.setStoreId(userSession.getAccount().getOffice().getOfficeId()+"");
 			saleNoteService.add(saleNoteForm);		
 			
 			// se marco imprimir la nota despues de agregar los datos a bd
