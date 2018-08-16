@@ -347,7 +347,7 @@ $( document ).ready(function() {
 		if('${userSession.account.job.jobId}' == '2')
 			alert("No tienes suficientes permisos para esta accion :( ")
 			else
-				$('##modalAdd').modal('toggle');
+				$('#modalAdd').modal('toggle');
 	});
 		
 	$( '.btnAddColor' ).click(function() {
