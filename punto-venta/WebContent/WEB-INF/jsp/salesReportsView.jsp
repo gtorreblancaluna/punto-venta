@@ -96,8 +96,11 @@ $( document ).ready(function() {
 					<td colspan=5>
 						 <input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
 					</td>
-					<td colspan=2>
-						 <input type="button" class="btn btn-dark" name="" onclick="generatePdf();" value="Generar PDF" />	
+					<td colspan=1>
+						 <input type="button" class="btn btn-dark" name="" onclick="generatePdf('generate_pdf_sale_reports.do');" value="Generar PDF" />	
+					</td>
+					<td colspan=1>
+						 <input type="button" class="btn btn-dark" name="" onclick="generatePdf('generate_pdf_detail_sale_reports.do');" value="Generar detalle PDF" />	
 					</td>
 				</tr>
 			</tbody>

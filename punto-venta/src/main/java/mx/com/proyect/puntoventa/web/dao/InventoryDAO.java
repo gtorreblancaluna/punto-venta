@@ -19,6 +19,6 @@ public interface InventoryDAO {
 	public List<ItemDTO> getAll(int sucursalId);
 	public List<StoreDTO> getAllStore();
 	ItemDTO getItemById(int id);
-	boolean decreaseStockByItemid(float stock, Integer id);
+	boolean updateStockByItemid(float stock, Integer id);
 	public List<ItemDTO> getItemsByFilter(SaleNoteFilter saleNoteFilter);
 }

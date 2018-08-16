@@ -101,7 +101,7 @@
 		SELECT * FROM c_articulo WHERE cl_articulo = #{id}
 	</select>
 	
-	<update id="decreaseStockByItemid" parameterType="java.util.Map">
+	<update id="updateStockByItemid" parameterType="java.util.Map">
 		UPDATE c_articulo SET cantidad_existente = #{stock} WHERE cl_articulo = #{id}
 	</update>
 	

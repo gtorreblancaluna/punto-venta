@@ -429,6 +429,10 @@ function changeStatusSubmit (){
 	
 }
 
+function agregarColor(){
+	$('#modalAddColor').modal('show');
+}
+
 
 
 

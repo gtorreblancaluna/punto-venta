@@ -33,7 +33,15 @@ public class ResultQuerySaleNote {
 	// total de la venta
 	private Float totalAmount;	
 	
+	// detalle de la venta
+	private List<SaleDetailDTO> saleDetail;	
 	
+	public List<SaleDetailDTO> getSaleDetail() {
+		return saleDetail;
+	}
+	public void setSaleDetail(List<SaleDetailDTO> saleDetail) {
+		this.saleDetail = saleDetail;
+	}
 	public Float getTotalAmount() {
 		return totalAmount;
 	}

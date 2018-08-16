@@ -73,7 +73,11 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 
 	@Override
 	public List<ResultQuerySaleNote> getByFilter(SaleNoteFilter saleNoteFilter) {
-		return getSqlSession().selectList("getSaleNoteByFilter",saleNoteFilter);
+		List<ResultQuerySaleNote> list = getSqlSession().selectList("getSaleNoteByFilter",saleNoteFilter);		
+		for(ResultQuerySaleNote queryRest: list) {
+			queryRest.setSaleDetail(getSqlSession().selectList("getDetailSaleNoteById",queryRest.getSaleId()));
+		}
+		return list;
 	}
 
 	@Override

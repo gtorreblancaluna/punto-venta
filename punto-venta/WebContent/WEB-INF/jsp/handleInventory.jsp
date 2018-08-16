@@ -86,13 +86,13 @@
 				</tr>
 				<tr>
 					<td colspan=4>
-					 <input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
+					 	<input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
 					</td>
 					<td colspan=1>
-						<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAdd">Agregar producto</button>
+						<button type="button" class="btn btn-dark btnAddProduct" data-toggle="modal" data-target="">Agregar producto</button>
 					</td>
 					<td colspan=1>
-						<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddColor">Agregar Color</button>
+						<button type="button" class="btn btn-dark btnAddColor" data-toggle="modal"  data-target="">Agregar Color</button>
 					</td>
 				</tr>
 			</tbody>
@@ -340,13 +340,38 @@
 
 <script type="text/javascript">
 $( document ).ready(function() {
+	
+	
+	
+	$( '.btnAddProduct' ).click(function() {
+		if('${userSession.account.job.jobId}' == '2')
+			alert("No tienes suficientes permisos para esta accion :( ")
+			else
+				$('##modalAdd').modal('toggle');
+	});
+		
+	$( '.btnAddColor' ).click(function() {
+		if('${userSession.account.job.jobId}' == '2')
+			alert("No tienes suficientes permisos para esta accion :( ")
+			else
+				$('#modalAddColor').modal('toggle');
+	});
 	//confirmar eliminar	
 	$('form[name="deleteForm"]').submit(function() {
+		if('${userSession.account.job.jobId}' == '2'){
+			alert("No tienes suficientes permisos para esta accion :( ")
+			return false;
+		}
 	   return confirm("confirma para continuar");	   
 	});
 	
 	
 	$( '.btnUpdate' ).click(function() {
+		if('${userSession.account.job.jobId}' == '2'){
+			alert("No tienes suficientes permisos para esta accion :( ")
+			return false;
+		}
+			
 		var $updateForm = $("#updateForm");
 		 var $row = jQuery(this).closest('tr');
 		    var $columns = $row.find('td');

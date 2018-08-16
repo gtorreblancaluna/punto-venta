@@ -118,7 +118,7 @@
 				AND v.cl_sucursal IN (#{officeIdFilter})
 			</if>
 			<if test="customerNameFilter != null and customerNameFilter != '' ">
-				AND CONCAT(u.nombre,' ',u.ap_paterno) LIKE CONCAT('%',#{customerNameFilter},'%')
+				AND CONCAT(c.nombre,' ',c.ap_paterno) LIKE CONCAT('%',#{customerNameFilter},'%')
 			</if>
 			<if test="statusFilter != null and statusFilter != 0 ">
 				AND v.cl_estatus_venta = (#{statusFilter})

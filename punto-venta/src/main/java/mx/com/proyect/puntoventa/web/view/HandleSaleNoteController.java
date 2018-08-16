@@ -2,6 +2,8 @@ package mx.com.proyect.puntoventa.web.view;
 
 import static mx.com.proyect.puntoventa.web.commons.ApplicationConstants.VENTA_ENTREGADO;
 import static mx.com.proyect.puntoventa.web.commons.ApplicationConstants.VENTA_REGISTRADO;
+import static mx.com.proyect.puntoventa.web.commons.ApplicationConstants.VENTA_CANCELADO;
+import static mx.com.proyect.puntoventa.web.commons.ApplicationConstants.PUESTO_VENDEDOR;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -103,7 +105,11 @@ public class HandleSaleNoteController {
 			
 			HttpSession session = request.getSession();
 			UserSession userSession = (UserSession) session.getAttribute("userSession");			
-			if(userSession != null && userSession.getAccount() != null) {	
+			if(userSession != null && userSession.getAccount() != null) {
+				if(userSession.getAccount().getJob().getJobId() == PUESTO_VENDEDOR+"") {
+					// el usuario tiene puesto vendedor , filtraremos siempre en la sucursal donde esta logeado
+					saleNoteFilter.setOfficeIdFilter(userSession.getAccount().getOffice().getOfficeId()+"");
+				}
 				List<ResultQuerySaleNote> listSaleNoteByFilter = saleNoteService.getByFilter(saleNoteFilter);			
 				//obtenemos el resultado y enviamos al JSP
 				model.addAttribute("listSaleNoteByFilter", listSaleNoteByFilter);
@@ -165,6 +171,14 @@ public class HandleSaleNoteController {
 				 * */
 				saleNoteService.decreaseStockPerSale(note.getSaleDetail());
 				messageSucess.append("Se descontaron "+note.getSaleDetail().size()+" articulos del inventario de manera exitosa ");
+			}
+
+			if(note.getStatus().getStatusId() == VENTA_ENTREGADO 
+					&& Integer.parseInt(saleForm.getStatusId()) == VENTA_CANCELADO) {
+				// la venta esta entregada y se cambia a cancelado
+				saleNoteService.increaseStockPerSale(note.getSaleDetail());
+				messageSucess.append("Se incrementarion "+note.getSaleDetail().size()+" articulos del inventario de manera exitosa ");
+				
 			}
 			
 			saleNoteService.changeStatus(new Integer(saleForm.getSaleId()), new Integer(saleForm.getStatusId()));

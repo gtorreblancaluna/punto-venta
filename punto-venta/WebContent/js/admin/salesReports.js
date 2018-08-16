@@ -1,4 +1,4 @@
-function generatePdf(){
+function generatePdf(url){
 	var $form = $('#salesReportsFilter');
 	
 	// variables del filtro
@@ -11,7 +11,7 @@ function generatePdf(){
 	var idEstatus = $form.find('#statusFilter').val();
 	
 	// armado de parametros a enviar
-	var url = "generate_pdf_sale_reports.do";
+//	var url = "generate_pdf_sale_reports.do";
 	var parametros = "";
 	var valid = false;
 	var cont = 0;
@@ -63,7 +63,7 @@ function generatePdf(){
 	}
 		
 	if(valid)
-		window.open("generate_pdf_sale_reports.do"+parametros+"", "Nota venta", "width=500,height=300");
+		window.open(url+parametros+"", "Reporte nota venta", "width=500,height=300");
 	else
 		alert('Ingresa parametros para generar el reporte PDF ')
 }

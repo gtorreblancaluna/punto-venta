@@ -9,6 +9,11 @@
 <fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
 <html>
 <head>
+<style type="text/css">
+#modalAdd, .model-content{width:95%;margin:auto;}
+#modalAddColor, .model-content{width:50%;margin:auto;}
+
+</style>
 <script type="text/javascript" src="js/admin/handleSaleNote.js?v1.1"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	
 <title>Punto Venta:: Notas</title>
@@ -17,6 +22,13 @@ var u_cont=0;
 var g_colors="";
 
 $( document ).ready(function() {
+	
+	//
+	if('${userSession.account.job.jobId}' == '2'){
+
+		$( "#officeIdFilter" ).prop( "disabled", true );
+	}
+	
 	
 // 	alert('${accountSession}')
 	if('${printSaleId}' != ''){	
@@ -343,39 +355,26 @@ function addSaleDetailNoteForm(items){
       <div class="modal-body">     
 	
 	<form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="saleNoteForm" id="addSaleNoteForm">
-	<div class="info-modal-header">
-		<table class="table" >
-			<tr>
-				<td colspan=5>
-				<label style="cursor:pointer;">
-					<input type="checkbox" name="printSaleNote" checked>
-					<span> Deseo imprimir nota al finalizar</span>
-				</label>		
-				</td>
-			</tr>
-			<tr>
-				<td colspan=5>
-					<span class="input-group-text">Descripci&oacute;n:<input type="text" name="description" id="description" class="form-control"> </span>
-				</td>
-			</tr>
-			<tr>
+	
 			
-				<td>
-					<span class="input-group-text">Fecha :<input type="date" name="dateSaleNote" id="dateForm" class="form-control dateForm"> </span>
-				</td>
-				<td>
-					<span class="input-group-text">Cliente : 
+			<div class="form-group row">
+			
+				<div class="col-xs-3">
+					<label >Fecha :</label>
+					<input type="date" name="dateSaleNote" id="dateForm" class="form-control dateForm">
+				</div>
+				
+				<div class="col-xs-3">
+					<label >Cliente : </label>
 							<select name="userId" class="form-control userId" >
 										<option value="0">- Seleccione -</option>
 									<c:forEach items="${listClients}" var="client">
 										<option value="${client.userId}">${client.name} ${client.firstName}</option>
 									</c:forEach>	
-							</select>	
-					</span>				
-				</td>
-				<td>
-	<%-- 				<span class="input-group-text">Vendedor :<input type="text" class="form-control" value="${sessionScope.userSession.name }" disabled></span> --%>
-						<span class="input-group-text">Vendedor : 
+							</select>				
+				</div>
+				<div class="col-xs-3">
+						<label>Vendedor :</label> 
 							<select name="sellerId" class="form-control sellerId" >
 										<option value="0">- Seleccione -</option>
 									<c:forEach items="${listUsers}" var="user">
@@ -384,10 +383,9 @@ function addSaleDetailNoteForm(items){
 											<option value="${user.userId}">${user.name} ${user.firstName}</option>
 										</c:if>									
 									</c:forEach>	
-							</select>	
-					</span>	
-				</td>
-				<td>
+							</select>					
+				</div>
+<!-- 				<td> -->
 <!-- 				<span class="input-group-text">Sucursal :  -->
 <!-- 					<select name="storeId" class="form-control storeId" id="storeId"> -->
 <!-- 								<option value="0">- Seleccione -</option> -->
@@ -397,22 +395,34 @@ function addSaleDetailNoteForm(items){
 <!-- 					</select> -->
 <!-- 				</span> -->
 				
-				</td>
-				<td>
-					<p style="font-weight: 900;  font-size: 20px;">Total a pagar: $<span id="totalPagar"></span></p>
-				</td>
-			</tr>
-		</table>
-	</div>
+<!-- 				</td> -->
+				<div class="col-xs-3">
+					<label>Total a pagar: $</label><span id="totalPagar"></span>
+				</div>
+			</div>
+			<div class="form-group row">				
+				<div class="col-xs-6">				
+					<label>Descripci&oacute;n:</label>
+					<input type="text" name="description" id="description" class="form-control">
+				</div>		
+				<div class="col-xs-6">				
+					<label style="cursor:pointer;">
+						<input type="checkbox" name="printSaleNote" class="" checked>
+						<span> Deseo imprimir nota al finalizar</span>
+					</label>	
+				</div>	
+				
+			</div>
+		
 	
-	<div class="row">
+	<div class="form-group row">
      		<table class="table tableAddNote">
 			    <thead>
 			      <tr>
 			      	<th>#</th>
 			      	<th style="width:10%;">Buscar por id</th>
 			        <th>Articulo</th>			        
-			        <th>Color<p><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddColor">+</button></p></th>
+			        <th ><a href="javascript:void();" onclick="agregarColor();">Color</a></th>
 			        <th>Descripci&oacute;n</th>
 			        <th>Cantidad</th>
 			        <th>Precio</th>
@@ -453,8 +463,14 @@ function addSaleDetailNoteForm(items){
 			      	      	      
 			    </tbody>			    
 			  </table>
-			  <input type="submit" class="btn btn-dark" name="add" value="Enviar" />	
+			 	
 	  	</div> <!-- end row -->
+	  	
+	  	 <div class="form-group row">
+			  	<div class="col-xs-12">		
+			  		<input type="submit" class="btn btn-dark" name="add" value="Enviar" style="width: 100%;"/>
+			  	</div>
+			  </div>
 	  	</form:form>
 	  	
 <!-- 	   <p>Agregar nota</p> -->
@@ -593,8 +609,7 @@ function addSaleDetailNoteForm(items){
     
     <!-- modal para agregar color -->
 		<div id="modalAddColor" class="modal fade" role="dialog">
-			<div class="modal-content"
-				style="width: 1000px; height: 600px; margin: auto; margin-top: 30px; overflow: auto;">
+			<div class="modal-content">				
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Agregar color</h4>
@@ -608,11 +623,11 @@ function addSaleDetailNoteForm(items){
 						<input type="button" onclick="addColor();" class="btn btn-dark" value="Enviar" />
 					</form>
 
-					<p>Agregar color</p>
+<!-- 					<p>Agregar color</p> -->
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
-				</div>
+<!-- 				<div class="modal-footer"> -->
+<!-- 					<button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button> -->
+<!-- 				</div> -->
 			</div>
 		</div>
 		<!-- end modal add color -->
@@ -644,11 +659,11 @@ function addSaleDetailNoteForm(items){
 						<input type="submit" class="btn btn-dark" name="change" value="Enviar" />
 					</form:form>
 
-					<p>Cambiar estatus</p>
+<!-- 					<p>Cambiar estatus</p> -->
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
-				</div>
+<!-- 				<div class="modal-footer"> -->
+<!-- 					<button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button> -->
+<!-- 				</div> -->
 			</div>
 		</div>
 		<!-- end modal add color -->

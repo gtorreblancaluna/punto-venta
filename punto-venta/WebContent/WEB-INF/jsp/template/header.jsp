@@ -78,6 +78,12 @@
 							<li><a href="handleSaleNote.do">Notas Venta</a></li>	
 						</ul>
 					</li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="javascript:void(0);">Sistema</a>
+						<ul class="dropdown-menu">							
+							<li><a href="handleInventory.do">Inventario</a></li>
+						</ul>
+					</li>
 				</c:if>
 			</c:if>
 		</ul>

@@ -62,11 +62,11 @@ public class SqlMapInventoryDao extends SqlSessionDaoSupport implements Inventor
 	}
 
 	@Override
-	public boolean decreaseStockByItemid(float stock,Integer id) {
+	public boolean updateStockByItemid(float stock,Integer id) {
 		Map<String,Object> param = new HashMap<>();
 		param.put("stock", stock);
 		param.put("id", id);
-		getSqlSession().update("decreaseStockByItemid",param);
+		getSqlSession().update("updateStockByItemid",param);
 		return true;
 	}
 

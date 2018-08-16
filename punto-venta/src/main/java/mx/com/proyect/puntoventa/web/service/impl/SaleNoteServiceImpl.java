@@ -69,7 +69,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 				ItemDTO itemDTO = inventoryDao.getItemById(item.getItemId());
 				float stock_anterior = itemDTO.getStock();
 				float stock_actual = stock_anterior - item.getAmountEntry();
-				inventoryDao.decreaseStockByItemid(stock_actual,item.getItemId());
+				inventoryDao.updateStockByItemid(stock_actual,item.getItemId());
 			} 
 	    }else {
 	    	//ponemos status de registrado	    	
@@ -87,7 +87,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 			ItemDTO itemDTO = inventoryDao.getItemById(detail.getItem().getItemId());
 			float stock_anterior = itemDTO.getStock();
 			float stock_actual = stock_anterior - detail.getAmount();
-			inventoryDao.decreaseStockByItemid(stock_actual,detail.getItem().getItemId());
+			inventoryDao.updateStockByItemid(stock_actual,detail.getItem().getItemId());
 		} 
 		
 		return true;
@@ -152,6 +152,19 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	public Float getTotalSaleById(int id) {
 		// TODO Auto-generated method stub
 		return saleNoteDao.getTotalSaleById(id);
+	}
+
+	@Override
+	public boolean increaseStockPerSale(List<SaleDetailDTO> details) {
+		for(SaleDetailDTO detail : details) {
+			//descontamos los articulos de la bd
+			ItemDTO itemDTO = inventoryDao.getItemById(detail.getItem().getItemId());
+			float stock_anterior = itemDTO.getStock();
+			float stock_actual = stock_anterior + detail.getAmount();
+			inventoryDao.updateStockByItemid(stock_actual,detail.getItem().getItemId());
+		} 
+		
+		return true;
 	}
 	
 
