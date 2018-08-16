@@ -68,13 +68,10 @@ public class HandleInventoryController {
 				item.getStoreDTO().setStoreId(1);
 				
 				inventoryService.add(item);
-	//			List<ItemDTO> listItems = inventoryService.getAll();
-	//			model.addAttribute("listItems", listItems);
+
 				model.addAttribute("item", new ItemDTO());
 				model.addAttribute("message", "Exito al registrar el producto: " + item.getDescription());
-				List<ColorDTO> listColors = colorService.getAll();
-				model.addAttribute("listColors", listColors);
-				model.addAttribute("listOffices", officeService.getAll());
+				this.getAttributes(model);
 				return "handleInventory";			
 			}else {
 				model.addAttribute("item", new ItemDTO());
@@ -88,14 +85,7 @@ public class HandleInventoryController {
 		@RequestMapping(value = "/handleInventory.do", params = "update")
 		public String update(HttpServletRequest request, @ModelAttribute ItemDTO item, Model model) {
 			inventoryService.update(item);		
-//			List<ItemDTO> listItems = inventoryService.getAll();
-//			model.addAttribute("listItems", listItems);
-			// traer la lista de almacenes
-			List<StoreDTO> listStore = inventoryService.getAllStore();
-			model.addAttribute("listStore", listStore);	
-			List<ColorDTO> listColors = colorService.getAll();
-			model.addAttribute("listColors", listColors);
-			model.addAttribute("listOffices", officeService.getAll());
+			this.getAttributes(model);
 			model.addAttribute("message", "Exito al actualizar el producto: " + item.getDescription());
 			return "handleInventory";
 		}
@@ -124,17 +114,8 @@ public class HandleInventoryController {
 				model.addAttribute("message",message);
 			
 			if(messageError!=null)
-				model.addAttribute("messageError",messageError);
-
-//			List<ItemDTO> listItem = inventoryService.getAll();
-//			model.addAttribute("listItem", listItem);
-			// traer la lista de almacenes
-			List<StoreDTO> listStore = inventoryService.getAllStore();
-			model.addAttribute("listStore", listStore);	
-			List<ColorDTO> listColors = colorService.getAll();
-			model.addAttribute("listColors", listColors);
-			// sucursales
-			model.addAttribute("listOffices", officeService.getAll());
+				model.addAttribute("messageError",messageError);			
+			this.getAttributes(model);
 						
 			return "handleInventory";
 		}
@@ -145,11 +126,17 @@ public class HandleInventoryController {
 				@ModelAttribute ("saleNoteFilter") SaleNoteFilter saleNoteFilter, Model model) {
 			
 			model.addAttribute("listItems", inventoryService.getItemsByFilter(saleNoteFilter));
+			this.getAttributes(model);
+			return "handleInventory";
+		}
+		
+		public Model getAttributes(Model model) {
 			model.addAttribute("listStore", inventoryService.getAllStore());			
 			model.addAttribute("listColors", colorService.getAll());
 			// sucursales
 			model.addAttribute("listOffices", officeService.getAll());
-			return "handleInventory";
+			
+			return model;
 		}
 	
 }

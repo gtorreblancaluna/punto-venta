@@ -57,15 +57,36 @@
 		(#{storeDTO.storeId},#{color.colorId},#{officeDTO.officeId},#{description},#{unitMeasurement},#{amountEntry},#{amountOutput},#{salePrice},#{stock})
 	</insert>
 	<update id="updateItem" parameterType="itemDTO">
-		UPDATE c_articulo SET
-		cl_almacen = #{storeDTO.storeId},
-		cl_color = #{color.colorId},
-		descripcion = #{description},
-		unidad_medida = #{unitMeasurement},
-		cantidad_entrada =	#{amountEntry},
-		cantidad_salida = #{amountOutput},
-		precio_venta = #{salePrice},
-		cantidad_existente = #{stock}
+		UPDATE c_articulo 
+		<set>		
+			<if test="officeDTO != null and officeDTO.officeId != 0">
+				cl_sucursal = #{officeDTO.officeId},
+			</if>
+			<if test="storeDTO != null and storeDTO.storeId != 0">
+				cl_almacen = #{storeDTO.storeId},
+			</if>
+			<if test="color != null and color.colorId != 0">
+				cl_color = #{color.colorId},
+			</if>
+			<if test="description != null and description != '' ">
+				descripcion = #{description},
+			</if>
+			<if test="unitMeasurement != null and unitMeasurement != '' ">
+				unidad_medida = #{unitMeasurement},
+			</if>
+			<if test="amountEntry != null and amountEntry != '' ">
+				cantidad_entrada =	#{amountEntry},
+			</if>
+			<if test="amountOutput != null and amountOutput != '' ">
+				cantidad_salida = #{amountOutput},
+			</if>
+			<if test="salePrice != null and salePrice != '' ">
+				precio_venta = #{salePrice},
+			</if>
+			<if test="stock != null and stock != '' ">
+				cantidad_existente = #{stock}
+			</if>
+		</set>
 		WHERE cl_articulo = #{itemId}
 	</update>
 	<delete id="deleteItem" parameterType="itemDTO">

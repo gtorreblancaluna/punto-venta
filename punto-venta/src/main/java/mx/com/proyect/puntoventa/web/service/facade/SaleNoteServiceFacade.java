@@ -34,7 +34,7 @@ public class SaleNoteServiceFacade {
 	@RequestMapping(value = "/getItemById.do")
 	@ResponseBody
 	public String getItemById(@RequestBody String id) {
-		ItemDTO item = inventoryService.findById(new Long (id));
+			ItemDTO item = inventoryService.findById(new Long (id));
 		
 		
 			Map<String,Object> myMap = new HashMap<>();
