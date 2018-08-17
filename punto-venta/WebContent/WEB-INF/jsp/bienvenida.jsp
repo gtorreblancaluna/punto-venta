@@ -30,7 +30,8 @@
 			
 		</div>
 	</div>
-	
+	<c:if test="${userSession.account.job.jobId eq '1' }">
+	<!-- Solo mostraremos esta info a usuarios logueados y que sean admin -->
 	<div class="row centered row-color" >
 	<div class="col-sm-12 ">
 	   		<h3>Pedidos del dia</h3>
@@ -231,6 +232,7 @@
 	   </div>
 	   	
 	</div>
+	</c:if>
 </div>
 
 

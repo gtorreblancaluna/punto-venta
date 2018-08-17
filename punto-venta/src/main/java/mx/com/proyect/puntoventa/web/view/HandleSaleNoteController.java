@@ -116,8 +116,7 @@ public class HandleSaleNoteController {
 				model.addAttribute("messageSucess","Total de registros encontrados: "+listSaleNoteByFilter.size());
 				this.getModelAttributtes(model);
 				// solo traer los articulos registrados en la sucursal que se logueo el usuario
-				model.addAttribute("listItems", inventoryService.getAll(userSession.getAccount().getOffice().getOfficeId()));
-				
+				model.addAttribute("listItems", inventoryService.getAll(userSession.getAccount().getOffice().getOfficeId()));				
 				return "handleSaleNote";
 			}else {			
 				model.addAttribute("messageError", "ERROR. No se encontro session, porfavor recarga la pagina y logueate correctamente ");
