@@ -106,7 +106,7 @@ public class HandleSaleNoteController {
 			HttpSession session = request.getSession();
 			UserSession userSession = (UserSession) session.getAttribute("userSession");			
 			if(userSession != null && userSession.getAccount() != null) {
-				if(userSession.getAccount().getJob().getJobId() == PUESTO_VENDEDOR+"") {
+				if(userSession.getAccount().getJob().getJobId().equals(PUESTO_VENDEDOR+"")) {
 					// el usuario tiene puesto vendedor , filtraremos siempre en la sucursal donde esta logeado
 					saleNoteFilter.setOfficeIdFilter(userSession.getAccount().getOffice().getOfficeId()+"");
 				}
