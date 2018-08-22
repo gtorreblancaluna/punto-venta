@@ -365,7 +365,7 @@ function addSaleDetailNoteForm(items){
 		
 			<div id="tabClientes" class="tab-pane fade in active">
 				<div class="form-group row">
-					<input type="hidden" id="customerId" name="customer.userId">
+					<input type="hidden" id="customerId" name="customer.userId" value="0">
 					
 					<div class="col-xs-3">
 						<label>Nombre: </label>
@@ -377,7 +377,7 @@ function addSaleDetailNoteForm(items){
 					</div>
 					<div class="col-xs-3">
 						<label>Apellido materno: </label>
-						<input type="text" id="apMaterno" name="customer.secondname" placeholder="Apellido Materno" class="buscarCliente form-control">
+						<input type="text" id="apMaterno" name="customer.secondname" placeholder="Apellido Materno" class="form-control">
 					</div>
 					<div class="col-xs-3">
 						<label>Email: </label>
@@ -579,58 +579,55 @@ function addSaleDetailNoteForm(items){
       <div class="modal-body">     
 <form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="updateSaleNoteForm" id="updateSaleNoteForm">
 	<input type="hidden" name="saleId" class="saleId" id="saleId" value="">
-	<table class="table tableSaleNoteForm">
-		<tr>
-			<td colspan=4>
-				<span class="input-group-text">Descripci&oacute;n:<input type="text" name="description" id="descriptionFormUpdate" class="form-control "> </span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<span class="input-group-text">Fecha :<input type="date" name="dateSaleNote" id="dateFormUpdate" class="form-control dateForm"> </span>
-			</td>
-			<td>
-				<span class="input-group-text">Cliente : 
-						<select name="userId" class="form-control userId" >
-									<option value="0">- Seleccione -</option>
-								<c:forEach items="${listClients}" var="client">
-									<option value="${client.userId}">${client.name} ${client.firstName}</option>
-								</c:forEach>	
-						</select>	
-				</span>				
-			</td>
-			<td>
-<%-- 				<span class="input-group-text">Vendedor :<input type="text" class="form-control" value="${sessionScope.userSession.name }" disabled></span> --%>
-					<span class="input-group-text">Vendedor : 
-						<select name="sellerId" class="form-control sellerId" >
-									<option value="0">- Seleccione -</option>
-								<c:forEach items="${listUsers}" var="user">
-									<!-- Solo mostrar usuarios que sean vendedores -->
-									<c:if test="${user.job.description eq 'vendedor' }">
-										<option value="${user.userId}">${user.name} ${user.firstName}</option>
-									</c:if>									
-								</c:forEach>	
-						</select>	
-				</span>	
-			</td>
-			<td>
-			<span class="input-group-text">Sucursal : 
-				<select name="storeId" class="form-control storeId" id="storeId">
-							<option value="0">- Seleccione -</option>
-						<c:forEach items="${listOffices}" var="office">
-							<option value="${office.officeId}">${office.name}</option>
-						</c:forEach>	
-				</select>
-			</span>
-			
-			</td>
-			<td>
-				<p style="font-weight: 900;  font-size: 20px;">Total a pagar: $<span id="totalPagarUpdate"></span></p>
-			</td>
-		</tr>
-	</table>
 	
-	<div class="row">
+			<div class="form-group row">			
+				<div class="col-xs-8">
+					<label >Descripci&oacute;n:</label>
+					<input type="text" name="description" id="descriptionFormUpdate" class="form-control">
+				</div>
+				<div class="col-xs-">
+					<label>Total a pagar: $<span id="totalPagarUpdate"></span></label>
+				</div>
+			</div>
+			<div class="form-group row">
+			<div class="col-xs-3">
+				<label>Fecha:</label>
+				<input type="date" name="dateSaleNote" id="dateFormUpdate" class="form-control">
+			</div>
+			<div class="col-xs-3">
+				<label>Cliente:</label>
+				<select name="userId" class="form-control userId" >
+						<option value="0">- Seleccione -</option>
+					<c:forEach items="${listClients}" var="client">
+						<option value="${client.userId}">${client.name} ${client.firstName}</option>
+					</c:forEach>	
+				</select>	
+			</div>	
+			<div class="col-xs-3">
+				<label>Vendedor:</label>
+				<select name="sellerId" class="form-control sellerId" >
+						<option value="0">- Seleccione -</option>
+					<c:forEach items="${listUsers}" var="user">
+						<!-- Solo mostrar usuarios que sean vendedores -->
+						<c:if test="${user.job.description eq 'vendedor' }">
+							<option value="${user.userId}">${user.name} ${user.firstName}</option>
+						</c:if>									
+					</c:forEach>	
+				</select>
+			</div>
+			<div class="col-xs-3">
+				<label>Sucursal:</label>
+				<select name="storeId" class="form-control storeId" id="storeId">
+						<option value="0">- Seleccione -</option>
+					<c:forEach items="${listOffices}" var="office">
+						<option value="${office.officeId}">${office.name}</option>
+					</c:forEach>	
+				</select>
+			</div>
+			
+		</div> <!-- end row -->
+	
+	<div class="form-group row">
      		<table class="table tableUpdateNote">
 			    <thead>
 			      <tr>
@@ -647,38 +644,16 @@ function addSaleDetailNoteForm(items){
 			    </thead>
 			    <tbody>
 			     <tr>
-<!-- 			     	<td style="width:2%"><span class="input-group-text" >1</span></td> -->
-<!-- 			     	<td > -->
-<!-- 			     		<input type="number" class="form-control" name="" id="txtFindItemById" > -->
-<!-- 			     	</td>			     		 -->
-<!-- 			        <td > -->
-			        	
-<!-- 				        <select name="items[0].itemIdForm" class="form-control selItems"> -->
-<!-- 						<option value="0" data-value="0">- Seleccione -</option> -->
-<%-- 							<c:forEach items="${listItems}" var="item"> --%>
-<%-- 								<option value="${item.itemId}" data-value="${item.itemId}|${item.description}|${item.salePrice}" >${item.description}</option> --%>
-<%-- 							</c:forEach>	 --%>
-<!-- 						</select>			         -->
-<!-- 			        </td>			       -->
-			        
-<!-- 			         <td> -->
-<!-- 				        <select name="items[0].color.colorId" class="form-control selColors"> -->
-<!-- 						<option value="0">- Seleccione -</option> -->
-<%-- 							<c:forEach items="${listColors}" var="color"> --%>
-<%-- 								<option value="${color.colorId}">${color.description}</option> --%>
-<%-- 							</c:forEach>	 --%>
-<!-- 						</select>			         -->
-<!-- 			        </td> -->
-<!-- 			        <td><input type="text" class="form-control" name="items[0].description" id="itemDescription" disabled></td> -->
-<!-- 			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					 -->
-<!-- 			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" disabled></td> -->
-<!-- 			        <td><input type="number" class="form-control totalItem" name="" id="totalItem" disabled></td> -->
-<!-- 			        <td><input type="button" class="btn btn-info btn-lg" id="addRow-update" value="Agregar" /></td>			         -->
+
 			      </tr>			
 			      	      	      
 			    </tbody>			    
 			  </table>
-			  <input type="submit" class="btn btn-dark" name="update" value="Enviar" />	
+			   <div class="form-group row">
+				  	<div class="col-xs-12">	
+				  		<input type="submit" class="btn btn-dark" name="update" value="Enviar" style="width:100%;"/>
+					</div>
+				</div>
 	  	</div> <!-- end row -->
 	  	</form:form>
 	  	

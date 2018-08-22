@@ -369,11 +369,11 @@ function getSaleNoteById(id){
 // agregar los datos a la ventana de actualizacion
 function addSaleNoteForm(data){
 	
-	var $tableSaleNoteForm = $('.tableSaleNoteForm');
-	$tableSaleNoteForm.find('.userId').val(data.userId);
-	$tableSaleNoteForm.find('.sellerId').val(data.sellerId);
-	$tableSaleNoteForm.find('.storeId').val(data.storeId);
-	$tableSaleNoteForm.find('#descriptionFormUpdate').val(data.description);
+	var $form = $('#updateSaleNoteForm');
+	$form.find('.userId').val(data.userId);
+	$form.find('.sellerId').val(data.sellerId);
+	$form.find('.storeId').val(data.storeId);
+	$form.find('#descriptionFormUpdate').val(data.description);
 	document.getElementById("dateFormUpdate").valueAsDate = new Date(data.dateDelivery)	
 }
 
