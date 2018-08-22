@@ -7,7 +7,7 @@ public class AccountDTOclient implements Serializable {
 	
 	private static final long serialVersionUID = 413296597983426252L;
 
-	private String userId;
+	private int userId;
 	private String name;
 	private String firstName;
 	private String secondName;
@@ -26,7 +26,14 @@ public class AccountDTOclient implements Serializable {
 	// bandera para saber si esta activo
 		private String fgActivo;
 	
+		
 	
+	public int getUserId() {
+			return userId;
+		}
+		public void setUserId(int userId) {
+			this.userId = userId;
+		}
 	public String getFgActivo() {
 			return fgActivo;
 		}
@@ -51,12 +58,7 @@ public class AccountDTOclient implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+
 	public String getName() {
 		return name;
 	}

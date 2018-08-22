@@ -45,7 +45,17 @@
 		<result property="description" column="ds_descripcion" />	
 		
 		<result property="status.statusId" column="cl_estatus_venta" />
-		<result property="status.description" column="descripcion_estatus" />	
+		<result property="status.description" column="descripcion_estatus" />
+		
+		<!-- Datos del cliente -->
+		<result property="customer.userId" column="cl_cliente" />
+		<result property="customer.name" column="nombre" />
+		<result property="customer.firstName" column="ap_paterno" />
+		<result property="customer.secondName" column="ap_materno" />
+		<result property="customer.tel1" column="tel1" />
+		<result property="customer.tel2" column="tel2" />	
+		<result property="customer.adress" column="direccion" />
+		
 	</resultMap>
 
 	<resultMap id="resultMapSaleNoteDto" type="saleNoteDTO">
@@ -134,6 +144,7 @@
 		SELECT venta.*, estatus.ds_descripcion AS descripcion_estatus
 		FROM c_venta venta
 		INNER JOIN c_estatus_venta estatus ON (venta.cl_estatus_venta = estatus.cl_estatus_venta)
+		INNER JOIN c_cliente cliente ON (venta.cl_cliente = cliente.cl_cliente)
 		WHERE cl_venta = #{id}
 	</select>
 

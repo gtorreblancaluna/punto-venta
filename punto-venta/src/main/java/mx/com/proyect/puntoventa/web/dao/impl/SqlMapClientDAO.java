@@ -12,8 +12,9 @@ public class SqlMapClientDAO extends SqlSessionDaoSupport implements ClientDAO {
 
 	@Override
 	public boolean insertClient(AccountDTOclient a) {
-		getSqlSession().insert("insertClient", a);
-		return true;
+		
+		 getSqlSession().insert("insertClient", a);
+		 return true;
 	}
 
 	@Override

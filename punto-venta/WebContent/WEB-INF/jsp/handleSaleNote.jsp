@@ -352,10 +352,89 @@ function addSaleDetailNoteForm(items){
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Agregar nota</h4>
       </div>
-      <div class="modal-body">     
+      <div class="modal-body">
 	
 	<form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="saleNoteForm" id="addSaleNoteForm">
-	
+		
+		<ul class="nav nav-tabs">
+		  <li class="active"><a data-toggle="tab" href="#tabClientes">Clientes</a></li>
+		  <li><a data-toggle="tab" href="#tabVentas">Nota</a></li>
+		</ul>
+		
+		<div class="tab-content">
+		
+			<div id="tabClientes" class="tab-pane fade in active">
+				<div class="form-group row">
+					<input type="hidden" id="customerId" name="customer.userId">
+					
+					<div class="col-xs-3">
+						<label>Nombre: </label>
+						<input type="text" id="name" name="customer.name" placeholder="Nombre" class="form-control">
+					</div>
+					<div class="col-xs-3">
+						<label>Apellido paterno: </label>
+						<input type="text" id="apPaterno" name="customer.firstName" placeholder="Apellido Paterno" class="buscarCliente form-control">
+					</div>
+					<div class="col-xs-3">
+						<label>Apellido materno: </label>
+						<input type="text" id="apMaterno" name="customer.secondname" placeholder="Apellido Materno" class="buscarCliente form-control">
+					</div>
+					<div class="col-xs-3">
+						<label>Email: </label>
+						<input type="text" id="email" name="customer.email" placeholder="Email" class="form-control">
+					</div>
+					<div class="col-xs-3">
+						<label>Tel&eacute;fono 1: </label>
+						<input type="text" id="tel1" name="customer.tel1" placeholder="Telefono celular" class="form-control">
+					</div>
+					<div class="col-xs-3">
+						<label>Tel&eacute;fono 2: </label>
+						<input type="text" id="tel2" name="customer.tel2" placeholder="Telefono casa" class="form-control">
+					</div>
+					<div class="col-xs-3">
+						<label>Direcci&oacute;n: </label>
+						<input type="text" id="direccion" name="customer.adress" placeholder="Direcci&oacute;n" class="form-control">
+					</div>
+					</div>
+					<div class="form-group row">			
+						<div class="col-xs-6">
+							<input type="button" class="btn btn-dark login-button btnContinuarVenta"  value="Continuar" />					
+						</div>
+					
+						<div class="form-group row">			
+							<div class="col-xs-6">
+								<input type="button" class="btn btn-dark login-button btnHabilitarFormCliente"  value="Habilitar formulario" />					
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group row ">
+						
+						<table class="table tablaClientes">
+						    <thead>
+						      <tr>
+						      	<th>#</th>
+						      	<th>Id</th>
+						        <th>Nombre</th>			        
+						        <th>Ap paterno</th>
+						        <th>Ap materno</th>
+						        <th>email</th>
+						        <th>tel1</th>
+								<th>tel2</th>
+						        <th>Direcci&oacute;n</th>
+						      </tr>
+						    </thead>
+						     <tbody>
+						     <tr></tr>
+						     </tbody>
+					     </table>
+					</div>
+				
+			</div><!-- end tab clientes -->
+		
+		
+		
+			<div id="tabVentas" class="tab-pane fade in ">
 			
 			<div class="form-group row">
 			
@@ -364,15 +443,15 @@ function addSaleDetailNoteForm(items){
 					<input type="date" name="dateSaleNote" id="dateForm" class="form-control dateForm">
 				</div>
 				
-				<div class="col-xs-3">
-					<label >Cliente : </label>
-							<select name="userId" class="form-control userId" >
-										<option value="0">- Seleccione -</option>
-									<c:forEach items="${listClients}" var="client">
-										<option value="${client.userId}">${client.name} ${client.firstName}</option>
-									</c:forEach>	
-							</select>				
-				</div>
+<!-- 				<div class="col-xs-3"> -->
+<!-- 					<label >Cliente : </label> -->
+<!-- 							<select name="userId" class="form-control userId" > -->
+<!-- 										<option value="0">- Seleccione -</option> -->
+<%-- 									<c:forEach items="${listClients}" var="client"> --%>
+<%-- 										<option value="${client.userId}">${client.name} ${client.firstName}</option> --%>
+<%-- 									</c:forEach>	 --%>
+<!-- 							</select>				 -->
+<!-- 				</div> -->
 				<div class="col-xs-3">
 						<label>Vendedor :</label> 
 							<select name="sellerId" class="form-control sellerId" >
@@ -399,8 +478,12 @@ function addSaleDetailNoteForm(items){
 				<div class="col-xs-3">
 					<label>Total a pagar: $</label><span id="totalPagar"></span>
 				</div>
+				<div class="col-xs-3">				
+					<label>Cliente: <span id="spanNombreCliente"></span></label>
+				</div>
 			</div>
-			<div class="form-group row">				
+			<div class="form-group row">	
+								
 				<div class="col-xs-6">				
 					<label>Descripci&oacute;n:</label>
 					<input type="text" name="description" id="description" class="form-control">
@@ -466,6 +549,8 @@ function addSaleDetailNoteForm(items){
 			 	
 	  	</div> <!-- end row -->
 	  	
+	  	</div> <!-- end tab ventas -->
+	  	</div> <!-- end tab general -->
 	  	 <div class="form-group row">
 			  	<div class="col-xs-12">		
 			  		<input type="submit" class="btn btn-dark" name="add" value="Enviar" style="width: 100%;"/>

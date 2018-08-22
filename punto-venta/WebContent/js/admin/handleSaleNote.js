@@ -19,6 +19,19 @@ $( document ).ready(function() {
 		total();	
 	});
 	
+	$( '.buscarCliente' ).keyup(function(){
+		var valor = $(this).val();
+		if(valor != '')
+			obtenerClientes(valor,1);
+	});
+	
+	$( '.btnHabilitarFormCliente' ).click(function(){
+		var $form = $('#addSaleNoteForm');		
+		$form.find('#name,#apPaterno,#apMaterno,#email,#tel1,#tel2,#direccion').prop( "disabled", false );
+		$form.find('#customerId').val(0);
+		$form.find('#spanNombreCliente').text("");
+	});
+	
 	// 2018.05.22 GTL funcion para calcular el total a pagar por articulo
 	$(".tableAddNote tbody").on('change','#itemPrice', function(){	
 		var price = $(this).val();	
@@ -127,33 +140,52 @@ $( document ).ready(function() {
 	});
 	
 	function validateFormAddNote(){
+			var $form = $('#addSaleNoteForm');
 			var msgError="",msgDate="";
 		    var valid=true,fgDate=false;
 		    var count=0;
+		    var msgCliente = "";
 			
 		    var x =  $('#dateForm').val().split('-');
 			var date = new Date ( x[0],(x[1] - 1),x[2] ,0,0,0) ;
-			var userId = $('.userId').val();
-			var sellerId = $('.sellerId').val();
+			var customerId = $form.find('#customerId').val();
+			var sellerId = $form.find('.sellerId').val();
 //			var storeId = $('#storeId').val();
 			var d = new Date();
 			var today = d.getFullYear()+'/'+ (d.getMonth<10 ? '0' : '') + d.getMonth + '/' 
 			+ (d.getDate()<10 ? '0' : '') + d.getDate();
 			d.setHours(0,0,0,0);
 			
-			if($('#dateForm').val() === '' || userId === '0' || sellerId === '0' ){
-				valid=false;
-				msgError += ++count + ". Faltan valores para agregar a la venta\n";
-			}else{		
+			if(customerId == '' || customerId == '0'){
+				 // no eligio cliente de la lista, vamos a validar datos usuario				
+				var nombre = $form.find('#name').val();
+				var apPaterno = $form.find('#apPaterno').val();
+				var apMaterno = $form.find('#apMaterno').val();
+				var email = $form.find('#email').val();
+				var tel1 = $form.find('#tel1').val();
+				var tel2 = $form.find('#tel2').val();
 				
-				if(d.getTime() == date.getTime()){
-					fgDate=true;
-					msgDate = 'Se descontar\u00E1n los articulos de la bd en este momento, confirma para continuar';					
-				}
-				if(date < d){
-					valid=false;
-					msgError += ++count + ". La fecha debe ser mayor o igual a hoy\n";
-				}
+				if(nombre == '')
+					msgCliente += ++count +". Nombre del cliente es requerido \n";
+				if(apPaterno == '')
+					msgCliente += ++count +". Apellido paterno del cliente es requerido \n";
+				if(apMaterno == '')
+					msgCliente += ++count +". Apellido materno del cliente es requerido \n";
+				if(email == '')
+					msgCliente += ++count +". Email del cliente es requerido \n";
+				if(tel1 == '' && tel2 == '')
+					msgCliente += ++count +". Al menos un telefono debes ingresar para el cliente \n";
+			}
+			
+			if($('#dateForm').val() === '' || sellerId === '0' )				
+				msgError += ++count + ". Faltan valores para agregar a la venta\n";					
+				
+			if(d.getTime() == date.getTime())					
+				msgDate = 'Se descontar\u00E1n los articulos de la bd en este momento, confirma para continuar';					
+				
+			if(date < d)					
+				msgError += ++count + ". La fecha debe ser mayor o igual a hoy\n";
+				
 				
 				
 				
@@ -161,30 +193,32 @@ $( document ).ready(function() {
 			  $(".tableAddNote tbody tr").each(function () {
 		            var itemId = $(this).find("td").eq(2).find(".selItems").val();
 		            var colorId = $(this).find("td").eq(3).find(".selColors").val();
-		            var amountItem = $(this).find("td").eq(5).find("#amountItem").val();	  
+		            var amountItem = $(this).find("td").eq(5).find("#amountItem").val();
+		            var descripcion = $(this).find("td").eq(4).find("#itemDescription").val();
 		            
-		            if(itemId === '0' || colorId === '0' || amountItem === ''){
-		            	valid=false;
-		            	msgError += ++count + ". Faltan valores para agregar a la venta\n";
-		            }
+		            if(itemId === '0' || colorId === '0' || amountItem === '')		            	
+		            	msgError += ++count + ". Faltan valores para el articulo "+descripcion+" \n";
+		            
 		           
 		      });
-			}	    
+			    
 		    
-		    if(!valid){
-		    	alert(msgError);
-		    	return valid;
+		    if(msgError!='' || msgCliente != ''){
+		    	alert(msgCliente+msgError);
+		    	valid = false;
 		    }else{
-		    	if(fgDate){
+		    	if(msgDate!=''){
 		    		if(confirm(msgDate)){
-		    			return valid = confirm("Confirma para continuar");
+		    			valid = confirm("Confirma para continuar");
 		    		}else{
-		    			return false;
+		    			valid = false;
 		    		}
 		    	}else{
-		    		return valid = confirm("Confirma para continuar");
+		    		valid = confirm("Confirma para continuar");
 		    	}
 		    }
+		    
+		    return valid;
 	}// end valid form
 	
 	// ----------------------------------------------- funciones para actualizar la nota
@@ -227,6 +261,75 @@ $( document ).ready(function() {
 	});
 	
 }); // end document ready
+
+
+function obtenerClientes(valor,val){
+	var data = {}
+	var x = valor;
+	if(x != ''){			
+			
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "obtenerClientes.do",
+			data : x,
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {				
+				console.log(data.clientes);
+				llenarTablaClientes(data.clientes,val);
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);				
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+		});
+	}else{
+		alert("No se recibio el parametro, porfavor recarga la pagina e intentalo de nuevo :( ")
+	}
+}
+
+function llenarTablaClientes(clientes,val){
+	var cont = 0;
+	if(val == 1)
+		var $form = $('#addSaleNoteForm');
+	else
+		var $form = $('#updateSaleNoteForm');
+	
+	$form.find('.tablaClientes tbody tr td').remove();
+
+	$.each(clientes, function(index, value) {
+		$form.find(".tablaClientes tbody").append("<tr>"	
+				+"<td>"+ ++cont +"</td>"
+				+"<td>"+ value.userId +"</td>"
+				+"<td><a href='javascript:void(0);' onclick='elegirCliente("+JSON.stringify(value)+","+val+");'>"+ value.name +"</a></td>"
+				+"<td><a href='javascript:void(0);' onclick='elegirCliente("+JSON.stringify(value)+","+val+");'>"+ value.firstName +"</a></td>"
+				+"<td><a href='javascript:void(0);' onclick='elegirCliente("+JSON.stringify(value)+","+val+");'>"+ value.secondName +"</a></td>"
+				+"<td>"+ value.email +"</td>"
+				+"<td>"+ value.tel1 +"</td>"
+				+"<td>"+ value.tel2 +"</td>"
+				+"<td>"+ value.adress +"</td>"
+		+"</tr>");
+	
+	});	// end for each
+}
+
+function elegirCliente(cliente,val){
+		
+	if(val == 1) // viene de agregar
+		var $form = $('#addSaleNoteForm');
+	else // viene de actualizar
+		var $form = $('#updateSaleNoteForm');
+	
+	$form.find('#name,#apPaterno,#apMaterno,#email,#tel1,#tel2,#direccion').prop( "disabled", true );
+	
+	$form.find('#customerId').val(cliente.userId);
+	$form.find('#spanNombreCliente').text(cliente.name);
+	$form.find('.nav-tabs li:eq(1) a').tab('show');
+	
+}
 
 //2018.06.05 GTL Obtener una nota por id
 function getSaleNoteById(id){

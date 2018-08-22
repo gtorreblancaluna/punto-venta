@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import mx.com.proyect.puntoventa.web.forms.CustomerFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleForm;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
+import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
+import mx.com.proyect.puntoventa.web.service.ClientService;
 import mx.com.proyect.puntoventa.web.service.ColorService;
 import mx.com.proyect.puntoventa.web.service.InventoryService;
 import mx.com.proyect.puntoventa.web.service.SaleNoteService;
@@ -25,11 +28,14 @@ import mx.com.proyect.puntoventa.web.service.SaleNoteService;
 public class SaleNoteServiceFacade {
 	
 	@Autowired
-	InventoryService inventoryService;
+	private InventoryService inventoryService;
 	@Autowired
-	SaleNoteService saleNoteService;
+	private SaleNoteService saleNoteService;
 	@Autowired
-	ColorService colorService;
+	private ColorService colorService;
+	@Autowired
+	private ClientService clientService;
+	
 	
 	@RequestMapping(value = "/getItemById.do")
 	@ResponseBody
@@ -140,6 +146,34 @@ public class SaleNoteServiceFacade {
 //		
 		
 		return null;
+	}
+	
+	
+	@RequestMapping(value = "/obtenerClientes.do")
+	@ResponseBody
+		public String obtenerClientes(@RequestBody String valor) {
+		CustomerFilter customerFilter = new CustomerFilter();
+		customerFilter.setFirstName(valor);
+		List<AccountDTOclient> clientes = clientService.getCustomerByFilter(customerFilter);
+		
+		Map<String,Object> myMap = new HashMap<>();		
+		
+		myMap.put("clientes", clientes);	
+			       
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(myMap);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	       
+	
+        return json;
+
 	}
 
 }

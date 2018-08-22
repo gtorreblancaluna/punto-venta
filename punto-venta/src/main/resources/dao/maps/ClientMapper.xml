@@ -30,6 +30,9 @@
 	</select>
 
 	<insert id="insertClient" parameterType="clientDTO">
+	<selectKey resultType="java.lang.Integer" keyProperty="userId" order="AFTER">
+			SELECT LAST_INSERT_ID() as id
+		</selectKey>
 		INSERT INTO c_cliente
 		(nombre,ap_paterno,ap_materno,email,tel1,tel2,
 <!-- 		calle,delegacion,colonia,cp,municipio,estado,ciudad, -->

@@ -13,6 +13,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mx.com.proyect.puntoventa.web.dao.ClientDAO;
 import mx.com.proyect.puntoventa.web.dao.InventoryDAO;
 import mx.com.proyect.puntoventa.web.dao.SaleNoteDAO;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
@@ -22,6 +23,7 @@ import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
+import mx.com.proyect.puntoventa.web.service.ClientService;
 import mx.com.proyect.puntoventa.web.service.SaleNoteService;;
 
 @Service("saleNoteServiceImpl")
@@ -31,9 +33,22 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	private SaleNoteDAO saleNoteDao;
 	@Autowired
 	private InventoryDAO inventoryDao;
+	@Autowired
+	private ClientDAO clientDao;
 	
 	@Override
 	public boolean add(SaleNoteForm saleNoteForm) {
+		
+		if(saleNoteForm.getCustomer() != null && saleNoteForm.getCustomer().getUserId() != 0) {
+			// eligio un cliente de la lista
+			saleNoteForm.setUserId(saleNoteForm.getCustomer().getUserId()+"");
+		}else {
+			// vamos agregar al cliente
+			clientDao.insertClient(saleNoteForm.getCustomer());
+			saleNoteForm.setUserId(saleNoteForm.getCustomer().getUserId()+"");
+			
+		}
+		
 		if(saleNoteForm.getStatus() == null)
     		saleNoteForm.setStatus(new SaleStatusDTO());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
