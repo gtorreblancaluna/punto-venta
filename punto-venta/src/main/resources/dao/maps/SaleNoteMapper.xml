@@ -84,6 +84,11 @@
 		<result property="description" column="ds_descripcion" />				
 	</resultMap>
 	
+	<resultMap id="resultMapTipoAbono" type="tipoAbonoDTO">
+		<result property="tipoAbonoId" column="cl_tipo_abono" />
+		<result property="descripcion" column="ds_descripcion" />	
+		<result property="estado" column="fg_estatus" />				
+	</resultMap>
 
 	<insert id="addSaleNote" parameterType="saleNoteForm">
 		<selectKey resultType="java.lang.Integer" keyProperty="saleId" order="AFTER">
@@ -271,5 +276,28 @@
 	<select id="getTotalSaleById" parameterType="java.lang.Integer" resultType="java.lang.Float">
 		SELECT SUM(cantidad * precio_articulo) FROM k_detalle_venta WHERE cl_venta = #{id}
 	</select>
+	
+	<select id="obtenerTiposAbono" resultMap="resultMapTipoAbono" >
+		SELECT * FROM c_tipo_abono WHERE fg_estatus = '1' ORDER BY ds_descripcion
+	</select>
+	
+	<insert id="insertarAbono" parameterType="java.util.Map">
+		INSERT INTO c_abono
+		(
+			cl_venta,
+			cl_tipo_abono,
+			cl_usuario,
+			cantidad_abono,
+			ds_descripcion
+		)
+		VALUES
+		(
+			#{ventaId},
+			#{abono.tipoAbono.tipoAbonoId},
+			#{abono.usuario.userId},
+			#{abono.cantidadAbono},
+			#{abono.descripcion}
+		)
+	</insert>
 
 </mapper>

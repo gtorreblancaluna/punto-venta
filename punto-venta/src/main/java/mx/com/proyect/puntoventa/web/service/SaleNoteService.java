@@ -9,6 +9,7 @@ import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
+import mx.com.proyect.puntoventa.web.model.TipoAbonoDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 
 public interface SaleNoteService {
@@ -28,4 +29,5 @@ public interface SaleNoteService {
 	public boolean decreaseStockPerSale(List<SaleDetailDTO> details);
 	public boolean increaseStockPerSale(List<SaleDetailDTO> details);
 	Float getTotalSaleById(int id);
+	public List<TipoAbonoDTO> obtenerTiposAbono();
 }

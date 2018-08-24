@@ -17,6 +17,7 @@ import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
+import mx.com.proyect.puntoventa.web.model.TipoAbonoDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQueryItemsSold;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 
@@ -35,6 +36,10 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 			param.put("itemSalePrice", item.getSalePrice());
 			getSqlSession().insert("addSaleNoteDetails",param);
 		}
+		Map<String,Object> map = new HashMap<>();
+		map.put("ventaId", saleNoteForm.getSaleId());
+		map.put("abono", saleNoteForm.getAbono());
+		getSqlSession().insert("insertarAbono",map);
 		return true;
 	}
 
@@ -155,6 +160,12 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 	public Float getTotalSaleById(int id) {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("getTotalSaleById",id);
+	}
+
+	@Override
+	public List<TipoAbonoDTO> obtenerTiposAbono() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("obtenerTiposAbono");
 	}
 
 }

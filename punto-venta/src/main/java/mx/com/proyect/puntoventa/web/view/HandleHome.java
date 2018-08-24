@@ -35,14 +35,14 @@ public class HandleHome {
 		model.addAttribute("salesByMonth", salesByMonth);
 		
 		// traer los articulos vendidos por dia, semana y mes
-		Map<String,Object> result = saleNoteService.getItemsSold();
-		List<ResultQueryItemsSold> itemsByDay = (List<ResultQueryItemsSold>) result.get("itemsByDay");
-		List<ResultQueryItemsSold> itemsByWeek = (List<ResultQueryItemsSold>) result.get("itemsByWeek");
-		List<ResultQueryItemsSold> itemsByMonth = (List<ResultQueryItemsSold>) result.get("itemsByMonth");
+//		Map<String,Object> result = saleNoteService.getItemsSold();
+//		List<ResultQueryItemsSold> itemsByDay = (List<ResultQueryItemsSold>) result.get("itemsByDay");
+//		List<ResultQueryItemsSold> itemsByWeek = (List<ResultQueryItemsSold>) result.get("itemsByWeek");
+//		List<ResultQueryItemsSold> itemsByMonth = (List<ResultQueryItemsSold>) result.get("itemsByMonth");
 		
-		model.addAttribute("itemsByDay", itemsByDay);
-		model.addAttribute("itemsByWeek", itemsByWeek);
-		model.addAttribute("itemsByMonth", itemsByMonth);
+//		model.addAttribute("itemsByDay", itemsByDay);
+//		model.addAttribute("itemsByWeek", itemsByWeek);
+//		model.addAttribute("itemsByMonth", itemsByMonth);
 		
 		return"bienvenida";
 	}

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import mx.com.proyect.puntoventa.web.forms.SaleForm;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
+import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.model.UserSession;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 import mx.com.proyect.puntoventa.web.service.AccountService;
@@ -78,6 +79,9 @@ public class HandleSaleNoteController {
 			// agregando pedido a la bd
 			//2018.08.13  GTL agregamos el pedido en la sucursal donde se logueo el usuario
 			saleNoteForm.setStoreId(userSession.getAccount().getOffice().getOfficeId()+"");
+			saleNoteForm.getAbono().setUsuario(new AccountDTO());
+			// asignamos el abono al usuario que esta logueado
+			saleNoteForm.getAbono().getUsuario().setUserId(userSession.getAccount().getUserId());
 			saleNoteService.add(saleNoteForm);		
 			
 			// se marco imprimir la nota despues de agregar los datos a bd
@@ -203,7 +207,8 @@ public class HandleSaleNoteController {
 			model.addAttribute("listOffices", officeService.getAll());
 			model.addAttribute("listColors", colorService.getAll());		
 			model.addAttribute("listUsers", accountService.getAllUser());
-			model.addAttribute("listStatus", saleNoteService.getSalesStatus());		
+			model.addAttribute("listStatus", saleNoteService.getSalesStatus());	
+			model.addAttribute("tipoAbonos", saleNoteService.obtenerTiposAbono());	
 		return model;
 	}
 

@@ -25,6 +25,14 @@ $( document ).ready(function() {
 			obtenerClientes(valor,1);
 	});
 	
+	$( '#cantidadAbono' ).keyup(function(){
+		var valor = $(this).val();
+		if(valor != ''){
+			$('#totalAbono').html(new Intl.NumberFormat('es-MX').format(valor));
+			total();
+		}
+	});
+	
 	$( '.btnHabilitarFormCliente' ).click(function(){
 		var $form = $('#addSaleNoteForm');		
 		$form.find('#name,#apPaterno,#apMaterno,#email,#tel1,#tel2,#direccion').prop( "disabled", false );
@@ -43,12 +51,17 @@ $( document ).ready(function() {
 	
 	function total(){
 		var total=0;
+		var $form = $('#addSaleNoteForm');
+		var abono = $form.find('#cantidadAbono').val();
 		  $(".tableAddNote tbody tr").each(function () {
             stotal = $(this).find("td").eq(7).find(".totalItem").val();
             if(stotal != undefined && stotal != "")
           	  total += parseFloat(stotal);
         })
-      $('#totalPagar').html(new Intl.NumberFormat('es-MX').format(total));
+      if(total >0){
+	      $('#totalPagar').html(new Intl.NumberFormat('es-MX').format(total));
+		  $('#total').html(new Intl.NumberFormat('es-MX').format(total-abono));
+      }
 	}
 		
 	// 2018.05.22 GTL Funcion para colocar los demas valores en los inputs del articulo

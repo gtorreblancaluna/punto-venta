@@ -13,8 +13,9 @@
 
 		<!-- Declaracion de los bean de tipos de datos de entrada y del manejador. -->
 
-		
-		
+		<typeAlias alias="tipoAbonoDTO" type="mx.com.proyect.puntoventa.web.model.TipoAbonoDTO" />
+		<typeAlias alias="abonoDTO" type="mx.com.proyect.puntoventa.web.model.AbonoDTO" />
+			
 		<typeAlias alias="accountDTO" type="mx.com.proyect.puntoventa.web.model.AccountDTO" />
 		<typeAlias alias="loginForm" type="mx.com.proyect.puntoventa.web.forms.LoginForm" />
 		<typeAlias alias="clientDTO" type="mx.com.proyect.puntoventa.web.model.AccountDTOclient" />

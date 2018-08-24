@@ -22,6 +22,7 @@ import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
+import mx.com.proyect.puntoventa.web.model.TipoAbonoDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 import mx.com.proyect.puntoventa.web.service.ClientService;
 import mx.com.proyect.puntoventa.web.service.SaleNoteService;;
@@ -92,6 +93,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	    }
 		
 		saleNoteDao.add(saleNoteForm);
+			
 		return true;
 	}
 	
@@ -180,6 +182,12 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 		} 
 		
 		return true;
+	}
+
+	@Override
+	public List<TipoAbonoDTO> obtenerTiposAbono() {
+		// TODO Auto-generated method stub
+		return saleNoteDao.obtenerTiposAbono();
 	}
 	
 

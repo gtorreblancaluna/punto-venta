@@ -94,14 +94,14 @@ public class LoginController {
 			modelAndView.addObject("salesByMonth", salesByMonth);
 			
 			// traer los articulos vendidos por dia, semana y mes
-			Map<String,Object> result = saleNoteService.getItemsSold();
-			List<ResultQueryItemsSold> itemsByDay = (List<ResultQueryItemsSold>) result.get("itemsByDay");
-			List<ResultQueryItemsSold> itemsByWeek = (List<ResultQueryItemsSold>) result.get("itemsByWeek");
-			List<ResultQueryItemsSold> itemsByMonth = (List<ResultQueryItemsSold>) result.get("itemsByMonth");
-			
-			modelAndView.addObject("itemsByDay", itemsByDay);
-			modelAndView.addObject("itemsByWeek", itemsByWeek);
-			modelAndView.addObject("itemsByMonth", itemsByMonth);
+//			Map<String,Object> result = saleNoteService.getItemsSold();
+//			List<ResultQueryItemsSold> itemsByDay = (List<ResultQueryItemsSold>) result.get("itemsByDay");
+//			List<ResultQueryItemsSold> itemsByWeek = (List<ResultQueryItemsSold>) result.get("itemsByWeek");
+//			List<ResultQueryItemsSold> itemsByMonth = (List<ResultQueryItemsSold>) result.get("itemsByMonth");
+//			
+//			modelAndView.addObject("itemsByDay", itemsByDay);
+//			modelAndView.addObject("itemsByWeek", itemsByWeek);
+//			modelAndView.addObject("itemsByMonth", itemsByMonth);
 			
 			return modelAndView;
 		}else if(account != null && account.getJob().getJobId().equals("4")){

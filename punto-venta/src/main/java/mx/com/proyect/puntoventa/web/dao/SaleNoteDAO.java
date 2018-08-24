@@ -7,6 +7,7 @@ import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
+import mx.com.proyect.puntoventa.web.model.TipoAbonoDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 
 public interface SaleNoteDAO {
@@ -23,5 +24,6 @@ public interface SaleNoteDAO {
 	public List<SaleStatusDTO> getSalesStatus();
 	boolean changeStatus(int saleId, int statusId);
 	Float getTotalSaleById(int id);
+	public List<TipoAbonoDTO> obtenerTiposAbono();
 
 }

@@ -23,30 +23,12 @@ PRIMARY KEY(cl_estatus_venta)
 )
 ENGINE = InnoDB;
 
-INSERT INTO c_estatus_venta (ds_descripcion) VALUES ('Registrado');
-INSERT INTO c_estatus_venta (ds_descripcion) VALUES ('Cancelado');
-INSERT INTO c_estatus_venta (ds_descripcion) VALUES ('Autorizado');
-INSERT INTO c_estatus_venta (ds_descripcion) VALUES ('Archivado');
-INSERT INTO c_estatus_venta (ds_descripcion) VALUES ('Entregado');
-
 CREATE TABLE c_estatus_entrega(
 cl_estatus_entrega integer unsigned not null AUTO_INCREMENT,
 ds_descripcion VARCHAR(65) NOT NULL,
 PRIMARY KEY(cl_estatus_entrega)
 )
 ENGINE = InnoDB;
-
-INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Registrado');
-INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Cancelado');
-INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Autorizado');
-INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Archivado');
-INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Entregado');
-
--- insertar solo para pruebas
-INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_1');
-INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_2');
-INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_3');
-INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_4');
 
 -- 2018-05-25 GTL - TABLA COLORES
 CREATE TABLE c_color(
@@ -57,14 +39,6 @@ PRIMARY KEY(cl_color)
 )
 ENGINE = InnoDB;
 
--- insertar solo para pruebas
-INSERT INTO c_color (ds_descripcion) VALUES ('blanco');
-INSERT INTO c_color (ds_descripcion) VALUES ('azul');
-INSERT INTO c_color (ds_descripcion) VALUES ('amarillo');
-INSERT INTO c_color (ds_descripcion) VALUES ('rosa');
-INSERT INTO c_color (ds_descripcion) VALUES ('negro');
-INSERT INTO c_color (ds_descripcion) VALUES ('rojo');
-    
 -- 2018-05-26 GTL - TABLA PUESTOS DEL TRABAJADOR
 CREATE TABLE c_puesto(
 cl_puesto integer unsigned not null AUTO_INCREMENT,
@@ -73,12 +47,6 @@ fg_estatus ENUM('1','0') NOT NULL DEFAULT '1',
 PRIMARY KEY(cl_puesto)
 )
 ENGINE = InnoDB;
-
--- insertar solo para pruebas
-INSERT INTO c_puesto (ds_descripcion) VALUES ('administrador');
-INSERT INTO c_puesto (ds_descripcion) VALUES ('vendedor');
-INSERT INTO c_puesto (ds_descripcion) VALUES ('chofer');
-INSERT INTO c_puesto (ds_descripcion) VALUES ('proveedor');
 
 -- tabla clientes 
 
@@ -105,20 +73,6 @@ CREATE TABLE c_cliente(
 )
 ENGINE = InnoDB;
 
--- NOTA 2018.05.22 GTL
--- solo para pruebas
-INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente1','ap_paterno','ap_materno','cliente1@email.com','1');
-INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente2','ap_paterno','ap_materno','cliente2@email.com','1');
-INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente3','ap_paterno','ap_materno','cliente3@email.com','1');
-INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente4','ap_paterno','ap_materno','cliente4@email.com','1');
-INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente5','ap_paterno','ap_materno','cliente5@email.com','1');
-INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente6','ap_paterno','ap_materno','cliente6@email.com','1');
-INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente7','ap_paterno','ap_materno','cliente7@email.com','1');
-INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente8','ap_paterno','ap_materno','cliente8@email.com','1');
-INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente9','ap_paterno','ap_materno','cliente9@email.com','1');
-INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente10','ap_paterno','ap_materno','cliente10@email.com','1');
-INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente11','ap_paterno','ap_materno','cliente11@email.com','1');
-
 -- tabla sucursales 
 CREATE TABLE c_sucursal(
 cl_sucursal INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -133,11 +87,6 @@ t_secundario VARCHAR (12),
 PRIMARY KEY (cl_sucursal)
 )
 ENGINE = InnoDB;
-
-
-INSERT INTO c_sucursal (cl_sucursal, nombre, calle, t_fijo) VALUES ('1', 'TOLUCA 1', 'PINOSUAREZ', '7222426467');
-INSERT INTO c_sucursal (cl_sucursal, nombre, calle, t_fijo) VALUES ('2', 'TOLUCA 2', 'ADOLFO LOPEZ MATEOS', '7223186761');
-INSERT INTO c_sucursal (cl_sucursal, nombre, calle, colonia, municipio, estado, t_fijo) VALUES ('3', 'TOLUCA 3', 'PASEO TOLLOCAN', 'UNIVERSIDAD', 'TOLUCA', 'TOLUCA', '7222121844');
 
 -- tabla usuario 
 CREATE TABLE c_usuario (
@@ -164,10 +113,6 @@ CREATE TABLE c_usuario (
  )
 ENGINE = InnoDB;
 
-INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('1','1','Gerardo','Torreblanca','Luna','gtorre@email.com','123456','1','1');
-INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('2','1','Armando','Gonzales','Borja','armando@email.com','123456','1','1');
--- agregamos usuario ROL PROVEEDOR
-INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('4','1','luis','proveedor 1','ap_paterno','proveedor@email.com','123456','1','1');
 
 
 -- Tabla Inventarios
@@ -200,14 +145,7 @@ CONSTRAINT fk1_cl_color FOREIGN KEY fk1_cl_color (cl_color)
 )
 ENGINE = InnoDB;
 
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_2','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','2','1','sala_3','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_4','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_5','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_6','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_7','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_8','pieza',600,22000,500,'1');
-					
+				
 -- 2018.05.22 GTL Tabla Ventas 
 CREATE TABLE c_venta(
 cl_venta INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -311,4 +249,110 @@ CONSTRAINT fk_detalle_entrega_cl_color FOREIGN KEY fk_detalle_entrega_cl_color (
 )
 ENGINE = InnoDB;
 
--- FIN DEL SCRIPT
+-- 2018.08.28 tabla tipo de abonos
+CREATE TABLE c_tipo_abono(
+cl_tipo_abono INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+ds_descripcion VARCHAR(65) NOT NULL,
+fg_estatus ENUM('1','0') NOT NULL DEFAULT '1',
+PRIMARY KEY(cl_tipo_abono)
+)
+ENGINE = InnoDB;
+
+-- 2018.08.28 tabla abonos
+CREATE TABLE c_abono(
+cl_abono INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+cl_venta INTEGER UNSIGNED NOT NULL,
+cl_tipo_abono INTEGER UNSIGNED NOT NULL,
+cl_usuario INTEGER UNSIGNED NOT NULL,
+fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+cantidad_abono DECIMAL(9,2),
+ds_descripcion VARCHAR(65) NULL,
+fg_estatus ENUM('1','0') NOT NULL DEFAULT '1',
+PRIMARY KEY(cl_abono),
+CONSTRAINT fk_abono_cl_usuario FOREIGN KEY fk_abono_cl_usuario (cl_usuario) 
+	REFERENCES c_usuario(cl_usuario)
+	ON DELETE CASCADE
+    ON UPDATE CASCADE,
+CONSTRAINT fk_abono_cl_venta FOREIGN KEY fk_abono_cl_venta (cl_venta) 
+	REFERENCES c_venta(cl_venta)
+	ON DELETE CASCADE
+    ON UPDATE CASCADE,
+CONSTRAINT fk_abono_cl_tipo_abono FOREIGN KEY fk_abono_cl_tipo_abono (cl_tipo_abono) 
+	REFERENCES c_tipo_abono(cl_tipo_abono)
+	ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
+ENGINE = InnoDB;
+
+-- FIN DEL SCRIPT PARA BD
+
+-- Inicia la inserccion de registros solo para pruebas
+
+-- primero insertamos la info para catalogos
+INSERT INTO c_tipo_abono (ds_descripcion) VALUES ('Efectivo');
+INSERT INTO c_tipo_abono (ds_descripcion) VALUES ('Cheque');
+INSERT INTO c_tipo_abono (ds_descripcion) VALUES ('Transferencia');
+INSERT INTO c_tipo_abono (ds_descripcion) VALUES ('Tarjeta credito');
+INSERT INTO c_tipo_abono (ds_descripcion) VALUES ('Tarjeta debito');
+
+INSERT INTO c_estatus_venta (ds_descripcion) VALUES ('Registrado');
+INSERT INTO c_estatus_venta (ds_descripcion) VALUES ('Cancelado');
+INSERT INTO c_estatus_venta (ds_descripcion) VALUES ('Autorizado');
+INSERT INTO c_estatus_venta (ds_descripcion) VALUES ('Archivado');
+INSERT INTO c_estatus_venta (ds_descripcion) VALUES ('Entregado');
+
+INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Registrado');
+INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Cancelado');
+INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Autorizado');
+INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Archivado');
+INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Entregado');
+
+INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_1');
+INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_2');
+INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_3');
+INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_4');
+
+INSERT INTO c_color (ds_descripcion) VALUES ('blanco');
+INSERT INTO c_color (ds_descripcion) VALUES ('azul');
+INSERT INTO c_color (ds_descripcion) VALUES ('amarillo');
+INSERT INTO c_color (ds_descripcion) VALUES ('rosa');
+INSERT INTO c_color (ds_descripcion) VALUES ('negro');
+INSERT INTO c_color (ds_descripcion) VALUES ('rojo');
+
+INSERT INTO c_puesto (ds_descripcion) VALUES ('administrador');
+INSERT INTO c_puesto (ds_descripcion) VALUES ('vendedor');
+INSERT INTO c_puesto (ds_descripcion) VALUES ('chofer');
+INSERT INTO c_puesto (ds_descripcion) VALUES ('proveedor');
+
+INSERT INTO c_sucursal (cl_sucursal, nombre, calle, t_fijo) VALUES ('1', 'TOLUCA 1', 'PINOSUAREZ', '7222426467');
+INSERT INTO c_sucursal (cl_sucursal, nombre, calle, t_fijo) VALUES ('2', 'TOLUCA 2', 'ADOLFO LOPEZ MATEOS', '7223186761');
+INSERT INTO c_sucursal (cl_sucursal, nombre, calle, colonia, municipio, estado, t_fijo) VALUES ('3', 'TOLUCA 3', 'PASEO TOLLOCAN', 'UNIVERSIDAD', 'TOLUCA', 'TOLUCA', '7222121844');
+
+INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('1','1','Gerardo','Torreblanca','Luna','gtorre@email.com','123456','1','1');
+INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('2','1','Armando','Gonzales','Borja','armando@email.com','123456','1','1');
+-- agregamos usuario ROL PROVEEDOR
+INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('4','1','luis','proveedor 1','ap_paterno','proveedor@email.com','123456','1','1');
+
+INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente1','ap_paterno','ap_materno','cliente1@email.com','1');
+INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente2','ap_paterno','ap_materno','cliente2@email.com','1');
+INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente3','ap_paterno','ap_materno','cliente3@email.com','1');
+INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente4','ap_paterno','ap_materno','cliente4@email.com','1');
+INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente5','ap_paterno','ap_materno','cliente5@email.com','1');
+INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente6','ap_paterno','ap_materno','cliente6@email.com','1');
+INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente7','ap_paterno','ap_materno','cliente7@email.com','1');
+INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente8','ap_paterno','ap_materno','cliente8@email.com','1');
+INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente9','ap_paterno','ap_materno','cliente9@email.com','1');
+INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente10','ap_paterno','ap_materno','cliente10@email.com','1');
+INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente11','ap_paterno','ap_materno','cliente11@email.com','1');
+
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_2','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','2','1','sala_3','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_4','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_5','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_6','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_7','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_8','pieza',600,22000,500,'1');
+	
+
+
+

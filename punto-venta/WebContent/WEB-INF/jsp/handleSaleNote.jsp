@@ -359,8 +359,15 @@ function addSaleDetailNoteForm(items){
 		<ul class="nav nav-tabs">
 		  <li class="active"><a data-toggle="tab" href="#tabClientes">Clientes</a></li>
 		  <li><a data-toggle="tab" href="#tabVentas">Nota</a></li>
+		  <li><a data-toggle="tab" href="#tabAbono">Abono</a></li>
 		</ul>
-		
+<!-- 		<div class="form-group row"> -->
+<!-- 				<div class="col-xs-3"> -->
+<!-- 					<label style="padding-left:12px;">Subtotal: $<span id="totalPagar"></span></label> -->
+<!-- 					<label style="padding-left:12px;">Abono: $<span id="totalAbono"></span></label> -->
+<!-- 					<label style="padding-left:12px;">Total: $<span id="total"></span></label> -->
+<!-- 				</div> -->
+<!-- 		</div> -->
 		<div class="tab-content">
 		
 			<div id="tabClientes" class="tab-pane fade in active">
@@ -438,7 +445,7 @@ function addSaleDetailNoteForm(items){
 			
 			<div class="form-group row">
 			
-				<div class="col-xs-3">
+				<div class="col-xs-2">
 					<label >Fecha :</label>
 					<input type="date" name="dateSaleNote" id="dateForm" class="form-control dateForm">
 				</div>
@@ -452,7 +459,7 @@ function addSaleDetailNoteForm(items){
 <%-- 									</c:forEach>	 --%>
 <!-- 							</select>				 -->
 <!-- 				</div> -->
-				<div class="col-xs-3">
+				<div class="col-xs-2">
 						<label>Vendedor :</label> 
 							<select name="sellerId" class="form-control sellerId" >
 										<option value="0">- Seleccione -</option>
@@ -475,11 +482,14 @@ function addSaleDetailNoteForm(items){
 <!-- 				</span> -->
 				
 <!-- 				</td> -->
-				<div class="col-xs-3">
-					<label>Total a pagar: $</label><span id="totalPagar"></span>
-				</div>
-				<div class="col-xs-3">				
-					<label>Cliente: <span id="spanNombreCliente"></span></label>
+				
+				<div class="col-xs-8">				
+					<label style="padding-left:12px;">Cliente: <span id="spanNombreCliente"></span></label>
+<!-- 				</div> -->
+<!-- 				<div class="col-xs-3">	 -->
+					<label style="padding-left:12px;">Subtotal: $<span id="totalPagar"></span></label>
+					<label style="padding-left:12px;">Abono: $<span id="totalAbono"></span></label>
+					<label style="padding-left:12px;">Total: $<span id="total"></span></label>
 				</div>
 			</div>
 			<div class="form-group row">	
@@ -498,7 +508,7 @@ function addSaleDetailNoteForm(items){
 			</div>
 		
 	
-	<div class="form-group row">
+		<div class="form-group row">
      		<table class="table tableAddNote">
 			    <thead>
 			      <tr>
@@ -550,6 +560,32 @@ function addSaleDetailNoteForm(items){
 	  	</div> <!-- end row -->
 	  	
 	  	</div> <!-- end tab ventas -->
+	  	
+	  	<!-- formulario para el abono -->
+	  	<div id="tabAbono" class="tab-pane fade in ">
+	  		<div class="form-group row">
+	  			<div class="col-xs-6">				
+					<label>Abono:</label>
+					<input type="number" name="abono.cantidadAbono" id="cantidadAbono" class="form-control" min="1" max="1000000">
+				</div>
+				<div class="col-xs-6">	
+					<label>Tipo de abono:</label>			
+					<select name="abono.tipoAbono.tipoAbonoId" class="form-control ">
+								<option value="0">- Seleccione -</option>
+							<c:forEach items="${tipoAbonos}" var="tipo">								
+								<option value="${tipo.tipoAbonoId}">${tipo.descripcion}</option>																
+							</c:forEach>	
+					</select>	
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-xs-12">				
+					<label>Descripci&oacute;n:</label>
+					<input type="text" name="abono.descripcion" id="descripcionAbono" class="form-control">
+				</div>
+	  		</div>
+	  	</div> <!-- end tab abono -->
+	  	
 	  	</div> <!-- end tab general -->
 	  	 <div class="form-group row">
 			  	<div class="col-xs-12">		

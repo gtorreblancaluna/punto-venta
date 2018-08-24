@@ -4,6 +4,7 @@ package mx.com.proyect.puntoventa.web.forms;
 import java.sql.Timestamp;
 import java.util.List;
 
+import mx.com.proyect.puntoventa.web.model.AbonoDTO;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
@@ -33,6 +34,16 @@ public class SaleNoteForm {
 	// desea imprimir la nota despues de agregar la venta
 	private boolean printSaleNote;
 	
+	private AbonoDTO abono;
+	
+	public AbonoDTO getAbono() {
+		return abono;
+	}
+
+	public void setAbono(AbonoDTO abono) {
+		this.abono = abono;
+	}
+
 	private AccountDTOclient customer;	
 
 	public AccountDTOclient getCustomer() {
