@@ -175,5 +175,30 @@ public class SaleNoteServiceFacade {
         return json;
 
 	}
+	
+	
+	@RequestMapping(value = "/eliminarAbono.do")
+	@ResponseBody
+		public String eliminarAbono(@RequestBody String abonoId) {
+		
+		saleNoteService.eliminarAbono(new Integer(abonoId));
+		
+		Map<String,Object> myMap = new HashMap<>();		
+		myMap.put("mensaje", "Se elimino con \u00E9xito el abono");	
+		ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(myMap);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	       
+	
+        return json;
+
+	}
 
 }

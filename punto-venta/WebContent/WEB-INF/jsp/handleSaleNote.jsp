@@ -292,6 +292,7 @@ function addSaleDetailNoteForm(items){
 							</select>
 						</span>
 					</td>
+					
 				</tr>
 				<tr>
 					<td colspan=5>
@@ -564,18 +565,32 @@ function addSaleDetailNoteForm(items){
 	  	<!-- formulario para el abono -->
 	  	<div id="tabAbono" class="tab-pane fade in ">
 	  		<div class="form-group row">
-	  			<div class="col-xs-6">				
+	  			<div class="col-xs-3">				
 					<label>Abono:</label>
 					<input type="number" name="abono.cantidadAbono" id="cantidadAbono" class="form-control" min="1" max="1000000">
 				</div>
-				<div class="col-xs-6">	
+				<div class="col-xs-3">	
 					<label>Tipo de abono:</label>			
-					<select name="abono.tipoAbono.tipoAbonoId" class="form-control ">
+					<select name="abono.tipoAbono.tipoAbonoId" class="form-control tipoAbono">
 								<option value="0">- Seleccione -</option>
 							<c:forEach items="${tipoAbonos}" var="tipo">								
 								<option value="${tipo.tipoAbonoId}">${tipo.descripcion}</option>																
 							</c:forEach>	
 					</select>	
+				</div>
+					
+				<div class="col-xs-3">
+					<label >Fecha vencimiento:</label>
+					<input type="date" name="fechaVencimientoCredito" id="fechaVencimientoCredito" class="form-control dateForm">
+				</div>
+				<div class="col-xs-3">				
+					<span class="input-group-text">Es a credito: 
+							<select name="credit" class="form-control" id="credit">
+										<option value="">- Seleccione -</option>									
+										<option value="0">Nota sin cr&eacute;dito</option>
+										<option value="1">Nota a cr&eacute;dito</option>									
+							</select>
+						</span>	
 				</div>
 			</div>
 			<div class="form-group row">

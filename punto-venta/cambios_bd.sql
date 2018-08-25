@@ -151,11 +151,13 @@ CREATE TABLE c_venta(
 cl_venta INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
 fe_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 fe_entrega TIMESTAMP NULL,
+fe_vencimiento_credito TIMESTAMP NULL,
 cl_cliente INTEGER UNSIGNED NOT NULL,
 cl_usuario INTEGER UNSIGNED NOT NULL,
 cl_sucursal INTEGER UNSIGNED NOT NULL,
 cl_estatus_venta INTEGER UNSIGNED NOT NULL,
 ds_descripcion VARCHAR(100),
+fg_credito ENUM('1','0') NOT NULL DEFAULT '0',
 PRIMARY KEY (cl_venta),
 CONSTRAINT fk_cl_cliente FOREIGN KEY fk_cl_cliente (cl_cliente) 
 	REFERENCES c_cliente(cl_cliente)

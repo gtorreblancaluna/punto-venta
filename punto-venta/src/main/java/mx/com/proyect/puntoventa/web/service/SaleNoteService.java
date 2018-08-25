@@ -5,6 +5,7 @@ import java.util.Map;
 
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
+import mx.com.proyect.puntoventa.web.model.AbonoDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
@@ -30,4 +31,6 @@ public interface SaleNoteService {
 	public boolean increaseStockPerSale(List<SaleDetailDTO> details);
 	Float getTotalSaleById(int id);
 	public List<TipoAbonoDTO> obtenerTiposAbono();
+	public void agregarAbono(AbonoDTO abono);
+	public void eliminarAbono(int abonoId);
 }

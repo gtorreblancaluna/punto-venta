@@ -93,8 +93,7 @@ public class HandleSaleNoteController {
 			model.addAttribute("listItems", inventoryService.getAll(userSession.getAccount().getOffice().getOfficeId()));
 						
 			model.addAttribute("messageSucess","Se agrego con exito la nota, total de articulos: "+saleNoteForm.getItems().size());
-			model.addAttribute("saleNoteForm", new SaleNoteForm());
-			return "handleSaleNote";
+			return "handleSaleNoteSucess";
 		
 		}else {			
 			model.addAttribute("messageError", "ERROR. No se encontro session, porfavor recarga la pagina y logueate correctamente ");
@@ -144,7 +143,7 @@ public class HandleSaleNoteController {
 			model.addAttribute("listItems", inventoryService.getAll(userSession.getAccount().getOffice().getOfficeId()));			
 			model.addAttribute("messageSucess","Se actualizo con exito la nota, total de articulos: "+saleNoteForm.getItems().size());
 			model.addAttribute("saleNoteForm", new SaleNoteForm());
-			return "handleSaleNote";		
+			return "handleSaleNoteSucess";		
 		}else {			
 			model.addAttribute("messageError", "ERROR. No se encontro session, porfavor recarga la pagina y logueate correctamente ");
 			return "handleSaleNote";		

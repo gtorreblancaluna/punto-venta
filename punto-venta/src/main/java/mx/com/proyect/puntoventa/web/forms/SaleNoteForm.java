@@ -21,6 +21,7 @@ public class SaleNoteForm {
 	private String storeId;
 	private String sellerId;
 	private String dateSaleNote;
+	private String fechaVencimientoCredito;
 	// almacenara el detalle de la venta para mostrar en la vista
 	private List<SaleDetailDTO> saleDetail;
 	private List<ItemDTO> items;
@@ -33,35 +34,51 @@ public class SaleNoteForm {
 	private SaleStatusDTO status;	
 	// desea imprimir la nota despues de agregar la venta
 	private boolean printSaleNote;
+	//2018.08.25 sera a credito
+	private boolean credit;
+	// pojo abono
+	private AbonoDTO abono;	
+	// lista abonos
+	private List<AbonoDTO> abonos;	
 	
-	private AbonoDTO abono;
-	
+	public List<AbonoDTO> getAbonos() {
+		return abonos;
+	}
+	public void setAbonos(List<AbonoDTO> abonos) {
+		this.abonos = abonos;
+	}
+	public String getFechaVencimientoCredito() {
+		return fechaVencimientoCredito;
+	}
+	public void setFechaVencimientoCredito(String fechaVencimientoCredito) {
+		this.fechaVencimientoCredito = fechaVencimientoCredito;
+	}
+	public boolean isCredit() {
+		return credit;
+	}
+	public void setCredit(boolean credit) {
+		this.credit = credit;
+	}		
 	public AbonoDTO getAbono() {
 		return abono;
 	}
-
 	public void setAbono(AbonoDTO abono) {
 		this.abono = abono;
 	}
-
 	private AccountDTOclient customer;	
 
 	public AccountDTOclient getCustomer() {
 		return customer;
 	}
-
 	public void setCustomer(AccountDTOclient customer) {
 		this.customer = customer;
 	}
-
 	public SaleStatusDTO getStatus() {
 		return status;
 	}
-
 	public void setStatus(SaleStatusDTO status) {
 		this.status = status;
 	}
-
 	public boolean isPrintSaleNote() {
 		return printSaleNote;
 	}

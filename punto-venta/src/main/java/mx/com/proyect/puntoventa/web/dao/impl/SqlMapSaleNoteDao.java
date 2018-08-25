@@ -14,6 +14,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import mx.com.proyect.puntoventa.web.dao.SaleNoteDAO;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
+import mx.com.proyect.puntoventa.web.model.AbonoDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
@@ -81,6 +82,15 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 		List<ResultQuerySaleNote> list = getSqlSession().selectList("getSaleNoteByFilter",saleNoteFilter);		
 		for(ResultQuerySaleNote queryRest: list) {
 			queryRest.setSaleDetail(getSqlSession().selectList("getDetailSaleNoteById",queryRest.getSaleId()));
+			queryRest.setAbonos(getSqlSession().selectList("obtenerAbonosPorVenta",queryRest.getSaleId()));
+		}
+		// calcular el total de abonos
+		for(ResultQuerySaleNote res: list) {
+			float total = 0;
+			for(AbonoDTO abono : res.getAbonos()) {
+				total += abono.getCantidadAbono();
+			}
+			res.setTotalAbonos(total);
 		}
 		return list;
 	}
@@ -89,6 +99,7 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 	public SaleNoteForm getSaleNoteById(Integer id) {
 		SaleNoteForm saleNoteForm = getSqlSession().selectOne("getSaleNoteById",id);
 		saleNoteForm.setSaleDetail(getSqlSession().selectList("getDetailSaleNoteById",id));
+		saleNoteForm.setAbonos(getSqlSession().selectList("obtenerAbonosPorVenta",id));
 		return saleNoteForm;
 	}
 
@@ -166,6 +177,18 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 	public List<TipoAbonoDTO> obtenerTiposAbono() {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectList("obtenerTiposAbono");
+	}
+
+	@Override
+	public void agregarAbono(AbonoDTO abono) {
+		getSqlSession().insert("agregarAbono",abono);
+		
+	}
+
+	@Override
+	public void eliminarAbono(int abonoId) {
+		getSqlSession().update("eliminarAbono",abonoId);
+		
 	}
 
 }

@@ -12,6 +12,7 @@
 		<result property="saleId" column="cl_venta" />
 		<result property="saleDate" column="fe_registro" />
 		<result property="dateDelivery" column="fe_entrega" />
+		<result property="fechaVencimientoCredito" column="fe_vencimiento_credito" />
 		<result property="description" column="ds_descripcion" />
 		<result property="nameCustomer" column="nombre_cliente" />
 		<result property="nameOffice" column="nombre_sucursal" />
@@ -89,15 +90,56 @@
 		<result property="descripcion" column="ds_descripcion" />	
 		<result property="estado" column="fg_estatus" />				
 	</resultMap>
+	
+	<resultMap id="resultMapAbonos" type="abonoDTO">
+		<result property="abonoId" column="cl_abono" />
+		<result property="saleNote.saleId" column="cl_venta" />	
+		<result property="tipoAbono.tipoAbonoId" column="cl_tipo_abono" />	
+		<result property="tipoAbono.descripcion" column="descripcion_abono" />	
+		<result property="cantidadAbono" column="cantidad_abono" />	
+		<result property="descripcion" column="ds_descripcion" />	
+		<result property="feRegistro" column="fecha_registro" />	
+		<!-- Datos del usuario que agrego el abono -->
+		<result property="usuario.userId" column="cl_usuario" />	
+		<result property="usuario.name" column="nombre_usuario" />
+		<result property="usuario.firstName" column="ap_paterno_usuario" />	
+		<result property="usuario.secondName" column="ap_materno_usuario" />
+					
+	</resultMap>
 
 	<insert id="addSaleNote" parameterType="saleNoteForm">
 		<selectKey resultType="java.lang.Integer" keyProperty="saleId" order="AFTER">
 			SELECT LAST_INSERT_ID() as id
 		</selectKey>
 		INSERT INTO c_venta
-		(cl_cliente,cl_usuario,cl_sucursal,fe_entrega,cl_estatus_venta,ds_descripcion)
+		(
+			cl_cliente,
+			cl_usuario,
+			cl_sucursal,
+			fe_entrega,
+			cl_estatus_venta,
+			<if test="credit != null and credit != '' ">
+				fg_credito,
+			</if>
+			<if test="fechaVencimientoCredito != null and fechaVencimientoCredito != ''  ">
+				fe_vencimiento_credito,
+			</if>
+			ds_descripcion
+		)
 		VALUES
-		(#{userId},#{sellerId},#{storeId},#{dateTimestamp},#{status.statusId},#{description})
+		(
+			#{userId},
+			#{sellerId},	
+			#{storeId},
+			#{dateTimestamp},
+			#{status.statusId},
+			<if test="credit != null and credit != '' ">
+				#{credit},
+			</if>
+			<if test="fechaVencimientoCredito != null and fechaVencimientoCredito != ''  ">
+				#{fechaVencimientoCredito},
+			</if>
+			#{description})
 	</insert>
 
 	<insert id="addSaleNoteDetails" parameterType="java.util.Map">
@@ -108,7 +150,7 @@
 	</insert>
 	
 	<select id="getSaleNoteByFilter" parameterType="saleNoteFilter"	resultMap="resultMapQuerySaleNote">
-		SELECT v.cl_venta,v.fe_registro,v.fe_entrega,v.ds_descripcion,
+		SELECT v.cl_venta,v.fe_registro,v.fe_entrega,v.ds_descripcion,v.fe_vencimiento_credito,
 		CONCAT(c.nombre,' ',c.ap_paterno) AS nombre_cliente, s.nombre AS nombre_sucursal,
 		CONCAT(u.nombre,' ',u.ap_paterno) AS nombre_usuario,
 		estatus.ds_descripcion AS descripcion_estatus_venta	
@@ -140,6 +182,9 @@
 			</if>
 			<if test="saleIdFilter != null and saleIdFilter != '' ">
 				AND v.cl_venta = (#{saleIdFilter})
+			</if>
+			<if test="credit != null and credit != ''  ">
+				AND v.fg_credito = #{credit}
 			</if>
 		</where>
 		ORDER BY v.cl_venta DESC
@@ -299,5 +344,40 @@
 			#{abono.descripcion}
 		)
 	</insert>
+	
+	<select id="obtenerAbonosPorVenta" parameterType="java.lang.Integer" resultMap="resultMapAbonos">
+		SELECT abono.*,
+		usuario.nombre AS nombre_usuario,
+		usuario.ap_paterno AS ap_paterno_usuario,
+		usuario.ap_materno AS ap_materno_usuario,
+		tipo.ds_descripcion AS descripcion_abono
+		FROM c_abono abono
+		INNER JOIN c_usuario usuario ON (abono.cl_usuario = usuario.cl_usuario)
+		INNER JOIN c_tipo_abono tipo ON (abono.cl_tipo_abono = tipo.cl_tipo_abono)
+		WHERE abono.cl_venta = #{value} AND abono.fg_estatus = '1'
+	</select>
+	
+	<insert id="agregarAbono" parameterType="abonoDTO">
+		INSERT INTO c_abono
+		(
+			cl_venta,
+			cl_tipo_abono,
+			cl_usuario,
+			cantidad_abono,
+			ds_descripcion
+		)
+		VALUES
+		(
+			#{saleNote.saleId},
+			#{tipoAbono.tipoAbonoId},
+			#{usuario.userId},
+			#{cantidadAbono},
+			#{descripcion}
+		)
+	</insert>
+	
+	<update id="eliminarAbono" parameterType="java.lang.Integer">
+		UPDATE c_abono SET fg_estatus = '0' WHERE cl_abono = #{abonoId}
+	</update>
 
 </mapper>

@@ -3,6 +3,7 @@ package mx.com.proyect.puntoventa.web.resultsQuerys;
 import java.sql.Timestamp;
 import java.util.List;
 
+import mx.com.proyect.puntoventa.web.model.AbonoDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
 
@@ -19,7 +20,7 @@ public class ResultQuerySaleNote {
 	private Timestamp saleDate;
 	// fe_entrega - fecha en la que se entragara el pedido
 	private Timestamp dateDelivery;
-	// ds_descripcion - descripcion de la nota
+		// ds_descripcion - descripcion de la nota
 	private String description;
 	// nombre_cliente
 	private String nameCustomer;
@@ -27,14 +28,48 @@ public class ResultQuerySaleNote {
 	private String nameOffice;
 	// nombre_usuario
 	private String nameUser;
+	// total de la venta
+	private Float totalAmount;
 	// status
 	private SaleStatusDTO status;
+	// abonos 
+	private List<AbonoDTO> abonos;
 	
-	// total de la venta
-	private Float totalAmount;	
-	
+	/** datos para mostrar en el modulo de cobranza */
+	// fecha vencimiento
+	private Timestamp fechaVencimientoCredito;
+	private float totalAbonos;	
+	private float resta;
 	// detalle de la venta
 	private List<SaleDetailDTO> saleDetail;	
+	
+	
+	
+	public float getTotalAbonos() {
+		return totalAbonos;
+	}
+	public void setTotalAbonos(float totalAbonos) {
+		this.totalAbonos = totalAbonos;
+	}
+	public float getResta() {
+		return resta;
+	}
+	public void setResta(float resta) {
+		this.resta = resta;
+	}
+	
+	public Timestamp getFechaVencimientoCredito() {
+		return fechaVencimientoCredito;
+	}
+	public void setFechaVencimientoCredito(Timestamp fechaVencimientoCredito) {
+		this.fechaVencimientoCredito = fechaVencimientoCredito;
+	}
+	public List<AbonoDTO> getAbonos() {
+		return abonos;
+	}
+	public void setAbonos(List<AbonoDTO> abonos) {
+		this.abonos = abonos;
+	}
 	
 	public List<SaleDetailDTO> getSaleDetail() {
 		return saleDetail;

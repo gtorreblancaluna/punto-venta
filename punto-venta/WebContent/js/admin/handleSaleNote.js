@@ -190,6 +190,20 @@ $( document ).ready(function() {
 					msgCliente += ++count +". Al menos un telefono debes ingresar para el cliente \n";
 			}
 			
+			// validando el abono, lo debe de incluir no importa si es a credito
+			var cantidadAbono = $form.find('#cantidadAbono').val();
+			var tipoAbono = $form.find('.tipoAbono').val();
+			
+			if(cantidadAbono != ''){
+				if(cantidadAbono < 0 || cantidadAbono >= 1000000)
+					msgError += ++count + ". Cantidad abono esta incorrecta\n";
+				if(tipoAbono == '0')
+					msgError += ++count + ". Introduce un tipo de abono\n";
+			}else{
+				msgError += ++count + ". Introduce una cantidad para el abono. (Acepta cero)\n";
+			}
+			
+						
 			if($('#dateForm').val() === '' || sellerId === '0' )				
 				msgError += ++count + ". Faltan valores para agregar a la venta\n";					
 				

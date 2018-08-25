@@ -1,6 +1,14 @@
 package mx.com.proyect.puntoventa.web.model;
 
+import static mx.com.proyect.puntoventa.web.commons.ApplicationConstants.MASK_DATE_FORMAT;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class AbonoDTO {
+	private static final Locale locale = new Locale( "es", "MX" );
+	private static final SimpleDateFormat formatoFecha = new SimpleDateFormat( MASK_DATE_FORMAT, locale );
 	
 	private int abonoId;
 	private SaleNoteDTO saleNote;
@@ -9,7 +17,22 @@ public class AbonoDTO {
 	private String descripcion;
 	private String estado;
 	private AccountDTO usuario;	
+	private Timestamp feRegistro;
+	private String feRegistroFormat;	
 	
+	public String getFeRegistroFormat() {
+		return feRegistroFormat;
+	}
+	public void setFeRegistroFormat(String feRegistroFormat) {
+		this.feRegistroFormat = feRegistroFormat;
+	}
+	public Timestamp getFeRegistro() {
+		return feRegistro;
+	}
+	public void setFeRegistro(Timestamp feRegistro) {
+		this.feRegistro = feRegistro;
+		this.feRegistroFormat = formatoFecha.format(feRegistro);
+	}
 	public AccountDTO getUsuario() {
 		return usuario;
 	}

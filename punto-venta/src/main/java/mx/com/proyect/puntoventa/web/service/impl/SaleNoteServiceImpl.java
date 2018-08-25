@@ -18,6 +18,7 @@ import mx.com.proyect.puntoventa.web.dao.InventoryDAO;
 import mx.com.proyect.puntoventa.web.dao.SaleNoteDAO;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
+import mx.com.proyect.puntoventa.web.model.AbonoDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
@@ -188,6 +189,18 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	public List<TipoAbonoDTO> obtenerTiposAbono() {
 		// TODO Auto-generated method stub
 		return saleNoteDao.obtenerTiposAbono();
+	}
+
+	@Override
+	public void agregarAbono(AbonoDTO abono) {
+		saleNoteDao.agregarAbono(abono);
+		
+	}
+
+	@Override
+	public void eliminarAbono(int abonoId) {
+		saleNoteDao.eliminarAbono(abonoId);
+		
 	}
 	
 

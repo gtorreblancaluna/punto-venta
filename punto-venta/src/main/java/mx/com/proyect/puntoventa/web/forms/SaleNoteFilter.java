@@ -25,9 +25,24 @@ public class SaleNoteFilter {
 	private String colorIdFilter;
 	// id almacen
 	private String storeIdFilter;
+	// es a credito
+	private String credit;
+	// id almacen
+	private int tipoAbonoId;		
 	
+	public int getTipoAbonoId() {
+		return tipoAbonoId;
+	}
+	public void setTipoAbonoId(int tipoAbonoId) {
+		this.tipoAbonoId = tipoAbonoId;
+	}	
 	
-	
+	public String getCredit() {
+		return credit;
+	}
+	public void setCredit(String credit) {
+		this.credit = credit;
+	}
 	public String getSaleIdFilter() {
 		return saleIdFilter;
 	}

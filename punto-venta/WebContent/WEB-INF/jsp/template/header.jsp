@@ -37,8 +37,7 @@
 						<ul class="dropdown-menu">
 <!-- 							<li><a> Pedidos</a></li> -->
 							<li><a href="handleSaleNote.do">Notas Venta</a></li>
-<!-- 							<li><a>Administraci&oacute;n</a></li> -->
-<!-- 							<li><a>Reportes</a></li> -->
+							<li><a href="cobranza.do">Cobranza</a></li>
 						</ul>
 					</li>
 					
