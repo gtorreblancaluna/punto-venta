@@ -21,6 +21,10 @@
 var u_cont=0;
 var g_colors="";
 
+function generatePdf(id){
+	window.open("generate_pdf_sale_note.do?idOp="+id+"", "Nota venta", "width=500,height=300");
+};
+
 $( document ).ready(function() {
 	
 	//
@@ -28,9 +32,7 @@ $( document ).ready(function() {
 
 		$( "#officeIdFilter" ).prop( "disabled", true );
 	}
-	function generatePdf(id){
-		window.open("generate_pdf_sale_note.do?idOp="+id+"", "Nota venta", "width=500,height=300");
-	};
+	
 	
 // 	alert('${accountSession}')
 	

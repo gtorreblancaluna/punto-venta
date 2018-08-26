@@ -53,7 +53,8 @@
 					<li><a class="dropdown-toggle" data-toggle="dropdown"
 						href="javascript:void(0);">Reportes</a>
 						<ul class="dropdown-menu">						
-							<li><a href="salesReports.do">Reportes de ventas</a></li>
+							<li><a href="salesReports.do">Ventas</a></li>
+							<li><a href="reporteAbonos.do">Abonos</a></li>
 						</ul>
 					</li>
 				</c:if>
