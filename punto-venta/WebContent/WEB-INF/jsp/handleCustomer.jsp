@@ -94,8 +94,11 @@ $( document ).ready(function() {
 					</td>
 				</tr>
 				<tr>
-					<td colspan=5>
+					<td colspan=2>
 					 <input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
+					</td>
+					<td colspan=2>
+						<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddUser">Agregar cliente</button>
 					</td>
 				</tr>
 			</tbody>
@@ -149,8 +152,7 @@ $( document ).ready(function() {
 	 	</div>
 	 	</div>
 		</c:if>
-		<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalAddUser">Agregar cliente</button>
-
+		
 
 
 

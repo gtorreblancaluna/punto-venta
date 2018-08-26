@@ -36,11 +36,11 @@
 		INSERT INTO c_cliente
 		(nombre,ap_paterno,ap_materno,email,tel1,tel2,
 <!-- 		calle,delegacion,colonia,cp,municipio,estado,ciudad, -->
-		direccion,status)
+		direccion)
 		VALUES
 		(#{name},#{firstName},#{secondName},#{email},#{tel1},#{tel2},
 <!-- 		#{street},#{delegation},#{colony},#{cp},#{municipality},#{state},#{city}, -->
-		#{adress},#{fgActivo})
+		#{adress})
 	</insert>
 	
 	<update id="updateCustomer" parameterType="clientDTO">
