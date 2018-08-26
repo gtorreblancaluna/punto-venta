@@ -24,6 +24,7 @@ import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
@@ -120,17 +121,22 @@ public class GeneratePDFSaleNoteController {
 			    Date dateDelivery = new Date(saleNote.getDeliveryDate().getTime()); 
 			    DateFormat formatoFecha;		    
 			    formatoFecha = DateFormat.getDateInstance(DateFormat.MEDIUM);
-			    LocalDate myDate2 = LocalDate.now();
-			    System.out.println(myDate2);
+//			    LocalDateTime myDate2 = LocalDateTime.now();
+//			    System.out.println("la fecha con hora es: "+myDate2);
 //			    System.out.println(myDate.format(DateTimeFormatter.ISO_TIME));
 //			    TimeFormat formatotiempo;
-	
+//			   ----
+			   LocalDateTime comTime = LocalDateTime.now();
+//			   System.out.println(" Hora:"+comTime.getHour()+com);
+			   String complTime;
+			   complTime = " Hora"+comTime.getHour()+":"+comTime.getMinute();
+			   
 			    document.add(new Phrase("  \n"));
 //			    primer version de vista 
 //			    document.add(new Phrase("Toluca, Mex, a "+formatoFecha.format(dateDelivery), new Font(Font.HELVETICA,12, Font.NORMAL)));
-			    document.add(new Phrase("Fecha de Nota : "+formatoFecha.format(dateRegister)+" Fecha de entrega :"+formatoFecha.format(dateDelivery), new Font(Font.HELVETICA,12, Font.NORMAL)));
+			    document.add(new Phrase("Fecha de Nota : "+formatoFecha.format(dateRegister)+complTime+"        Fecha de entrega :"+formatoFecha.format(dateDelivery), new Font(Font.HELVETICA,12, Font.NORMAL)));
 			   
-			    document.add(new Phrase("\n"+saleNote.getClient().getName()+ " "+ saleNote.getClient().getFirstName(),new Font(Font.HELVETICA,fontSizeNormal,Font.HELVETICA)));
+			    document.add(new Phrase("\n"+saleNote.getClient().getName()+ " "+ saleNote.getClient().getFirstName()+"                                                                                       Vendedor: "+saleNote.getAccount().getName(),new Font(Font.HELVETICA,fontSizeNormal,Font.HELVETICA)));
 //			    cell = new PdfPCell(new Phrase("Se\u00F1or: "+saleNote.getClient().getName()+" "+saleNote.getClient().getFirstName(), new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
 //		        cell.setFixedHeight(cellHeight);
 //		        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
@@ -138,7 +144,7 @@ public class GeneratePDFSaleNoteController {
 //		        cell.setColspan(3);
 //		        table.addCell(cell);			    
 //			    String addressClient = saleNote.getClient().getStreet()+" "+saleNote.getClient().getColony()+" "+saleNote.getClient().getDelegation()+" "+saleNote.getClient().getCp();
-		        document.add(new Phrase(" \n"+saleNote.getClient().getAdress(), new Font(Font.HELVETICA,12,Font.HELVETICA)));
+		        document.add(new Phrase(" \n"+saleNote.getClient().getAdress()+"Celular"+saleNote.getClient().getTel1(), new Font(Font.HELVETICA,12,Font.HELVETICA)));
 		        document.add(new Phrase("  \n "));
 	//	        cell = new PdfPCell(new Phrase(" ", new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
 	//	        cell.setFixedHeight(cellHeight);
@@ -264,30 +270,8 @@ public class GeneratePDFSaleNoteController {
 		        	abonos += abono.getCantidadAbono();
 		        }
 		        
-		     		        
-		        // total a pagar
-//		        cellDetails = new PdfPCell(new Phrase("Total a pagar: ",new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
-//	 	        cellDetails.setFixedHeight(cellHeightDetails);
-//	// 	        cellDetails.setBorder(Rectangle.TOP);
-//	 	        cellDetails.setColspan(1);
-//	 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
-//	 	        tableDetails.addCell(cellDetails);
-	 	        
-	 	        cellDetails = new PdfPCell(new Phrase("Total a pagar: "+NumberFormat.getCurrencyInstance(new Locale("es", "MX")).format(total),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
-		        cellDetails.setFixedHeight(cellHeightDetails);
-	//	        cellDetails.setBorder(Rectangle.TOP);
-		        cellDetails.setColspan(2);	        
-		        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
-		        tableDetails.addCell(cellDetails);
-		        
-		     // Abonos
-//		        cellDetails = new PdfPCell(new Phrase("Total de pagos: ",new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
-//	 	        cellDetails.setFixedHeight(cellHeightDetails);
-//	// 	        cellDetails.setBorder(Rectangle.TOP);
-//	 	        cellDetails.setColspan(1);
-//	 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
-//	 	        tableDetails.addCell(cellDetails);
-	 	        
+		     	
+
 	 	        // Abonos
 		        cellDetails = new PdfPCell(new Phrase("Pagos: "+NumberFormat.getCurrencyInstance(new Locale("es", "MX")).format(abonos),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
 	 	        cellDetails.setFixedHeight(cellHeightDetails);
@@ -304,13 +288,37 @@ public class GeneratePDFSaleNoteController {
 	 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 	 	        tableDetails.addCell(cellDetails);
 		        
+		        // total a pagar
+//		        cellDetails = new PdfPCell(new Phrase("Total a pagar: ",new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
+//	 	        cellDetails.setFixedHeight(cellHeightDetails);
+//	// 	        cellDetails.setBorder(Rectangle.TOP);
+//	 	        cellDetails.setColspan(1);
+//	 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
+//	 	        tableDetails.addCell(cellDetails);
+	 	        
+	 	        cellDetails = new PdfPCell(new Phrase("Total: "+NumberFormat.getCurrencyInstance(new Locale("es", "MX")).format(total),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
+		        cellDetails.setFixedHeight(cellHeightDetails);
+	//	        cellDetails.setBorder(Rectangle.TOP);
+		        cellDetails.setColspan(2);	        
+		        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
+		        tableDetails.addCell(cellDetails);
+		        
+		     // Abonos
+//		        cellDetails = new PdfPCell(new Phrase("Total de pagos: ",new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
+//	 	        cellDetails.setFixedHeight(cellHeightDetails);
+//	// 	        cellDetails.setBorder(Rectangle.TOP);
+//	 	        cellDetails.setColspan(1);
+//	 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
+//	 	        tableDetails.addCell(cellDetails);
+	 	        
 		        document.add(tableDetails);
 		        
 				
 				((ByteArrayOutputStream) bao).writeTo(bao);
 				} catch (DocumentException e) {					
 					throw new RuntimeException(e);
-				} catch (IOException e) {				
+				} catch (IOException e) {	
+					System.out.println(e);
 					throw new RuntimeException(e);
 				} finally {				
 					if( document != null && document.isOpen() ) {
