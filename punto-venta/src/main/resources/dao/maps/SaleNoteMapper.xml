@@ -94,6 +94,7 @@
 	<resultMap id="resultMapAbonos" type="abonoDTO">
 		<result property="abonoId" column="cl_abono" />
 		<result property="saleNote.saleId" column="cl_venta" />	
+		<result property="saleNote.description" column="descripcion_venta" />	
 		<result property="tipoAbono.tipoAbonoId" column="cl_tipo_abono" />	
 		<result property="tipoAbono.descripcion" column="descripcion_abono" />	
 		<result property="cantidadAbono" column="cantidad_abono" />	
@@ -385,17 +386,19 @@
 		usuario.nombre AS nombre_usuario,
 		usuario.ap_paterno AS ap_paterno_usuario,
 		usuario.ap_materno AS ap_materno_usuario,
-		tipo.ds_descripcion AS descripcion_abono
+		tipo.ds_descripcion AS descripcion_abono,
+		venta.ds_descripcion AS descripcion_venta
 		FROM c_abono abono
 		INNER JOIN c_usuario usuario ON (abono.cl_usuario = usuario.cl_usuario)
 		INNER JOIN c_tipo_abono tipo ON (abono.cl_tipo_abono = tipo.cl_tipo_abono)
+		INNER JOIN c_venta venta ON (abono.cl_venta = venta.cl_venta)
 		WHERE abono.fg_estatus = '1'
 		<if	test="fechaInicial != null and fechaFinal != null and fechaInicial != '' and fechaFinal != '' ">
 			<![CDATA[ 
-				AND abono.fecha_registro >= CONCAT(#{fechaInicial},' 000000') AND v.fecha_registro <= CONCAT(#{fechaFinal},' 235959')
+				AND abono.fecha_registro >= CONCAT(#{fechaInicial},' 000000') AND abono.fecha_registro <= CONCAT(#{fechaFinal},' 235959')
 			]]>
 		</if>	
-		<if test="tipoAbonoId != null and tipoAbonoId != '' ">
+		<if test="tipoAbonoId != null and tipoAbonoId != 0 ">
 			AND abono.cl_tipo_abono = #{tipoAbonoId}
 		</if>		
 	</select>

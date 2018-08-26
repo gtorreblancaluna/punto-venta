@@ -35,7 +35,7 @@ public class ReporteAbonosController {
 		public String principal( HttpServletRequest request,HttpServletResponse response, Model model) {		
 							
 			this.getModelAttributtes(model);
-			return "reporteAbonos";
+			return "abonos";
 		}
 		
 		@PostMapping(value = "reporteAbonos.do", params = "filter")
@@ -47,7 +47,7 @@ public class ReporteAbonosController {
 			model.addAttribute("abonos", abonos);
 			model.addAttribute("messageSucess","Total de registros encontrados: "+abonos.size());
 			this.getModelAttributtes(model);
-			return "reporteAbonos";
+			return "abonos";
 		}
 		
 		// obtener lo necesario para enviar al JSP
