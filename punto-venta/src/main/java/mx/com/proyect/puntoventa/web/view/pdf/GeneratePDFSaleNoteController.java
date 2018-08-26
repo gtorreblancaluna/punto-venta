@@ -33,6 +33,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import mx.com.proyect.puntoventa.web.model.AbonoDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.service.SaleNoteService;
@@ -256,21 +258,51 @@ public class GeneratePDFSaleNoteController {
 		 	        
 		        	
 		        }
+		        // calcluar los abonos
+		        float abonos = 0f;
+		        for(AbonoDTO abono : saleNote.getAbonos()) {
+		        	abonos += abono.getCantidadAbono();
+		        }
 		        
+		     		        
 		        // total a pagar
-		        cellDetails = new PdfPCell(new Phrase("Total a pagar: ",new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
+//		        cellDetails = new PdfPCell(new Phrase("Total a pagar: ",new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
+//	 	        cellDetails.setFixedHeight(cellHeightDetails);
+//	// 	        cellDetails.setBorder(Rectangle.TOP);
+//	 	        cellDetails.setColspan(1);
+//	 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
+//	 	        tableDetails.addCell(cellDetails);
+	 	        
+	 	        cellDetails = new PdfPCell(new Phrase("Total a pagar: "+NumberFormat.getCurrencyInstance(new Locale("es", "MX")).format(total),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
+		        cellDetails.setFixedHeight(cellHeightDetails);
+	//	        cellDetails.setBorder(Rectangle.TOP);
+		        cellDetails.setColspan(2);	        
+		        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
+		        tableDetails.addCell(cellDetails);
+		        
+		     // Abonos
+//		        cellDetails = new PdfPCell(new Phrase("Total de pagos: ",new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
+//	 	        cellDetails.setFixedHeight(cellHeightDetails);
+//	// 	        cellDetails.setBorder(Rectangle.TOP);
+//	 	        cellDetails.setColspan(1);
+//	 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
+//	 	        tableDetails.addCell(cellDetails);
+	 	        
+	 	        // Abonos
+		        cellDetails = new PdfPCell(new Phrase("Pagos: "+NumberFormat.getCurrencyInstance(new Locale("es", "MX")).format(abonos),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
 	 	        cellDetails.setFixedHeight(cellHeightDetails);
 	// 	        cellDetails.setBorder(Rectangle.TOP);
-	 	        cellDetails.setColspan(4);
+	 	        cellDetails.setColspan(2);
 	 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 	 	        tableDetails.addCell(cellDetails);
 	 	        
-	 	        cellDetails = new PdfPCell(new Phrase(NumberFormat.getCurrencyInstance(new Locale("es", "MX")).format(total),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
-		        cellDetails.setFixedHeight(cellHeightDetails);
-	//	        cellDetails.setBorder(Rectangle.TOP);
-		        cellDetails.setColspan(1);	        
-		        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
-		        tableDetails.addCell(cellDetails);
+	 	        // Resta
+		        cellDetails = new PdfPCell(new Phrase("Resta: "+NumberFormat.getCurrencyInstance(new Locale("es", "MX")).format(total-abonos),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
+	 	        cellDetails.setFixedHeight(cellHeightDetails);
+	// 	        cellDetails.setBorder(Rectangle.TOP);
+	 	        cellDetails.setColspan(1);
+	 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
+	 	        tableDetails.addCell(cellDetails);
 		        
 		        document.add(tableDetails);
 		        
