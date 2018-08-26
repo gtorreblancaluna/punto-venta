@@ -289,7 +289,7 @@ ENGINE = InnoDB;
 
 -- Inicia la inserccion de registros solo para pruebas
 
--- primero insertamos la info para catalogos
+-- inicia inserccion de catalogos
 INSERT INTO c_tipo_abono (ds_descripcion) VALUES ('Efectivo');
 INSERT INTO c_tipo_abono (ds_descripcion) VALUES ('Cheque');
 INSERT INTO c_tipo_abono (ds_descripcion) VALUES ('Transferencia');
@@ -307,6 +307,8 @@ INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Cancelado');
 INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Autorizado');
 INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Archivado');
 INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Entregado');
+
+-- finaliza catalogos
 
 INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_1');
 INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_2');

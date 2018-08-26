@@ -402,6 +402,11 @@ function addSaleNoteForm(data){
 	$form.find('.storeId').val(data.storeId);
 	$form.find('#descriptionFormUpdate').val(data.description);
 	document.getElementById("dateFormUpdate").valueAsDate = new Date(data.dateDelivery)	
+	var abonos = 0;
+	$.each(data.abonos, function(index, value) {
+		abonos += value.cantidadAbono;
+	});	// end for each
+	$form.find('#totalAbonosUpdate').html(new Intl.NumberFormat('es-MX').format(abonos));
 }
 
 function totalUpdateForm(){

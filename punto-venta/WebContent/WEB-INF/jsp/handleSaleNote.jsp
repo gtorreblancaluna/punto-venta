@@ -95,9 +95,9 @@ $( document ).ready(function() {
 	function addRowUpdate(){			
 		$(".tableUpdateNote tbody").append("<tr>"			
 				+"<td style='width:2%'><span class='input-group-text tr-count"+(u_cont+1)+"'>"+ (u_cont+1) +"</span></td>"
-			+"<td><input type='number' class='form-control' name='' id='txtFindItemById'></td>"
+			+"<td><input type='number' class='form-control' name='' id='txtFindItemById' disabled></td>"
 			+"<td>" +
-					"<select name='items["+u_cont+"].itemIdForm' class='form-control selItems'>" +
+					"<select name='items["+u_cont+"].itemIdForm' class='form-control selItems' disabled>" +
 					"<option value='0' data-value='0'>- Seleccione -</option> " +
 					"<c:forEach items='${listItems}' var='item'>" +
 						"<option value='${item.itemId}' data-value='${item.itemId}|${item.description}|${item.salePrice}' >${item.description}</option> " +
@@ -105,7 +105,7 @@ $( document ).ready(function() {
 					"</select>" +
 			"</td>"
 			+"<td>" +
-					"<select name='items["+u_cont+"].color.colorId' class='form-control selColors'>" +
+					"<select name='items["+u_cont+"].color.colorId' class='form-control selColors' disabled>" +
 					"<option value='0'>- Seleccione -</option> " +
 					"<c:forEach items='${listColors}' var='color'>" +
 						"<option value='${color.colorId}'>${color.description}</option> " +
@@ -113,10 +113,10 @@ $( document ).ready(function() {
 					"</select>" +
 			"</td>"
 			+"<td><input type='text' class='form-control' name='items["+ u_cont +"].description' id='itemDescription' disabled></td>"
-			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].amountEntry' id='amountItem' ></td>"
-			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].salePrice' id='itemPrice'></td>"
+			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].amountEntry' id='amountItem' disabled></td>"
+			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].salePrice' id='itemPrice' disabled></td>"
 			+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
-			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
+			+"<td><button type='button' class='btnDelete' disabled>Eliminar</button></td>"
 		+"</tr>");
 		
 		if(g_colors != ""){
@@ -149,13 +149,12 @@ function addSaleDetailNoteForm(items){
 //	$('.tableUpdateNote').remove();
 	var $tableUpdateNote = $('.tableUpdateNote');
 	
-	$.each(items, function(index, value) {	 
-		
+	$.each(items, function(index, value) {		
 		$(".tableUpdateNote tbody").append("<tr>"			
 			+"<td style='width:2%'><span class='input-group-text tr-count"+(u_cont+1)+"'>"+ (u_cont+1) +"</span></td>"
-			+"<td><input type='number' class='form-control' name='' id='txtFindItemById'></td>"
+			+"<td><input type='number' class='form-control' name='' id='txtFindItemById' disabled></td>"
 			+"<td>" +
-					"<select name='items["+u_cont+"].itemIdForm' class='form-control selItems'>" +
+					"<select name='items["+u_cont+"].itemIdForm' class='form-control selItems' disabled>" +
 					"<option value='0' data-value='0'>- Seleccione -</option> " +
 					"<c:forEach items='${listItems}' var='item'>" +
 						"<option value='${item.itemId}' data-value='${item.itemId}|${item.description}|${item.salePrice}' >${item.description}</option> " +
@@ -163,7 +162,7 @@ function addSaleDetailNoteForm(items){
 					"</select>" +
 			"</td>"
 			+"<td>" +
-					"<select name='items["+u_cont+"].color.colorId' class='form-control selColors'>" +
+					"<select name='items["+u_cont+"].color.colorId' class='form-control selColors' disabled>" +
 					"<option value='0'>- Seleccione -</option> " +
 					"<c:forEach items='${listColors}' var='color'>" +
 						"<option value='${color.colorId}'>${color.description}</option> " +
@@ -171,10 +170,10 @@ function addSaleDetailNoteForm(items){
 					"</select>" +
 			"</td>"
 			+"<td><input type='text' class='form-control' name='items["+ u_cont +"].description' id='itemDescription' disabled></td>"
-			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].amountEntry' id='amountItem' ></td>"
-			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].salePrice' id='itemPrice' ></td>"
+			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].amountEntry' id='amountItem' disabled ></td>"
+			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].salePrice' id='itemPrice' disabled></td>"
 			+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
-			+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
+			+"<td><button type='button' class='btnDelete' disabled>Eliminar</button></td>"
 		+"</tr>");
 		
 		if(g_colors != ""){
@@ -552,7 +551,7 @@ function addSaleDetailNoteForm(items){
 			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					
 			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" ></td>
 			        <td><input type="number" class="form-control totalItem" name="" id="totalItem" disabled></td>
-			        <td><input type="button" class="btn btn-dark" id="addRow-add" value="Agregar" /></td>			        
+			        <td><input type="button" class="btn btn-dark" id="addRow-add" value="Agregar" disabled/></td>			        
 			      </tr>			
 			      	      	      
 			    </tbody>			    
@@ -625,7 +624,7 @@ function addSaleDetailNoteForm(items){
  <div class="modal-content" >
       <div class="modal-header">
         <button type="button" class="close closeUpdateForm" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Actualizar nota</h4>
+        <h4 class="modal-title">Nota</h4>
       </div>
       <div class="modal-body">     
 <form:form modelAttribute="saleNoteForm" action="handleSaleNote.do" method="post" name="updateSaleNoteForm" id="updateSaleNoteForm">
@@ -634,20 +633,22 @@ function addSaleDetailNoteForm(items){
 			<div class="form-group row">			
 				<div class="col-xs-8">
 					<label >Descripci&oacute;n:</label>
-					<input type="text" name="description" id="descriptionFormUpdate" class="form-control">
+					<input type="text" name="description" id="descriptionFormUpdate" class="form-control" disabled>
 				</div>
-				<div class="col-xs-">
+				<div class="col-xs-4">
 					<label>Total a pagar: $<span id="totalPagarUpdate"></span></label>
+					<label>Abonos: $<span id="totalAbonosUpdate"></span></label>
+					<label>Resta: $<span id="restaUpdate"></span></label>
 				</div>
 			</div>
 			<div class="form-group row">
 			<div class="col-xs-3">
 				<label>Fecha:</label>
-				<input type="date" name="dateSaleNote" id="dateFormUpdate" class="form-control">
+				<input type="date" name="dateSaleNote" id="dateFormUpdate" class="form-control" disabled>
 			</div>
 			<div class="col-xs-3">
 				<label>Cliente:</label>
-				<select name="userId" class="form-control userId" >
+				<select name="userId" class="form-control userId" disabled>
 						<option value="0">- Seleccione -</option>
 					<c:forEach items="${listClients}" var="client">
 						<option value="${client.userId}">${client.name} ${client.firstName}</option>
@@ -656,7 +657,7 @@ function addSaleDetailNoteForm(items){
 			</div>	
 			<div class="col-xs-3">
 				<label>Vendedor:</label>
-				<select name="sellerId" class="form-control sellerId" >
+				<select name="sellerId" class="form-control sellerId" disabled>
 						<option value="0">- Seleccione -</option>
 					<c:forEach items="${listUsers}" var="user">
 						<!-- Solo mostrar usuarios que sean vendedores -->
@@ -668,7 +669,7 @@ function addSaleDetailNoteForm(items){
 			</div>
 			<div class="col-xs-3">
 				<label>Sucursal:</label>
-				<select name="storeId" class="form-control storeId" id="storeId">
+				<select name="storeId" class="form-control storeId" id="storeId" disabled>
 						<option value="0">- Seleccione -</option>
 					<c:forEach items="${listOffices}" var="office">
 						<option value="${office.officeId}">${office.name}</option>
@@ -702,7 +703,7 @@ function addSaleDetailNoteForm(items){
 			  </table>
 			   <div class="form-group row">
 				  	<div class="col-xs-12">	
-				  		<input type="submit" class="btn btn-dark" name="update" value="Enviar" style="width:100%;"/>
+				  		<input type="submit" class="btn btn-dark" name="update" value="Enviar" style="width:100%;" disabled/>
 					</div>
 				</div>
 	  	</div> <!-- end row -->

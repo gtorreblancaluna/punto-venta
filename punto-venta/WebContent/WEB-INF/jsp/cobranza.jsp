@@ -220,6 +220,7 @@ function eliminarAbono(abonoId){
 				<th>Total a pagar</th>
 				<th>Abonos</th>
 				<th>Resta</th>
+				<th>Estado</th>
 				<th>Fecha registro</th>
 				<th>Fecha vencimiento</th>
 				<th></th>
@@ -228,12 +229,13 @@ function eliminarAbono(abonoId){
 		<tbody>
 			<c:forEach items="${ventas}" var="venta">		
 		 		<tr>
-		 			<td><a href="#" onclick="getSaleNoteById('${venta.saleId}')">${venta.saleId}</a></td>
+		 			<td><a href="javascript:void(0);" onclick="getSaleNoteById('${venta.saleId}')">${venta.saleId}</a></td>
 		 			<td>${venta.nameCustomer}</td>
 		 			<td>${venta.description}</td>
 					<td><fmt:formatNumber value="${venta.totalAmount}" type="currency" currencySymbol=""/></td>
 					<td><fmt:formatNumber value="${venta.totalAbonos}" type="currency" currencySymbol=""/></td>
 					<td><fmt:formatNumber value="${venta.resta}" type="currency" currencySymbol=""/></td>
+					<td><c:out value="${venta.resta eq '0' ? 'Pagado' : 'Pendiente' }"></c:out></td>
 					<td>${venta.saleDate}</td>
 					<td>${venta.fechaVencimientoCredito}</td>
 		 			<td><button type="button" class="btn btn-dark btnAbonar" id="btnAbonar" data-toggle="modal" data-value="${venta.saleId}">Abonar</button></td>
