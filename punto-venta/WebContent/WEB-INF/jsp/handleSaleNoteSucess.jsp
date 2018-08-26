@@ -17,6 +17,20 @@
 <script type="text/javascript" src="js/admin/handleSaleNote.js?v1.1"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	
 <title>Punto Venta:: Notas</title>
+<script type="text/javascript">
+$( document ).ready(function() {
+	
+	if('${printSaleId}' != ''){	
+		var idSaleToPrint = parseFloat('${printSaleId}');
+		generatePdf(idSaleToPrint);
+	}
+}); // end document ready
+
+function generatePdf(id){
+	window.open("generate_pdf_sale_note.do?idOp="+id+"", "Nota venta", "width=500,height=300");
+};
+
+</script>
 
 </head>
 <body>

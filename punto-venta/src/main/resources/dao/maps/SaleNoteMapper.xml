@@ -162,7 +162,7 @@
 		<where>
 			<if	test="iniDateFilter != null and endDateFilter != null and iniDateFilter != '' and endDateFilter != '' ">
 				<![CDATA[ 
-					AND v.fe_entrega >= CONCAT(#{iniDateFilter},' 000000') AND v.fe_entrega <= CONCAT(#{endDateFilter},' 235959')
+					AND v.fe_registro >= CONCAT(#{iniDateFilter},' 000000') AND v.fe_registro <= CONCAT(#{endDateFilter},' 235959')
 				]]>
 				<!-- AND (v.fe_entrega BETWEEN STR_TO_DATE(#{iniDateFilter},'%Y/%m/%d') 
 					AND STR_TO_DATE(CONCAT(#{endDateFilter}, ' 235959'),'%Y/%m/%d %H%i%s') ) -->

@@ -111,7 +111,7 @@
 				<tr>
 					<td>Id</td>
 					<td>Fecha alta</td>
-<!-- 					<td>almacen</td> -->
+					<td>almacen</td>
 					<td>Sucursal</td>
 					<td>Descripci&oacute;n</td>	
 					<td>Color</td>				
@@ -126,9 +126,9 @@
 			 		<tr>
 			 			<td>${item.itemId}</td>
 			 			<td>${item.date}</td>
-			 			<td>${item.officeDTO.name}</td>
-<%-- 			 			<td>${item.storeDTO.description}</td>		 			 --%>
-			 			<td>${item.description}</td>	
+			 			<td>${item.storeDTO.description}</td>
+			 			<td>${item.officeDTO.name}</td>			 					 			
+			 			<td>${item.description}</td>
 			 			<td>${item.color.description}</td>		 			
 			 			<td>${item.unitMeasurement}</td>
 <%-- 			 			<td>${item.amountEntry}</td> --%>
@@ -160,15 +160,15 @@
       <div class="modal-body">     
 		<form:form modelAttribute="ItemDTO" action="handleInventory.do" method="post" name="addForm" id="addForm">				
 				
-<!-- 				<div class="form-group"> -->
-<!-- 					<label>Almacen: </label> -->
-<!-- 					<select name="storeDTO.storeId" id="selStoreFilter"> -->
-<!-- 					<option value="0">- Seleccione -</option> -->
-<%-- 						<c:forEach items="${listStore}" var="store"> --%>
-<%-- 							<option value="${store.storeId}">${store.description}</option> --%>
-<%-- 						</c:forEach>	 --%>
-<!-- 					</select> -->
-<!-- 				</div> -->
+				<div class="form-group">
+					<label>Almacen: </label>
+					<select name="storeDTO.storeId" id="selStoreFilter" class="form-control">
+					<option value="0">- Seleccione -</option>
+						<c:forEach items="${listStore}" var="store">
+							<option value="${store.storeId}">${store.description}</option>
+						</c:forEach>	
+					</select>
+				</div>
 				
 				<div class="form-group">
 					<label>Sucursal: </label>
@@ -239,15 +239,15 @@
 				
 				<input type="hidden" name="itemId" id="itemId">
 					
-<!-- 				<div class="form-group"> -->
-<!-- 					<label>Almacen: </label> -->
-<!-- 					<select name="storeDTO.storeId" id="selStoreId" class="selStoreId form-group"> -->
-<!-- 					<option value="0">- Seleccione -</option> -->
-<%-- 						<c:forEach items="${listStore}" var="store"> --%>
-<%-- 							<option value="${store.storeId}">${store.description}</option> --%>
-<%-- 						</c:forEach>	 --%>
-<!-- 					</select> -->
-<!-- 				</div> -->
+				<div class="form-group">
+					<label>Almacen: </label>
+					<select name="storeDTO.storeId" id="selStoreId" class="selStoreId form-control">
+					<option value="0">- Seleccione -</option>
+						<c:forEach items="${listStore}" var="store">
+							<option value="${store.storeId}">${store.description}</option>
+						</c:forEach>	
+					</select>
+				</div>
 
 
 				<div class="form-group">
@@ -383,23 +383,25 @@ $( document ).ready(function() {
 		        values = values + 'td' + (i + 1) + ':' + item.innerHTML + '<br/>';
 		        if(i===0)
 		        	$updateForm.find('#itemId').val(item.innerHTML);
-		       if(i===2)
+		        if(i===2)
+		        	$updateForm.find('#selStoreId').val(getValueSelect(item.innerHTML));
+		       if(i===3)
 		        	$updateForm.find('#selOffice').val(getValueOffice(item.innerHTML));
-		        if(i===3)
-		        	$updateForm.find('#description').val(item.innerHTML);
 		        if(i===4)
-		        	$updateForm.find('.selColorId').val(getColorSelect(item.innerHTML));
+		        	$updateForm.find('#description').val(item.innerHTML);
 		        if(i===5)
+		        	$updateForm.find('.selColorId').val(getColorSelect(item.innerHTML));
+		        if(i===6)
 		        	$updateForm.find('#unitMeasurement').val(item.innerHTML);
 		        
 // 		        if(i===6)
 // 		        	$updateForm.find('#amountEntry').val(item.innerHTML);
 // 		        if(i===7)
 // 		        	$updateForm.find('#amountOutput').val(item.innerHTML);
-		        if(i===6)
+		        if(i===7)
 		        	$updateForm.find('#salePrice').val(item.innerHTML);
 		        
-		        if(i===7)
+		        if(i===8)
 		        	$updateForm.find('#stock').val(item.innerHTML);
 		       
 		        

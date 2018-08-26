@@ -62,6 +62,7 @@ $( document ).ready(function() {
 	      $('#totalPagar').html(new Intl.NumberFormat('es-MX').format(total));
 		  $('#total').html(new Intl.NumberFormat('es-MX').format(total-abono));
       }
+		  return total;
 	}
 		
 	// 2018.05.22 GTL Funcion para colocar los demas valores en los inputs del articulo
@@ -158,11 +159,16 @@ $( document ).ready(function() {
 		    var valid=true,fgDate=false;
 		    var count=0;
 		    var msgCliente = "";
-			
+		    var totalPagar = total();
 		    var x =  $('#dateForm').val().split('-');
 			var date = new Date ( x[0],(x[1] - 1),x[2] ,0,0,0) ;
+			
+			
 			var customerId = $form.find('#customerId').val();
 			var sellerId = $form.find('.sellerId').val();
+			var fechaVencimiento = $form.find('#fechaVencimientoCredito').val();
+			var z = $form.find('#fechaVencimientoCredito').val().split('-');
+			var dateFechaVencimiento = new Date ( z[0],(z[1] - 1),z[2] ,0,0,0);
 //			var storeId = $('#storeId').val();
 			var d = new Date();
 			var today = d.getFullYear()+'/'+ (d.getMonth<10 ? '0' : '') + d.getMonth + '/' 
@@ -193,6 +199,27 @@ $( document ).ready(function() {
 			// validando el abono, lo debe de incluir no importa si es a credito
 			var cantidadAbono = $form.find('#cantidadAbono').val();
 			var tipoAbono = $form.find('.tipoAbono').val();
+			var credit = $form.find('#credit').val();
+			
+			if(credit == '')
+				msgError += ++count + ". Elige si es a cr\u00E9dito\n";
+			if(cantidadAbono > totalPagar)
+				msgError += ++count + ". Error. La cantidad de pago no puede ser mayor al total a pagar\n";
+			
+			if(credit == '0'){				
+				// eligio nota sin credito, vamos a validar que la cantidad de abono sea igual a el total
+				if(cantidadAbono < totalPagar)
+					msgError += ++count + ". La cantidad de pago debe ser igual al total a pagar\n";
+				
+			}
+			
+			if(credit == '1'){
+				// eligio nota a credito
+				if(fechaVencimiento == '')
+					msgError += ++count + ". Debes indicar la fecha de vencimiento para la nota a cr\u00E9dito\n";
+				if(dateFechaVencimiento <= d)
+					msgError += ++count + ". Fecha de vencimiento debe ser mayor a hoy\n";
+			}
 			
 			if(cantidadAbono != ''){
 				if(cantidadAbono < 0 || cantidadAbono >= 1000000)
@@ -202,8 +229,7 @@ $( document ).ready(function() {
 			}else{
 				msgError += ++count + ". Introduce una cantidad para el abono. (Acepta cero)\n";
 			}
-			
-						
+					
 			if($('#dateForm').val() === '' || sellerId === '0' )				
 				msgError += ++count + ". Faltan valores para agregar a la venta\n";					
 				
@@ -468,9 +494,7 @@ function validateFormUpdateNote(){
 //    voucher.focus();
 //};
 
-function generatePdf(id){
-	window.open("generate_pdf_sale_note.do?idOp="+id+"", "Nota venta", "width=500,height=300");
-};
+
 
 //2018.06.26 GTL agregar un color via AJAX
 function addColor(){

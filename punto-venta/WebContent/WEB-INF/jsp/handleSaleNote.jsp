@@ -31,10 +31,7 @@ $( document ).ready(function() {
 	
 	
 // 	alert('${accountSession}')
-	if('${printSaleId}' != ''){	
-		var idSaleToPrint = parseFloat('${printSaleId}');
-		generatePdf(idSaleToPrint);
-	}
+	
 
 	$( "#addRow-add" ).click(function() {
 		addRow();
@@ -446,7 +443,7 @@ function addSaleDetailNoteForm(items){
 			<div class="form-group row">
 			
 				<div class="col-xs-2">
-					<label >Fecha :</label>
+					<label >Fecha entrega:</label>
 					<input type="date" name="dateSaleNote" id="dateForm" class="form-control dateForm">
 				</div>
 				
@@ -565,11 +562,11 @@ function addSaleDetailNoteForm(items){
 	  	<div id="tabAbono" class="tab-pane fade in ">
 	  		<div class="form-group row">
 	  			<div class="col-xs-3">				
-					<label>Abono:</label>
+					<label>Pago:</label>
 					<input type="number" name="abono.cantidadAbono" id="cantidadAbono" class="form-control" min="1" max="1000000">
 				</div>
 				<div class="col-xs-3">	
-					<label>Tipo de abono:</label>			
+					<label>Tipo de pago:</label>			
 					<select name="abono.tipoAbono.tipoAbonoId" class="form-control tipoAbono">
 								<option value="0">- Seleccione -</option>
 							<c:forEach items="${tipoAbonos}" var="tipo">								
@@ -637,7 +634,7 @@ function addSaleDetailNoteForm(items){
 				</div>
 				<div class="col-xs-4">
 					<label>Total a pagar: $<span id="totalPagarUpdate"></span></label>
-					<label>Abonos: $<span id="totalAbonosUpdate"></span></label>
+					<label>Pago: $<span id="totalAbonosUpdate"></span></label>
 					<label>Resta: $<span id="restaUpdate"></span></label>
 				</div>
 			</div>

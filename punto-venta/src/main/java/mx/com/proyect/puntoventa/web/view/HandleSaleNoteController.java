@@ -30,7 +30,6 @@ import mx.com.proyect.puntoventa.web.service.SaleNoteService;
  * Controlador para las notas de venta
  * 
  * */
-
 @Controller
 public class HandleSaleNoteController {
 
@@ -90,9 +89,9 @@ public class HandleSaleNoteController {
 			// cargar datos al JSP
 			this.getModelAttributtes(model);	
 			// solo traer los articulos registrados en la sucursal que se logueo el usuario
-			model.addAttribute("listItems", inventoryService.getAll(userSession.getAccount().getOffice().getOfficeId()));
-						
+			model.addAttribute("listItems", inventoryService.getAll(userSession.getAccount().getOffice().getOfficeId()));						
 			model.addAttribute("messageSucess","Se agrego con exito la nota, total de articulos: "+saleNoteForm.getItems().size());
+			model.addAttribute("saleNoteForm", new SaleNoteForm());
 			return "handleSaleNoteSucess";
 		
 		}else {			
