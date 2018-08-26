@@ -32,7 +32,17 @@ public class SaleNoteDTO implements Serializable {
 	private SaleStatusDTO status;
 	// detalle de la venta	
 	private List<SaleDetailDTO> saleDetails;
+	// lista de abonos
+	private List<AbonoDTO> abonos;	
 	
+	public List<AbonoDTO> getAbonos() {
+		return abonos;
+	}
+
+	public void setAbonos(List<AbonoDTO> abonos) {
+		this.abonos = abonos;
+	}
+
 	public String getSaleId() {
 		return saleId;
 	}

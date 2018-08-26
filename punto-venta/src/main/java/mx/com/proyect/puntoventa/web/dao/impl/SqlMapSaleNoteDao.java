@@ -107,6 +107,7 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 	public SaleNoteDTO getSaleById(Integer id) {
 		SaleNoteDTO saleNote = getSqlSession().selectOne("getSaleById",id);
 		saleNote.setSaleDetails(getSqlSession().selectList("getDetailSaleNoteById",id));
+		saleNote.setAbonos(getSqlSession().selectList("obtenerAbonosPorVenta",id));
 		return saleNote;
 	}
 
