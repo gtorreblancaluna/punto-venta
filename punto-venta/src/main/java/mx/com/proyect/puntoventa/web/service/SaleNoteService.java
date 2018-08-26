@@ -3,6 +3,7 @@ package mx.com.proyect.puntoventa.web.service;
 import java.util.List;
 import java.util.Map;
 
+import mx.com.proyect.puntoventa.web.forms.FiltroAbonos;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.AbonoDTO;
@@ -33,4 +34,5 @@ public interface SaleNoteService {
 	public List<TipoAbonoDTO> obtenerTiposAbono();
 	public void agregarAbono(AbonoDTO abono);
 	public void eliminarAbono(int abonoId);
+	public List<AbonoDTO> obtenerAbonosPorFiltro(FiltroAbonos filtroAbonos);
 }

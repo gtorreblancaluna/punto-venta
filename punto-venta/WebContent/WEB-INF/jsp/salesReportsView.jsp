@@ -91,6 +91,17 @@ $( document ).ready(function() {
 							</select>
 						</span>
 					</td>
+					<td>
+						<div class="col-xs-3">	
+							<label>Tipo de pago:</label>			
+							<select name="tipoAbonoId" class="form-control tipoAbono">
+										<option value="0">- Seleccione -</option>
+									<c:forEach items="${tipoAbonos}" var="tipo">								
+										<option value="${tipo.tipoAbonoId}">${tipo.descripcion}</option>																
+									</c:forEach>	
+							</select>	
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<td colspan=5>

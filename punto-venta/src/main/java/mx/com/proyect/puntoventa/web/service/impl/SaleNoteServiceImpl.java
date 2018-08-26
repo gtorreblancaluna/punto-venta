@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import mx.com.proyect.puntoventa.web.dao.ClientDAO;
 import mx.com.proyect.puntoventa.web.dao.InventoryDAO;
 import mx.com.proyect.puntoventa.web.dao.SaleNoteDAO;
+import mx.com.proyect.puntoventa.web.forms.FiltroAbonos;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.AbonoDTO;
@@ -201,6 +202,12 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	public void eliminarAbono(int abonoId) {
 		saleNoteDao.eliminarAbono(abonoId);
 		
+	}
+
+	@Override
+	public List<AbonoDTO> obtenerAbonosPorFiltro(FiltroAbonos filtroAbonos) {
+		// TODO Auto-generated method stub
+		return saleNoteDao.obtenerAbonosPorFiltro(filtroAbonos);
 	}
 	
 

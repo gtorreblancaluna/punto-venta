@@ -379,5 +379,25 @@
 	<update id="eliminarAbono" parameterType="java.lang.Integer">
 		UPDATE c_abono SET fg_estatus = '0' WHERE cl_abono = #{abonoId}
 	</update>
+	
+	<select id="obtenerAbonosPorFiltro" parameterType="filtroAbonos" resultMap="resultMapAbonos">		
+		SELECT abono.*,
+		usuario.nombre AS nombre_usuario,
+		usuario.ap_paterno AS ap_paterno_usuario,
+		usuario.ap_materno AS ap_materno_usuario,
+		tipo.ds_descripcion AS descripcion_abono
+		FROM c_abono abono
+		INNER JOIN c_usuario usuario ON (abono.cl_usuario = usuario.cl_usuario)
+		INNER JOIN c_tipo_abono tipo ON (abono.cl_tipo_abono = tipo.cl_tipo_abono)
+		WHERE abono.fg_estatus = '1'
+		<if	test="fechaInicial != null and fechaFinal != null and fechaInicial != '' and fechaFinal != '' ">
+			<![CDATA[ 
+				AND abono.fecha_registro >= CONCAT(#{fechaInicial},' 000000') AND v.fecha_registro <= CONCAT(#{fechaFinal},' 235959')
+			]]>
+		</if>	
+		<if test="tipoAbonoId != null and tipoAbonoId != '' ">
+			AND abono.cl_tipo_abono = #{tipoAbonoId}
+		</if>		
+	</select>
 
 </mapper>

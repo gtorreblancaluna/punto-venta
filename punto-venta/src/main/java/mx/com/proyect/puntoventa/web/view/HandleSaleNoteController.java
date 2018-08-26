@@ -206,7 +206,7 @@ public class HandleSaleNoteController {
 			model.addAttribute("listColors", colorService.getAll());		
 			model.addAttribute("listUsers", accountService.getAllUser());
 			model.addAttribute("listStatus", saleNoteService.getSalesStatus());	
-			model.addAttribute("tipoAbonos", saleNoteService.obtenerTiposAbono());	
+			model.addAttribute("tipoAbonos", saleNoteService.obtenerTiposAbono());			
 		return model;
 	}
 

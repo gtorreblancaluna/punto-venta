@@ -12,6 +12,7 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import mx.com.proyect.puntoventa.web.dao.SaleNoteDAO;
+import mx.com.proyect.puntoventa.web.forms.FiltroAbonos;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.AbonoDTO;
@@ -190,6 +191,12 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 	public void eliminarAbono(int abonoId) {
 		getSqlSession().update("eliminarAbono",abonoId);
 		
+	}
+
+	@Override
+	public List<AbonoDTO> obtenerAbonosPorFiltro(FiltroAbonos filtroAbonos) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("obtenerAbonosPorFiltro",filtroAbonos);
 	}
 
 }

@@ -11,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import mx.com.proyect.puntoventa.web.forms.FiltroAbonos;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
+import mx.com.proyect.puntoventa.web.model.AbonoDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 import mx.com.proyect.puntoventa.web.service.OfficeService;
 import mx.com.proyect.puntoventa.web.service.SaleNoteService;
@@ -22,38 +25,33 @@ import mx.com.proyect.puntoventa.web.service.SaleNoteService;
  * 
  * */
 @Controller
-public class SalesReportsController {
+public class ReporteAbonosController {
 	
 	@Autowired
 	private SaleNoteService saleNoteService;
-	@Autowired
-	private OfficeService officeService;
-	
+		
 		// vista principal
-		@GetMapping(value = "salesReports.do")
-		public String getIniMapping( HttpServletRequest request,HttpServletResponse response, Model model) {		
+		@GetMapping(value = "reporteAbonos.do")
+		public String principal( HttpServletRequest request,HttpServletResponse response, Model model) {		
 							
 			this.getModelAttributtes(model);
-			return "salesReportsView";
+			return "reporteAbonos";
 		}
 		
-		@PostMapping(value = "salesReports.do", params = "filter")
+		@PostMapping(value = "reporteAbonos.do", params = "filter")
 		public String getSaleNoteByFilter(HttpServletRequest request, 
-				@ModelAttribute ("saleNoteFilter") SaleNoteFilter saleNoteFilter, Model model) {
+				@ModelAttribute ("filtroAbonos") FiltroAbonos filtroAbonos, Model model) {
 			
-			List<ResultQuerySaleNote> listSaleNoteByFilter = saleNoteService.getByFilter(saleNoteFilter);			
+			List<AbonoDTO> abonos = saleNoteService.obtenerAbonosPorFiltro(filtroAbonos);			
 			//obtenemos el resultado y enviamos al JSP
-			model.addAttribute("listSaleNoteByFilter", listSaleNoteByFilter);
-			model.addAttribute("messageSucess","Total de registros encontrados: "+listSaleNoteByFilter.size());
+			model.addAttribute("abonos", abonos);
+			model.addAttribute("messageSucess","Total de registros encontrados: "+abonos.size());
 			this.getModelAttributtes(model);
-			return "salesReportsView";
+			return "reporteAbonos";
 		}
 		
 		// obtener lo necesario para enviar al JSP
 		public Model getModelAttributtes(Model model) {
-			model.addAttribute("listOffices", officeService.getAll());
-			model.addAttribute("listStatus", saleNoteService.getSalesStatus());
-			model.addAttribute("saleNoteFilter", new SaleNoteFilter());	
 			model.addAttribute("tipoAbonos", saleNoteService.obtenerTiposAbono());
 			return model;
 		}
