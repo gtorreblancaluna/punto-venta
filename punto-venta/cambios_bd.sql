@@ -67,7 +67,7 @@ CREATE TABLE c_cliente(
   estado VARCHAR(30),
   ciudad VARCHAR(45),
   direccion VARCHAR(255),
-  status ENUM('1','0'),  
+  status ENUM('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY(cl_cliente)  
    
 )
