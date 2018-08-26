@@ -7,6 +7,7 @@ package mx.com.proyect.puntoventa.web.view.pdf;
  **/
 
 import com.lowagie.text.Document;
+
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
 import com.lowagie.text.Font;
@@ -22,6 +23,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
@@ -109,13 +112,21 @@ public class GeneratePDFSaleNoteController {
 			    table.setLockedWidth(true);
 			    int cellHeight = 14;
 			    int cellHi=13;
-			    
+//			    registro de nota
+			    Date dateRegister = new Date(saleNote.getRegisterDate().getTime());
+//			    registro de entrega 
 			    Date dateDelivery = new Date(saleNote.getDeliveryDate().getTime()); 
 			    DateFormat formatoFecha;		    
-			    formatoFecha = DateFormat.getDateInstance(DateFormat.FULL);
+			    formatoFecha = DateFormat.getDateInstance(DateFormat.MEDIUM);
+			    LocalDate myDate2 = LocalDate.now();
+			    System.out.println(myDate2);
+//			    System.out.println(myDate.format(DateTimeFormatter.ISO_TIME));
+//			    TimeFormat formatotiempo;
 	
 			    document.add(new Phrase("  \n"));
-			    document.add(new Phrase("Toluca, Mex, a "+formatoFecha.format(dateDelivery), new Font(Font.HELVETICA,12, Font.NORMAL)));
+//			    primer version de vista 
+//			    document.add(new Phrase("Toluca, Mex, a "+formatoFecha.format(dateDelivery), new Font(Font.HELVETICA,12, Font.NORMAL)));
+			    document.add(new Phrase("Fecha de Nota : "+formatoFecha.format(dateRegister)+" Fecha de entrega :"+formatoFecha.format(dateDelivery), new Font(Font.HELVETICA,12, Font.NORMAL)));
 			   
 			    document.add(new Phrase("\n"+saleNote.getClient().getName()+ " "+ saleNote.getClient().getFirstName(),new Font(Font.HELVETICA,fontSizeNormal,Font.HELVETICA)));
 //			    cell = new PdfPCell(new Phrase("Se\u00F1or: "+saleNote.getClient().getName()+" "+saleNote.getClient().getFirstName(), new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
