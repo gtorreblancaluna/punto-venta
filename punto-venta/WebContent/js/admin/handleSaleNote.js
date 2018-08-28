@@ -163,7 +163,7 @@ $( document ).ready(function() {
 		    var x =  $('#dateForm').val().split('-');
 			var date = new Date ( x[0],(x[1] - 1),x[2] ,0,0,0) ;
 			
-			
+			var precioArticulo = $form.find('#itemPrice').val();
 			var customerId = $form.find('#customerId').val();
 			var sellerId = $form.find('.sellerId').val();
 			var fechaVencimiento = $form.find('#fechaVencimientoCredito').val();
@@ -200,6 +200,9 @@ $( document ).ready(function() {
 			var cantidadAbono = $form.find('#cantidadAbono').val();
 			var tipoAbono = $form.find('.tipoAbono').val();
 			var credit = $form.find('#credit').val();
+			
+			if(precioArticulo == '' || (precioArticulo < 0 || precioArticulo > 1000000))
+				msgError += ++count + ". Precio invalido\n";
 			
 			if(credit == '')
 				msgError += ++count + ". Elige si es a cr\u00E9dito\n";
