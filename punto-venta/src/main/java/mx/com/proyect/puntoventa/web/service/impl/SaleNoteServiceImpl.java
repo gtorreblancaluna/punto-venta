@@ -85,7 +85,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 			for(ItemDTO item : saleNoteForm.getItems()) {
 				//descontamos los articulos de la bd
 				ItemDTO itemDTO = inventoryDao.getItemById(item.getItemId());
-				float stock_anterior = itemDTO.getStock();
+				float stock_anterior = itemDTO.getStock() == null ? 0f : itemDTO.getStock();
 				float stock_actual = stock_anterior - item.getAmountEntry();
 				inventoryDao.updateStockByItemid(stock_actual,item.getItemId());
 			} 
