@@ -68,6 +68,8 @@
 		<result property="client.firstName" column="ap_paterno_cliente" />
 		<result property="client.secondName" column="ap_materno_cliente" />
 		<result property="client.adress" column="direccion_cliente" />
+		<result property="client.tel1" column="tel1_cliente" />
+		<result property="client.tel2" column="tel2_cliente" />
 		<result property="account.userId" column="cl_usuario" />
 		<result property="account.name" column="nombre_usuario" />
 		<result property="account.firstName" column="ap_paterno_usuario" />
@@ -231,6 +233,8 @@
 		c.ap_paterno AS ap_paterno_cliente,
 		c.ap_materno AS	ap_materno_cliente,
 		c.direccion AS direccion_cliente,
+		c.tel1 AS tel1_cliente,
+		c.tel2 AS tel2_cliente,
 		u.nombre AS nombre_usuario, 
 		u.ap_paterno AS	ap_paterno_usuario, 
 		u.ap_materno AS ap_materno_usuario,
