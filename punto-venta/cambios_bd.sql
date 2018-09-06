@@ -268,6 +268,7 @@ cl_abono INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
 cl_venta INTEGER UNSIGNED NOT NULL,
 cl_tipo_abono INTEGER UNSIGNED NOT NULL,
 cl_usuario INTEGER UNSIGNED NOT NULL,
+cl_cliente INTEGER UNSIGNED NOT NULL,
 fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 cantidad_abono DECIMAL(9,2),
 ds_descripcion VARCHAR(65) NULL,
@@ -279,6 +280,10 @@ CONSTRAINT fk_abono_cl_usuario FOREIGN KEY fk_abono_cl_usuario (cl_usuario)
     ON UPDATE CASCADE,
 CONSTRAINT fk_abono_cl_venta FOREIGN KEY fk_abono_cl_venta (cl_venta) 
 	REFERENCES c_venta(cl_venta)
+	ON DELETE CASCADE
+    ON UPDATE CASCADE,
+CONSTRAINT fk_abono_cl_cliente FOREIGN KEY fk_abono_cl_cliente (cl_cliente) 
+	REFERENCES c_cliente(cl_cliente)
 	ON DELETE CASCADE
     ON UPDATE CASCADE,
 CONSTRAINT fk_abono_cl_tipo_abono FOREIGN KEY fk_abono_cl_tipo_abono (cl_tipo_abono) 

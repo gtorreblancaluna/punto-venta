@@ -16,6 +16,7 @@ import mx.com.proyect.puntoventa.web.forms.FiltroAbonos;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.AbonoDTO;
+import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
@@ -41,6 +42,8 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 			getSqlSession().insert("addSaleNoteDetails",param);
 		}
 		Map<String,Object> map = new HashMap<>();
+		saleNoteForm.getAbono().setCliente(new AccountDTOclient());
+		saleNoteForm.getAbono().getCliente().setUserId(saleNoteForm.getCustomer().getUserId());
 		map.put("ventaId", saleNoteForm.getSaleId());
 		map.put("abono", saleNoteForm.getAbono());
 		getSqlSession().insert("insertarAbono",map);
@@ -200,7 +203,8 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 	@Override
 	public List<AbonoDTO> obtenerAbonosPorFiltro(FiltroAbonos filtroAbonos) {
 		// TODO Auto-generated method stub
-		return getSqlSession().selectList("obtenerAbonosPorFiltro",filtroAbonos);
+		List<AbonoDTO> abonos = getSqlSession().selectList("obtenerAbonosPorFiltro",filtroAbonos);
+		return abonos;
 	}
 
 }

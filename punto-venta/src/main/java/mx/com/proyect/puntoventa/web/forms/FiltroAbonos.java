@@ -9,6 +9,15 @@ public class FiltroAbonos {
 	private String fechaInicial;
 	private String fechaFinal;
 	private int tipoAbonoId;
+	private String nombreCliente;
+	
+	
+	public String getNombreCliente() {
+		return nombreCliente;
+	}
+	public void setNombreCliente(String nombreCliente) {
+		this.nombreCliente = nombreCliente;
+	}
 	public int getAbonoId() {
 		return abonoId;
 	}

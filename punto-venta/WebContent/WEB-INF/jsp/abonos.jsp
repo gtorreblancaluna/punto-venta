@@ -98,6 +98,9 @@ function generatePdf(url){
 			<tbody>
 				<tr>
 					<td>
+						<span class="input-group-text">Nombre cliente:<input type="text" name="nombreCliente" id="nombreCliente" class="form-control"> </span>
+					</td>									
+					<td>
 						<span class="input-group-text">Fecha inicial:<input type="date" name="fechaInicial" id="fechaInicial" class="form-control"> </span>
 					</td>
 					<td>
@@ -139,6 +142,7 @@ function generatePdf(url){
 				<th>Cantidad</th>
 				<th>Tipo de pago</th>
 				<th>Descripci&oacute;n pago</th>
+				<th>Nombre cliente</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -149,6 +153,7 @@ function generatePdf(url){
 		 			<td><fmt:formatNumber value="${abono.cantidadAbono}" type="currency" currencySymbol=""/></td>
 		 			<td>${abono.tipoAbono.descripcion}</td>
 		 			<td>${abono.descripcion}</td>
+		 			<td>${abono.cliente.name} ${abono.cliente.firstName}</td>
 		 		</tr>	 	
 	 		</c:forEach>
 	 	</tbody>

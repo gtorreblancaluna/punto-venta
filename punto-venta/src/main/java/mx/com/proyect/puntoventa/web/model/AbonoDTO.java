@@ -19,7 +19,14 @@ public class AbonoDTO {
 	private AccountDTO usuario;	
 	private Timestamp feRegistro;
 	private String feRegistroFormat;	
+	private AccountDTOclient cliente;	
 	
+	public AccountDTOclient getCliente() {
+		return cliente;
+	}
+	public void setCliente(AccountDTOclient cliente) {
+		this.cliente = cliente;
+	}
 	public String getFeRegistroFormat() {
 		return feRegistroFormat;
 	}

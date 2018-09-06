@@ -57,7 +57,8 @@ public class GeneratePDFAbonos {
 			filtro.setFechaInicial( request.getParameter("fechaInicial") != null ? request.getParameter("fechaInicial") : null );
 			filtro.setFechaFinal( request.getParameter("fechaFinal") != null ? request.getParameter("fechaFinal") : null );
 			filtro.setTipoAbonoId( request.getParameter("tipoAbonoId") != null ? new Integer(request.getParameter("tipoAbonoId")) : null );
-							
+			filtro.setNombreCliente( request.getParameter("nombreCliente") != null ? request.getParameter("nombreCliente") : null );
+			
 			List<AbonoDTO> abonos = saleNoteService.obtenerAbonosPorFiltro(filtro);					
 			
 			Document document = null;
@@ -135,8 +136,8 @@ public class GeneratePDFAbonos {
 		        // salto de linea
 		        document.add(new Phrase("\n"));
 		        // Agregando tabla para los detalles
-		        PdfPTable tableDetails = new PdfPTable(5);
-		        tableDetails.setTotalWidth(new float[] {40,100,40,100,140});
+		        PdfPTable tableDetails = new PdfPTable(6);
+		        tableDetails.setTotalWidth(new float[] {40,100,40,100,140,140});
 		        tableDetails.setLockedWidth(true);
 		        
 			    int cellHeightDetails = 13;
@@ -159,6 +160,10 @@ public class GeneratePDFAbonos {
 		        tableDetails.addCell(cellDetails);
 		        
 		        cellDetails = new PdfPCell(new Phrase("Nota de pago",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
+		        cellDetails.setFixedHeight(cellHeightDetails);
+		        tableDetails.addCell(cellDetails);
+		        
+		        cellDetails = new PdfPCell(new Phrase("Cliente",new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
 		        cellDetails.setFixedHeight(cellHeightDetails);
 		        tableDetails.addCell(cellDetails);
 		     
@@ -196,6 +201,12 @@ public class GeneratePDFAbonos {
 		 	        cellDetails.setBorder(0);
 		 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 		 	        tableDetails.addCell(cellDetails);
+		 	        
+		 	       cellDetails = new PdfPCell(new Phrase(abono.getCliente().getName()+" "+abono.getCliente().getFirstName(),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL, new Color(80, 80, 80))));
+		 	        cellDetails.setFixedHeight(cellHeightDetails);
+		 	        cellDetails.setBorder(0);
+		 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
+		 	        tableDetails.addCell(cellDetails);
 		 	        		 	        
 		 	       total += abono.getCantidadAbono();
 		        	
@@ -205,7 +216,7 @@ public class GeneratePDFAbonos {
 		        cellDetails = new PdfPCell(new Phrase("Total: ",new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL)));
 	 	        cellDetails.setFixedHeight(cellHeightDetails);
 	 	        cellDetails.setBorder(0);
-	 	        cellDetails.setColspan(4);
+	 	        cellDetails.setColspan(5);
 	 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 	 	        tableDetails.addCell(cellDetails);		        
 		     

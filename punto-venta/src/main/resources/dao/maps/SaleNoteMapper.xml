@@ -107,6 +107,12 @@
 		<result property="usuario.name" column="nombre_usuario" />
 		<result property="usuario.firstName" column="ap_paterno_usuario" />	
 		<result property="usuario.secondName" column="ap_materno_usuario" />
+		
+		<result property="cliente.name" column="nombre_cliente" />
+		<result property="cliente.firstName" column="ap_paterno_cliente" />	
+		<result property="cliente.secondName" column="ap_materno_cliente" />
+		
+		
 					
 	</resultMap>
 
@@ -336,6 +342,7 @@
 		(
 			cl_venta,
 			cl_tipo_abono,
+			cl_cliente,
 			cl_usuario,
 			cantidad_abono,
 			ds_descripcion
@@ -344,6 +351,7 @@
 		(
 			#{ventaId},
 			#{abono.tipoAbono.tipoAbonoId},
+			#{abono.cliente.userId},			
 			#{abono.usuario.userId},
 			#{abono.cantidadAbono},
 			#{abono.descripcion}
@@ -390,12 +398,16 @@
 		usuario.nombre AS nombre_usuario,
 		usuario.ap_paterno AS ap_paterno_usuario,
 		usuario.ap_materno AS ap_materno_usuario,
+		cliente.nombre AS nombre_cliente,
+		cliente.ap_paterno AS ap_paterno_cliente,
+		cliente.ap_materno AS ap_materno_cliente,
 		tipo.ds_descripcion AS descripcion_abono,
 		venta.ds_descripcion AS descripcion_venta
 		FROM c_abono abono
 		INNER JOIN c_usuario usuario ON (abono.cl_usuario = usuario.cl_usuario)
 		INNER JOIN c_tipo_abono tipo ON (abono.cl_tipo_abono = tipo.cl_tipo_abono)
 		INNER JOIN c_venta venta ON (abono.cl_venta = venta.cl_venta)
+		INNER JOIN c_cliente cliente ON (abono.cl_cliente = cliente.cl_cliente)
 		WHERE abono.fg_estatus = '1'
 		<if	test="fechaInicial != null and fechaFinal != null and fechaInicial != '' and fechaFinal != '' ">
 			<![CDATA[ 
@@ -404,7 +416,11 @@
 		</if>	
 		<if test="tipoAbonoId != null and tipoAbonoId != 0 ">
 			AND abono.cl_tipo_abono = #{tipoAbonoId}
+		</if>	
+		<if test="nombreCliente != null and nombreCliente != '' ">
+			AND CONCAT(cliente.nombre,' ',cliente.ap_paterno) LIKE CONCAT('%',#{nombreCliente},'%')
 		</if>		
 	</select>
+	
 
 </mapper>
