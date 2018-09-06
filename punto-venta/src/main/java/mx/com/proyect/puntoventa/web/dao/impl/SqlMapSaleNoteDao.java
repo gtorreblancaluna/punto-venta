@@ -34,7 +34,9 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 			param.put("saleId", saleNoteForm.getSaleId());
 			param.put("itemId", item.getItemId());
 			param.put("amount", item.getAmountEntry());
-			param.put("colorId", item.getColor().getColorId());
+//			param.put("colorId", item.getColor().getColorId());
+			// 2018.09.06 GTL, se envia siempre el color 1
+			param.put("colorId", 1);
 			param.put("itemSalePrice", item.getSalePrice());
 			getSqlSession().insert("addSaleNoteDetails",param);
 		}
@@ -59,7 +61,9 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 			param.put("saleId", saleNoteForm.getSaleId());
 			param.put("itemId", item.getItemIdForm());
 			param.put("amount", item.getAmountEntry());
-			param.put("colorId", item.getColor().getColorId());
+//			param.put("colorId", item.getColor().getColorId());
+			// 2018.09.06 GTL, se envia siempre el color 1
+			param.put("colorId", 1);
 			param.put("itemSalePrice", item.getSalePrice());
 			getSqlSession().insert("addSaleNoteDetails",param);
 		}		

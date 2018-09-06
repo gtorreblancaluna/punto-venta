@@ -63,16 +63,16 @@
 							</select>
 						</span>
 					</td>
-					<td>
-					<span class="input-group-text">Color: 
-				        <select name="colorIdFilter" class="form-control selColorId">
-						<option value="">- Seleccione -</option>
-							<c:forEach items="${listColors}" var="color">
-								<option value="${color.colorId}">${color.description}</option>
-							</c:forEach>	
-						</select>	
-					</span>		        
-			        </td>
+<!-- 					<td> -->
+<!-- 					<span class="input-group-text">Color:  -->
+<!-- 				        <select name="colorIdFilter" class="form-control selColorId"> -->
+<!-- 						<option value="">- Seleccione -</option> -->
+<%-- 							<c:forEach items="${listColors}" var="color"> --%>
+<%-- 								<option value="${color.colorId}">${color.description}</option> --%>
+<%-- 							</c:forEach>	 --%>
+<!-- 						</select>	 -->
+<!-- 					</span>		         -->
+<!-- 			        </td> -->
 			        <td>
 					<span class="input-group-text">Sucursal: 
 				        <select name="officeIdFilter" class="form-control">
@@ -88,12 +88,12 @@
 					<td colspan=4>
 					 	<input type="submit" class="btn btn-dark" name="filter" value="Enviar" />	
 					</td>
-					<td colspan=1>
+					<td colspan=2>
 						<button type="button" class="btn btn-dark btnAddProduct" data-toggle="modal" data-target="">Agregar producto</button>
 					</td>
-					<td colspan=1>
-						<button type="button" class="btn btn-dark btnAddColor" data-toggle="modal"  data-target="">Agregar Color</button>
-					</td>
+<!-- 					<td colspan=1> -->
+<!-- 						<button type="button" class="btn btn-dark btnAddColor" data-toggle="modal"  data-target="">Agregar Color</button> -->
+<!-- 					</td> -->
 				</tr>
 			</tbody>
 			</table>	
@@ -114,7 +114,7 @@
 					<td>almacen</td>
 					<td>Sucursal</td>
 					<td>Descripci&oacute;n</td>	
-					<td>Color</td>				
+<!-- 					<td>Color</td>				 -->
 					<td>U.M.</td>
 <!-- 					<td>cantidad entrada</td> -->
 <!-- 					<td>cantidad salida</td> -->
@@ -129,7 +129,7 @@
 			 			<td>${item.storeDTO.description}</td>
 			 			<td>${item.officeDTO.name}</td>			 					 			
 			 			<td>${item.description}</td>
-			 			<td>${item.color.description}</td>		 			
+<%-- 			 			<td>${item.color.description}</td>		 			 --%>
 			 			<td>${item.unitMeasurement}</td>
 <%-- 			 			<td>${item.amountEntry}</td> --%>
 <%-- 			 			<td>${item.amountOutput}</td>		 			 --%>
@@ -180,15 +180,15 @@
 					</select>
 				</div>
 				
-				<div class="form-group">
-					<label>Color: </label>
-				<select name="color.colorId" id="selColorId" class="form-control selColorId">
-				<option value="0">- Seleccione -</option>
-					<c:forEach items="${listColors}" var="color">
-						<option value="${color.colorId}">${color.description}</option>
-					</c:forEach>	
-				</select>
-				</div>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label>Color: </label> -->
+<!-- 				<select name="color.colorId" id="selColorId" class="form-control selColorId"> -->
+<!-- 				<option value="0">- Seleccione -</option> -->
+<%-- 					<c:forEach items="${listColors}" var="color"> --%>
+<%-- 						<option value="${color.colorId}">${color.description}</option> --%>
+<%-- 					</c:forEach>	 --%>
+<!-- 				</select> -->
+<!-- 				</div> -->
 				<div class="form-group">
 					<label>Descripci&oacute;n: </label>
 					<input type="text" id="description" name="description" placeholder="" class="form-control">
@@ -260,15 +260,15 @@
 					</select>
 				</div>
 				
-				<div class="form-group">
-					<label>Color: </label>
-					<select name="color.colorId" id="selOffice" class="form-control selColorId">
-					<option value="0">- Seleccione -</option>
-						<c:forEach items="${listColors}" var="color">
-							<option value="${color.colorId}">${color.description}</option>
-						</c:forEach>	
-					</select>
-				</div>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label>Color: </label> -->
+<!-- 					<select name="color.colorId" id="selOffice" class="form-control selColorId"> -->
+<!-- 					<option value="0">- Seleccione -</option> -->
+<%-- 						<c:forEach items="${listColors}" var="color"> --%>
+<%-- 							<option value="${color.colorId}">${color.description}</option> --%>
+<%-- 						</c:forEach>	 --%>
+<!-- 					</select> -->
+<!-- 				</div> -->
 				
 				
 				<div class="form-group">
@@ -389,19 +389,19 @@ $( document ).ready(function() {
 		        	$updateForm.find('#selOffice').val(getValueOffice(item.innerHTML));
 		        if(i===4)
 		        	$updateForm.find('#description').val(item.innerHTML);
+// 		        if(i===5)
+// 		        	$updateForm.find('.selColorId').val(getColorSelect(item.innerHTML));
 		        if(i===5)
-		        	$updateForm.find('.selColorId').val(getColorSelect(item.innerHTML));
-		        if(i===6)
 		        	$updateForm.find('#unitMeasurement').val(item.innerHTML);
 		        
 // 		        if(i===6)
 // 		        	$updateForm.find('#amountEntry').val(item.innerHTML);
 // 		        if(i===7)
 // 		        	$updateForm.find('#amountOutput').val(item.innerHTML);
-		        if(i===7)
+		        if(i===6)
 		        	$updateForm.find('#salePrice').val(item.innerHTML);
 		        
-		        if(i===8)
+		        if(i===7)
 		        	$updateForm.find('#stock').val(item.innerHTML);
 		       
 		        

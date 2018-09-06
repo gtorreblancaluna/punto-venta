@@ -54,7 +54,7 @@ $( document ).ready(function() {
 		var $form = $('#addSaleNoteForm');
 		var abono = $form.find('#cantidadAbono').val();
 		  $(".tableAddNote tbody tr").each(function () {
-            stotal = $(this).find("td").eq(7).find(".totalItem").val();
+            stotal = $(this).find("td").eq(6).find(".totalItem").val();
             if(stotal != undefined && stotal != "")
           	  total += parseFloat(stotal);
         })
@@ -363,7 +363,7 @@ function llenarTablaClientes(clientes,val){
 				+"<td><a href='javascript:void(0);' onclick='elegirCliente("+JSON.stringify(value)+","+val+");'>"+ value.name +"</a></td>"
 				+"<td><a href='javascript:void(0);' onclick='elegirCliente("+JSON.stringify(value)+","+val+");'>"+ value.firstName +"</a></td>"
 				+"<td><a href='javascript:void(0);' onclick='elegirCliente("+JSON.stringify(value)+","+val+");'>"+ value.secondName +"</a></td>"
-				+"<td>"+ value.email +"</td>"
+//				+"<td>"+ value.email +"</td>"
 				+"<td>"+ value.tel1 +"</td>"
 				+"<td>"+ value.tel2 +"</td>"
 				+"<td>"+ value.adress +"</td>"
@@ -441,7 +441,7 @@ function addSaleNoteForm(data){
 function totalUpdateForm(){
 	var total=0;
 	  $(".tableUpdateNote tbody tr").each(function () {
-        stotal = $(this).find("td").eq(7).find(".totalItem").val();
+        stotal = $(this).find("td").eq().find(".totalItem").val();
         if(stotal != undefined && stotal != "")
       	  total += parseFloat(stotal);
     })

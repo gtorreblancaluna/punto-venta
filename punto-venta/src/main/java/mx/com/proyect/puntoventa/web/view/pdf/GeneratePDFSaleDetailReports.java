@@ -180,7 +180,7 @@ public class GeneratePDFSaleDetailReports {
 		        document.add(new Phrase("\n"));
 		        // Agregando tabla para los detalles
 		        PdfPTable tableDetails = new PdfPTable(8);
-		        tableDetails.setTotalWidth(new float[] {40,100,100,140,90,140,50,70});
+		        tableDetails.setTotalWidth(new float[] {40,100,140,100,90,140,50,70});
 		        tableDetails.setLockedWidth(true);
 		        
 		        PdfPTable tableItemsDetails = new PdfPTable(4);
@@ -297,11 +297,17 @@ public class GeneratePDFSaleDetailReports {
 		 	        	   cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 		 	        	   tableDetails.addCell(cellDetails);	
 				 	        // 4
-				 	        cellDetails = new PdfPCell(new Phrase(detail.getColor().getDescription(),new Font(Font.ITALIC, fontSizeSmall, Font.ITALIC, new Color(80, 80, 80))));
+		 	        	    cellDetails = new PdfPCell(new Phrase("",new Font(Font.ITALIC, fontSizeSmall, Font.ITALIC, new Color(80, 80, 80))));
 				 	        cellDetails.setFixedHeight(cellHeightDetails);
 		 	        	    cellDetails.setBorder(0);
 		 	        	  	cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 		 	        	  	tableDetails.addCell(cellDetails);
+		 	        	  	
+//				 	        cellDetails = new PdfPCell(new Phrase(detail.getColor().getDescription(),new Font(Font.ITALIC, fontSizeSmall, Font.ITALIC, new Color(80, 80, 80))));
+//				 	        cellDetails.setFixedHeight(cellHeightDetails);
+//		 	        	    cellDetails.setBorder(0);
+//		 	        	  	cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+//		 	        	  	tableDetails.addCell(cellDetails);
 				 	        
 				 	        //5			 	        
 		 	        	  	cellDetails = new PdfPCell(new Phrase(detail.getItem().getSalePrice()+"",new Font(Font.ITALIC, fontSizeSmall, Font.ITALIC, new Color(80, 80, 80))));

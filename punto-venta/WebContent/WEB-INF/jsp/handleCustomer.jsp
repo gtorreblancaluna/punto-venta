@@ -36,13 +36,13 @@ $( document ).ready(function() {
 		        	$updateForm.find('#apPaterno').val(item.innerHTML);
 		        if(i===3)
 		        	$updateForm.find('#apMaterno').val(item.innerHTML);
+// 		        if(i===4)
+// 		        	$updateForm.find('#email').val(item.innerHTML);
 		        if(i===4)
-		        	$updateForm.find('#email').val(item.innerHTML);
-		        if(i===5)
 		        	$updateForm.find('#tel1').val(item.innerHTML);
-		        if(i===6)
+		        if(i===5)
 		        	$updateForm.find('#tel2').val(item.innerHTML);
-		        if(i===7)
+		        if(i===6)
 		        	$updateForm.find('#adress').val(item.innerHTML);
 		        
 		    });		   
@@ -89,9 +89,9 @@ $( document ).ready(function() {
 					<td>
 						<span class="input-group-text">Apellido Materno:<input type="text" name="lastName" id="" class="form-control"></span>
 					</td>
-					<td>
-						<span class="input-group-text">Email:<input type="text" name="email" id="" class="form-control"></span>
-					</td>
+<!-- 					<td> -->
+<!-- 						<span class="input-group-text">Email:<input type="text" name="email" id="" class="form-control"></span> -->
+<!-- 					</td> -->
 				</tr>
 				<tr>
 					<td colspan=2>
@@ -119,7 +119,7 @@ $( document ).ready(function() {
 						<th>Nombre</th>
 						<th>Ap Paterno</th>
 						<th>Ap Materno</th>
-						<th>Email</th>
+<!-- 						<th>Email</th> -->
 						<th>tel1</th>
 						<th>tel2</th>
 						<th>Direcci&oacute;n</th>
@@ -134,7 +134,7 @@ $( document ).ready(function() {
 				 			<td>${user.name}</td>
 				 			<td>${user.firstName}</td>
 				 			<td>${user.secondName}</td>
-				 			<td>${user.email}</td>
+<%-- 				 			<td>${user.email}</td> --%>
 				 			<td>${user.tel1}</td>
 				 			<td>${user.tel2}</td>
 				 			<td style="max-width: 80px;">${user.adress}</td>
@@ -177,10 +177,10 @@ $( document ).ready(function() {
 					<label>Apellido Materno: </label>
 					<input type="text" id="apMaterno" name="secondName" placeholder="Apellido Materno" class="form-control">
 				</div>
-				<div class="form-group">
-					<label>Email: </label>
-					<input type="text" id="email" name="email" placeholder="Email" class="form-control">
-				</div>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label>Email: </label> -->
+<!-- 					<input type="text" id="email" name="email" placeholder="Email" class="form-control"> -->
+<!-- 				</div> -->
 				<div class="form-group">
 					<label>Tel1: </label>
 					<input type="number" id="tel1" name="tel1" placeholder="Telefono celular" class="form-control">
@@ -230,10 +230,10 @@ $( document ).ready(function() {
 					<label>Apellido Materno: </label>
 					<input type="text" id="apMaterno" name="secondName" placeholder="Apellido Materno" class="form-control">
 				</div>
-				<div class="form-group">
-					<label>Email: </label>
-					<input type="text" id="email" name="email" placeholder="Email" class="form-control">
-				</div>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label>Email: </label> -->
+<!-- 					<input type="text" id="email" name="email" placeholder="Email" class="form-control"> -->
+<!-- 				</div> -->
 				<div class="form-group">
 					<label>Tel1: </label>
 					<input type="number" id="tel1" name="tel1" placeholder="Telefono celular" class="form-control">

@@ -59,6 +59,7 @@ $( document ).ready(function() {
 					"</c:forEach> " +
 					"</select>" +
 			"</td>"
+			/*
 			+"<td>" +
 					"<select name='items["+cont+"].color.colorId' class='form-control selColors'>" +
 					"<option value='0'>- Seleccione -</option> " +
@@ -67,6 +68,7 @@ $( document ).ready(function() {
 					"</c:forEach> " +
 					"</select>" +
 			"</td>"
+			*/
 			+"<td><input type='text' class='form-control' name='items["+ cont +"].description' id='itemDescription' disabled></td>"
 			+"<td><input type='number' class='form-control' name='items["+ cont +"].amountEntry' id='amountItem' ></td>"
 			+"<td><input type='number' class='form-control' name='items["+ cont +"].salePrice' id='itemPrice'></td>"
@@ -105,14 +107,14 @@ $( document ).ready(function() {
 					"</c:forEach> " +
 					"</select>" +
 			"</td>"
-			+"<td>" +
-					"<select name='items["+u_cont+"].color.colorId' class='form-control selColors' disabled>" +
+			/*
+			+"<td> <select name='items["+u_cont+"].color.colorId' class='form-control selColors' disabled>" +
 					"<option value='0'>- Seleccione -</option> " +
 					"<c:forEach items='${listColors}' var='color'>" +
 						"<option value='${color.colorId}'>${color.description}</option> " +
 					"</c:forEach> " +
 					"</select>" +
-			"</td>"
+			"</td>" */
 			+"<td><input type='text' class='form-control' name='items["+ u_cont +"].description' id='itemDescription' disabled></td>"
 			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].amountEntry' id='amountItem' disabled></td>"
 			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].salePrice' id='itemPrice' disabled></td>"
@@ -161,7 +163,8 @@ function addSaleDetailNoteForm(items){
 						"<option value='${item.itemId}' data-value='${item.itemId}|${item.description}|${item.salePrice}' >${item.description}</option> " +
 					"</c:forEach> " +					
 					"</select>" +
-			"</td>"
+			"</td>"+
+			/*
 			+"<td>" +
 					"<select name='items["+u_cont+"].color.colorId' class='form-control selColors' disabled>" +
 					"<option value='0'>- Seleccione -</option> " +
@@ -170,6 +173,7 @@ function addSaleDetailNoteForm(items){
 					"</c:forEach> " +
 					"</select>" +
 			"</td>"
+			*/
 			+"<td><input type='text' class='form-control' name='items["+ u_cont +"].description' id='itemDescription' disabled></td>"
 			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].amountEntry' id='amountItem' disabled ></td>"
 			+"<td><input type='number' class='form-control' name='items["+ u_cont +"].salePrice' id='itemPrice' disabled></td>"
@@ -204,7 +208,7 @@ function addSaleDetailNoteForm(items){
 		$tr.find('#itemDescription').val(value.item.description);
 		$tr.find('#itemPrice').val(value.item.salePrice);
 		$tr.find('#amountItem').val(value.amount);
-		$tr.find('.selColors').val(value.color.colorId);
+// 		$tr.find('.selColors').val(value.color.colorId);
 		var amount = parseFloat(value.amount);
 		var salePrice = parseFloat(value.item.salePrice);
 		$tr.find('#totalItem').val(amount*salePrice);
@@ -387,10 +391,10 @@ function addSaleDetailNoteForm(items){
 						<label>Apellido materno: </label>
 						<input type="text" id="apMaterno" name="customer.secondname" placeholder="Apellido Materno" class="form-control">
 					</div>
-					<div class="col-xs-3">
-						<label>Email: </label>
-						<input type="text" id="email" name="customer.email" placeholder="Email" class="form-control">
-					</div>
+<!-- 					<div class="col-xs-3"> -->
+<!-- 						<label>Email: </label> -->
+<!-- 						<input type="text" id="email" name="customer.email" placeholder="Email" class="form-control"> -->
+<!-- 					</div> -->
 					<div class="col-xs-3">
 						<label>Tel&eacute;fono 1: </label>
 						<input type="text" id="tel1" name="customer.tel1" placeholder="Telefono celular" class="form-control">
@@ -426,7 +430,7 @@ function addSaleDetailNoteForm(items){
 						        <th>Nombre</th>			        
 						        <th>Ap paterno</th>
 						        <th>Ap materno</th>
-						        <th>email</th>
+<!-- 						        <th>email</th> -->
 						        <th>tel1</th>
 								<th>tel2</th>
 						        <th>Direcci&oacute;n</th>
@@ -516,7 +520,7 @@ function addSaleDetailNoteForm(items){
 			      	<th>#</th>
 			      	<th style="width:10%;">Buscar por id</th>
 			        <th>Articulo</th>			        
-			        <th ><a href="javascript:void();" onclick="agregarColor();">Color</a></th>
+<!-- 			        <th ><a href="javascript:void();" onclick="agregarColor();">Color</a></th> -->
 			        <th>Descripci&oacute;n</th>
 			        <th>Cantidad</th>
 			        <th>Precio</th>
@@ -540,19 +544,19 @@ function addSaleDetailNoteForm(items){
 						</select>			        
 			        </td>			      
 			        
-			         <td>
-				        <select name="items[0].color.colorId" class="form-control selColors">
-						<option value="0">- Seleccione -</option>
-							<c:forEach items="${listColors}" var="color">
-								<option value="${color.colorId}">${color.description}</option>
-							</c:forEach>	
-						</select>			        
-			        </td>
+<!-- 			         <td> -->
+<!-- 				        <select name="items[0].color.colorId" class="form-control selColors"> -->
+<!-- 						<option value="0">- Seleccione -</option> -->
+<%-- 							<c:forEach items="${listColors}" var="color"> --%>
+<%-- 								<option value="${color.colorId}">${color.description}</option> --%>
+<%-- 							</c:forEach>	 --%>
+<!-- 						</select>			         -->
+<!-- 			        </td> -->
 			        <td><input type="text" class="form-control" name="items[0].description" id="itemDescription" disabled></td>
 			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					
 			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" ></td>
 			        <td><input type="number" class="form-control totalItem" name="" id="totalItem" disabled></td>
-			        <td><input type="button" class="btn btn-dark" id="addRow-add" value="Agregar" disabled/></td>			        
+			        <td><input type="button" class="btn btn-dark" id="addRow-add" value="Agregar" /></td>			        
 			      </tr>			
 			      	      	      
 			    </tbody>			    

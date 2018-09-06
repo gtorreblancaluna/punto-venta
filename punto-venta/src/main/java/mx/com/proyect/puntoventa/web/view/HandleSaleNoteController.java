@@ -48,13 +48,13 @@ public class HandleSaleNoteController {
 
 	// vista principal
 	@GetMapping(value = "handleSaleNote.do")
-	public String showSaleNote(HttpServletRequest request,  Model model) {		
+	public String showSaleNote(HttpServletRequest request,  Model model) {
 //		ModelAndView modelAndView = new ModelAndView("handleSaleNote");
 		
 		HttpSession session = request.getSession();
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		
-		if(userSession != null && userSession.getAccount() != null) {			
+		if(userSession != null && userSession.getAccount() != null) {
 			model.addAttribute("saleNoteForm", new SaleNoteForm());
 			this.getModelAttributtes(model);
 			// solo traer los articulos registrados en la sucursal que se logueo el usuario
