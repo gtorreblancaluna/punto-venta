@@ -20,6 +20,7 @@ import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
+import mx.com.proyect.puntoventa.web.model.StoreDTO;
 import mx.com.proyect.puntoventa.web.model.TipoAbonoDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQueryItemsSold;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
@@ -205,6 +206,12 @@ public class SqlMapSaleNoteDao extends SqlSessionDaoSupport implements SaleNoteD
 		// TODO Auto-generated method stub
 		List<AbonoDTO> abonos = getSqlSession().selectList("obtenerAbonosPorFiltro",filtroAbonos);
 		return abonos;
+	}
+
+	@Override
+	public List<StoreDTO> obtenerAlmacenesPorSucursal(int sucursalId) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("obtenerAlmacenesPorSucursal",sucursalId);
 	}
 
 }

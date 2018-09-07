@@ -75,7 +75,7 @@
 <!-- 			        </td> -->
 			        <td>
 					<span class="input-group-text">Sucursal: 
-				        <select name="officeIdFilter" class="form-control">
+				        <select name="officeIdFilter" class="form-control" id="officeIdFilter">
 						<option value="">- Seleccione -</option>
 							<c:forEach items="${listOffices}" var="office">
 								<option value="${office.officeId}">${office.name}</option>
@@ -159,23 +159,23 @@
       </div>
       <div class="modal-body">     
 		<form:form modelAttribute="ItemDTO" action="handleInventory.do" method="post" name="addForm" id="addForm">				
-				
-				<div class="form-group">
-					<label>Almacen: </label>
-					<select name="storeDTO.storeId" id="selStoreFilter" class="form-control">
-					<option value="0">- Seleccione -</option>
-						<c:forEach items="${listStore}" var="store">
-							<option value="${store.storeId}">${store.description}</option>
-						</c:forEach>	
-					</select>
-				</div>
-				
+								
 				<div class="form-group">
 					<label>Sucursal: </label>
 					<select name="officeDTO.officeId" id="selOffice" class="form-control">
 					<option value="0">- Seleccione -</option>
 						<c:forEach items="${listOffices}" var="office">
 							<option value="${office.officeId}">${office.name}</option>
+						</c:forEach>	
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label>Almacen: </label>
+					<select name="storeDTO.storeId" id="selStoreAdd" class="form-control">
+					<option value="0">- Seleccione -</option>
+						<c:forEach items="${listStore}" var="store">
+							<option value="${store.storeId}">${store.description}</option>
 						</c:forEach>	
 					</select>
 				</div>
@@ -240,6 +240,16 @@
 				<input type="hidden" name="itemId" id="itemId">
 					
 				<div class="form-group">
+					<label>Sucursal: </label>
+					<select name="officeDTO.officeId" id="selOffice" class="selOffice selOfficeUpdate form-control">
+					<option value="0">- Seleccione -</option>
+						<c:forEach items="${listOffices}" var="office">
+							<option value="${office.officeId}">${office.name}</option>
+						</c:forEach>	
+					</select>
+				</div>
+				
+				<div class="form-group">
 					<label>Almacen: </label>
 					<select name="storeDTO.storeId" id="selStoreId" class="selStoreId form-control">
 					<option value="0">- Seleccione -</option>
@@ -248,17 +258,7 @@
 						</c:forEach>	
 					</select>
 				</div>
-
-
-				<div class="form-group">
-					<label>Sucursal: </label>
-					<select name="officeDTO.officeId" id="selOffice" class="selOffice form-control">
-					<option value="0">- Seleccione -</option>
-						<c:forEach items="${listOffices}" var="office">
-							<option value="${office.officeId}">${office.name}</option>
-						</c:forEach>	
-					</select>
-				</div>
+				
 				
 <!-- 				<div class="form-group"> -->
 <!-- 					<label>Color: </label> -->
@@ -342,6 +342,20 @@
 $( document ).ready(function() {
 	
 	
+	$( '.selOfficeUpdate' ).change(function() {
+		var sucursalId = $( ".selOfficeUpdate option:selected" ).val();
+		traerAlamcenesPorSucursal(sucursalId,3);
+	});
+	
+	$( '#selOffice' ).change(function() {
+		var sucursalId = $( "#selOffice option:selected" ).val();
+		traerAlamcenesPorSucursal(sucursalId,2);
+	});
+	
+	$( '#officeIdFilter' ).change(function() {
+		var sucursalId = $( "#officeIdFilter option:selected" ).val();
+		traerAlamcenesPorSucursal(sucursalId,1);
+	});
 	
 	$( '.btnAddProduct' ).click(function() {
 		if('${userSession.account.job.jobId}' == '2')
@@ -371,6 +385,7 @@ $( document ).ready(function() {
 			alert("No tienes suficientes permisos para esta accion :( ")
 			return false;
 		}
+		var x = '';
 			
 		var $updateForm = $("#updateForm");
 		 var $row = jQuery(this).closest('tr');
@@ -384,9 +399,14 @@ $( document ).ready(function() {
 		        if(i===0)
 		        	$updateForm.find('#itemId').val(item.innerHTML);
 		        if(i===2)
-		        	$updateForm.find('#selStoreId').val(getValueSelect(item.innerHTML));
-		       if(i===3)
-		        	$updateForm.find('#selOffice').val(getValueOffice(item.innerHTML));
+		        	x = item.innerHTML;
+// 		        	$updateForm.find('#selStoreId').val(getValueSelect(item.innerHTML));
+		       if(i===3){
+		    	   var sucursalId = getValueOffice(item.innerHTML);
+		    	   traerAlamcenesPorSucursal(sucursalId,3);
+		    	   $updateForm.find('#selOffice').val(sucursalId);
+		    	   $updateForm.find('#selStoreId').val(getValueSelect(x));
+		       }
 		        if(i===4)
 		        	$updateForm.find('#description').val(item.innerHTML);
 // 		        if(i===5)
@@ -409,10 +429,10 @@ $( document ).ready(function() {
 		    });
 		    function getValueOffice(text){
 		    	var value = 0;
-		    	$( ".selOffice option" ).each(function( index ) {
+		    	$( ".selOffice option" ).each(function( index, val ) {
 		    		var x = $(this).text();
 		    		if(x == text){
-		    			value = index;
+		    			value = val.value;
 		    		}
 // 		    		  console.log( index + ": " + $( this ).text() );
 		    	});
@@ -420,10 +440,10 @@ $( document ).ready(function() {
 		    }
 		    function getValueSelect(text){		    	
 		    	var value = 0;
-		    	$( ".selStoreId option" ).each(function( index ) {
+		    	$( ".selStoreId option" ).each(function( index , val ) {
 		    		var x = $(this).text();
 		    		if(x == text){
-		    			value = index;
+		    			value = val.value;
 		    		}
 // 		    		  console.log( index + ": " + $( this ).text() );
 		    	});
@@ -497,6 +517,83 @@ function appendsColorsToSelects(color){
 	    text: color.description
 	}));
 }
+
+function traerAlamcenesPorSucursal(sucursalId,valor){	
+	if(sucursalId != ''){		
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "obtenerAlmacenesPorSucursal.do",
+			data : sucursalId+"",
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {						
+				console.log(data.almacenes)
+				llenarComboAlmacenes(data.almacenes,valor);
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);	
+				alert("ERROR: "+e)
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+		});
+	}else{
+		alert("No se recibio el parametro, porfavor recarga la pagina e intentalo de nuevo :( ")
+	}
+	
+}
+
+function llenarComboAlmacenes(almacenes,valor){
+	
+	if(valor==1){
+		$('#storeIdFilter')
+	    .find('option')
+	    .remove()
+	    .end()
+	    .append('<option value="0">- Seleccione -</option>')
+	    .val('0');
+		// llenamos el combo del filtro
+		$.each(almacenes, function (i, almacen) {
+		    $('#storeIdFilter').append($('<option>', { 
+		        value: almacen.storeId,
+		        text : almacen.description 
+		    }));
+		});
+	}else if(valor==2){
+		// llenamos el combo de agregar articulo
+		$('#selStoreAdd')
+	    .find('option')
+	    .remove()
+	    .end()
+	    .append('<option value="0">- Seleccione -</option>')
+	    .val('0');
+		// llenamos el combo del filtro
+		$.each(almacenes, function (i, almacen) {
+		    $('#selStoreAdd').append($('<option>', { 
+		        value: almacen.storeId,
+		        text : almacen.description 
+		    }));
+		});
+	}else if(valor==3){
+		// llenamos el combo de actualizar articulo
+		$('#selStoreId')
+	    .find('option')
+	    .remove()
+	    .end()
+	    .append('<option value="0">- Seleccione -</option>')
+	    .val('0');
+		// llenamos el combo del filtro
+		$.each(almacenes, function (i, almacen) {
+		    $('#selStoreId').append($('<option>', { 
+		        value: almacen.storeId,
+		        text : almacen.description 
+		    }));
+		});
+	}
+}
+
 </script>    
 
 

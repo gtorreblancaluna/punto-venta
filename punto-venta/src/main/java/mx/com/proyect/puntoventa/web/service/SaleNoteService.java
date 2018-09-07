@@ -11,6 +11,7 @@ import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
+import mx.com.proyect.puntoventa.web.model.StoreDTO;
 import mx.com.proyect.puntoventa.web.model.TipoAbonoDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 
@@ -35,4 +36,5 @@ public interface SaleNoteService {
 	public void agregarAbono(AbonoDTO abono);
 	public void eliminarAbono(int abonoId);
 	public List<AbonoDTO> obtenerAbonosPorFiltro(FiltroAbonos filtroAbonos);
+	public List<StoreDTO> obtenerAlmacenesPorSucursal(int sucursalId);
 }

@@ -12,8 +12,15 @@ public class StoreDTO implements Serializable {
 	private String description;
 	// estatus
 	private String fgStatus;
+	// sucursal
+	private OfficeDTO sucursal;
 	
-	
+	public OfficeDTO getSucursal() {
+		return sucursal;
+	}
+	public void setSucursal(OfficeDTO sucursal) {
+		this.sucursal = sucursal;
+	}
 	public Integer getStoreId() {
 		return storeId;
 	}

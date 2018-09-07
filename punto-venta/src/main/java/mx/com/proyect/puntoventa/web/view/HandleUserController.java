@@ -48,7 +48,7 @@ public class HandleUserController {
 	
 		model.addAttribute("account", account);	
 		model.addAttribute(this.getModelAttributtes(model));
-		model.addAttribute("message", "Exito al registrar el usuario: " + account.getEmail());
+		model.addAttribute("messageView", "Exito al registrar el usuario: " + account.getEmail());
 		return "handleUser";
 	}
 
@@ -58,7 +58,7 @@ public class HandleUserController {
 		accountService.updateUser(account);		
 		
 		model.addAttribute(this.getModelAttributtes(model));
-		model.addAttribute("message", "Exito al actualizar el usuario: " + account.getEmail());
+		model.addAttribute("messageView", "Exito al actualizar el usuario: " + account.getEmail());
 		return "handleUser";
 	}
 
@@ -83,7 +83,7 @@ public class HandleUserController {
 		}
 		
 		if(message!=null)
-			model.addAttribute("message",message);
+			model.addAttribute("messageView",message);
 		
 		if(messageError!=null)
 			model.addAttribute("messageError",messageError);

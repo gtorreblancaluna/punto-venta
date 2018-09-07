@@ -8,14 +8,6 @@ USE puntoventa;
 
 -- agregando catalogos
 
-CREATE TABLE c_almacen(
-cl_almacen integer unsigned not null AUTO_INCREMENT,
-ds_descripcion VARCHAR(65) NOT NULL,
-fg_estatus ENUM('1','0') NOT NULL DEFAULT '1',
-PRIMARY KEY(cl_almacen)
-)
-ENGINE = InnoDB;
-
 CREATE TABLE c_estatus_venta(
 cl_estatus_venta integer unsigned not null AUTO_INCREMENT,
 ds_descripcion VARCHAR(65) NOT NULL,
@@ -86,6 +78,21 @@ t_secundario VARCHAR (12),
 PRIMARY KEY (cl_sucursal)
 )
 ENGINE = InnoDB;
+
+
+CREATE TABLE c_almacen(
+cl_almacen integer unsigned not null AUTO_INCREMENT,
+ds_descripcion VARCHAR(65) NOT NULL,
+cl_sucursal INTEGER UNSIGNED NOT NULL,
+fg_estatus ENUM('1','0') NOT NULL DEFAULT '1',
+PRIMARY KEY(cl_almacen),
+ CONSTRAINT fk_almacen_cl_sucursal FOREIGN KEY fk_almacen_cl_sucursal (cl_sucursal) 
+	REFERENCES c_sucursal(cl_sucursal)
+	ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
+ENGINE = InnoDB;
+
 
 -- tabla usuario 
 CREATE TABLE c_usuario (
@@ -318,11 +325,6 @@ INSERT INTO c_estatus_entrega (ds_descripcion) VALUES ('Entregado');
 
 -- finaliza catalogos
 
-INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_1');
-INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_2');
-INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_3');
-INSERT INTO c_almacen (ds_descripcion) VALUES ('almacen_4');
-
 INSERT INTO c_color (ds_descripcion) VALUES ('blanco');
 INSERT INTO c_color (ds_descripcion) VALUES ('azul');
 INSERT INTO c_color (ds_descripcion) VALUES ('amarillo');
@@ -337,7 +339,14 @@ INSERT INTO c_puesto (ds_descripcion) VALUES ('proveedor');
 
 INSERT INTO c_sucursal (cl_sucursal, nombre, calle, t_fijo) VALUES ('1', 'TOLUCA 1', 'PINOSUAREZ', '7222426467');
 INSERT INTO c_sucursal (cl_sucursal, nombre, calle, t_fijo) VALUES ('2', 'TOLUCA 2', 'ADOLFO LOPEZ MATEOS', '7223186761');
-INSERT INTO c_sucursal (cl_sucursal, nombre, calle, colonia, municipio, estado, t_fijo) VALUES ('3', 'TOLUCA 3', 'PASEO TOLLOCAN', 'UNIVERSIDAD', 'TOLUCA', 'TOLUCA', '7222121844');
+INSERT INTO c_sucursal (cl_sucursal, nombre, calle, colonia, municipio, estado, t_fijo) VALUES ('3', 'TOLLOCAN', 'PASEO TOLLOCAN', 'UNIVERSIDAD', 'TOLUCA', 'TOLUCA', '7222121844');
+
+
+INSERT INTO c_almacen (cl_sucursal,ds_descripcion) VALUES (1,'Almacen General');
+INSERT INTO c_almacen (cl_sucursal,ds_descripcion) VALUES (2,'Almacen General');
+INSERT INTO c_almacen (cl_sucursal,ds_descripcion) VALUES (3,'Almacen Tollocan Sucursal');
+INSERT INTO c_almacen (cl_sucursal,ds_descripcion) VALUES (3,'Almacen Tollocan Bodega');
+
 
 INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('1','1','Gerardo','Torreblanca','Luna','gtorre@email.com','123456','1','1');
 INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('2','1','Armando','Gonzales','Borja','armando@email.com','123456','1','1');

@@ -17,6 +17,7 @@
 		<result property="nameCustomer" column="nombre_cliente" />
 		<result property="nameOffice" column="nombre_sucursal" />
 		<result property="nameUser" column="nombre_usuario" />
+		<result property="clienteId" column="cl_cliente" />
 		
 		<result property="status.statusId" column="cl_estatus_venta" />
 		<result property="status.description" column="descripcion_estatus_venta" />
@@ -93,6 +94,15 @@
 		<result property="estado" column="fg_estatus" />				
 	</resultMap>
 	
+	<resultMap id="resultMapAlmacen" type="storeDTO">
+		<result property="storeId" column="cl_almacen" />
+		<result property="description" column="ds_descripcion" />	
+		<result property="fgStatus" column="fg_estatus" />	
+		
+		<result property="sucursal.officeId" column="cl_sucursal" />	
+		<result property="sucursal.name" column="nombre_sucursal" />			
+	</resultMap>
+	
 	<resultMap id="resultMapAbonos" type="abonoDTO">
 		<result property="abonoId" column="cl_abono" />
 		<result property="saleNote.saleId" column="cl_venta" />	
@@ -110,10 +120,7 @@
 		
 		<result property="cliente.name" column="nombre_cliente" />
 		<result property="cliente.firstName" column="ap_paterno_cliente" />	
-		<result property="cliente.secondName" column="ap_materno_cliente" />
-		
-		
-					
+		<result property="cliente.secondName" column="ap_materno_cliente" />					
 	</resultMap>
 
 	<insert id="addSaleNote" parameterType="saleNoteForm">
@@ -162,7 +169,8 @@
 		SELECT v.cl_venta,v.fe_registro,v.fe_entrega,v.ds_descripcion,v.fe_vencimiento_credito,
 		CONCAT(c.nombre,' ',c.ap_paterno) AS nombre_cliente, s.nombre AS nombre_sucursal,
 		CONCAT(u.nombre,' ',u.ap_paterno) AS nombre_usuario,
-		estatus.ds_descripcion AS descripcion_estatus_venta	
+		estatus.ds_descripcion AS descripcion_estatus_venta,
+		v.cl_cliente
 		FROM c_venta v
 		INNER JOIN c_cliente c ON (v.cl_cliente = c.cl_cliente)
 		INNER JOIN c_sucursal s ON (v.cl_sucursal = s.cl_sucursal)
@@ -376,6 +384,7 @@
 			cl_venta,
 			cl_tipo_abono,
 			cl_usuario,
+			cl_cliente,
 			cantidad_abono,
 			ds_descripcion
 		)
@@ -384,6 +393,7 @@
 			#{saleNote.saleId},
 			#{tipoAbono.tipoAbonoId},
 			#{usuario.userId},
+			#{cliente.userId},
 			#{cantidadAbono},
 			#{descripcion}
 		)
@@ -420,6 +430,12 @@
 		<if test="nombreCliente != null and nombreCliente != '' ">
 			AND CONCAT(cliente.nombre,' ',cliente.ap_paterno) LIKE CONCAT('%',#{nombreCliente},'%')
 		</if>		
+	</select>
+	<select id="obtenerAlmacenesPorSucursal" resultMap="resultMapAlmacen">
+		SELECT almacen.*,sucursal.nombre AS nombre_sucursal
+		FROM c_almacen almacen
+		INNER JOIN c_sucursal sucursal ON (almacen.cl_sucursal = sucursal.cl_sucursal)
+		WHERE almacen.cl_sucursal = #{sucursalId}
 	</select>
 	
 

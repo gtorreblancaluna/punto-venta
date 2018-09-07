@@ -30,11 +30,19 @@ public class ResultQuerySaleNote {
 	private String nameUser;
 	// total de la venta
 	private Float totalAmount;
+	// id cliente
+	private int clienteId;
 	// status
 	private SaleStatusDTO status;
 	// abonos 
-	private List<AbonoDTO> abonos;
+	private List<AbonoDTO> abonos;	
 	
+	public int getClienteId() {
+		return clienteId;
+	}
+	public void setClienteId(int clienteId) {
+		this.clienteId = clienteId;
+	}
 	/** datos para mostrar en el modulo de cobranza */
 	// fecha vencimiento
 	private Timestamp fechaVencimientoCredito;

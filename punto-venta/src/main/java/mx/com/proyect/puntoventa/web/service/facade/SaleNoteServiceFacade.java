@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import mx.com.proyect.puntoventa.web.forms.CustomerFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleForm;
+import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
+import mx.com.proyect.puntoventa.web.model.StoreDTO;
 import mx.com.proyect.puntoventa.web.service.ClientService;
 import mx.com.proyect.puntoventa.web.service.ColorService;
 import mx.com.proyect.puntoventa.web.service.InventoryService;
@@ -185,6 +187,56 @@ public class SaleNoteServiceFacade {
 		
 		Map<String,Object> myMap = new HashMap<>();		
 		myMap.put("mensaje", "Se elimino con \u00E9xito el abono");	
+		ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(myMap);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	       
+	
+        return json;
+
+	}
+	
+	@RequestMapping(value = "/obtenerAlmacenesPorSucursal.do")
+	@ResponseBody
+		public String obtenerAlmacenesPorSucursal(@RequestBody String sucursalId) {
+		
+		List<StoreDTO> almacenes = saleNoteService.obtenerAlmacenesPorSucursal(new Integer(sucursalId));
+		
+		Map<String,Object> myMap = new HashMap<>();		
+		myMap.put("almacenes", almacenes);
+		ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(myMap);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	       
+	
+        return json;
+
+	}
+	
+	@RequestMapping(value = "/buscarArticulosPorDescripcion.do")
+	@ResponseBody
+		public String buscarArticulosPorDescripcion(@RequestBody String descripcion) {
+		
+		SaleNoteFilter filtro = new SaleNoteFilter();
+		filtro.setDescriptionFilter(descripcion);
+		List<ItemDTO> articulos = inventoryService.getItemsByFilter(filtro);
+		
+		Map<String,Object> myMap = new HashMap<>();		
+		myMap.put("articulos", articulos);
 		ObjectMapper mapper = new ObjectMapper();
         String json = "";
         try {

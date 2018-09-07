@@ -16,8 +16,10 @@
 $( document ).ready(function() {
 		$('.btnAbonar').click(function(){
 			var saleId = $(this).attr('data-value');
+			var clienteId = $(this).attr('data-clienteId');
 			var $form = $('#formAbono');
 			$form.find('#saleId').val(saleId);
+			$form.find('#clienteId').val(clienteId);
 			$('#modalAbonar').modal('show');
 		});
 		
@@ -238,7 +240,7 @@ function eliminarAbono(abonoId){
 					<td><c:out value="${venta.resta eq '0' ? 'Pagado' : 'Pendiente' }"></c:out></td>
 					<td>${venta.saleDate}</td>
 					<td>${venta.fechaVencimientoCredito}</td>
-		 			<td><button type="button" class="btn btn-dark btnAbonar" id="btnAbonar" data-toggle="modal" data-value="${venta.saleId}">Abonar</button></td>
+		 			<td><button type="button" class="btn btn-dark btnAbonar" id="btnAbonar" data-toggle="modal" data-clienteId="${venta.clienteId}" data-value="${venta.saleId}">Abonar</button></td>
 		 		</tr>	 	
 	 		</c:forEach>
 	 	</tbody>
@@ -256,6 +258,7 @@ function eliminarAbono(abonoId){
       <div class="modal-body">     
 		<form:form modelAttribute="abono" action="cobranza.do" method="post" name="formAbono" id="formAbono">
 				<input type="hidden" name="saleNote.saleId" id="saleId">
+				<input type="hidden" name="cliente.userId" id="clienteId">
 					<div class="form-group row">
 						<div class="col-xs-6">	
 							<label>Cantidad a abonar: </label>

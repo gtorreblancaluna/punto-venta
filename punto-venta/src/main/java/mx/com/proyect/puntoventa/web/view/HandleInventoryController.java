@@ -42,8 +42,8 @@ public class HandleInventoryController {
 //			model.addAttribute("listItems", listItems);	
 			
 			// traer la lista de almacenes
-			List<StoreDTO> listStore = inventoryService.getAllStore();
-			model.addAttribute("listStore", listStore);	
+//			List<StoreDTO> listStore = inventoryService.getAllStore();
+//			model.addAttribute("listStore", listStore);	
 			List<ColorDTO> listColors = colorService.getAll();
 			model.addAttribute("listColors", listColors);
 			model.addAttribute("listOffices", officeService.getAll());
@@ -66,7 +66,8 @@ public class HandleInventoryController {
 				//2018.08.10 Se agregara siempre en el almacen 1, por que solo habra un almacen por sucursal
 //				item.setStoreDTO(new StoreDTO());
 //				item.getStoreDTO().setStoreId(1);
-				
+				item.setColor(new ColorDTO());
+				item.getColor().setColorId(1);
 				inventoryService.add(item);
 
 				model.addAttribute("item", new ItemDTO());
@@ -125,13 +126,15 @@ public class HandleInventoryController {
 		public String getSaleNoteByFilter(HttpServletRequest request, 
 				@ModelAttribute ("saleNoteFilter") SaleNoteFilter saleNoteFilter, Model model) {
 			
-			model.addAttribute("listItems", inventoryService.getItemsByFilter(saleNoteFilter));
+			List<ItemDTO> listItems = inventoryService.getItemsByFilter(saleNoteFilter);
+			model.addAttribute("listItems", listItems);
 			this.getAttributes(model);
 			return "handleInventory";
 		}
 		
 		public Model getAttributes(Model model) {
-			model.addAttribute("listStore", inventoryService.getAllStore());			
+			// almacenes
+			// model.addAttribute("listStore", inventoryService.getAllStore());			
 			model.addAttribute("listColors", colorService.getAll());
 			// sucursales
 			model.addAttribute("listOffices", officeService.getAll());

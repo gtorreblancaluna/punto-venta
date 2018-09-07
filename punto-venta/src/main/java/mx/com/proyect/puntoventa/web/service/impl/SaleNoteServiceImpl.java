@@ -24,6 +24,7 @@ import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.SaleNoteDTO;
 import mx.com.proyect.puntoventa.web.model.SaleStatusDTO;
+import mx.com.proyect.puntoventa.web.model.StoreDTO;
 import mx.com.proyect.puntoventa.web.model.TipoAbonoDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQuerySaleNote;
 import mx.com.proyect.puntoventa.web.service.ClientService;
@@ -208,6 +209,12 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 	public List<AbonoDTO> obtenerAbonosPorFiltro(FiltroAbonos filtroAbonos) {
 		// TODO Auto-generated method stub
 		return saleNoteDao.obtenerAbonosPorFiltro(filtroAbonos);
+	}
+
+	@Override
+	public List<StoreDTO> obtenerAlmacenesPorSucursal(int sucursalId) {
+		// TODO Auto-generated method stub
+		return saleNoteDao.obtenerAlmacenesPorSucursal(sucursalId);
 	}
 	
 

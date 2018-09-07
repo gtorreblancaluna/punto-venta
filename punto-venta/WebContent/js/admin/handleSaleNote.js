@@ -2,7 +2,17 @@ var g_saleId;
 
 $( document ).ready(function() {
 	
+	// buscar clientes via AJAX
+	$( '#filtroDescripcionArticulo' ).keyup(function(){
+		var valor = $(this).val();
+		if(valor != '')
+			filtroArticulos(valor,'add');
+	});
 	
+	$( '#sucursalIdElegir' ).change(function() {
+		var sucursalId = $( "#sucursalIdElegir option:selected" ).val();
+		traerAlamacenesPorSucursal(sucursalId);
+	});
 	
 	$(".tableAddNote tbody").on('keypress', function(e){
 		 var code = (e.keyCode ? e.keyCode : e.which);
@@ -595,9 +605,116 @@ function agregarColor(){
 	$('#modalAddColor').modal('show');
 }
 
+function traerAlamacenesPorSucursal(sucursalId){	
+	if(sucursalId != ''){		
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "obtenerAlmacenesPorSucursal.do",
+			data : sucursalId+"",
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {						
+				console.log(data.almacenes)
+				llenarComboAlmacenes(data.almacenes);
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);	
+				alert("ERROR: "+e)
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+		});
+	}else{
+		alert("No se recibio el parametro, porfavor recarga la pagina e intentalo de nuevo :( ")
+	}
+	
+}
 
 
+function llenarComboAlmacenes(almacenes){	
+		$('#storeIdFilter')
+	    .find('option')
+	    .remove()
+	    .end()
+	    .append('<option value="0">- Seleccione -</option>')
+	    .val('');
+		// llenamos el combo del filtro
+		$.each(almacenes, function (i, almacen) {
+		    $('#storeIdFilter').append($('<option>', { 
+		        value: almacen.storeId,
+		        text : almacen.description 
+		    }));
+		});	
+}
 
+function buscarArticulo(){
+	$('#modalElegirArticulo').modal('show');
+};
+
+function filtroArticulos(valor,form){
+	
+	var data = {};
+	if(valor != ''){		
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "buscarArticulosPorDescripcion.do",
+			data : valor,
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {				
+				// exito, llenamos la tabla de clientes
+				console.log(data.articulos);		
+				llenarTablaArticulos(data.articulos,form);
+				
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);	
+				alert("ERROR: "+e)
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+		});
+	}else{
+		alert("No se recibio el parametro, porfavor recarga la pagina e intentalo de nuevo :( ");
+	}
+}
+
+function llenarTablaArticulos(articulos,form){
+	
+	var cont = 0;
+	$('.tablaArticulos tbody tr td').remove();
+	$.each(articulos, function(index, articulo) {
+		$(".tablaArticulos tbody").append("<tr>"	
+				+"<td>"+ ++cont +"</td>"
+				+"<td>"+ articulo.itemId +"</td>"
+				+"<td><a href='javascript:void(0);' onclick='elegirArticulo("+JSON.stringify(articulo)+","+form+");'>"+ articulo.description +"</a></td>"
+		+"</tr>");
+	
+	});	// end for each
+}
+
+function elegirArticulo(articulo,form){
+	$('#modalElegirArticulo').modal('hide');	
+	var descripcion = articulo.description;
+	var precio = parseFloat(articulo.salePrice);
+	if(form == 'add'){
+		$(".tableAddNote tbody").append("<tr>"	
+				+"<td><span class='consecutivo'></span></td>"
+				+"<td><input type='hidden' class='form-control articuloId' name='items["+cont+"].itemIdForm' value="+articulo.itemId+"></td>"
+				+"<td><input type='text' class='form-control itemDescription' name='items["+ cont +"].description' value="+descripcion+" id='itemDescription' disabled></td>"
+				+"<td><input type='number' class='form-control amountItem' name='items["+ cont +"].amountEntry' value='"+(1)+"' id='amountItem'></td>"
+				+"<td><input type='number' class='form-control itemPrice' name='items["+ cont +"].salePrice' value="+(precio*1)+" id='itemPrice'></td>"
+				+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
+				+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
+		+"</tr>");
+		total();
+	}
+	
+}
 
 
 

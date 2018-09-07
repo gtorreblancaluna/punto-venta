@@ -95,10 +95,11 @@ $( document ).ready(function() {
 	};
 	
 	// funcion para agregar una fila a la tabla de actualizar nota
-	function addRowUpdate(){			
+	function addRowUpdate(){
 		$(".tableUpdateNote tbody").append("<tr>"			
 				+"<td style='width:2%'><span class='input-group-text tr-count"+(u_cont+1)+"'>"+ (u_cont+1) +"</span></td>"
 			+"<td><input type='number' class='form-control' name='' id='txtFindItemById' disabled></td>"
+			
 			+"<td>" +
 					"<select name='items["+u_cont+"].itemIdForm' class='form-control selItems' disabled>" +
 					"<option value='0' data-value='0'>- Seleccione -</option> " +
@@ -518,31 +519,31 @@ function addSaleDetailNoteForm(items){
 			    <thead>
 			      <tr>
 			      	<th>#</th>
-			      	<th style="width:10%;">Buscar por id</th>
-			        <th>Articulo</th>			        
+<!-- 			      	<th style="width:10%;">Buscar por id</th> -->
+			         <th ><a href="#" onclick="buscarArticulo();">Articulo</a></th>			        
 <!-- 			        <th ><a href="javascript:void();" onclick="agregarColor();">Color</a></th> -->
 			        <th>Descripci&oacute;n</th>
 			        <th>Cantidad</th>
 			        <th>Precio</th>
 			        <th>Total</th>
-			        <th></th>			        
+<!-- 			        <th></th>			         -->
 			      </tr>
 			    </thead>
 			    <tbody>
-			     <tr>
-			     	<td style="width:2%"><span class="input-group-text" >1</span></td>
-			     	<td >
-			     		<input type="number" class="form-control" name="" id="txtFindItemById" >
-			     	</td>			     		
-			        <td >
+<!-- 			     <tr> -->
+<!-- 			     	<td style="width:2%"><span class="input-group-text" >1</span></td> -->
+<!-- 			     	<td > -->
+<!-- 			     		<input type="number" class="form-control" name="" id="txtFindItemById" > -->
+<!-- 			     	</td>			     		 -->
+<!-- 			        <td > -->
 			        	
-				        <select name="items[0].itemIdForm" class="form-control selItems">
-						<option value="0" data-value="0">- Seleccione -</option>
-							<c:forEach items="${listItems}" var="item">
-								<option value="${item.itemId}" data-value="${item.itemId}|${item.description}|${item.salePrice}" >${item.description}</option>
-							</c:forEach>	
-						</select>			        
-			        </td>			      
+<!-- 				        <select name="items[0].itemIdForm" class="form-control selItems"> -->
+<!-- 						<option value="0" data-value="0">- Seleccione -</option> -->
+<%-- 							<c:forEach items="${listItems}" var="item"> --%>
+<%-- 								<option value="${item.itemId}" data-value="${item.itemId}|${item.description}|${item.salePrice}" >${item.description}</option> --%>
+<%-- 							</c:forEach>	 --%>
+<!-- 						</select>			         -->
+<!-- 			        </td>			       -->
 			        
 <!-- 			         <td> -->
 <!-- 				        <select name="items[0].color.colorId" class="form-control selColors"> -->
@@ -552,13 +553,12 @@ function addSaleDetailNoteForm(items){
 <%-- 							</c:forEach>	 --%>
 <!-- 						</select>			         -->
 <!-- 			        </td> -->
-			        <td><input type="text" class="form-control" name="items[0].description" id="itemDescription" disabled></td>
-			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					
-			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" ></td>
-			        <td><input type="number" class="form-control totalItem" name="" id="totalItem" disabled></td>
-			        <td><input type="button" class="btn btn-dark" id="addRow-add" value="Agregar" /></td>			        
-			      </tr>			
-			      	      	      
+<!-- 			        <td><input type="text" class="form-control" name="items[0].description" id="itemDescription" disabled></td> -->
+<!-- 			        <td><input type="number" class="form-control" name="items[0].amountEntry" id="amountItem"></td> 					 -->
+<!-- 			        <td><input type="number" class="form-control" name="items[0].salePrice" id="itemPrice" ></td> -->
+<!-- 			        <td><input type="number" class="form-control totalItem" name="" id="totalItem" disabled></td> -->
+<!-- 			        <td><input type="button" class="btn btn-dark" id="addRow-add" value="Agregar" /></td>			         -->
+<!-- 			      </tr>			      	      	       -->
 			    </tbody>			    
 			  </table>
 			 	
@@ -749,6 +749,58 @@ function addSaleDetailNoteForm(items){
 		</div>
 		<!-- end modal add color -->
 
+
+	<div id="modalElegirArticulo" class="modal fade" role="dialog">
+			<div class="modal-content" style="width:50%;height:90%;overflow: auto;">				
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Elegir articulo</h4>
+				</div>
+				<div class="modal-body">
+				<div class="form-group row">				
+					<div class="col-xs-6">
+						<span class="input-group-text">Sucursal: 
+					        <select name="officeIdFilter" class="form-control" id="sucursalIdElegir">
+							<option value="">- Seleccione -</option>
+								<c:forEach items="${listOffices}" var="office">
+									<option value="${office.officeId}">${office.name}</option>
+								</c:forEach>	
+							</select>	
+						</span>		
+					</div>
+					<div class="col-xs-6">
+						<span class="input-group-text">Almacen: 
+							<select name="storeIdFilter" class="form-control" id="storeIdFilter">
+										<option value="">- Seleccione -</option>
+									<c:forEach items="${listStore}" var="store">
+										<option value="${store.storeId}">${store.description}</option>
+									</c:forEach>	
+							</select>
+						</span>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-xs-12">
+						<label>Filtrar por descripci&oacute;n: </label>
+						<input type="hidden" id="valor" >
+						<input type="text" id="filtroDescripcionArticulo" name="filtroDescripcionArticulo" class="filtroDescripcionArticulo form-control">
+						<table class="table tablaArticulos">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Id</th>
+									<th>Descripci&oacute;n</th>																											
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				</div>
+
+			</div>
+		</div>
 
 
 <!-- 2018.08.01 - modal para cambiar estatus a la venta -->
