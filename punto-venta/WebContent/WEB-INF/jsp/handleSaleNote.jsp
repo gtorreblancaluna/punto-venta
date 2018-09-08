@@ -13,6 +13,7 @@
 #modalAdd, .model-content{width:95%;margin:auto;}
 #modalAddColor, .model-content{width:50%;margin:auto;}
 
+.tableAddNote .form-control{height:23px;}
 </style>
 <script type="text/javascript" src="js/admin/handleSaleNote.js?v1.1"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	
@@ -525,7 +526,7 @@ function addSaleDetailNoteForm(items){
 			        <th>Descripci&oacute;n</th>
 			        <th>Cantidad</th>
 			        <th>Precio</th>
-			        <th>Total</th>
+			        <th>Subtotal</th>
 <!-- 			        <th></th>			         -->
 			      </tr>
 			    </thead>
@@ -695,7 +696,7 @@ function addSaleDetailNoteForm(items){
 			        <th>Descripci&oacute;n</th>
 			        <th>Cantidad</th>
 			        <th>Precio</th>
-			        <th>Total</th>
+			        <th>Subtotal</th>
 			        <th><input type="button" class="btn btn-dark" id="addRow-update" value="Agregar" /></th>			        
 			      </tr>
 			    </thead>
@@ -783,7 +784,7 @@ function addSaleDetailNoteForm(items){
 					<div class="col-xs-12">
 						<label>Filtrar por descripci&oacute;n: </label>
 						<input type="hidden" id="valor" >
-						<input type="text" id="filtroDescripcionArticulo" name="filtroDescripcionArticulo" class="filtroDescripcionArticulo form-control">
+						<input type="text" id="filtroDescripcionArticulo" name="filtroDescripcionArticulo" class="filtroDescripcionArticulo form-control" disabled>
 						<table class="table tablaArticulos">
 							<thead>
 								<tr>

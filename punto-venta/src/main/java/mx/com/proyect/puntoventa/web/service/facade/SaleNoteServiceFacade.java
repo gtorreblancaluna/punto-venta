@@ -229,10 +229,14 @@ public class SaleNoteServiceFacade {
 	
 	@RequestMapping(value = "/buscarArticulosPorDescripcion.do")
 	@ResponseBody
-		public String buscarArticulosPorDescripcion(@RequestBody String descripcion) {
+		public String buscarArticulosPorDescripcion(@RequestBody String valor) {
+		String[] parametros = valor.split("-");
+		
 		
 		SaleNoteFilter filtro = new SaleNoteFilter();
-		filtro.setDescriptionFilter(descripcion);
+		filtro.setDescriptionFilter(parametros[0]);
+		filtro.setOfficeIdFilter(parametros[1]);
+		filtro.setStoreIdFilter(parametros[2]);
 		List<ItemDTO> articulos = inventoryService.getItemsByFilter(filtro);
 		
 		Map<String,Object> myMap = new HashMap<>();		

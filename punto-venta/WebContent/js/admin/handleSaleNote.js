@@ -2,11 +2,28 @@ var g_saleId;
 
 $( document ).ready(function() {
 	
+	$( '#sucursalIdElegir' ).change(function() {		
+			$('#filtroDescripcionArticulo').prop( "disabled", true );
+			
+	});
+	
+	$( '#storeIdFilter' ).change(function() {
+		var almacenId = $( "#storeIdFilter option:selected" ).val();
+		if(almacenId != 0){
+			$('#filtroDescripcionArticulo').prop( "disabled", false );
+			$('#filtroDescripcionArticulo').focus();
+		}
+	});
+	
 	// buscar clientes via AJAX
 	$( '#filtroDescripcionArticulo' ).keyup(function(){
 		var valor = $(this).val();
-		if(valor != '')
-			filtroArticulos(valor,'add');
+		var almacenId = $( "#storeIdFilter option:selected" ).val();
+		var sucursalId = $( "#sucursalIdElegir option:selected" ).val();
+		if(valor != ''){
+			valor += "-"+sucursalId+"-"+almacenId;
+			filtroArticulos(valor,1);
+		}
 	});
 	
 	$( '#sucursalIdElegir' ).change(function() {
@@ -59,21 +76,7 @@ $( document ).ready(function() {
 		total();	
 	});
 	
-	function total(){
-		var total=0;
-		var $form = $('#addSaleNoteForm');
-		var abono = $form.find('#cantidadAbono').val();
-		  $(".tableAddNote tbody tr").each(function () {
-            stotal = $(this).find("td").eq(6).find(".totalItem").val();
-            if(stotal != undefined && stotal != "")
-          	  total += parseFloat(stotal);
-        })
-      if(total >0){
-	      $('#totalPagar').html(new Intl.NumberFormat('es-MX').format(total));
-		  $('#total').html(new Intl.NumberFormat('es-MX').format(total-abono));
-      }
-		  return total;
-	}
+	
 		
 	// 2018.05.22 GTL Funcion para colocar los demas valores en los inputs del articulo
 	$(".tableAddNote tbody").on('change','.selItems', function(){	
@@ -94,6 +97,7 @@ $( document ).ready(function() {
 	$(".tableAddNote tbody").on('click','.btnDelete', function(){
 		if(confirm("\u00BFEliminar fila?"))
 			$(this).closest('tr').remove();		
+		conteoFilasArticulos(1);
 	});		
 //	document.getElementById("dateForm").valueAsDate = new Date()	
 	
@@ -684,7 +688,6 @@ function filtroArticulos(valor,form){
 }
 
 function llenarTablaArticulos(articulos,form){
-	
 	var cont = 0;
 	$('.tablaArticulos tbody tr td').remove();
 	$.each(articulos, function(index, articulo) {
@@ -700,20 +703,72 @@ function llenarTablaArticulos(articulos,form){
 function elegirArticulo(articulo,form){
 	$('#modalElegirArticulo').modal('hide');	
 	var descripcion = articulo.description;
-	var precio = parseFloat(articulo.salePrice);
-	if(form == 'add'){
+	var precio = parseFloat(articulo.salePrice);	
 		$(".tableAddNote tbody").append("<tr>"	
 				+"<td><span class='consecutivo'></span></td>"
-				+"<td><input type='hidden' class='form-control articuloId' name='items["+cont+"].itemIdForm' value="+articulo.itemId+"></td>"
-				+"<td><input type='text' class='form-control itemDescription' name='items["+ cont +"].description' value="+descripcion+" id='itemDescription' disabled></td>"
-				+"<td><input type='number' class='form-control amountItem' name='items["+ cont +"].amountEntry' value='"+(1)+"' id='amountItem'></td>"
-				+"<td><input type='number' class='form-control itemPrice' name='items["+ cont +"].salePrice' value="+(precio*1)+" id='itemPrice'></td>"
-				+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' disabled></td>"
+				+"<td style='width: 7%;'><input type='number' class='form-control articuloId' name='items["+u_cont+"].itemIdForm' value="+articulo.itemId+" disabled></td>"
+				+"<td style='width: 58%;'><input type='text' class='form-control itemDescription' name='items["+ u_cont +"].description' value="+descripcion+" id='itemDescription' disabled></td>"
+				+"<td><input type='number' class='form-control amountItem' name='items["+ u_cont +"].amountEntry' value='"+(1)+"' id='amountItem'></td>"
+				+"<td><input type='number' class='form-control itemPrice' name='items["+ u_cont +"].salePrice' value="+(precio*1)+" id='itemPrice'></td>"
+				+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' value="+(precio*1)+" disabled></td>"
 				+"<td><button type='button' class='btnDelete'>Eliminar</button></td>"
 		+"</tr>");
-		total();
-	}
+		u_cont++;
+		total();	
+		conteoFilasArticulos(form);
 	
+}
+
+function total(){
+	var total=0;
+	var $form = $('#addSaleNoteForm');
+	var abono = $form.find('#cantidadAbono').val();
+	  $(".tableAddNote tbody tr").each(function () {
+        stotal = $(this).find("td").eq(5).find(".totalItem").val();
+        if(stotal != undefined && stotal != "")
+      	  total += parseFloat(stotal);
+    })
+  if(total >0){
+      $('#totalPagar').html(new Intl.NumberFormat('es-MX').format(total));
+	  $('#total').html(new Intl.NumberFormat('es-MX').format(total-abono));
+  }
+	  return total;
+}
+
+function conteoFilasArticulos(valor){
+	var total=0;
+	
+	if(valor == '1'){
+	  $(".tableAddNote tbody tr").each(function () {
+		  
+		var articuloId = $(this).find('td').eq(1).find(".articuloId").attr('name');
+		$(this).find('td').eq(1).find(".articuloId").attr('name',articuloId.replace(/[^a-zA-Z_\W]+/g, total));
+		  
+		var itemDescription = $(this).find('td').eq(2).find(".itemDescription").attr('name');
+		$(this).find('td').eq(2).find(".itemDescription").attr('name',itemDescription.replace(/[^a-zA-Z_\W]+/g, total));
+		
+		var amountItem = $(this).find('td').eq(3).find(".amountItem").attr('name');
+		$(this).find('td').eq(3).find(".amountItem").attr('name',amountItem.replace(/[^a-zA-Z_\W]+/g, total));
+		
+		var itemPrice = $(this).find('td').eq(4).find(".itemPrice").attr('name');
+		$(this).find('td').eq(4).find(".itemPrice").attr('name',itemPrice.replace(/[^a-zA-Z_\W]+/g, total));			
+	
+		
+		$(this).find("td").eq(0).find(".consecutivo").text(++total);
+	  });
+	  $('#totalArticulos').text(total);
+	}else{
+		$(".tablaUpdateVentaArticulos tbody tr").each(function () {
+			// esta parte es para reoirganizar la numeracion del arreglo y evitar conflictos en el server
+			var x = $(this).find('td').eq(3).find(".descripcion").attr('name');
+			var z = x.replace(/[^a-zA-Z_\W]+/g, total);
+			$(this).find('td').eq(3).find(".descripcion").attr('name',z);
+			$(this).find("td").eq(0).find(".consecutivo").text(++total);
+		});
+	  $('#totalArticulosUpdate').text(total);
+	}
+  
+	  
 }
 
 
