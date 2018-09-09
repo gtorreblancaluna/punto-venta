@@ -293,7 +293,9 @@ $( document ).ready(function() {
 		    		valid = confirm("Confirma para continuar");
 		    	}
 		    }
-		    
+		    if(valid)
+		    	$form.find('.articuloId').prop( "disabled", false );
+		    	
 		    return valid;
 	}// end valid form
 	
@@ -720,7 +722,7 @@ function elegirArticulo(articulo,form){
 	var precio = parseFloat(articulo.salePrice);	
 		$(".tableAddNote tbody").append("<tr>"	
 				+"<td><span class='consecutivo'></span></td>"
-				+"<td style='width: 7%;'><input type='number' class='form-control articuloId' name='items["+u_cont+"].itemIdForm' value="+articulo.itemId+" disabled></td>"
+				+"<td style='width: 7%;'><input type='text' class='form-control articuloId' name='items["+u_cont+"].itemIdForm' value="+articulo.itemId+" disabled></td>"
 				+"<td style='width: 58%;'><input type='text' class='form-control itemDescription' name='items["+ u_cont +"].description' value="+descripcion+" id='itemDescription' disabled></td>"
 				+"<td><input type='number' class='form-control amountItem' name='items["+ u_cont +"].amountEntry' value='"+(1)+"' id='amountItem'></td>"
 				+"<td><input type='number' class='form-control itemPrice' name='items["+ u_cont +"].salePrice' value="+(precio*1)+" id='itemPrice'></td>"
