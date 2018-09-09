@@ -8,8 +8,12 @@ $( document ).ready(function() {
 	});
 	
 	$( '#storeIdFilter' ).change(function() {
+		
 		var almacenId = $( "#storeIdFilter option:selected" ).val();
 		if(almacenId != 0){
+			$('.filtroDescripcionArticulo').val("");
+			$('.filtroDescripcionArticulo').focus();
+			$('.tablaArticulos tbody tr td').remove();
 			$('#filtroDescripcionArticulo').prop( "disabled", false );
 			$('#filtroDescripcionArticulo').focus();
 		}
@@ -28,7 +32,9 @@ $( document ).ready(function() {
 	
 	$( '#sucursalIdElegir' ).change(function() {
 		var sucursalId = $( "#sucursalIdElegir option:selected" ).val();
+		$('.tablaArticulos tbody tr td').remove();
 		traerAlamacenesPorSucursal(sucursalId);
+		
 	});
 	
 	$(".tableAddNote tbody").on('keypress', function(e){
@@ -638,6 +644,7 @@ function traerAlamacenesPorSucursal(sucursalId){
 
 
 function llenarComboAlmacenes(almacenes){	
+	
 		$('#storeIdFilter')
 	    .find('option')
 	    .remove()
@@ -670,8 +677,15 @@ function filtroArticulos(valor,form){
 			timeout : 100000,
 			success : function(data) {				
 				// exito, llenamos la tabla de clientes
-				console.log(data.articulos);		
-				llenarTablaArticulos(data.articulos,form);
+				console.log(data.articulos);
+				if(data.articulos.length > 0)
+					llenarTablaArticulos(data.articulos,form);
+				else{
+					$('.tablaArticulos tbody tr td').remove();
+					$(".tablaArticulos tbody").append("<tr>"	
+							+"<td colspan=3>No encontre coincidencias segun el criterio aplicado</td>"							
+					+"</tr>");
+					}	
 				
 			},
 			error : function(e) {
@@ -756,7 +770,7 @@ function conteoFilasArticulos(valor){
 		
 		$(this).find("td").eq(0).find(".consecutivo").text(++total);
 	  });
-	  $('#totalArticulos').text(total);
+//	  $('#totalArticulos').text(total);
 	}else{
 		$(".tablaUpdateVentaArticulos tbody tr").each(function () {
 			// esta parte es para reoirganizar la numeracion del arreglo y evitar conflictos en el server
