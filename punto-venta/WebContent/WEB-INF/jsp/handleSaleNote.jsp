@@ -14,6 +14,7 @@
 #modalAddColor, .model-content{width:50%;margin:auto;}
 
 .tableAddNote .form-control{height:23px;}
+.tablaUpdateVentaArticulos .form-control{height:23px;}
 </style>
 <script type="text/javascript" src="js/admin/handleSaleNote.js?v1.1"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	
@@ -686,18 +687,18 @@ function addSaleDetailNoteForm(items){
 		</div> <!-- end row -->
 	
 	<div class="form-group row">
-     		<table class="table tableUpdateNote">
+     		<table class="table tableUpdateNote tablaUpdateVentaArticulos">
 			    <thead>
 			      <tr>
 			      	<th>#</th>
-			      	<th style="width:5%;">Buscar por id</th>
-			        <th>Articulo</th>			        
-			        <th>Color</th>
+<!-- 			      	<th style="width:5%;">Buscar por id</th> -->
+			        <th>Id</th>			        
+<!-- 			        <th>Color</th> -->
 			        <th>Descripci&oacute;n</th>
 			        <th>Cantidad</th>
 			        <th>Precio</th>
 			        <th>Subtotal</th>
-			        <th><input type="button" class="btn btn-dark" id="addRow-update" value="Agregar" /></th>			        
+<!-- 			        <th><input type="button" class="btn btn-dark" id="addRow-update" value="Agregar" /></th>			         -->
 			      </tr>
 			    </thead>
 			    <tbody>

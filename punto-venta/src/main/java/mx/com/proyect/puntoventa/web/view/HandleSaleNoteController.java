@@ -81,7 +81,7 @@ public class HandleSaleNoteController {
 			saleNoteForm.getAbono().setUsuario(new AccountDTO());
 			// asignamos el abono al usuario que esta logueado
 			saleNoteForm.getAbono().getUsuario().setUserId(userSession.getAccount().getUserId());
-			saleNoteService.add(saleNoteForm);		
+			saleNoteService.add(saleNoteForm);
 			
 			// se marco imprimir la nota despues de agregar los datos a bd
 			if (saleNoteForm.isPrintSaleNote())

@@ -429,7 +429,8 @@ function getSaleNoteById(id){
 				document.updateSaleNoteForm.saleId.value = data.noteForm.saleId;
 				$('.saleId').val(data.noteForm.saleId);
 				addSaleNoteForm(data.noteForm);
-				addSaleDetailNoteForm(data.noteForm.saleDetail);
+//				addSaleDetailNoteForm(data.noteForm.saleDetail);
+				llenarTablaActualizacion(data.noteForm.saleDetail);
 				$('#modalUpdate').modal('toggle');
 			},
 			error : function(e) {
@@ -462,12 +463,17 @@ function addSaleNoteForm(data){
 
 function totalUpdateForm(){
 	var total=0;
+	var abono = $('#totalAbonosUpdate').text();
 	  $(".tableUpdateNote tbody tr").each(function () {
-        stotal = $(this).find("td").eq().find(".totalItem").val();
+        stotal = $(this).find("td").eq(5).find(".totalItem").val();
         if(stotal != undefined && stotal != "")
       	  total += parseFloat(stotal);
     })
-  $('#totalPagarUpdate').html(new Intl.NumberFormat('es-MX').format(total));
+    if(total > 0){
+      $('#totalPagarUpdate').html(new Intl.NumberFormat('es-MX').format(total));
+  	  $('#restaUpdate').html(new Intl.NumberFormat('es-MX').format(total-abono));
+    }
+ 
 }
 
 function validateFormUpdateNote(){
@@ -775,16 +781,48 @@ function conteoFilasArticulos(valor){
 //	  $('#totalArticulos').text(total);
 	}else{
 		$(".tablaUpdateVentaArticulos tbody tr").each(function () {
-			// esta parte es para reoirganizar la numeracion del arreglo y evitar conflictos en el server
-			var x = $(this).find('td').eq(3).find(".descripcion").attr('name');
-			var z = x.replace(/[^a-zA-Z_\W]+/g, total);
-			$(this).find('td').eq(3).find(".descripcion").attr('name',z);
+			
+			var articuloId = $(this).find('td').eq(1).find(".articuloId").attr('name');
+			$(this).find('td').eq(1).find(".articuloId").attr('name',articuloId.replace(/[^a-zA-Z_\W]+/g, total));
+			  
+			var itemDescription = $(this).find('td').eq(2).find(".itemDescription").attr('name');
+			$(this).find('td').eq(2).find(".itemDescription").attr('name',itemDescription.replace(/[^a-zA-Z_\W]+/g, total));
+			
+			var amountItem = $(this).find('td').eq(3).find(".amountItem").attr('name');
+			$(this).find('td').eq(3).find(".amountItem").attr('name',amountItem.replace(/[^a-zA-Z_\W]+/g, total));
+			
+			var itemPrice = $(this).find('td').eq(4).find(".itemPrice").attr('name');
+			$(this).find('td').eq(4).find(".itemPrice").attr('name',itemPrice.replace(/[^a-zA-Z_\W]+/g, total));			
+		
+			
 			$(this).find("td").eq(0).find(".consecutivo").text(++total);
 		});
 	  $('#totalArticulosUpdate').text(total);
 	}
   
 	  
+}
+
+function llenarTablaActualizacion(articulos){
+	var contador = 1;
+	
+	$.each(articulos, function(index, articulo) {		
+		var descripcion = articulo.item.description;
+		var precio = parseFloat(articulo.item.salePrice);
+		var cantidadVendida = parseFloat(articulo.amount);
+		$(".tablaUpdateVentaArticulos tbody").append("<tr>"			
+				+"<td><span class='consecutivo'></span></td>"
+				+"<td style='width: 7%;'><input type='text' class='form-control articuloId' name='items["+contador+"].itemIdForm' value="+articulo.item.itemId+" disabled></td>"
+				+"<td style='width: 58%;'><input type='text' class='form-control itemDescription' name='items["+ contador +"].description' value="+descripcion+" id='itemDescription' disabled></td>"
+				+"<td><input type='number' class='form-control amountItem' name='items["+ contador +"].amountEntry' value='"+ cantidadVendida +"' id='amountItem' disabled></td>"
+				+"<td><input type='number' class='form-control itemPrice' name='items["+ contador +"].salePrice' value="+(precio)+" id='itemPrice' disabled></td>"
+				+"<td><input type='number' class='form-control totalItem' name='' id='totalItem' value="+(cantidadVendida*precio)+" disabled></td>"
+				+"<td><button type='button' class='btnDelete' disabled>Eliminar</button></td>"
+		+"</tr>");
+		contador++;
+	});	// end for each
+	conteoFilasArticulos(2);
+	totalUpdateForm();
 }
 
 
