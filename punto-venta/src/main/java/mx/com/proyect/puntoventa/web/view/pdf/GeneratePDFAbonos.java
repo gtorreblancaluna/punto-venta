@@ -58,6 +58,7 @@ public class GeneratePDFAbonos {
 			filtro.setFechaFinal( request.getParameter("fechaFinal") != null ? request.getParameter("fechaFinal") : null );
 			filtro.setTipoAbonoId( request.getParameter("tipoAbonoId") != null ? new Integer(request.getParameter("tipoAbonoId")) : null );
 			filtro.setNombreCliente( request.getParameter("nombreCliente") != null ? request.getParameter("nombreCliente") : null );
+			filtro.setStatusFilter( request.getParameter("idEstatus") != null ? request.getParameter("idEstatus") : null );
 			
 			List<AbonoDTO> abonos = saleNoteService.obtenerAbonosPorFiltro(filtro);					
 			
@@ -128,7 +129,17 @@ public class GeneratePDFAbonos {
 			        cell.setBorder(Rectangle.NO_BORDER);
 			        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 			        headerInfoTable.addCell(cell);	
+		        }	
+		     // filtro aplicado por tipo de estado de la venta
+		        if(filtro.getStatusFilter() != null && !filtro.getStatusFilter().equals("")) {		
+		        	cell = new PdfPCell(new Phrase("Estado de la venta es: "+filtro.getStatusFilter(),new Font(Font.HELVETICA, fontSizeNormal, Font.NORMAL)));
+			        cell.setFixedHeight(cellHeightInfoTable);
+			        cell.setColspan(3);
+			        cell.setBorder(Rectangle.NO_BORDER);
+			        cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			        headerInfoTable.addCell(cell);	
 		        }	     
+		        
 		        
 		        document.add(new Phrase("\n"));  // salto de linea 		        
 		        document.add(headerInfoTable);

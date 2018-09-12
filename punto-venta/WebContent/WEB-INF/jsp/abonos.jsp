@@ -11,56 +11,7 @@
 <style>		    
 
 </style>
-<script type="text/javascript">
-$( document ).ready(function() {
-		
-		
-	 	
-}); // end document ready
 
-function generatePdf(url){
-	var $form = $('#reporteAbonos');
-	var fechaInicial = $form.find('#fechaInicial').val();
-	var fechaFinal = $form.find('#fechaFinal').val();
-	var tipoAbonoId = $form.find('#tipoAbonoId').val();
-	var msgError = '';
-	
-	var parametros='';
-	var valid=true;
-	var cont=0;
-	var x = 0;
-	
-	if(fechaInicial == '' || fechaFinal == '' )
-		msgError += ++cont + '. Ingresa fecha inicial y final\n'
-		
-	if(fechaInicial != '' && fechaFinal != '' ){
-		x ++;
-		if(x == 1)
-			parametros += "?fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal+"";
-		else
-			parametros += "&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal+"";
-	}
-	if(tipoAbonoId != 0){
-		x ++;
-		if(x == 1)
-			parametros += "?tipoAbonoId="+tipoAbonoId+"";
-		else
-			parametros += "&tipoAbonoId="+tipoAbonoId+"";
-	}else{
-		msgError += ++cont + '. Ingresa tipo de abono\n'
-	}
-	
-	if(msgError != ''){
-		valid = false;
-		alert(msgError);
-	}else{
-		window.open(url+parametros+"", "Reporte abonos", "width=500,height=300");
-	}
-
-		
-		
-}
-</script>
 </head>
 <body>
  <div class="container" style="">
@@ -115,6 +66,16 @@ function generatePdf(url){
 									</c:forEach>	
 							</select>
 						</span>
+					</td>
+					<td>
+						<span class="input-group-text">Estado venta: 
+							<select name="statusFilter" class="form-control" id="statusFilter">
+										<option value="0">- Seleccione -</option>
+									<c:forEach items="${listStatus}" var="status">
+										<option value="${status.statusId}">${status.description}</option>
+									</c:forEach>	
+							</select>
+						</span>
 					</td>							
 				</tr>
 				<tr>
@@ -165,7 +126,66 @@ function generatePdf(url){
     </div>
     
     
+<script type="text/javascript">
+$( document ).ready(function() {
+		
+	$("#statusFilter").val("1").change();
+	 	
+}); // end document ready
 
+function generatePdf(url){
+	var $form = $('#reporteAbonos');
+	var fechaInicial = $form.find('#fechaInicial').val();
+	var fechaFinal = $form.find('#fechaFinal').val();
+	var tipoAbonoId = $form.find('#tipoAbonoId').val();
+	var idEstatus = $form.find('#statusFilter').val();
+	var msgError = '';
+	
+	var parametros='';
+	var valid=true;
+	var cont=0;
+	var x = 0;
+	
+	if(fechaInicial == '' || fechaFinal == '' )
+		msgError += ++cont + '. Ingresa fecha inicial y final\n'
+		
+	if(fechaInicial != '' && fechaFinal != '' ){
+		x ++;
+		if(x == 1)
+			parametros += "?fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal+"";
+		else
+			parametros += "&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal+"";
+	}
+	if(tipoAbonoId != 0){
+		x ++;
+		if(x == 1)
+			parametros += "?tipoAbonoId="+tipoAbonoId+"";
+		else
+			parametros += "&tipoAbonoId="+tipoAbonoId+"";
+	}else{
+		msgError += ++cont + '. Ingresa tipo de abono\n'
+	}
+	
+	if(idEstatus != '0'){
+		cont++;
+		if(cont == 1)
+			parametros += "?idEstatus="+idEstatus+"";
+		else
+			parametros += "&idEstatus="+idEstatus+"";
+		valid=true;
+	}
+	
+	if(msgError != ''){
+		valid = false;
+		alert(msgError);
+	}else{
+		window.open(url+parametros+"", "Reporte abonos", "width=500,height=300");
+	}
+
+		
+		
+}
+</script>
 
 </body>
 </html>

@@ -429,7 +429,10 @@
 		</if>	
 		<if test="nombreCliente != null and nombreCliente != '' ">
 			AND CONCAT(cliente.nombre,' ',cliente.ap_paterno) LIKE CONCAT('%',#{nombreCliente},'%')
-		</if>		
+		</if>	
+		<if test="statusFilter != null and statusFilter != 0 ">
+			AND venta.cl_estatus_venta = (#{statusFilter})
+		</if>	
 	</select>
 	<select id="obtenerAlmacenesPorSucursal" resultMap="resultMapAlmacen">
 		SELECT almacen.*,sucursal.nombre AS nombre_sucursal

@@ -10,8 +10,15 @@ public class FiltroAbonos {
 	private String fechaFinal;
 	private int tipoAbonoId;
 	private String nombreCliente;
+	// estatus
+	private String statusFilter;
 	
-	
+	public String getStatusFilter() {
+		return statusFilter;
+	}
+	public void setStatusFilter(String statusFilter) {
+		this.statusFilter = statusFilter;
+	}
 	public String getNombreCliente() {
 		return nombreCliente;
 	}

@@ -53,6 +53,7 @@ public class ReporteAbonosController {
 		// obtener lo necesario para enviar al JSP
 		public Model getModelAttributtes(Model model) {
 			model.addAttribute("tipoAbonos", saleNoteService.obtenerTiposAbono());
+			model.addAttribute("listStatus", saleNoteService.getSalesStatus());	
 			return model;
 		}
 
