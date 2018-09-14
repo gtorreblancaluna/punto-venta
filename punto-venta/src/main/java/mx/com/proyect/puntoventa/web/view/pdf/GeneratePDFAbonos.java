@@ -193,16 +193,16 @@ public class GeneratePDFAbonos {
 		 	        cellDetails.setFixedHeight(cellHeightDetails);		 	       
 		 	        tableDetails.addCell(cellDetails);
 		 	        
-		 	        cellDetails = new PdfPCell(new Phrase(abono.getCantidadAbono()+"",new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL, new Color(80, 80, 80))));
+		 	        cellDetails = new PdfPCell(new Phrase(NumberFormat.getCurrencyInstance(new Locale("es", "MX")).format(abono.getCantidadAbono()),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL, new Color(80, 80, 80))));
    		 	        cellDetails.setBorder(0);
-		        	cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_LEFT);
+		        	cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
 		 	        cellDetails.setFixedHeight(cellHeightDetails);		 	      
 		 	        tableDetails.addCell(cellDetails);		 	        
 		 	      
 		 	        cellDetails = new PdfPCell(new Phrase(abono.getTipoAbono().getDescripcion(),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL, new Color(80, 80, 80))));
 		 	        cellDetails.setFixedHeight(cellHeightDetails);
 		 	        cellDetails.setBorder(0);
-		 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
+		 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 		 	        cellDetails.setBorder(Rectangle.NO_BORDER);
 		 	        tableDetails.addCell(cellDetails);
 		 	        
@@ -210,13 +210,13 @@ public class GeneratePDFAbonos {
 		 	        cellDetails = new PdfPCell(new Phrase(abono.getDescripcion(),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL, new Color(80, 80, 80))));
 		 	        cellDetails.setFixedHeight(cellHeightDetails);
 		 	        cellDetails.setBorder(0);
-		 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
+		 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 		 	        tableDetails.addCell(cellDetails);
 		 	        
 		 	       cellDetails = new PdfPCell(new Phrase(abono.getCliente().getName()+" "+abono.getCliente().getFirstName(),new Font(Font.HELVETICA, fontSizeSmall, Font.NORMAL, new Color(80, 80, 80))));
 		 	        cellDetails.setFixedHeight(cellHeightDetails);
 		 	        cellDetails.setBorder(0);
-		 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
+		 	        cellDetails.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 		 	        tableDetails.addCell(cellDetails);
 		 	        		 	        
 		 	       total += abono.getCantidadAbono();

@@ -167,8 +167,8 @@ function generatePdf(url){
 	}
 	
 	if(idEstatus != '0'){
-		cont++;
-		if(cont == 1)
+		x++;
+		if(x == 1)
 			parametros += "?idEstatus="+idEstatus+"";
 		else
 			parametros += "&idEstatus="+idEstatus+"";
