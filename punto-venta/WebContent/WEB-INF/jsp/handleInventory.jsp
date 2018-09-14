@@ -10,7 +10,7 @@
 <style>
 
 </style>
-
+<link rel="stylesheet" type="text/css" href="css/data-tables.css">
 </head>
 <body>
 <div data-spy="scroll" data-target="#navbar-example3" data-offset="0">
@@ -109,23 +109,26 @@
 			<table class="table tableShowResultQuery">
 			<thead>
 				<tr>
-					<td>Id</td>
-					<td>Fecha alta</td>
-					<td>almacen</td>
-					<td>Sucursal</td>
-					<td>Descripci&oacute;n</td>	
-<!-- 					<td>Color</td>				 -->
-					<td>U.M.</td>
-<!-- 					<td>cantidad entrada</td> -->
-<!-- 					<td>cantidad salida</td> -->
-					<td>Precio venta</td>				
-					<td>Cantidad existente</td>							
+					<th>Id</th>
+					<th>Fecha alta</th>
+					<th>almacen</th>
+					<th>Sucursal</th>
+					<th>Descripci&oacute;n</th>	
+<!-- 					<th>Color</th>				 -->
+					<th>U.M.</th>
+<!-- 					<th>cantidad entrada</th> -->
+<!-- 					<th>cantidad salida</th> -->
+					<th>Precio venta</th>				
+					<th>Cantidad existente</th>	
+					<th></th>
+					<th></th>				
 				</tr>
 			</thead>
 				<c:forEach items="${listItems}" var="item">		
 			 		<tr>
 			 			<td>${item.itemId}</td>
-			 			<td>${item.date}</td>
+<%-- 			 			<td>${item.date}</td> --%>
+			 			<td style="text-align:center;"><fmt:formatDate value="${item.date}" pattern="dd-MM-yyyy" /></td>
 			 			<td>${item.storeDTO.description}</td>
 			 			<td>${item.officeDTO.name}</td>			 					 			
 			 			<td>${item.description}</td>
@@ -337,11 +340,11 @@
     </div>
 
 </div>
-
+<script type="text/javascript" src="js/data-tables.js"></script>
 <script type="text/javascript">
 $( document ).ready(function() {
 	
-	
+	$('.tableShowResultQuery').DataTable();
 	$( '.selOfficeUpdate' ).change(function() {
 		var sucursalId = $( ".selOfficeUpdate option:selected" ).val();
 		traerAlamcenesPorSucursal(sucursalId,3);

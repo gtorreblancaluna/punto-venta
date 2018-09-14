@@ -8,3 +8,4 @@ body{background-image: url(../images/madera.jpg);}
 .bgcol{background-color: #f1c16d3d;}
 .info-modal-header{background-color: #eae7e7;border-radius: 5px;}
 .containerShowResultQuery{height: auto;overflow: auto;margin-top: 10px;margin-bottom: 10px;}
+.containerShowResultQuery table tr td{padding:0px 1px 0px 1px !important;background-color: #fff;color:#000;}

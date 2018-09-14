@@ -11,7 +11,7 @@
 <style>		    
 
 </style>
-
+<link rel="stylesheet" type="text/css" href="css/data-tables.css">
 </head>
 <body>
  <div class="container" style="">
@@ -95,7 +95,7 @@
 		<!-- abonos -->
 		<c:if test="${not empty abonos}">
 		<div class="containerShowResultQuery container-result">
-		<table class="table tableShowResultQuery">
+		<table class="table tableShowResultQuery ">
 		<thead>
 			<tr>
 				<th>id</th>
@@ -125,10 +125,10 @@
 
     </div>
     
-    
+<script type="text/javascript" src="js/data-tables.js"></script>    
 <script type="text/javascript">
 $( document ).ready(function() {
-		
+	$('.tableShowResultQuery').DataTable();
 	$("#statusFilter").val("1").change();
 	 	
 }); // end document ready
