@@ -35,7 +35,17 @@ public class DeliveryDTO implements Serializable {
 	private String formatedDateDelivery;
 	// detalle de la entrega
 	private List<DeliveryDetailDTO> details;
+	// cl_almacen
+	private StoreDTO store;
 	
+	
+	
+	public StoreDTO getStore() {
+		return store;
+	}
+	public void setStore(StoreDTO store) {
+		this.store = store;
+	}
 	public List<DeliveryDetailDTO> getDetails() {
 		return details;
 	}

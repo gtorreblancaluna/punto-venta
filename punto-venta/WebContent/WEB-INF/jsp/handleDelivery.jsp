@@ -253,79 +253,119 @@ function addSaleDetailNoteForm(items){
       </div>
       <div class="modal-body">     
 <form:form modelAttribute="deliveryForm" action="handleDelivery.do" method="post" name="deliveryForm" id="addDeliveryForm">
-	<table >
-		<tr>
-			<td>
-				<span class="input-group-text">Fecha :<input type="date" name="formatedDateDelivery" id="dateForm" class="form-control dateForm"> </span>
-			</td>
+
+			<div class="form-group row">
+				<div class="col-xs-3">				
+					<label>Descripci&oacute;n:</label>
+					<input type="text" name="description" id="description" class="form-control">
+				</div>
+				<div class="col-xs-3">
+					<span class="input-group-text">Sucursal: 
+				        <select name="office.officeId" class="form-control" id="sucursalIdElegir">
+						<option value="">- Seleccione -</option>
+							<c:forEach items="${listOffices}" var="office">
+								<option value="${office.officeId}">${office.name}</option>
+							</c:forEach>	
+						</select>	
+					</span>		
+				</div>	
+				<div class="col-xs-3">
+						<span class="input-group-text">Almacen: 
+							<select name="store.storeId" class="form-control" id="storeIdFilter">
+										<option value="">- Seleccione -</option>
+<%-- 									<c:forEach items="${listStore}" var="store"> --%>
+<%-- 										<option value="${store.storeId}">${store.description}</option> --%>
+<%-- 									</c:forEach>	 --%>
+							</select>
+						</span>
+				</div>
+				<div class="col-xs-3">
+						<span class="input-group-text">Proveedor: 
+							<select name="account.userId" class="form-control" id="proveedorId">
+										<option value="">- Seleccione -</option>
+									<c:forEach items="${proveedores}" var="proveedor">
+										<option value="${proveedor.userId}">${proveedor.firstName} ${proveedor.secondName}</option>
+									</c:forEach>	
+							</select>
+						</span>
+				</div>
+			</div>
+
+<!-- 	<table > -->
+<!-- 		<tr> -->
+<!-- 			<td> -->
+<!-- 				<span class="input-group-text">Fecha :<input type="date" name="formatedDateDelivery" id="dateForm" class="form-control dateForm"> </span> -->
+<!-- 			</td> -->
 			
-			<td>
-			<span class="input-group-text">Sucursal : 
-				<select name="office.officeId" class="form-control storeId" id="officeId">
-							<option value="0">- Seleccione -</option>
-						<c:forEach items="${listOffices}" var="office">
-							<option value="${office.officeId}">${office.name}</option>
-						</c:forEach>	
-				</select>
-			</span>
+<!-- 			<td> -->
+<!-- 			<span class="input-group-text">Sucursal :  -->
+<!-- 				<select name="office.officeId" class="form-control storeId" id="officeId"> -->
+<!-- 							<option value="0">- Seleccione -</option> -->
+<%-- 						<c:forEach items="${listOffices}" var="office"> --%>
+<%-- 							<option value="${office.officeId}">${office.name}</option> --%>
+<%-- 						</c:forEach>	 --%>
+<!-- 				</select> -->
+<!-- 			</span> -->
 			
-			</td>
+<!-- 			</td> -->
 			
-		</tr>
-	</table>
+<!-- 		</tr> -->
+<!-- 	</table> -->
 	
 	<div class="row">
      		<table class="table tableAddNote">
 			    <thead>
 			      <tr>
 			      	<th>#</th>
-			      	<th style="width:5%;">Buscar por id</th>
-			        <th>Articulo</th>			        
-			        <th>Color</th>
+<!-- 			      	<th style="width:5%;">Buscar por id</th> -->
+			        <th ><a href="#" onclick="buscarArticulo();">Articulo</a></th>				        
+<!-- 			        <th>Color</th> -->
 			        <th>Descripci&oacute;n</th>
 			        <th>Cantidad</th>			        
 			        <th></th>			        
 			      </tr>
 			    </thead>
 			    <tbody>
-			     <tr>
-			     	<td style="width:2%"><span class="input-group-text" >1</span></td>
-			     	<td >
-			     		<input type="number" class="form-control" name="" id="txtFindItemById" >
-			     	</td>			     		
-			        <td>			        	
-				        <select name="details[0].item.itemIdForm" class="form-control selItems">
-						<option value="0" data-value="0">- Seleccione -</option>
-							<c:forEach items="${listItems}" var="item">
-								<option value="${item.itemId}" data-value="${item.itemId}|${item.description}|${item.salePrice}" >${item.description}</option>
-							</c:forEach>	
-						</select>			        
-			        </td>			      
+<!-- 			     <tr> -->
+<!-- 			     	<td style="width:2%"><span class="input-group-text" >1</span></td> -->
+<!-- 			     	<td > -->
+<!-- 			     		<input type="number" class="form-control" name="" id="txtFindItemById" > -->
+<!-- 			     	</td>			     		 -->
+<!-- 			        <td>			        	 -->
+<!-- 				        <select name="details[0].item.itemIdForm" class="form-control selItems"> -->
+<!-- 						<option value="0" data-value="0">- Seleccione -</option> -->
+<%-- 							<c:forEach items="${listItems}" var="item"> --%>
+<%-- 								<option value="${item.itemId}" data-value="${item.itemId}|${item.description}|${item.salePrice}" >${item.description}</option> --%>
+<%-- 							</c:forEach>	 --%>
+<!-- 						</select>			         -->
+<!-- 			        </td>			       -->
 			        
-			         <td>
-				        <select name="details[0].item.color.colorId" class="form-control selColors">
-						<option value="0">- Seleccione -</option>
-							<c:forEach items="${listColors}" var="color">
-								<option value="${color.colorId}">${color.description}</option>
-							</c:forEach>	
-						</select>			        
-			        </td>
-			        <td><input type="text" class="form-control" name="details[0].item.description" id="itemDescription" disabled></td>
-			        <td><input type="number" class="form-control" name="details[0].item.amountEntry" id="amountItem"></td> 					
-			        <td><input type="button" class="btn btn-dark" id="addRow-add" value="Agregar" /></td>			        
-			      </tr>			
+<!-- 			         <td> -->
+<!-- 				        <select name="details[0].item.color.colorId" class="form-control selColors"> -->
+<!-- 						<option value="0">- Seleccione -</option> -->
+<%-- 							<c:forEach items="${listColors}" var="color"> --%>
+<%-- 								<option value="${color.colorId}">${color.description}</option> --%>
+<%-- 							</c:forEach>	 --%>
+<!-- 						</select>			         -->
+<!-- 			        </td> -->
+<!-- 			        <td><input type="text" class="form-control" name="details[0].item.description" id="itemDescription" disabled></td> -->
+<!-- 			        <td><input type="number" class="form-control" name="details[0].item.amountEntry" id="amountItem"></td> 					 -->
+<!-- 			        <td><input type="button" class="btn btn-dark" id="addRow-add" value="Agregar" /></td>			         -->
+<!-- 			      </tr>			 -->
 			      	      	      
 			    </tbody>			    
 			  </table>
-			  <input type="submit" class="btn btn-dark" name="add" value="Enviar" />	
+			  <div class="form-group row">
+			  	<div class="col-xs-12">		
+			  		<input type="submit" class="btn btn-dark" name="add" value="Enviar" style="width: 100%;"/>
+			  	</div>
+			  </div>	
 	  	</div> <!-- end row -->
 	  	</form:form>
 	  	
 	   <p>Agregar entrega</p>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
-      </div>
+     
     </div>
     </div><!-- end modal add -->
     
@@ -448,7 +488,35 @@ function addSaleDetailNoteForm(items){
     </div>
     </div><!-- end modal update -->
     
-    
+    <div id="modalElegirArticulo" class="modal fade" role="dialog">
+			<div class="modal-content" style="width:50%;height:90%;overflow: auto;">				
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Elegir articulo</h4>
+				</div>
+				<div class="modal-body">				
+				<div class="form-group row">
+					<div class="col-xs-12">
+						<label>Filtrar por descripci&oacute;n: </label>
+						<input type="hidden" id="valor" >
+						<input type="text" id="filtroDescripcionArticulo" name="filtroDescripcionArticulo" class="filtroDescripcionArticulo form-control" >
+						<table class="table tablaArticulos">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Id</th>
+									<th>Descripci&oacute;n</th>																											
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				</div>
+
+			</div>
+		</div><!-- fin elegir articulo -->
     
     
     

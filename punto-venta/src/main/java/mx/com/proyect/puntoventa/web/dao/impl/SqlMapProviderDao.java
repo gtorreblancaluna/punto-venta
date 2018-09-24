@@ -53,7 +53,7 @@ public class SqlMapProviderDao extends SqlSessionDaoSupport implements ProviderD
 			Map<String,Object> param = new HashMap<>();
 			param.put("deliveryId", delivery.getDeliveryId());
 			param.put("itemId", dto.getItem().getItemIdForm());
-			param.put("colorId", dto.getItem().getColor().getColorId());
+//			param.put("colorId", dto.getItem().getColor().getColorId());
 			param.put("amount", dto.getItem().getAmountEntry());			
 			getSqlSession().insert("addDeliveryDetails",param);
 		}

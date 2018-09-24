@@ -218,11 +218,16 @@ fe_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 fe_entrega TIMESTAMP NULL,
 cl_usuario INTEGER UNSIGNED NOT NULL,
 cl_sucursal INTEGER UNSIGNED NOT NULL,
+cl_almacen INTEGER UNSIGNED NOT NULL,
 cl_estatus_entrega INTEGER UNSIGNED NOT NULL,
 ds_descripcion VARCHAR(100),
 PRIMARY KEY (cl_entrega),
 CONSTRAINT fk_entrega_cl_sucursal FOREIGN KEY fk_entrega_cl_sucursal (cl_sucursal) 
 	REFERENCES c_sucursal(cl_sucursal)
+	ON DELETE CASCADE
+    ON UPDATE CASCADE,
+CONSTRAINT fk_entrega_cl_almacen FOREIGN KEY fk_entrega_cl_almacen (cl_almacen) 
+	REFERENCES c_almacen(cl_almacen)
 	ON DELETE CASCADE
     ON UPDATE CASCADE,
 CONSTRAINT fk_entrega_cl_usuario FOREIGN KEY fk_entrega_cl_usuario (cl_usuario) 

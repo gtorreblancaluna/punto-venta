@@ -64,13 +64,37 @@
 		<selectKey resultType="java.lang.Integer" keyProperty="deliveryId" order="AFTER">
 			SELECT LAST_INSERT_ID() as id
 		</selectKey>
-		INSERT INTO c_entrega (fe_entrega,cl_usuario,cl_sucursal,cl_estatus_entrega,ds_descripcion)
-		VALUES (#{dateDelivery},#{account.userId},#{office.officeId},#{status},#{description})
+		INSERT INTO c_entrega (
+			cl_usuario,
+			cl_sucursal,
+			cl_almacen,
+			cl_estatus_entrega,
+			ds_descripcion
+			)
+		VALUES 
+			(
+				#{account.userId},
+				#{office.officeId},
+				#{store.storeId},
+				#{status},
+				#{description}
+			)
 	</insert>
 	
 	<insert id="addDeliveryDetails" parameterType="java.util.Map">
-		INSERT INTO k_detalle_entrega (cl_entrega,cl_articulo,cl_color,cantidad)
-		VALUES (#{deliveryId},#{itemId},#{colorId},#{amount})
+		INSERT INTO k_detalle_entrega 
+			(
+				cl_entrega,
+				cl_articulo,
+<!-- 				cl_color, -->
+				cantidad
+			)
+		VALUES (
+			#{deliveryId},
+			#{itemId},
+<!-- 			#{colorId}, -->
+			#{amount}
+		)
 	</insert>
 	
 	

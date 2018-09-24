@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.WebUtils;
 
+import mx.com.proyect.puntoventa.web.commons.ApplicationConstants;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
+import mx.com.proyect.puntoventa.web.forms.UserFilter;
 import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
@@ -32,6 +34,7 @@ import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.OfficeDTO;
 import mx.com.proyect.puntoventa.web.model.UserSession;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQueryDelivery;
+import mx.com.proyect.puntoventa.web.service.AccountService;
 import mx.com.proyect.puntoventa.web.service.ColorService;
 import mx.com.proyect.puntoventa.web.service.InventoryService;
 import mx.com.proyect.puntoventa.web.service.OfficeService;
@@ -41,13 +44,15 @@ import mx.com.proyect.puntoventa.web.service.ProviderService;
 public class HandleDeliveryController {
 	
 	@Autowired
-	ProviderService providerService;
+	private ProviderService providerService;
+//	@Autowired
+//	private InventoryService inventoryService;
 	@Autowired
-	InventoryService inventoryService;
+	private OfficeService officeService;
+//	@Autowired
+//	private ColorService colorService;
 	@Autowired
-	OfficeService officeService;
-	@Autowired
-	ColorService colorService;
+	private AccountService accountService;
 	
 	// mostrando pantalla inicial
 	@RequestMapping(value = "/handleDelivery.do" , method = RequestMethod.GET)
@@ -69,7 +74,7 @@ public class HandleDeliveryController {
 			UserSession userSession = (UserSession) session.getAttribute("userSession");
 			
 			if(userSession != null && userSession.getAccount() != null) {				
-				deliveryForm.setAccount(userSession.getAccount());
+//				deliveryForm.setAccount(userSession.getAccount());
 				deliveryForm.setStatus(ENTREGA_REGISTRADO+"");
 				providerService.addDelivery(deliveryForm);
 				model.addAttribute("messageSucess","Se agrego con exito la entrega, total de articulos: "+deliveryForm.getDetails().size());
@@ -88,29 +93,32 @@ public class HandleDeliveryController {
 		 // traer las entregas por el filtro consultado
 		@RequestMapping(value = "handleDelivery.do", params = "filter")
 		public String getSaleNoteByFilter(HttpServletRequest request, 
-				@ModelAttribute ("saleNoteFilter") SaleNoteFilter saleNoteFilter, Model model) {
+				@ModelAttribute ("saleNoteFilter") SaleNoteFilter saleNoteFilter, Model model) {			
 			
-			AccountDTO account = null;
-			account = (AccountDTO) WebUtils.getSessionAttribute(request, "userSession");
-			if(account == null) {
-				account = new AccountDTO();
-				account.setUserId("1");
-			}
+			UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, "userSession");
+			if(userSession != null && userSession.getAccount() != null) {
 			// Solo traera las entregas del usuario logueado
-			saleNoteFilter.setUserId(account.getUserId());
-			List<ResultQueryDelivery> listDelivery = providerService.getByFilter(saleNoteFilter);
-			model.addAttribute("listDelivery", listDelivery);
-			
-			// enviando los articulos al JSP
-			this.getModelAttributtes(model);						
-			
-			return "handleDelivery";
+				saleNoteFilter.setUserId(userSession.getAccount().getUserId());
+				List<ResultQueryDelivery> listDelivery = providerService.getByFilter(saleNoteFilter);
+				model.addAttribute("listDelivery", listDelivery);
+				
+				// enviando info al JSP
+				this.getModelAttributtes(model);						
+				
+				return "handleDelivery";
+			}else {
+				model.addAttribute("messageError", "ERROR. No se encontro session, porfavor recarga la pagina y logueate correctamente ");
+				return "handleDelivery";		
+			}
 		}
 		
 		public Model getModelAttributtes(Model model) {		
-			model.addAttribute("listItems", inventoryService.getAll(0));					
+//			model.addAttribute("listItems", inventoryService.getAll(0));					
 			model.addAttribute("listOffices", officeService.getAll());
-			model.addAttribute("listColors", colorService.getAll());	
+			UserFilter userFilter = new UserFilter();
+			userFilter.setJobIdFilter(ApplicationConstants.PUESTO_PROVEEDOR+"");
+			model.addAttribute("proveedores", accountService.getUserByFilter(userFilter));
+//			model.addAttribute("listColors", colorService.getAll());	
 			
 				
 		return model;

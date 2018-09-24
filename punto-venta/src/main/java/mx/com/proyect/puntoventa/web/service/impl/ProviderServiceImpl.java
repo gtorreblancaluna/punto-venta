@@ -60,20 +60,10 @@ public class ProviderServiceImpl implements ProviderService {
 	@Override
 	// agregar entrega a c_entrega
 	public boolean addDelivery(DeliveryDTO delivery) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			   
-		    java.util.Date date = dateFormat.parse(delivery.getFormatedDateDelivery());
-		    java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
-		    delivery.setDateDelivery(timestamp);
-		} catch(Exception e) { //this generic but you can control another types of exception
-		    System.out.println(e);
-		}
-		
 		providerDao.addDelivery(delivery);
 				
 		
-		return false;
+		return true;
 	}
 
 	@Override
