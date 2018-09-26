@@ -85,6 +85,25 @@
 						</ul>
 					</li>
 				</c:if>
+				
+				<c:if test="${userSession.account.job.jobId eq '5' }">
+				<!-- ALMACENISTA -->
+				
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="javascript:void(0);">Sistema</a>
+						<ul class="dropdown-menu">							
+							<li><a href="handleInventory.do">Inventario</a></li>
+						</ul>
+					</li>
+					<li><a class="dropdown-toggle" data-toggle="dropdown"
+						href="javascript:void(0);">Provedores</a>
+						<ul class="dropdown-menu">
+							<li><a>LLegadas</a></li>
+							<li><a>Reporte diario</a></li>
+							<li><a href="handleDelivery.do">Entregas</a></li>
+						</ul>
+					</li>
+				</c:if>
 			</c:if>
 		</ul>
 	</div>

@@ -361,21 +361,21 @@ $( document ).ready(function() {
 	});
 	
 	$( '.btnAddProduct' ).click(function() {
-		if('${userSession.account.job.jobId}' == '2')
+		if('${userSession.account.job.jobId}' != '1')
 			alert("No tienes suficientes permisos para esta accion :( ")
 			else
 				$('#modalAdd').modal('toggle');
 	});
 		
 	$( '.btnAddColor' ).click(function() {
-		if('${userSession.account.job.jobId}' == '2')
+		if('${userSession.account.job.jobId}' != '1')
 			alert("No tienes suficientes permisos para esta accion :( ")
 			else
 				$('#modalAddColor').modal('toggle');
 	});
 	//confirmar eliminar	
 	$('form[name="deleteForm"]').submit(function() {
-		if('${userSession.account.job.jobId}' == '2'){
+		if('${userSession.account.job.jobId}' != '1'){
 			alert("No tienes suficientes permisos para esta accion :( ")
 			return false;
 		}
@@ -384,7 +384,7 @@ $( document ).ready(function() {
 	
 	
 	$( '.btnUpdate' ).click(function() {
-		if('${userSession.account.job.jobId}' == '2'){
+		if('${userSession.account.job.jobId}' != '1'){
 			alert("No tienes suficientes permisos para esta accion :( ")
 			return false;
 		}

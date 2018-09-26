@@ -341,6 +341,7 @@ INSERT INTO c_puesto (ds_descripcion) VALUES ('administrador');
 INSERT INTO c_puesto (ds_descripcion) VALUES ('vendedor');
 INSERT INTO c_puesto (ds_descripcion) VALUES ('chofer');
 INSERT INTO c_puesto (ds_descripcion) VALUES ('proveedor');
+INSERT INTO c_puesto (ds_descripcion) VALUES ('almacenista');
 
 INSERT INTO c_sucursal (cl_sucursal, nombre, calle, t_fijo) VALUES ('1', 'TOLUCA 1', 'PINOSUAREZ', '7222426467');
 INSERT INTO c_sucursal (cl_sucursal, nombre, calle, t_fijo) VALUES ('2', 'TOLUCA 2', 'ADOLFO LOPEZ MATEOS', '7223186761');
@@ -357,6 +358,7 @@ INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,
 INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('2','1','Armando','Gonzales','Borja','armando@email.com','123456','1','1');
 -- agregamos usuario ROL PROVEEDOR
 INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('4','1','luis','proveedor 1','ap_paterno','proveedor@email.com','123456','1','1');
+INSERT INTO c_usuario (cl_puesto,cl_sucursal,nombre,ap_paterno,ap_materno,email,password,fg_admin,fg_activo) VALUES ('5','1','Pedro','Almacenista 1','ap_paterno','almacenista@email.com','123456','1','1');
 
 INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente1','ap_paterno','ap_materno','cliente1@email.com','1');
 INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente2','ap_paterno','ap_materno','cliente2@email.com','1');
