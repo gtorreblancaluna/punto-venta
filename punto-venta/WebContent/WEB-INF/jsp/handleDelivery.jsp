@@ -10,7 +10,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/data-tables.css">
 <script type="text/javascript" src="js/data-tables.js"></script>
-<script type="text/javascript" src="js/admin/handleDelivery.js?v1.1"></script>
+<script type="text/javascript" src="js/admin/handleDelivery.js?v1.10"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	
 <title>Punto Venta :: Entregas</title>
 <script type="text/javascript">

@@ -30,6 +30,7 @@ import mx.com.proyect.puntoventa.web.model.AccountDTO;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
 import mx.com.proyect.puntoventa.web.model.DeliveryDTO;
+import mx.com.proyect.puntoventa.web.model.DeliveryDetailDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.OfficeDTO;
 import mx.com.proyect.puntoventa.web.model.UserSession;
@@ -73,8 +74,8 @@ public class HandleDeliveryController {
 			HttpSession session = request.getSession();
 			UserSession userSession = (UserSession) session.getAttribute("userSession");
 			
-			if(userSession != null && userSession.getAccount() != null) {				
-//				deliveryForm.setAccount(userSession.getAccount());
+			if(userSession != null && userSession.getAccount() != null) {
+				
 				deliveryForm.setStatus(ENTREGA_REGISTRADO+"");
 				providerService.addDelivery(deliveryForm);
 				model.addAttribute("messageSucess","Se agrego con exito la entrega, total de articulos: "+deliveryForm.getDetails().size());

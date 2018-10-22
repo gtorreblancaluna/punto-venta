@@ -368,13 +368,13 @@ INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('clien
 INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente10','ap_paterno','ap_materno','cliente10@email.com','1');
 INSERT INTO c_cliente (nombre,ap_paterno,ap_materno,email,status) VALUES ('cliente11','ap_paterno','ap_materno','cliente11@email.com','1');
 
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_2','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','2','1','sala_3','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_4','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_5','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_6','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_7','pieza',600,22000,500,'1');
-INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('2','1','1','sala_8','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('1','1','1','sala_2','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('1','2','1','sala_3','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('1','1','1','sala_4','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('1','1','1','sala_5','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('1','1','1','sala_6','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('1','1','1','sala_7','pieza',600,22000,500,'1');
+INSERT INTO c_articulo (cl_almacen,cl_color,cl_sucursal,descripcion,unidad_medida,cantidad_entrada,precio_venta,cantidad_existente,fg_estatus) VALUES ('1','1','1','sala_8','pieza',600,22000,500,'1');
 	
 
 

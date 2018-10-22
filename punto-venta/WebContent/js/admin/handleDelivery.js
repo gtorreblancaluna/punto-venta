@@ -9,22 +9,76 @@ $( document ).ready(function() {
 		conteoFilasArticulos(1);
 	});	
 	
-	$( '#sucursalIdElegir' ).change(function() {
-		var sucursalId = $( "#sucursalIdElegir option:selected" ).val();
-		$('.tablaArticulos tbody tr td').remove();
-		traerAlamacenesPorSucursal(sucursalId);
+	
+	$("#sucursalIdElegir").on('focus', function () {
+        // Store the current value on focus and on change
+        previous = this.value;
+    }).change(function() {
+    	
+    	var cont = 0;
+		 $(".tableAddNote tbody tr td").each(function () {
+			 cont++;
+		 });	
+		if(cont > 0)
+		{
+			if(confirm("Si cambias la sucursal, se eliminar\u00E1n los articulos que tienes en la lista\n\u00BFDeseas continuar?"))
+			{
+				$('.tableAddNote tbody tr td').remove();
+				var sucursalId = $( "#sucursalIdElegir option:selected" ).val();
+				$('.tablaArticulos tbody tr td').remove();
+				traerAlamacenesPorSucursal(sucursalId);
+			
+			}else{
+				$(this).val(previous);
+				return false;
+			}
+			
+		}else{
+			var sucursalId = $( "#sucursalIdElegir option:selected" ).val();
+			$('.tablaArticulos tbody tr td').remove();
+			traerAlamacenesPorSucursal(sucursalId);
+		}
+//        previous = this.value;
+    });
+	
+	$("#storeIdFilter").on('focus', function () {
+        // Store the current value on focus and on change
+        previous = this.value;
+    }).change(function() {
 		
+		var sucursalId = $(this).val();
+		var cont = 0;
+		 $(".tableAddNote tbody tr td").each(function () {
+			 cont++;
+		 });	
+		if(cont > 0)
+		{
+			if(confirm("Si cambias el almacen, se eliminar\u00E1n los articulos que tienes en la lista\n\u00BFDeseas continuar?"))
+			{
+				$('.tableAddNote tbody tr td').remove();
+			
+			}else{
+				$(this).val(previous);
+				return false;
+			}
+			
+		}
 	});
 
 
 	//buscar articulos via AJAX
 	$( '#filtroDescripcionArticulo' ).keyup(function(){
 		var valor = $(this).val();
+		
+		$form = $('#addDeliveryForm');
+		var sucursalId = $form.find("#sucursalIdElegir option:selected" ).val();
+		var almacenId = $form.find("#storeIdFilter option:selected" ).val();
+		
 //		var almacenId = $( "#storeIdFilter option:selected" ).val();
 //		var sucursalId = $( "#sucursalIdElegir option:selected" ).val();
 		if(valor != ''){
 			// traemos todos los articulos sin aplicar filtro
-			valor += "-"+0+"-"+0;
+			valor += "-"+sucursalId+"-"+almacenId;
 			filtroArticulos(valor,1);
 		}
 	});
@@ -141,9 +195,10 @@ $( document ).ready(function() {
 		 var msgError="";
 		 var totalArticulos=0;		 
 		    var count=0;
-			var proveedorId = $('#proveedorId').val();
-			var sucursalId = $('#sucursalIdElegir').val();
-			var almacenId = $('#storeIdFilter').val()
+		    $form = $('#addDeliveryForm');
+			var proveedorId = $form.find('#proveedorId').val();
+			var sucursalId = $form.find('#sucursalIdElegir').val();
+			var almacenId = $form.find('#storeIdFilter').val()
 
 			if(proveedorId == '')
 				msgError += ++count +'. Falta agregar el proveedor\n';
@@ -488,6 +543,18 @@ function llenarComboAlmacenes(almacenes){
 }
 
 function buscarArticulo(){
+	$form = $('#addDeliveryForm');
+//	var sucursalId = $form.find('#sucursalIdElegir').val();
+//	var almacenId = $form.find('#storeIdFilter').val();
+	
+	var sucursalId = $form.find("#sucursalIdElegir option:selected" ).val();
+	var almacenId = $form.find("#storeIdFilter option:selected" ).val();
+	if(sucursalId == '' || sucursalId == '0' || almacenId == '' || almacenId == '0'){
+		alert("debes elegir sucursal y almacen antes de continuar ")
+		return false;
+	}
+//	$form.find('#sucursalIdElegir').prop( "disabled", true );
+//	$form.find('#storeIdFilter').prop( "disabled", true );
 	$('#modalElegirArticulo').modal('show');
 };
 
