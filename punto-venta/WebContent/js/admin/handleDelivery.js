@@ -209,7 +209,7 @@ $( document ).ready(function() {
 }); // end document ready
 
 //2018.06.05 GTL Obtener una nota por id
-function getSaleNoteById(id){
+function obtenerEntregaPorId(id){
 	var data = {}
 	var x = id;
 	if(id != ''){			
@@ -217,19 +217,17 @@ function getSaleNoteById(id){
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "getSaleNoteById.do",
+			url : "obtenerEntregaPorId.do",
 			data : x,
 			dataType : 'json',
 			timeout : 100000,
 			success : function(data) {				
 				$(".tableUpdateNote tbody").empty();
-				u_cont=0;
-				console.log(data)
-				document.updateSaleNoteForm.saleId.value = data.noteForm.saleId; 
-				$('.saleId').val(data.saleId);
-				addSaleNoteForm(data);
-				addSaleDetailNoteForm(data.saleDetail);
+				console.log(data)		
 				$('#modalUpdate').modal('toggle');
+				agregarDatosGenerales(data);
+				agregarArticulosEntrega(data.entrega.details);
+				
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);				
@@ -244,13 +242,14 @@ function getSaleNoteById(id){
 }
 
 // agregar los datos a la ventana de actualizacion
-function addSaleNoteForm(data){
+function agregarDatosGenerales(data){
 	
-	var $tableSaleNoteForm = $('.tableSaleNoteForm');
-	$tableSaleNoteForm.find('.userId').val(data.userId);
-	$tableSaleNoteForm.find('.sellerId').val(data.sellerId);
-	$tableSaleNoteForm.find('.storeId').val(data.storeId);
-	document.getElementById("dateFormUpdate").valueAsDate = new Date(data.dateDelivery)	
+	var $form = $('#updatedeliveryForm');
+	$form.find('.estadoVenta').text((data.entrega.deliveryStatusDTO.description).toUpperCase());	
+	$form.find('#description').val(data.entrega.description);	
+	$form.find('#sucursalIdElegir').val(data.entrega.office.officeId);	
+	$form.find('#proveedorId').val(data.entrega.account.userId);
+	$form.find('#storeIdFilterUpdate').val(data.entrega.store.storeId);
 }
 
 function totalUpdateForm(){
@@ -492,9 +491,29 @@ function buscarArticulo(){
 	$('#modalElegirArticulo').modal('show');
 };
 
+function cambiarEstadoEntrega(entregaId){	
+	if(entregaId == ''){
+		alert("No se recibio el parametro, porfavor recarga la pagina e intentalo de nuevo :( ")
+		return false;
+	}
+	$form = $('#changeStatusForm');
+	$form.find('.deliveryId').val(entregaId);
+	$('#modalChangeStatus').modal('toggle');	
+		
+}
 
 
-
-
-
+function agregarArticulosEntrega(detalle){
+	var cont = 0;
+	$('.tablaActualizacionEntrega tbody tr td').remove();
+	$.each(detalle, function(index, valor) {
+		$(".tablaActualizacionEntrega tbody").append("<tr>"	
+				+"<td>"+ ++cont +"</td>"
+				+"<td>"+ valor.item.itemId +"</td>"
+				+"<td>"+ valor.item.description +"</td>"
+				+"<td>"+ valor.amount +"</td>"
+		+"</tr>");
+	
+	});	// end for each
+}
 

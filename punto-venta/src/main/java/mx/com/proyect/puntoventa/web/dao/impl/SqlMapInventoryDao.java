@@ -10,7 +10,10 @@ import org.springframework.dao.DataAccessException;
 import mx.com.proyect.puntoventa.web.dao.InventoryDAO;
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
+import mx.com.proyect.puntoventa.web.model.DeliveryDetailDTO;
+import mx.com.proyect.puntoventa.web.model.DeliveryStatusDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
+import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.StoreDTO;
 
 public class SqlMapInventoryDao extends SqlSessionDaoSupport implements InventoryDAO {
@@ -76,4 +79,37 @@ public class SqlMapInventoryDao extends SqlSessionDaoSupport implements Inventor
 		return getSqlSession().selectList("getItemsByFilter",saleNoteFilter);
 	}
 
+	@Override
+	public boolean incremetarStockEntrega(List<DeliveryDetailDTO> details) {
+		for(DeliveryDetailDTO detail : details) {
+			//descontamos los articulos de la bd
+			ItemDTO itemDTO = getSqlSession().selectOne("getItemById",detail.getItem().getItemId());
+			float stock_anterior = itemDTO.getStock();
+			float stock_actual = stock_anterior + detail.getAmount();
+					
+			Map<String,Object> param = new HashMap<>();
+			param.put("stock", stock_actual);
+			param.put("id", detail.getItem().getItemId());
+			getSqlSession().update("updateStockByItemid",param);
+		} 
+		return true;
+	}
+	
+	@Override
+	public boolean decrementarStockEntrega(List<DeliveryDetailDTO> details) {
+		for(DeliveryDetailDTO detail : details) {
+			//descontamos los articulos de la bd
+			ItemDTO itemDTO = getSqlSession().selectOne("getItemById",detail.getItem().getItemId());
+			float stock_anterior = itemDTO.getStock();
+			float stock_actual = stock_anterior - detail.getAmount();
+					
+			Map<String,Object> param = new HashMap<>();
+			param.put("stock", stock_actual);
+			param.put("id", detail.getItem().getItemId());
+			getSqlSession().update("updateStockByItemid",param);
+		} 
+		return true;
+	}
+
+	
 }

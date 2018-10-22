@@ -23,6 +23,11 @@
 		<result property="nameCustomer" column="nombre_cliente" />
 		<result property="nameOffice" column="nombre_sucursal" />
 		<result property="nameUser" column="nombre_usuario" />
+		
+		<result property="deliveryStatusDTO.statusId" column="cl_estatus_entrega" />
+		<result property="deliveryStatusDTO.description" column="descripcion_estatus_entrega" />
+		
+		
 	</resultMap>
 	
 	<resultMap type="deliveryDTO" id="resultMapDelivery">
@@ -37,8 +42,14 @@
 		<result property="office.officeId" column="cl_sucursal" />
 		<result property="office.name" column="nombre_sucursal" />
 		
-		<result property="status" column="cl_estatus_entrega" />
-		<result property="description" column="ds_descripcion" />		
+<!-- 		<result property="status" column="cl_estatus_entrega" /> -->
+		<result property="description" column="ds_descripcion" />
+		
+		<result property="deliveryStatusDTO.statusId" column="cl_estatus_entrega" />
+		<result property="deliveryStatusDTO.description" column="descripcion_estatus_entrega" />
+		
+		<result property="store.storeId" column="cl_almacen" />
+				
 	</resultMap>
 	
 	<resultMap type="deliveryDetailDTO" id="resultMapDeliveryDetails">
@@ -49,10 +60,16 @@
 		<result property="item.description" column="nombre_articulo" />
 		<result property="item.salePrice" column="precio_articulo" />		
 		<!-- color -->
-		<result property="color.colorId" column="cl_color" />
-		<result property="color.description" column="nombre_color" />			
+<!-- 		<result property="color.colorId" column="cl_color" /> -->
+<!-- 		<result property="color.description" column="nombre_color" />			 -->
 		<result property="amount" column="cantidad" />		
 	</resultMap>
+	
+	<resultMap type="deliveryStatusDTO" id="resultMapDeliveryStatus">
+		<result property="statusId" column="cl_estatus_entrega" />
+		<result property="description" column="ds_descripcion" />
+	</resultMap>
+	
 
 	<!-- obtener de la tabla usuarios los que tengan como ROL PROVEEDOR -->
 	<select id="getAllProvider" resultMap="accountResultMap">
@@ -100,23 +117,31 @@
 	
 	<select id="getDeliveryByFilter" parameterType="saleNoteFilter"
 		resultMap="resultMapQueryDelivery">
-		SELECT v.cl_entrega,v.fe_registro,v.fe_entrega,v.ds_descripcion,
+		SELECT v.cl_entrega,
+		v.fe_registro,
+		v.fe_entrega,
+		v.ds_descripcion,
 		s.nombre AS	nombre_sucursal,
+		v.cl_estatus_entrega,
+		estatus_entrega.ds_descripcion AS descripcion_estatus_entrega,
 		CONCAT(u.nombre,' ',u.ap_paterno) AS nombre_usuario
 		FROM c_entrega v		
 		INNER JOIN c_sucursal s ON (v.cl_sucursal = s.cl_sucursal)
 		INNER JOIN c_usuario u ON (v.cl_usuario = u.cl_usuario)
+		INNER JOIN c_estatus_entrega estatus_entrega ON (v.cl_estatus_entrega = estatus_entrega.cl_estatus_entrega)
 		<!-- Solo traera las entregas del usuario logueado -->
-		WHERE v.cl_usuario = #{userId}
+<!-- 		WHERE v.cl_usuario = #{userId} -->
 		<where>
+			<if	test="userId != null and userId != '' ">
+				AND v.cl_usuario = #{userId}						
+			</if>
 			<if	test="iniDateFilter != null and endDateFilter != null and iniDateFilter != '' and endDateFilter != '' ">
 			<![CDATA[ 
-			AND v.fe_entrega >= CONCAT(#{iniDateFilter},' 000000') AND v.fe_entrega <= CONCAT(#{endDateFilter},' 235959')
+				AND v.fe_entrega >= CONCAT(#{iniDateFilter},' 000000') AND v.fe_entrega <= CONCAT(#{endDateFilter},' 235959')
 			]]>				
 			</if>
 			<if test="descriptionFilter != null and descriptionFilter != '' ">
-				AND v.ds_descripcion LIKE
-				CONCAT('%',#{descriptionFilter},'%')
+				AND v.ds_descripcion LIKE CONCAT('%',#{descriptionFilter},'%')
 			</if>
 			<if test="officeIdFilter != 0 ">
 				AND v.cl_sucursal IN (#{officeIdFilter})
@@ -128,22 +153,39 @@
 	</select>
 	
 	<select id="getDeliveryById" parameterType="java.lang.Integer" resultMap="resultMapDelivery">
-		SELECT e.*, u.nombre as nombre_usuario, u.ap_paterno AS ap_paterno_usuario,
-		s.nombre AS nombre_sucursal
+		SELECT e.*, 
+		u.nombre as nombre_usuario,
+		u.ap_paterno AS ap_paterno_usuario,
+		s.nombre AS nombre_sucursal,
+		estatus_entrega.ds_descripcion AS descripcion_estatus_entrega
 		FROM c_entrega e
 		INNER JOIN c_usuario u ON (e.cl_usuario = u.cl_usuario)
 		INNER JOIN c_sucursal s ON (e.cl_sucursal = s.cl_sucursal)
+		INNER JOIN c_almacen almacen ON (e.cl_almacen = almacen.cl_almacen)
+		INNER JOIN c_estatus_entrega estatus_entrega ON (e.cl_estatus_entrega = estatus_entrega.cl_estatus_entrega)
 		WHERE e.cl_entrega = #{id}
 	</select>
 	
 	<select id="getDeliveryDetailsById" parameterType="java.lang.Integer" resultMap="resultMapDeliveryDetails">
-		SELECT de.*, a.descripcion AS nombre_articulo, a.precio_venta AS precio_articulo,
-		c.ds_descripcion AS nombre_color		
+		SELECT de.*, 
+		a.descripcion AS nombre_articulo,
+		a.precio_venta AS precio_articulo
+<!-- 		c.ds_descripcion AS nombre_color		 -->
 		FROM k_detalle_entrega de
 		INNER JOIN c_articulo a ON (de.cl_articulo = a.cl_articulo)
-		INNER JOIN c_color c ON (de.cl_color = c.cl_color)
+<!-- 		INNER JOIN c_color c ON (de.cl_color = c.cl_color) -->
 		WHERE de.cl_entrega = #{id}
 	</select>
+	
+	<update id="cambiarEstatusEntrega" parameterType="deliveryDTO">
+		UPDATE c_entrega
+		SET fe_autorizacion = #{fechaAutorizado},
+		cl_estatus_entrega = #{deliveryStatusDTO.statusId}
+		WHERE cl_entrega = #{deliveryId}
+	</update>
 
+	<select id="obtenerEstatusEntrega" resultMap="resultMapDeliveryStatus">
+		SELECT * FROM c_estatus_entrega
+	</select>
 
 </mapper>

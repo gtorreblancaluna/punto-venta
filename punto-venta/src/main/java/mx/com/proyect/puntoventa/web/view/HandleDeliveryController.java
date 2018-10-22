@@ -45,8 +45,8 @@ public class HandleDeliveryController {
 	
 	@Autowired
 	private ProviderService providerService;
-//	@Autowired
-//	private InventoryService inventoryService;
+	@Autowired
+	private InventoryService inventoryService;
 	@Autowired
 	private OfficeService officeService;
 //	@Autowired
@@ -98,8 +98,13 @@ public class HandleDeliveryController {
 			UserSession userSession = (UserSession) WebUtils.getSessionAttribute(request, "userSession");
 			if(userSession != null && userSession.getAccount() != null) {
 			// Solo traera las entregas del usuario logueado
-				saleNoteFilter.setUserId(userSession.getAccount().getUserId());
+//				saleNoteFilter.setUserId(userSession.getAccount().getUserId());
 				List<ResultQueryDelivery> listDelivery = providerService.getByFilter(saleNoteFilter);
+				if(listDelivery.size() > 0)
+					model.addAttribute("messageSucess","Se obtuvieron "+listDelivery.size()+" resultados");
+				else
+					model.addAttribute("messageSucess","No se encontraron registros segun los criterios aplicados");
+				
 				model.addAttribute("listDelivery", listDelivery);
 				
 				// enviando info al JSP
@@ -112,13 +117,30 @@ public class HandleDeliveryController {
 			}
 		}
 		
+		@RequestMapping(value = "handleDelivery.do", params = "cambiarEstadoEntrega")
+		public String cambiarEstadoEntrega(HttpServletRequest request,
+				@ModelAttribute ("deliveryDTO") DeliveryDTO deliveryDTO, Model model) {			
+			int estadoCambiar = deliveryDTO.getDeliveryStatusDTO().getStatusId();
+			deliveryDTO = providerService.getDeliveryById(deliveryDTO.getDeliveryId());
+			if(deliveryDTO == null) {
+				model.addAttribute("messageError", "No se encontro la entrega a eliminar, porfavor recarga la pagina e intentalo de nuevo! ");
+				return "handleDelivery";
+			}			
+			boolean todoBien = providerService.cambiarEstatusEntrega(deliveryDTO,estadoCambiar);
+			model.addAttribute("messageSucess","Se cambio con exito el estatus");
+			// enviando info al JSP
+			this.getModelAttributtes(model);
+			return "handleDelivery";
+		}
+		
 		public Model getModelAttributtes(Model model) {		
 //			model.addAttribute("listItems", inventoryService.getAll(0));					
 			model.addAttribute("listOffices", officeService.getAll());
 			UserFilter userFilter = new UserFilter();
 			userFilter.setJobIdFilter(ApplicationConstants.PUESTO_PROVEEDOR+"");
 			model.addAttribute("proveedores", accountService.getUserByFilter(userFilter));
-//			model.addAttribute("listColors", colorService.getAll());	
+			model.addAttribute("listStatus",providerService.obtenerEstatusEntrega());
+			model.addAttribute("almacenes", inventoryService.getAllStore());	
 			
 				
 		return model;

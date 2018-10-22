@@ -23,6 +23,8 @@ public class DeliveryDTO implements Serializable {
 	private Timestamp dateRegister;
 	//  fe_entrega
 	private Timestamp dateDelivery;
+	// fe_autorizado
+	private Timestamp fechaAutorizado;
 	// cl_usuario
 	private AccountDTO account;
 	// cl_sucursal
@@ -38,8 +40,22 @@ public class DeliveryDTO implements Serializable {
 	// cl_almacen
 	private StoreDTO store;
 	
+	private DeliveryStatusDTO deliveryStatusDTO;	
+	
+	public Timestamp getFechaAutorizado() {
+		return fechaAutorizado;
+	}
+	public void setFechaAutorizado(Timestamp fechaAutorizado) {
+		this.fechaAutorizado = fechaAutorizado;
+	}
 	
 	
+	public DeliveryStatusDTO getDeliveryStatusDTO() {
+		return deliveryStatusDTO;
+	}
+	public void setDeliveryStatusDTO(DeliveryStatusDTO deliveryStatusDTO) {
+		this.deliveryStatusDTO = deliveryStatusDTO;
+	}
 	public StoreDTO getStore() {
 		return store;
 	}

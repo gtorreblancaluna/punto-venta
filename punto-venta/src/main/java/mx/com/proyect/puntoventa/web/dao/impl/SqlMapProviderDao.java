@@ -8,6 +8,7 @@ import mx.com.proyect.puntoventa.web.dao.ProviderDAO;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.model.DeliveryDTO;
 import mx.com.proyect.puntoventa.web.model.DeliveryDetailDTO;
+import mx.com.proyect.puntoventa.web.model.DeliveryStatusDTO;
 import mx.com.proyect.puntoventa.web.model.ProviderDTO;
 import mx.com.proyect.puntoventa.web.resultsQuerys.ResultQueryDelivery;
 
@@ -72,6 +73,20 @@ public class SqlMapProviderDao extends SqlSessionDaoSupport implements ProviderD
 		DeliveryDTO delivery = getSqlSession().selectOne("getDeliveryById",id);
 		delivery.setDetails(getSqlSession().selectList("getDeliveryDetailsById",id));
 		return delivery;
+	}
+
+
+	@Override
+	public boolean cambiarEstatusEntrega(DeliveryDTO deliveryDTO) {
+		getSqlSession().update("cambiarEstatusEntrega",deliveryDTO);
+		return true;
+	}
+
+
+	@Override
+	public List<DeliveryStatusDTO> obtenerEstatusEntrega() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("obtenerEstatusEntrega");
 	}
 	
 	

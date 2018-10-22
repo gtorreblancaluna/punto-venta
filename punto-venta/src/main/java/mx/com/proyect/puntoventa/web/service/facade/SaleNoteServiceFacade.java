@@ -18,12 +18,14 @@ import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteForm;
 import mx.com.proyect.puntoventa.web.model.AccountDTOclient;
 import mx.com.proyect.puntoventa.web.model.ColorDTO;
+import mx.com.proyect.puntoventa.web.model.DeliveryDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.SaleDetailDTO;
 import mx.com.proyect.puntoventa.web.model.StoreDTO;
 import mx.com.proyect.puntoventa.web.service.ClientService;
 import mx.com.proyect.puntoventa.web.service.ColorService;
 import mx.com.proyect.puntoventa.web.service.InventoryService;
+import mx.com.proyect.puntoventa.web.service.ProviderService;
 import mx.com.proyect.puntoventa.web.service.SaleNoteService;
 
 @Controller
@@ -37,6 +39,8 @@ public class SaleNoteServiceFacade {
 	private ColorService colorService;
 	@Autowired
 	private ClientService clientService;
+	@Autowired
+	private ProviderService providerService;
 	
 	
 	@RequestMapping(value = "/getItemById.do")
@@ -256,5 +260,37 @@ public class SaleNoteServiceFacade {
         return json;
 
 	}
+	
+	// obtener datos generales de la venta
+		@RequestMapping(value = "/obtenerEntregaPorId.do")
+		@ResponseBody
+//		public SaleNoteForm getSaleNoteById(@RequestBody String id) {	
+			public String obtenerEntregaPorId(@RequestBody String id) {
+			
+			DeliveryDTO entrega = providerService.getDeliveryById(new Integer(id));			
+//			return note;	
+			
+			Map<String,Object> myMap = new HashMap<>();
+			
+			
+			myMap.put("entrega", entrega);		
+				
+				       
+	        ObjectMapper mapper = new ObjectMapper();
+	        String json = "";
+	        try {
+	            json = mapper.writeValueAsString(myMap);
+	        } catch (JsonProcessingException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        } catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	       
+		
+	        return json;
+
+		}
+
 
 }

@@ -6,6 +6,8 @@ import org.springframework.dao.DataAccessException;
 
 import mx.com.proyect.puntoventa.web.forms.LoginForm;
 import mx.com.proyect.puntoventa.web.forms.SaleNoteFilter;
+import mx.com.proyect.puntoventa.web.model.DeliveryDetailDTO;
+import mx.com.proyect.puntoventa.web.model.DeliveryStatusDTO;
 import mx.com.proyect.puntoventa.web.model.ItemDTO;
 import mx.com.proyect.puntoventa.web.model.StoreDTO;
 
@@ -21,4 +23,6 @@ public interface InventoryDAO {
 	ItemDTO getItemById(int id);
 	boolean updateStockByItemid(float stock, Integer id);
 	public List<ItemDTO> getItemsByFilter(SaleNoteFilter saleNoteFilter);
+	public boolean incremetarStockEntrega(List<DeliveryDetailDTO> details);
+	public boolean decrementarStockEntrega(List<DeliveryDetailDTO> details);
 }

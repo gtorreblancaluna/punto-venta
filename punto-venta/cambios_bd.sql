@@ -190,7 +190,6 @@ CREATE TABLE k_detalle_venta(
 cl_detalle_venta INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
 cl_venta INTEGER UNSIGNED NOT NULL,
 cl_articulo INTEGER UNSIGNED NOT NULL,
--- cl_color INTEGER UNSIGNED NOT NULL,
 cl_color INTEGER UNSIGNED NULL,
 cantidad INTEGER NOT NULL,
 precio_articulo DECIMAL(9,2),
@@ -203,10 +202,6 @@ CONSTRAINT fk_cl_articulo FOREIGN KEY fk_cl_articulo (cl_articulo)
 	REFERENCES c_articulo(cl_articulo)
 	ON DELETE CASCADE
     ON UPDATE CASCADE
--- CONSTRAINT fk_cl_color FOREIGN KEY fk_cl_color (cl_color) 
---	REFERENCES c_color(cl_color)
---	ON DELETE CASCADE
- --   ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 
@@ -216,6 +211,7 @@ CREATE TABLE c_entrega(
 cl_entrega INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
 fe_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 fe_entrega TIMESTAMP NULL,
+fe_autorizacion TIMESTAMP NULL,
 cl_usuario INTEGER UNSIGNED NOT NULL,
 cl_sucursal INTEGER UNSIGNED NOT NULL,
 cl_almacen INTEGER UNSIGNED NOT NULL,
