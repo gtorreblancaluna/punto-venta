@@ -361,30 +361,34 @@ $( document ).ready(function() {
 	});
 	
 	$( '.btnAddProduct' ).click(function() {
-		if('${userSession.account.job.jobId}' != '1')
-			alert("No tienes suficientes permisos para esta accion :( ")
+		if('${userSession.account.job.jobId}' == '1' || '${userSession.account.job.jobId}' == '5')
+			$('#modalAdd').modal('toggle');
 			else
-				$('#modalAdd').modal('toggle');
+				alert("No tienes suficientes permisos para esta accion :( ")
+				
 	});
 		
 	$( '.btnAddColor' ).click(function() {
-		if('${userSession.account.job.jobId}' != '1')
-			alert("No tienes suficientes permisos para esta accion :( ")
+		if('${userSession.account.job.jobId}' == '1' || '${userSession.account.job.jobId}' == '5')
+			$('#modalAddColor').modal('toggle');
 			else
-				$('#modalAddColor').modal('toggle');
+				alert("No tienes suficientes permisos para esta accion :( ")
+				
 	});
 	//confirmar eliminar	
 	$('form[name="deleteForm"]').submit(function() {
-		if('${userSession.account.job.jobId}' != '1'){
+		if('${userSession.account.job.jobId}' == '1' || '${userSession.account.job.jobId}' == '5'){
+			 return confirm("confirma para continuar");	
+		}else{
 			alert("No tienes suficientes permisos para esta accion :( ")
 			return false;
 		}
-	   return confirm("confirma para continuar");	   
+	     
 	});
 	
 	
 	$( '.btnUpdate' ).click(function() {
-		if('${userSession.account.job.jobId}' != '1'){
+		if('${userSession.account.job.jobId}' != '1' || '${userSession.account.job.jobId}' != '5'){
 			alert("No tienes suficientes permisos para esta accion :( ")
 			return false;
 		}

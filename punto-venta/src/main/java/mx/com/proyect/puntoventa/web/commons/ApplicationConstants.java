@@ -27,6 +27,8 @@ public interface ApplicationConstants {
 	public static final Integer PUESTO_CHOFER = 3;
 	/** estado para el puesto PROVEEDOR = 4 */
 	public static final Integer PUESTO_PROVEEDOR = 4;
+	/** estado para el puesto ALMACENISTA = 4 */
+	public static final Integer PUESTO_ALMACENISTA = 5;
 
 	// Mascara fecha grande
 	public static final String MASK_DATE_FORMAT = "EEEEEEEE dd 'de' MMMMMMMMMMMMMM, yyyy";
