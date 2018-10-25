@@ -17,7 +17,7 @@
 .tablaUpdateVentaArticulos .form-control{height:23px;}
 </style>
 <link rel="stylesheet" type="text/css" href="css/data-tables.css">
-<script type="text/javascript" src="js/admin/handleSaleNote.js?v1.1"></script>
+<script type="text/javascript" src="js/admin/handleSaleNote.js?v1.10"></script>
 <script type="text/javascript" src="js/data-tables.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">	
 <title>Punto Venta:: Notas</title>

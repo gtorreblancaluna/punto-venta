@@ -465,7 +465,7 @@ function totalUpdateForm(){
 	var total=0;
 	var abono = $('#totalAbonosUpdate').text();
 	  $(".tableUpdateNote tbody tr").each(function () {
-        stotal = $(this).find("td").eq(5).find(".totalItem").val();
+        stotal = $(this).find("td").eq(4).find(".totalItem").val();
         if(stotal != undefined && stotal != "")
       	  total += parseFloat(stotal);
     })
