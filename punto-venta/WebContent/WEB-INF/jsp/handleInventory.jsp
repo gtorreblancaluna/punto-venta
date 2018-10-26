@@ -389,10 +389,11 @@ $( document ).ready(function() {
 	
 	$( '.btnUpdate' ).click(function() {
 // 		if('${userSession.account.job.jobId}' != '1' || '${userSession.account.job.jobId}' != '5'){
-			if('${userSession.account.job.jobId}' == '1' || '${userSession.account.job.jobId}' == '5')
-			alert("No tienes suficientes permisos para esta accion :( ")
-			return false;
-		}
+			
+		if('${userSession.account.job.jobId}' == '1' || '${userSession.account.job.jobId}' == '5'){
+				alert("No tienes suficientes permisos para esta accion :( ")
+				return false;
+			}
 		var x = '';
 			
 		var $updateForm = $("#updateForm");
