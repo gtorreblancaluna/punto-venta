@@ -4,7 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-<script type="text/javascript" src="js/admin/inventory.js?v1.1"></script>
+<script type="text/javascript" src="js/admin/inventory.js?v1.10"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>punto de venta :: Inventario</title>
 <style>
@@ -390,7 +390,7 @@ $( document ).ready(function() {
 	$( '.btnUpdate' ).click(function() {
 // 		if('${userSession.account.job.jobId}' != '1' || '${userSession.account.job.jobId}' != '5'){
 			
-		if('${userSession.account.job.jobId}' == '1' || '${userSession.account.job.jobId}' == '5'){
+		if('${userSession.account.job.jobId}' != '1' && '${userSession.account.job.jobId}' != '5'){
 				alert("No tienes suficientes permisos para esta accion :( ")
 				return false;
 			}
