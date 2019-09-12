@@ -126,7 +126,6 @@ CREATE TABLE c_articulo(
 cl_articulo INTEGER unsigned NOT NULL AUTO_INCREMENT,
 fecha_alta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 cl_almacen INTEGER UNSIGNED NOT NULL,
--- cl_color INTEGER UNSIGNED NOT NULL,
 cl_color INTEGER UNSIGNED NULL,
 cl_sucursal INTEGER UNSIGNED NOT NULL,
 descripcion VARCHAR(80) NOT NULL,
@@ -144,11 +143,7 @@ CONSTRAINT fk_articulo_cl_sucursal FOREIGN KEY fk_articulo_cl_sucursal (cl_sucur
 CONSTRAINT fk1_cl_almacen FOREIGN KEY fk1_cl_almacen (cl_almacen) 
   REFERENCES c_almacen(cl_almacen)
   ON DELETE CASCADE
-    ON UPDATE CASCADE 
--- CONSTRAINT fk1_cl_color FOREIGN KEY fk1_cl_color (cl_color) 
---  REFERENCES c_color(cl_color)
---  ON DELETE CASCADE
---   ON UPDATE CASCADE
+  ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 
@@ -242,7 +237,6 @@ CREATE TABLE k_detalle_entrega(
 cl_detalle_entrega INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
 cl_entrega INTEGER UNSIGNED NOT NULL,
 cl_articulo INTEGER UNSIGNED NOT NULL,
--- cl_color INTEGER UNSIGNED NOT NULL,
 cl_color INTEGER UNSIGNED NULL,
 cantidad INTEGER NOT NULL,
 PRIMARY KEY (cl_detalle_entrega),
@@ -253,11 +247,7 @@ CONSTRAINT fk_cl_detalle_entrega FOREIGN KEY fk_cl_detalle_entrega (cl_entrega)
 CONSTRAINT fk_detalle_entrega_cl_articulo FOREIGN KEY fk_detalle_entrega_cl_articulo (cl_articulo) 
 	REFERENCES c_articulo(cl_articulo)
 	ON DELETE CASCADE
-    ON UPDATE CASCADE 
--- CONSTRAINT fk_detalle_entrega_cl_color FOREIGN KEY fk_detalle_entrega_cl_color (cl_color) 
---	REFERENCES c_color(cl_color)
---	ON DELETE CASCADE
- --   ON UPDATE CASCADE
+    ON UPDATE CASCADE
 )
 ENGINE = InnoDB;
 

@@ -19,17 +19,17 @@ import mx.com.proyect.puntoventa.web.model.StoreDTO;
 public class SqlMapInventoryDao extends SqlSessionDaoSupport implements InventoryDAO {
 
 	@Override
-	public ItemDTO findById(Long id) {		
+	public ItemDTO findById(Long id) {
 		return (ItemDTO) getSqlSession().selectOne("findByIdItem",id);
 	}
 
 	@Override
-	public ItemDTO validate(LoginForm loginForm) throws DataAccessException {		
+	public ItemDTO validate(LoginForm loginForm) throws DataAccessException {
 		return (ItemDTO) getSqlSession().selectOne("validateItem",loginForm);
 	}
 
 	@Override
-	public boolean add(ItemDTO item) {		
+	public boolean add(ItemDTO item) {
 		 getSqlSession().insert("addItem",item);
 		 return true;
 	}
@@ -47,7 +47,7 @@ public class SqlMapInventoryDao extends SqlSessionDaoSupport implements Inventor
 	}
 
 	@Override
-	public List<ItemDTO> getAll(int id) {	
+	public List<ItemDTO> getAll(int id) {
 		Map<String,Object> param = new HashMap<>();
 		param.put("id", id);
 		return getSqlSession().selectList("getAllItems", param);

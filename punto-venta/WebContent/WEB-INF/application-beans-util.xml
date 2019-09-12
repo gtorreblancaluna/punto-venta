@@ -30,6 +30,25 @@
       		</list>
     	</property>
   	</bean>
+  
+  	
+  	<bean id="scheduleJobReportSales" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject" ref="saleNoteService" />
+	    <property name="targetMethod" value="generateReportMail" />
+  	</bean>
+  	
+  	<bean id="cronScheduleReportSales" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+  		<property name="jobDetail" ref="scheduleJobReportSales" />
+    	<property name="cronExpression" value="${scheduleReportSales.cronExpression}" />
+  	</bean>
+  	
+  <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" autowire="no">
+    <property name="triggers">
+      <list>
+        <ref bean="cronScheduleReportSales" />        
+      </list>
+    </property>
+  </bean>
   		
  
   

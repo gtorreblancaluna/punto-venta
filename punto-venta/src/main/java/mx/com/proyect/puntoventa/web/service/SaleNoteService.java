@@ -37,4 +37,5 @@ public interface SaleNoteService {
 	public void eliminarAbono(int abonoId);
 	public List<AbonoDTO> obtenerAbonosPorFiltro(FiltroAbonos filtroAbonos);
 	public List<StoreDTO> obtenerAlmacenesPorSucursal(int sucursalId);
+	public void generateReportMail();
 }

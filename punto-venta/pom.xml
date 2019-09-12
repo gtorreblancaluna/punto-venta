@@ -79,7 +79,7 @@
 	</build>
 	<properties>
 		<spring.security.version>4.2.0.RELEASE</spring.security.version>
-<!-- 		<spring.version>4.3.0.RELEASE</spring.version> -->
+		<spring.version>4.3.0.RELEASE</spring.version>
 	</properties>
 	
 	<dependencies>
@@ -132,6 +132,12 @@
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20160212</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.13</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>displaytag</groupId>
@@ -258,6 +264,24 @@
 		    <groupId>com.itextpdf</groupId>
 		    <artifactId>itextpdf</artifactId>
 		    <version>5.0.6</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>2.2.1</version>
+		</dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2</version>
+        </dependency>
+        
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+			<!-- <scope>compile</scope> -->
 		</dependency>
 		
 	</dependencies>

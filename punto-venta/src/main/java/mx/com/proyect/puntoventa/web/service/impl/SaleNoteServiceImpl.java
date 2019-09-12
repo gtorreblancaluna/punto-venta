@@ -158,19 +158,19 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 
 	@Override
 	public List<SaleStatusDTO> getSalesStatus() {
-		// TODO Auto-generated method stub
+		
 		return saleNoteDao.getSalesStatus();
 	}
 
 	@Override
 	public boolean changeStatus(int saleId, int statusId) {
-		// TODO Auto-generated method stub
+		
 		return saleNoteDao.changeStatus(saleId,statusId);
 	}
 
 	@Override
 	public Float getTotalSaleById(int id) {
-		// TODO Auto-generated method stub
+		
 		return saleNoteDao.getTotalSaleById(id);
 	}
 
@@ -189,7 +189,7 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 
 	@Override
 	public List<TipoAbonoDTO> obtenerTiposAbono() {
-		// TODO Auto-generated method stub
+		
 		return saleNoteDao.obtenerTiposAbono();
 	}
 
@@ -207,15 +207,23 @@ public class SaleNoteServiceImpl implements SaleNoteService {
 
 	@Override
 	public List<AbonoDTO> obtenerAbonosPorFiltro(FiltroAbonos filtroAbonos) {
-		// TODO Auto-generated method stub
+		
 		return saleNoteDao.obtenerAbonosPorFiltro(filtroAbonos);
 	}
 
 	@Override
 	public List<StoreDTO> obtenerAlmacenesPorSucursal(int sucursalId) {
-		// TODO Auto-generated method stub
+		
 		return saleNoteDao.obtenerAlmacenesPorSucursal(sucursalId);
 	}
+
+	@Override
+	public void generateReportMail() {
+		System.out.println("generateReportMail");
+		
+	}
+	
+	
 	
 
 }

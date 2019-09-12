@@ -57,7 +57,7 @@
 		(#{storeDTO.storeId},#{color.colorId},#{officeDTO.officeId},#{description},#{unitMeasurement},#{amountEntry},#{amountOutput},#{salePrice},#{stock})
 	</insert>
 	<update id="updateItem" parameterType="itemDTO">
-		UPDATE c_articulo 
+		UPDATE c_articulo
 		<set>		
 			<if test="officeDTO != null and officeDTO.officeId != 0">
 				cl_sucursal = #{officeDTO.officeId},
@@ -83,9 +83,9 @@
 			<if test="salePrice != null and salePrice != '' ">
 				precio_venta = #{salePrice},
 			</if>
-			<if test="stock != null and stock != '' ">
+<!-- 			<if test="stock != null "> -->
 				cantidad_existente = #{stock}
-			</if>
+<!-- 			</if> -->
 		</set>
 		WHERE cl_articulo = #{itemId}
 	</update>

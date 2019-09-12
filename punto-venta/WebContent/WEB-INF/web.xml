@@ -26,7 +26,7 @@
 		<param-value>
       /WEB-INF/application-beans-dao.xml
       /WEB-INF/application-beans-util.xml  
-<!--       /WEB-INF/application-beans-security.xml            -->
+      /WEB-INF/application-beans-service.xml           
     </param-value>
 	</context-param>
 	
